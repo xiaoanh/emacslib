@@ -12,7 +12,9 @@
 ; * @emacs
 ; ** path-too concat ~/.emacs.d/ -> /Volumes/xiaoanh/emacslib/
 
-(setq path-too "/Volumes/xiaoanh/emacslib/")  
+(setq path-too "/Volumes/xiaoanh/gitlib/emacslib/")  
+
+; (setq path-too "/Volumes/xiaoanh/emacslib/")  
 
  ;; USER-INIT-FILE, FOR DROPBOX, /131114
 ; (setq user-init-file "~/dropbox/emacslib/dotemacs.el")
