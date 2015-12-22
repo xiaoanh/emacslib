@@ -18,7 +18,7 @@
 
  ;; USER-INIT-FILE, FOR DROPBOX, /131114
 ; (setq user-init-file "~/dropbox/emacslib/dotemacs.el")
-(setq user-init-file (concat path-to  "dotemacs.el"))
+(setq user-init-file (concat path-too "dotemacs.el"))
 (setq texlive-root "/usr/texbin:")
 (setq path "/bin:/usr/bin:/usr/local/bin:/usr/bin:/usr/local/texlive/2013/bin/x86_64-darwin:/usr/local/cellar/ghostscript/9.07/bin:")
 (setenv "PATH" path)  
