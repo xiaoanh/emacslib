@@ -16,9 +16,10 @@
 
 ; (setq path-too "/Volumes/xiaoanh/emacslib/")  
 
- ;; USER-INIT-FILE, FOR DROPBOX, /131114
+ ;; USER-INIT-FILE, FOR DROPBOX, /20131114
 ; (setq user-init-file "~/dropbox/emacslib/dotemacs.el")
 (setq user-init-file (concat path-too "dotemacs.el"))
+; (setq user-init-file (concat path-to "dotemacs.el"))
 (setq texlive-root "/usr/texbin:")
 (setq path "/bin:/usr/bin:/usr/local/bin:/usr/bin:/usr/local/texlive/2013/bin/x86_64-darwin:/usr/local/cellar/ghostscript/9.07/bin:")
 (setenv "PATH" path)  
@@ -148,6 +149,7 @@
 ; M-x git-config-init
 ; *** @err
 ; *** ~/.git and /Volumns/xiaoanh/.git and ~/Dropbox/emacslib/.git
+; @err git push only work in term
 ; git config --local /Volumes/xiaoanh/.git
 ; error: invalid key: /Volumes/xiaoanh/.git
  
