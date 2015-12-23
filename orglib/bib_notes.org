@@ -1,0 +1,6 @@
+
+* [#C] Zhang, L., Ye, C., Hu, X., Li, Z., Fan, S., Hsueh, Y., Chang, Q., Su, Y., Chang, G., ... (2012): Generation of multiband signals in a bidirectional wireless over fiber system with high scalability using heterodyne mixing technique :@work:
+  :PROPERTIES:
+  :Custom_ID: zhang2012generation
+  :END:
+

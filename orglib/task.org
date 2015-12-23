@@ -1,0 +1,2264 @@
+# % Time-stamp: "xiaoanh 2015/12/22 15:37:47"
+# #+TAGS: @bell-labs
+
+* Work [#A] travel 						      :@work:
+  - State "Work"       from ""           [2014-11-26 Wed 13:53]
+** DONE eval[#A] not register transaction, HENDERSON, LEANNE (LEANNE) 
+   SCHEDULED: <2014-11-28 Fri>
+   - State "DONE"       from "Work"       [2014-12-02 周二 11:00]
+   - State "Work"       from ""           [2014-11-26 周三 13:56]
+   - I have CC’d the right Sean (XIAOAN ) Huang.
+   - Can we get these fixed asap please.
+   - Actually I did not register this travel,
+   - leanne.henderson@alcatel-lucent.com.au
+   - Please action immediately to link up Sean’s account to the his
+     correct CTE profile via Concur IT team and confirm.
+   - <2014-11-27 周四> Sean Huang has also two cards allocated to him under the card
+     name Xiaoan Huang, I believe he miss the following transactions:
+   - Niederer, Thomas (Thomas). I think I know the reason for this
+     issue. We do have an employee in ASB China with the name of
+     Xiaoan Huang, this matches with the name on card. 
+
+** 我的假期统计 黄小安(UPI:CV0035696)
+
+*** 1.5 untill 2015-12-31, 10 until 2106-12-31
+年度 标准天数 已使用天数 剩余天数 假期过期时间 
+国家 公司 总计 国家 公司 总计 国家 公司 总计 
+2014 1.0 1.0 2.0 0.5 0.0 0.5 0.5 1.0 1.5 2015/12/31 
+2015 5.0 5.0 10.0 0.0 0.0 0.0 5.0 5.0 10.0 2016/12/31 
+
+
+*  [#A] HXA meeting						   :@Meeting:
+
+  - State "DONE"       from "Huang"      [2014-12-22 Mon 09:34]
+  - State "Huang"      from ""           [2014-11-27 Thu 11:37]
+
+** TODO [#A] kaibin						      :@work:
+
+*** DONE [#A] [KAIBIN], 研究太浅不算深入研究, 什么才是MFH <2014-12-19 Fri>
+    - STATE "DONE"       FROM "TODO"       [2014-12-22 Mon 11:26]
+  GPP：连接在PCIE X1 槽上的显卡输出端口
+
+*** DONE Y2014 performance review, 
+   DEADLINE: <2015-01-08 周四>
+   - State "DONE"       from "TODO"       [2015-01-09 周五 09:08]
+before this Wednesday
+
+
+*** DONE party, rent 6287A9327 <2015-01-07 Wed>
+   - State "DONE"       from "TODO"       [2015-01-08 周四 16:00]
+已经订好了两辆车，一个六座的，一个四座的，都是黑色的，（真正的黑车啊）
+尾号分别是6287和9327。车在云桥路599号门外等，下班后大家迅速前往，5点10
+分前准时走
+
+
+*** DONE kaibin 提示信息：2015-01-16 日开始可提交审批(直接主管中期评估) :@work:
+   DEADLINE: <2015-01-16 Fri>
+
+[2015-04-14 Tue]
+   - State "TODO"       from ""           [2014-11-28 周五 09:05]
+
+   - State "TODO"       from "PENDING"    [2014-11-24 周一 10:49]
+
+   - 预期目标： Project execution: make sure all the tasks completed
+     on time, with good contribution quality.
+     1. 目标确认： Radio over fiber solution, experiment, simulations
+	and related algorithms
+
+     2. Completed radio over fiber based mobile fronthaul: proposed a
+        new MultiIFoF architecture, finished simulations and related
+        Interleaved Channel Aggregation algorithm. [2015-04-14 Tue]
+
+     3. Completed radio over fiber solution and experiments on time
+
+   - 预期目标： Creating of assets: at least 1 patent filed (aim:2),
+     better rank 1/2.
+     1. 目标确认： 1 patent filed, better Rank1/2
+
+     2. Finished 1 patent: "Interleaved Channel Aggregation Based
+        Multi-IFoF System For Mobile Fronthaul"
+
+     3. Finished 1 patent: "ICA Based  Multi-IFoF System"
+
+   - 预期目标： Creation of new project and disruptive assets: new
+     project proposed, or new idea GR and milestone review passed.
+     1. 目标确认： Propose new ideas/product concept on optical
+	access, with GR review passed
+
+     2. Proposed a novel radio over fiber architecture:  ICA.
+
+   - 预期目标： Behavior: open innovation, including contribution to
+     intra-team cooperation and activities, and having good
+     interaction with external collaboration; complete all the
+     regular managements finished on time.
+     1. 目标确认： Organize and participate internal and external
+	technical seminars, collaboration and other
+	activities. Complete regular reports/deliverables on time.
+
+     2. Participated technical seminars every week and collaborated
+        with other members in our FA team; Completed Deliverable
+        report_Q12015: "Technical Report on Interleaved Channel
+        Aggregation Based Multi-Intermedia Frequency over Fiber System
+        for Mobile Fronthaul".
+
+     3. Completed Deliverable report_Q12015: "Technical Report on Interleaved Channel
+        Aggregation Based Multi-Intermedia Frequency over Fiber System
+        for Mobile Fronthaul".
+
+     4. Participated technical seminars often and Completed Deliverable report_Q12015
+
+
+*** DONE [#A] kaibin personal accomplishment and performance evaluation :@work:
+    DEADLINE: [2014-12-02 Tue] SCHEDULED: [2014-12-01 Mon]
+    - State "DONE"       from "TODO"       [2014-12-01 Mon 11:29]
+    - State "TODO"       from ""           [2014-11-28 Fri 09:05]
+
+** DONE Research Review <2015-06-24 Wed 14:00-15:30>
+   CLOSED: [2015-06-26 Fri 11:26]
+   - State "DONE"       from "TODO"       [2015-06-26 Fri 11:26]
+** DONE [#A] my group study <2014-12-18 Thu>
+   - State "DONE"       from "TODO"       [2014-12-22 周一 09:35]
+** DONE Group paper study <2014-12-03 17:00-20:30>
+   - State "DONE"       from "TODO"       [2014-12-05 周五 15:43]
+   - YANG Shuigen: SD-351 “stage 1 – analysis of fixed access network sharing”;
+   - CHANG Qingjiang: real-time DSP for future optical access network.
+**  [#B] D401-1 
+   - State "Study"      from ""           [2014-12-05 周五 14:43]
+*** 高消光比、低半波电压 高调制带宽, dense IF. extinction ratio higher, lower V_pi Q, higher. 
+*** V_{\pi}, 0.5, 1.5, linear zone, nice; 0, 1, bad Q factor.
+*** SC-QAM, time domain, serial, PAPR lower than that of IFDMA, lowest. 
+
+
+* Huang [#A] SALARY
+  - State "Huang"      from ""           [2014-12-08 Mon 09:04]
+**  奖励信息：（6个月内没有获得奖励！） from  报销单 
+    1. 项目号 | R&D02029
+    2. 技术资料及转让费 | 357.85 
+
+** 14:02 leave, 公司统一安排下班时间 [2015-09-30 Wed]
+** 首次卡显示 11:56，说明: 系统显示有误 首次卡8:30之前 但未被记录  [2015-09-21 Mon]
+   1. 如果你9月21日的考勤显示只有半边，与实际不符的，请标注“系统显示有误”。
+** @leave, 病假   2015-09-07 2015-09-07 1 (天) 1 (天) 审批通过 [2015-09-07 Mon] 
+
+** GJJ公积金, ansel1986, pass: 0#####a#
+用 户 名：ansel1986
+公积金账号：159474668205
+身份证号：362424198605143411
+手机号码：13501809263
+http://www.shgjj.com/index.html
+*** 住房公积金个人账户查询 2116
+*** 补充住房公积金本年度账户明细 1510
+
+** GJJ公积金, 1058+755+755, 我的公积金帐号  159474668  我的补充公积金帐号  159474669  
+   1. 公司公积金帐号  881181730  公司补充公积金帐号  881181731
+   2. 我的社保帐号(养老金账户)  362424198605143411 
+
+| 我的公积金帐号           |       159474668205 | 我的补充公积金帐号 | 209159474669 |
+|--------------------------+--------------------+--------------------+--------------|
+| 公司公积金帐号           |          881181730 | 公司补充公积金帐号 |    881181731 |
+|--------------------------+--------------------+--------------------+--------------|
+| 我的社保帐号(养老金账户) | 362424198605143411 |                    |              |
+
+** 薪资与福利』-『收入与所得税
+任职、受雇单位税务代码 | 999200087
+应纳税额 |  2822.24, 已缴税额 | 2822.24
+| 所属年限 | 年所得额 | 应纳税所得额 | 应纳税额 | 已缴税额 | 任职、受雇单位       | 任职、受雇单位税务代码 |           证件号码 | 个税缴纳地 |
+|     2014 | 26077.80 |     19077.80 |  2822.24 |  2822.24 | 上海贝尔股份有限公司 |              999200087 | 362424198605143411 | 上海       |
+
+** 2015年度上海市基数调整通知
+
+ 1) 根据上述规则计算后得出您2014年度全年工资为45399.67元，计算平均工资
+    的月数为2.47个月，2014年月平均工资为18380.40元，上海市封顶基数为
+    16353.00元，最低基数为3271.00元，您的新基数为16353.00元。
+
+** [#C] salary is 14222.71, 15491+1550 [2015-10-10 Sat]
+   1. 15491+1550+3000+934.8-(1145+1308.3+327.1+81.8+818+818+2239.4+15.49)
+      = 14222.71
+   2. 934.8 is overtime
+   3. *补充公积金: 818+818*
+   4. *公积金: 1145*
+** salary, standard, 12113.4
+   1. 13470+1347+3000=17817-12113.4= 5703.6
+** [#C] salary, total: 18629-5904=12723, [2015-01-05 Mon]
+   1. 13470+1347+3000+812-(1058+1208+302+75+755+755+1738+13) = 12725
+   2. 812 is overtime
+   3. *补充公积金: 755+755*.
+   4. *公积金: 1058*
+   5. 1058+1208+302+75+755+755+1738+13 = 5904
+** DONE 体检报销单 [2014-10-28 Tue]
+   - State "DONE"       from ""           [2014-12-08 Mon 09:20]
+- System Notification :RRARNI014000327 has been received by
+  FNC-Accounting.系统通知: 财务部已收到报销单 RRARNI0140x00327 
+
+
+* DONE ASB Training141110, Nomadic-WIFI				      :@work:
+  CLOSED: [2015-01-20 Tue 11:56]
+  - State "DONE"       from ""           [2015-01-20 Tue 11:56]
+from JOB141110.org, <2015-01-06 Tue>
+http://ilearn.alcatel-sbell.com.cn/Home/Index
+
+** DONE 提醒：请于5月15日之前完成“质量意识培训”, [2015-05-04 Mon]
+   DONE, second  [2015-05-05 Tue]
+** All passed, [2014-11-21 Fri], My certification
+*** The Alcatel-Lucent Way, [2015-10-08 Thu]
+    1. Alcatel-Lucent University : Training Completion
+    2. Student Name:	Xiaoan HUANG
+    3. Certificate Name:	The Alcatel-Lucent Way
+    4. Acquired:	October 1, 2015
+
+*** my training->Transcripts
+https://training.alcatel-lucent.com/Saba/Web_wdk/Main/learning/learnerTranscript.rdf
+
+*** 信息安全 TBU31081W, Score 80, /141124
+- 3.信息安全：https://training.alcatel-lucent.com/scourse/TBU31081W
+- Information Security Policy Overview 2014
+- /141125, We are pleased to inform you that Xiaoan HUANG has successfully
+  completed the following certification: Certificate Name:
+  Information Security Policy Overview 2014 - New Hire
+
+- Email: <2015-01-06>
+Alcatel-Lucent University : Training Completion
+ Information Security Policy Overview 2014
+
+*** 商业道德规范  Score 100 Code of Conduct Review and  Acknowledge-2014 
+- Offering Name Alcatel-Lucent RU China Code of Conduct Review and
+  Acknowledge-2014 
+
+  Learner Name Xiaoan HUANG 
+  Overall Completion Status Successful 
+  Score 100 
+   2.商业道德规范：
+  Content and Results
+   https://training.alcatel-lucent.com/Saba/Web_wdk/Main/lucent/deeplink/register.rdf?register=dowbt000000000045383
+
+*** 新员工网上自学课程 New Employee Orientation E-Learning 
+- Offering Name New Employee Orientation E-Learning (Alcatel-Lucent RU China) 2014 
+  Learner Name Xiaoan HUANG 
+  Overall Completion Status Successful 
+  1.新员工网上自学课程：
+  https://training.alcatel-lucent.com/register/dowbt000000000046943
+
+**** passed, <2014-11-11 周二>
+  
+My Certifications (YET, /141111)
+ 
+My Enrollments (FINISHED, /141111)
+Offering Name Fixed Network xPON Products Overview (LAST, FINISHED, /141111)
+Learner Name Xiaoan HUANG 
+Overall Completion Status Successful 
+Score 80 
+
+Offering Name IP Transport -- PTN/OTN Products Overview 
+Learner Name Xiaoan HUANG 
+Overall Completion Status Successful 
+Score 80 
+
+Offering Name IP Routing Products Overview 
+Learner Name Xiaoan HUANG 
+Overall Completion Status Successful 
+Score 80 
+
+lesson:~Telecom Industry Overview, passed, /141110
+Offering Name Telecom Industry Overview 
+Learner Name Xiaoan HUANG 
+Overall Completion Status Successful 
+
+IP Platforms -- IMS/Cloud Products Overview, SCORE: 80
+Offering Name IP Platforms -- IMS/Cloud Products Overview 
+Learner Name Xiaoan HUANG 
+Overall Completion Status Successful 
+Score 80 
+
+Wireless Product Overview 
+
+Offering Name Wireless Product Overview 
+Learner Name Xiaoan HUANG 
+Overall Completion Status Successful 
+Score 100 
+
+  Circuit switch (virture wire, reserve), package switch (no virture
+  wire, into several parts)
+  optical: SONET and SDH
+  fixed voice (optical) and mobile voice (HLR: home location register) (dedicated, high-quality)
+  fixed data and mobile data (IP); fixed data (dial-up: 50K, ADSL: 8M,
+  DOCSIS(160M), FTTH: 1G)
+  MOBILE (IP ROUTER), 
+  CONVERGENCE: FIXED NGN AND MOBILE NGN (MERGING VOICE AND DATA, VoIP), 
+Voice Transmitted by package, cheaper (USING THE SAME IP NETWORK) than TDM)
+digitalize the voice and sampling, then get the amplitude, last
+become digit,
+Mobile NGN (different is access tech)
+
+IMS (END TO END,  ALL SERVICES)
+PSTN (PUBLIC, SWITCH, ) VS. PABX (PRIVATE, PAX, EASIER IP-LAN)
+
+IMS-->HIGH LEVERAGE NETWORK
+
+
+
+* TODO Monthly meeting 						   :@Meeting:
+
+** BELL LAB
+
+*** bell-labs
+  1) https://www.bell-labs.com/about/presidents/marcus-weldon/
+  2) Bjarne Stroustrup received his PhD from the University of Aarhus
+     in 1979, and joined the famed 1127 computing sciences center, the
+     birthplace of Unix and C, at Bell Labs in Murray Hill.
+  3) MASER stands for Microwave Amplification by Stimulation Emission of Radiation
+  4) Maser -- A Microwave Laser
+  5) The main difference between a maser and a laser is that masers
+     use microwaves. Hence the letter m.
+  6) A maser (/ˈmeɪzər/), an acronym for "microwave amplification by
+     stimulated emission of radiation"
+
+*** DiM-MIMO, D-RAN, distributed massive mimo [2015-04-29 Wed]
+ 1) Ant # >> UE #
+ 2) MMW
+ 3) edge, 5X
+ 4) localized vs distributed
+ 5) Distributed radio access network (DRAN)
+** FA discussion
+
+*** @hxf, PAPR, law companding and SQRT companding
+    1. [2015-09-11 Fri]
+    2. out = compand(in,Mu,v,'mu/compressor')
+    3. Source code mu-law or A-law compressor or expander
+
+*** [WHB] Carrier Ethernet,  Metro Ethernet Forum (MEF)
+*** [YCH] hybrid fiber and copper, different from HFC-(cable), copper is cheaper and 20MHz
+[2015-04-23 Thu]
+  1) coexistance
+     1) \cite{chand2014demonstration}	
+     2) Flexible TWDM PON with load balancing and power saving
+     3) \cite{iiyama2013two}
+	1)  Hierarchical Star 8-QAM and Square 16-QAM
+
+*** [HXA]
+**** ICA to [CQJ]
+[2015-03-30 Mon]
+重点在于橙色模块。华为的方案是采用LTE的上行DFT-S，但是方案有如下弊端：
+1. PAPR很高18dB (6 chns), 28dB (48chns)， 采用ICA几乎不变， 为11dB. 2)
+IFDT size 是6400,  RRH复杂度很高，ICA不需要那么复杂的IDFT， 只需要时域
+上的重复和相位旋转。
+
+MFH 发送端： 
+1.	MFH 发送端:　在BBU LTE-A信号之后时域上重复N次 (N为channel数目)
+2.	之后做相位旋转: 每个IF做对应的相位旋转，使得信号在频域上交织
+3.	然后所有的IF再叠加
+   
+RRH 接收端：
+1.	经过光通道后，在频域上做均衡FDE用来做光通道上的补偿
+2.	之后再对各自进行对应的相位逆旋转得到最初的LTE-A信号
+
+若有解释不周的地方，请交流。
+
+Xiaoan
+
+**** ICA,  spectrally-interleaved
+ 1) Proposed  ICA consisting of repetition and phase rotation is employed
+    between BBU and OLT Tx ports.
+    1) For downlink direction, each digital BB data from a specific BBU
+       is repeated in time domain at first to enlarge spectrum for all
+       OFDM data in frequency domain.
+    2) Then the repeated OFDM signal is multiplexed by a specific phase
+       to make each signal spectrally-interleaved. All OFDM signals are summed
+       and then modulated onto a Tx over a specific wavelength in the
+       OLT.
+ 2) Key architecture and technology description in RRH:
+    1) FDE is used to make equalization in frequency domain
+       to compensate for fiber dispersion and then specific inverse
+       phase rotation is implemented to drop the target data on its
+       corresponding IF.
+
+
+
+
+**** A converged optical and wireless network (CROWN)
+
+**** E-UTRA, SMA
+ 1) E-UTRA(N)(Evolved Universal Terrestrial Radio Access (Network),演
+    進的UMTS陸面無線接入(網路)),屬於3GPP LTE 的空中介面
+
+ 2) HSPA英文全称为HSPA High-Speed Packet Access
+
+ 3) sma socket
+
+**** [2015-03-20 Fri] need adding a little for interleaved proposal
+***** BBF, broad band forum
+https://www.broadband-forum.org/
+
+**** [2015-03-06 Fri]
+  1) performance: better or not
+  2) PAPR
+  3) all  the other methods, SC by HUAWEI
+*** [CQJ] FP-LD as receiver at first
+**** 100Gbps PON, high level, linewidth times symbol duration smaller, smaller linewidth
+ 1) Linewidth requirement is relaxed as the symbol rate is increased
+**** FBG, smallest wavelength gap, but  can not be gridless-(tunable), and reflective
+**** X2, traffic up to 20%, delay should be less than 10-ms
+***** inter-ONU
+***** ONU-RN-OLT, RN: MAC
+**** X2 and CoMP inter-eNB, not for intra-eNB
+ 1) The CoMP schemes are primarily specified to improve cell edge UE
+    performance by employing the X2 logical interface in order
+    establish coordination between different eNBs in the network
+
+
+[2015-03-20 Fri]
+*** [GZS] virtual PON
+**** 2 FBGs to FBG-FP, 100MHz spacing for larger precision
+[2015-03-20 Fri]
+**** virtual PON
+   1) 1st node: m, m-1, m-2
+   2) 2nd node: 1, 2, 3, 4
+*** [XSM] luoyanqiu, CBU, CFU
+TWDM CBU, CFU
+
+*** [YCH] symbol grouping
+1) demonstration of coexistance of legacy video and  ofdm pon in the
+   vedio wavelength band
+2) delay+add, silimar to Sampling ratio up
+3) *DAC-(2bits) as decoder for PAM4, including Comp*
+4) 
+   
+*** [SX] FP-LD, delta lambda = lambda^2/2nL
+VCSEL, Single mode, 3*lambda, low wavelength
+DFB: 100*lambda
+
+[2015-03-06 Fri]
+1) tunnable-(at least 3.2nm)
+   1) lambda |cavity length |delta_lambda |, 1550nm|669nm|0.5nm
+   2) short cavity length, low power
+   3) tunnable 0.8nm*4 is 3.2nm
+2) DFB: EX is about 10dB; linewidth is 10nm
+3) DBR: distributed Bragg reflector ( DBR ), largertunnable wavelength
+4) DWDM: 8*50G, 4*100G
+5) sales
+   1) SJTU: Xeston larger than 10Gbps
+   2) Oclaro
+   3) Avago
+
+**** BW
+1) increase bias
+2) tau decrease
+3) delta lambda
+
+** Review
+
+*** TODO Review <2015-03-05 Thu 14:30-15:30>
+Xu Jianbiao
+*** Review [2015-02-03 Tue]
+    1) [FA] symbol cascading, 2014年欧洲光纤通讯展ECOC
+       1) [FA] 48-CHN, 960MHz, TDD
+       2) European Conference on Optical Communications
+       3) [FA] FDD, 24-CHNs*100MHz
+       4) [NTT], 8CHNs*200MHz
+       5) [HW]: 36-CHN, standard ITU, Liu Xiang
+       6) CPRI: 8CHNs*20MHz
+    2) [GZS] DML, 10Gbps
+
+** [FA] NG-PON research progress discussion
+
+*** TODO meeting <2015-04-01 Wed 14:30-15:30>
+
+*** DONE meeting <2015-02-12 Thu 13:00-15:00>
+
+*** meeting [2015-01-28 Wed 13:00-15:00]
+ 1) backhual for core network
+    1) delay is 5ms, 
+    2) bandwidth is not a issue
+    3) 
+ 2) DML-->EML-->MZM
+    1) EML is 10GHz
+    2) 2.5-GHz DML, optimized bias can modulate 10Gbps data
+    3) Proposed AWG can do dispersion compresation
+    4) high-level, such as PAM can
+    5) \cite{Zhou2014Demo}, [[papers:Zhou2014Demo][Zhou2014Demo-paper]]
+    6) SOA as a modulator, BW limited
+    7) RSOA, no need of seed source, for colorless
+ 3) [YCH]: symbol Interleaver, asym system, low-speed receiver-ADC,
+    such as Interleaver is 4, 1/4 ADC. 
+
+*** DONE meeting <2015-01-21 Wed 13:30-15:00>
+    CLOSED: [2015-01-23 周五 14:40]
+    - State "DONE"       from ""           [2015-01-23 周五 14:40]
+1) universal remote use case, remote note
+   1) programmable
+   2) wifi,
+   3) *copper, G-fast*
+   4) *cable or coax, DOCSIS, XG-Cable*
+   5) wireless and wireline, both 7-Gbps
+2) Metro-access converged
+   1) wavelength shifter
+   2) pay as you grow
+   3) OLT pool, big data
+3) WSS, virtual pon, wavelength selective switch (wss), 16*4
+   1) optical switch, n*1
+4) *flexbile wavelength flow, awg+os,  北邮*
+5) technical engineer from accelink (光迅) will give a talk regarding
+   to their optical products at 15:00-16:00 tomorrow afternoon,
+   <2015-01-21 周三 15:00-16:00>.
+
+*** DONE open day demo and SOW, <2015-01-12 Mon 13:00-15:00>
+    - State "TODO"       from "DONE"       [2015-01-30 Fri 11:10]
+    - State "DONE"       from ""           [2015-01-30 Fri 10:43]
+1) task2.1-(como): open day demo-(2015q3)
+   1) human month-(hm), 12-hm
+   2) 2015q3
+   3) usrp, 20-if*5m, max is 120m, sampling bandwidth is 200m
+2) task2.3-equipment procure
+
+*** discussion of NG-PON 2015 work plan, <2015-01-05 Mon 10:30-11:30>
+1. new application for avenue: backhaul and fronthaul
+   1) twdm-pon into 100gbps pon: 40g/100gbps, symmetric, ook, pam,
+      1) quantum dot: long-reach into  low-cost
+      2) from 1st left to last, large
+      3) dml, dfb
+   2) 10x fronthaul or converged-COMO-(convergence of mobile and optical)
+      1) frontghaul: hybrid 40gbps digital and 24 channels analog,
+         wdma; pre and post equalization; 96-if/16qam ofdm 
+      2) backhaul: comp, inter/intra-onu, micro-sec delay, electrical is
+         fast enough
+   3) software defined pon
+      1) virtual pon: olt and onu
+      2) transceiver: multi-format, ook, qam, sim can not, exp will
+      3) open flow, 2 and 3 layers, nec: 4g ofdma mbh overlays onto
+         10gb/s pon
+2. [HXA]: como and sdn pon, demo: open day, vision, 24 or 48 if, beyond 24
+   1) lte-a 16-qam to lte-b, 256-qam,
+   2) uplink
+   3) optimization
+3. huang xiaoan:
+   1) fronthaul: 
+   2) open day: (70%) 
+   3) major project: fdd simulation platform (opti-system or vpi) (30%)
+
+*** ASRD-(architecture, spec, report, demo), q1-15, q4-15, quater
+architecture, specification, report, demo/exp
+pcie: 外围组件快速互连(peripheral component interconnect express) 
+<2015-01-08 周四>
+
+**** huang xiaoan 2015 work plan:
+
+1) como or mobile fronthaul open day demo (70%):
+   1) 24-if/64qam-ofdm experimental validation
+      1) expecting outputs: complete lte icc code development and validate 24-if/64qam-ofdm como demo
+      2) targeting date: 2015-03-01
+   2) 2015 open day demo
+      1) expecting outputs: continuously enhance como demo and prepare
+	 for open day demo
+      2) targeting date: 2015-06-01
+
+   3) 24-if/16qam-ofdm experimental validation with carrier aggregation
+
+      1) expecting outputs: continuously enhance como system with carrier aggregation and propose better tdd algorithm.
+
+      2) targeting date: 2015-09-01
+
+   4) pre- & post-compensation solution
+
+      1) expecting outputs: enhance compensation algorithm to optimize
+         imd distortion algorithm.
+
+      2) targeting date: 2015-12-01
+
+2) major project 40g/100gbps pon: fdd simulation platform (opti-system or vpi) (30%):
+
+   1) beyond 10gbps onu tx validation by opti-system or vpi
+
+      1) expecting outputs: complete >=10gbps onu tx system
+         development and enhance system performance.
+
+      2) targeting date: 2015-09-01
+
+**** convergence of mobile and optical
+1) [a]: 24-if/ 64qam-ofdm experimental validation
+2) [d]: 16-if/ 128qam-ofdm experimental validation
+3) [d]: 24-if, 16qam-ofdm experimental validation with carrier aggregation
+4) [d]: 2015 open day demo
+5) [s]: pre- & post-compensation solution
+
+
+*** [YCH] gpp-(cpu)  and usrp-(120m, bb and rf, usb with computer), <2015-01-08 周四>
+1) usrp: gpp（general purpose processors, 通用处理器
+   usrp（universal software radio peripheral，通用软件无线电外设）
+2) [YCH]: 手机处理最多1s, 20mhz-(1gbps), awg offline to realtime
+3) fpga is parallel; dsp is serial
+   1) cpu是穿行的，提高速度只能多和，而fpga是并行执行的，所以以fpga为
+      核心的计算机比现有的要强很多很多倍
+   2) parallel programming in fpga
+
+*** symbol cascading, key: tdma, <2014-12-31 周三>
+1) MFH 
+   1) pros: dsp and papr reduction and no fir filter, cons: high-speed dac
+   2) 3db papr increase if doubling if fdma
+   3) 24ch*64qam-(8%), cons: 20*48=960m, high optical bw
+      requirements, tdma difficulty: large symbol buffer
+   4) why large v_pi
+   5) sub-bit level sample precision
+2) short-term, mid-term, long-term
+
+*** DONE FA meeting [2014-11-28 周五]
+    - state "done"       from ""           [2014-12-05 周五 16:22]
+**** front-haul pon
+**** software defined pon, odn pool , 60% energy at onu
+**** flexible wavelength flow
+     - state "todo"       from ""           [2014-11-28 周五 09:44]
+entered on [2014-11-28 周五 09:44]
+ 
+ [[file:d:/gtd18/%5bhxa%5d.docsis.org::*%5b#b%5d%20al-banna,%20arris,][al-banna,
+ arris,]]
+
+
+** ASB meeting 
+*** ASB meeting [2015-01-23 周五]
+ 1) hybrid digital BF and reconfigured antenna, decrease RF number S,
+    S<N-(num of antenna)
+    1) digital BF --> RF chain (S) --> Antenna-(N)
+
+*** bell lab,  <2015-01-14 周三>
+**** successful innovation =  invention  +  implementation  +  market impact
+
+
+* [#B] Panel [KEY], [2015-02-05 Thu]
+
+** [KEY] 1024QAM, 40dB,
+1) 16QAM 信号中加入高斯白噪声(假设 Eb/No=15db)
+2) 4QAM、16QAM、64QAM和256QAM的识别率达到80%以上所需的信噪比分别为9dB,
+   15dB、24dB和24dB
+
+** optical OFDM, MAX 3GHz BW
+
+** main DML
+
+** Laser: mode \delta{lambda} = lambda^2/(2nL)
+
+
+* Work Monthly report						      :@work:
+
+** Key Achievements
+
+*** kaibin
+Dear Kaibin,
+
+Please review my weekly report!
+
+Best regards,
+Xiaoan
+
+
+*** TODO Monthly-report, <2015-03-27 Fri +1m>
+**** [#D] Monthly-report, TI devices are working [2015-11-27 Fri] 
+      1. Continuously make progress in real-time demo
+	 1. #TI devices integrating ADC and FPGA in receiver for real-time demo are working#
+	 2. #Further FPGA programming of OFDM for real-time demo is on-going#
+	 3. Continuously make progress in real-time demo:  real-time
+            4DEMUX1 processing as an ONU and further FPGA programming of
+            OFDM
+
+      2. Continuously make progress in 10X mobile fronthaul
+	 1. #Proposing a better channel aggregation method for hetnet in 10X MFH#
+
+**** Monthly-report, [2015-07-28 Tue]
+     1. Continuously make progress in channel model for Converged Optical and Copper (COCO)
+
+	1. #Proposed a novel channel model of the hybrid copper and wireless MIMO access#
+	2. Reducing bandwidth requirements in COMO: 1) I-Q compressing. 2) Split-PHY Processing (SPP)
+
+	   1. Considering more effective I-Q compressing in our system.
+
+	   2. Investigating SPP in COMO: almost 90% optical bandwidth reduction.
+
+     2. Crosstalk compensation in Converged Optical and Copper (COCO)
+
+	1. #Employed MMSE to fulfil channel estimation of the hybrid copper and wireless MIMO access
+
+     3. Continuously make progress in COMO real-time demo
+
+	1. #Real-time demo for converged mobile and optical (COMO)#
+
+**** Monthly-report, [2015-06-26 Fri]
+     1. Proposing CFO compensation and FBMC for converged mobile and optical (COMO)
+
+	1. #Simulation demonstration of CFO compensation and FBMC for Converged Mobile and Optical#
+
+     2. Crosstalk in Converged Optical and Copper (COCO)
+
+	1. #Fix Crosstalk for Converged Optical and Copper (COCO)#
+
+     3. Continuously Make progress in COMO Demo
+
+	1. #Reinstall GNURadio on the new PC and prepare to install Fedora for COMO demo#
+
+**** Monthly-report, [2015-05-28 Thu]
+
+ 1) Proposing SFBC and FBMC for converged mobile and optics
+
+    1) #Simulation demonstration of FBMC and SFBC for Converged
+       Mobile and Optics#
+       1) Simulation of FBMC to suppress sidelobes
+       2) PAPR and EVM performances to be measured for FBMC.
+
+    2) FBMC in MFH:
+
+       1) PAPR issue is a challenge even for FBMC
+	  although FBMC can resolve IMD issue due to very low side-lobe
+	  leakage. Furthermore, as for MFH, so many FBMC based IFs will
+	  make the transmitter and RRH receiver have a large PAPR. How to
+	  address this issue is a big challenge: hybrid FDD/TDD or
+	  interleaved mode.  Hybrid FDD/TDD may face time delay and sync
+	  issues. Interleaved mode should carefully consider CFO
+	  problems.
+
+    3) Proposing SFBC in MFH:
+
+       1) it can resolve the seamless
+	  connection between optics and wireless due to random
+	  distribution of UEs. As we know, SFBC is employed in current
+	  LTE system to utilize frequency diversity in the MIMO
+	  system. However, SFBC in MIMO is not yet considered in the
+	  converged optical and wireless system. 
+
+ 2) Converged Optical-Copper-Radio Access Network (COCRAN)
+
+    1) #SFBC for Converged Optical-Copper-Radio Access Network (COCRAN)#
+
+    2) SFBC simulation for COCRAN
+
+    3)  SFBC to reduce crosstalk in the Converged
+       Optical-Copper-Radio Access Network (COCRAN): crosstalk issue
+       should be carefully considered to reduce interference from the
+       other 3 wired lines. MIMO may be a solution to tackle this
+       issue.
+
+ 3) Continuously Make progress in interconnection between two USRP2s
+    for CoMO Demo
+
+    1) #installing Ubuntu-14.04 and GNURadio on the new PC#
+
+    2) install Ubuntu-14.04 and GNURadio on the new PC
+
+
+**** Monthly-report, [2015-04-28 Tue]
+
+ 1) Proposing software-defined MFH to support 96 E-UTRA-like IFs
+
+    1) #Simulation demonstration of software-defined MFH enabling 96
+       E-UTRA-like IF signals#
+       1) 16 IFs for each bandwidth 1.4, 3, 5, 10, 15 and 20 MHz, respectively.
+
+       2) software-defined QPSK, 16QAM and 64QAM for E-UTRA
+
+       3) PAPR and EVM performances to be measured.
+
+    2) Proposing software-defined MFH
+       1) Enabling ICA based 96-IFs: 16 IFs for each bandwidth 1.4, 3, 5, 10,
+          15 and 20 MHz, respectively.
+       2) finished DFT-S based MFH of 36 E-TRAN-like IF channels. But
+          the complexity is huge due to a M-point IDFT processing
+          (M-12288). Moreover, PAPR is large as 19dB, which will a
+          bottleneck especially for transmitter in the uplink.
+
+       3) Current stage: finished ICA based MFH supporting 96
+          E-UTRA-like IF channels and software-defined QPSK, 16QAM and
+          64QAM and can be fulfilled.
+
+       4) PAPR can be reduced from 19 to 11-dB by employing the novel ICA architecture. 
+
+ 2) Working on patent: "Interleaved Channel Aggregation Based
+    Multi-Intermedia Frequency Over Fiber System"
+
+    1) #Finished an invention: a novel ICA based Multi-IFoF with simpler
+       architecture and lower PAPR (8 dB reduction)#
+
+       1) support 48 IFs for C-RAN
+
+       2) low complexity and PAPR
+
+    2) Working on patent: 
+
+       1) high capacity for future CRAN: more than 48 IF channels, not
+          supported by current CPRI based MFH.
+
+       2) a cost-effective Multi-IFoF generation architecture between
+          BBU pool and RRH for A-RoF based MFH: no need of complex
+          filter design and multiple N-point DFTs and an M-point IDFT
+          processing
+
+       3) low PAPR: decreasing PAPR is a key issue especially for the
+          transmitter in uplink.
+
+
+**** Monthly-report, [2015-03-27 Fri]
+1) Continuously make progress to enhance performance for CoMO
+   system
+   1) #Proposing Interleaved Channel Aggregation algorithm
+       for MFH#
+
+      1) Proposing new algorithm for MFH
+
+      2) Decrease PAPR for MFH
+
+      3) Make MFH system cost-effective
+   2) Proposing Interleaved Channel Aggregation (ICA) algorithm
+       for MFH to support dense IFs and make system cost-effective:
+
+      1) ICA proposal has lower PAPR than Huawei's DFT-S
+         method-(PAPR decreased from 18 to 11dB for 6 channel
+         aggregation)
+      2) ICA proposal has lower complexity, due to simple repetition
+         and phase rotation in time domain; however, the Huawei's
+         proposal needs high-complexity FFT-(M (6400) point-IDFT).
+
+   3) Optical transmission for the proposal  employing Optisystem
+       should be performed, especially for high-level 1024-QAM.
+
+   4) Preparing technical report "Technical Report on Interleaved Channel Aggregation
+       Based Mobile Fronthaul" for deliverable report_Q12015: it is
+       time-consuming to write report, but valuable for me to
+       summarize latest research. 
+
+2) Continuously make progress in interconnection between two USRP1s in
+   narrowband for CoMO Demo
+
+   1) #Success in interconnection using FDD method  between two USRP1s in
+      narrowband for CoMO Demo: decreased ping delay#
+      1) decrease ping
+
+      2) More in code tunnel.py
+
+   2) Success with gmsk modulation (800kbps), but large delay
+   3) decrease ping delay by FDD: discussed  with technical
+          supporters and decided to employ FDD solution, so try to
+          use 2.41G and 2.5G to suppress the interference for
+          tunnel. tried many times, but still failed.
+   4) FDD: 2.41G and 2.5G, ping is decreased from 1-2s to 80ms
+      1) Node1 initiates the ping request to node2, node2 should
+         send back ARP reply.
+      2) When the reply is too short, node1 can not receive reply.
+      3) So increase reply time
+   5) fix code in tunnel.py
+      1) time.sleep(0.009) # delay 9ms before sending out the
+         reply. And then the ping delay can be decreased to 80ms, so
+         video transmission becomes better.
+
+
+*** Monthly-report, [2015-02-27 Fri]
+1) Make progress in interconnection between two USRP1s in narrowband for
+   CoMO Demo
+
+   1) #Success in interconnection between two USRP1s in
+      narrowband for CoMO Demo#
+   2) Success in benchmark_tx and benchmark_rx interconnection
+   3) /tunnel.py as a virtual ethernet
+      1) sudo ifconfig gr0 192.168.200.1
+      2) sudo ifconfig gr0 192.168.200.2
+      3) ping 192.168.200.2
+      4) Success in ping
+   4) interconnect with Video
+      1) download video in PC1
+      2) streaming setting
+      3) rtp://192.168.200.2:5004
+      4) Success but low speed (100kbps)
+
+2) Make progress in interconnection between two USRP1s in OFDM for
+   CoMO Demo
+
+   1) #Success in benchmark_tx and benchmark_rx interconnection
+      in OFDM for CoMO Demo#
+
+   2) Success in benchmark_tx and benchmark_rx interconnection in
+      OFDM 
+
+      1) bpsk up to 500kbps
+
+      2) qpsk up to 400kbps
+
+      3) qam16 up to 100kbps
+   
+   3) Stuck in /tunnel.py 
+
+3) Continuously make progress to enhance performance for CoMO
+   system
+
+   1) #Fulfilled 1024QAM transmission in wireless channel with
+      good quality for CoMO system#
+
+   2) Fulfilled 1024QAM transmission in wireless channel with good quality
+
+   3) Enhance equalization algorithm
+
+   4) Initiate optical transmission for 1024QAM employing Optisystem
+
+*** [2015-02-13 Fri]
+**** USRP
+1) *Success in benchmark_tx and benchmark_rx interconnection between
+   two USRP1s*
+2) /tunnel.py as a virtual ethernet
+   1) sudo ifconfig gr0 192.168.200.1
+   2) sudo ifconfig gr0 192.168.200.2
+   3) ping 192.168.200.2
+   4) *Success in ping*
+3) install VLC on Ubuntu
+4) interconnect with Video
+   1) download video in PC1
+   2) streaming setting
+   3) rtp://192.168.200.2:5004
+   4) *Success but low speed (100kbps)*
+**** COMO
+1) Make progress to realize 1024QAM transmission for 200MHz*16CHNs
+   MFH: fulfilled 1024QAM transmission in wireless channel with good quality
+
+
+*** [2015-02-06 Fri]
+1) Success of USRP1 or USRP2 with PC1 or PC2
+   1) Interconnection: try to fix the existing interconnection problem
+      of USRP1 and USRP2, still struggling.
+
+*** Monthly-report, [2015-01-30 Fri]
+1) Initiated USRP experimental testing for CoMO Demo
+   1) install Ubuntu 14.04
+      1) Finished installing Ubuntu 14.04
+   2) install GNURadio
+      1) Finished installing GNURadio
+   3) USRP Hardware Test
+      1) Terminal: uhd_find_devices
+	 1) check UHD Device Address
+      2)  burn USRP: sudo usrp_n2xx_simple_net_burner
+   4) Success of USRP1 or USRP2 with PC1 or PC2.
+   5) Stuck in Interconnection, due to only one USRP2
+
+2) Study GPP ICC development for CoMO Demo.
+   1) Understand basic architecture of ICC eNB PHY design.
+      1) Understood ICC basic PHY design
+   2) Understand GPP PHY QAM or PSK modulation development.
+      1) Understood ICC PHY QAM or PSK modulation.
+
+3) Enhance TDD algorithm for CoMO system.
+
+   1) Optimize TDD algorithm  for CoMO system to support
+      48-IF.
+
+      1) It can relieve complex FIR design and lower PAPR, but the
+	 drawback is its huge bandwidth occupy.
+
+   2) Enhance equalization algorithm:
+
+      1) current equalization algorithm will be updated into MMSE or
+         better algorithm.
+
+
+
+*** [2014-12-25 Thu]
+1) Completed paper studies on SCFDMA-PON and IFDMA-PON systems to
+   lower PAPR and improve its performance.
+2) Proposed a new Channel Aggregation-(CA) algorithm for mobile
+   front-haul-(MFH) to improve IF channels numbers.
+3) Proposed OBM-OFDM for MFH system to improve spectrum efficiency and
+   enlarge capacity.
+
+
+** Planning
+*** Monthly-report  [2015-03-27 Fri]
+1) Continuously make progress to enhance performance for CoMO
+   system: finish technical report "Technical Report on Interleaved
+   Channel Aggregation Based Mobile Fronthaul" for deliverable
+   report_Q12015.
+2) Continuously make progress in interconnection between two USRP1s in
+   narrowband for CoMO Demo: decrease ping delay more
+
+3) Continuously make progress in interconnection between two USRP1s in OFDM for
+   CoMO Demo
+
+*** Monthly-report  [2015-02-27 Fri]
+1) Continuously Make progress in interconnection between two USRP1s in
+   narrowband for CoMO Demo
+
+2) Continuously Make progress in interconnection between two USRP1s in OFDM for
+   CoMO Demo
+3) Continuously make progress to enhance performance for CoMO:
+   proposing new algorithm. 
+
+
+
+*** Monthly-report  [2015-01-30 Fri]
+1) Continuously Make progress to USRP experimental development for CoMO Demo
+2) Continuously  Study GPP ICC development for CoMO Demo.
+3) Continuously Enhance TDD algorithm for CoMO system.
+
+*** [2014-12-25 Thu]
+1) Continuously enhance MATLAB simulation of a new CA algorithm in MFH
+   system to support much denser IF channels.
+
+2) To simulate the new CA algorithm for MFH system in optical
+   communication simulation software: optisystem.
+
+3) Continuously make progress to design the OBM-OFDM in MFH to improve
+   spectrum efficiency
+
+
+
+* Work KPI, @patent 						     :@huang:
+** @work FIXED NETWORKS: Analog-Over-Fiber Enlarges Mobile Fronthaul Capacity [2015-11-16 Mon]
+   1. ACCOMPLISHMENTS
+   2. FIXED NETWORKS: Analog-Over-Fiber Enlarges Mobile Fronthaul Capacity
+      1. We demonstrated analog mobile fronthaul over PON at Bell Labs
+	 Shanghai, showing 96 x 20 MHz LTE channels, each up-converted as
+	 a subcarrier and combined into a single wavelength 2 GHz analog
+	 signal that is transported over 20 km of fiber. The approach
+	 with a single 2 GHz transceiver promises to be more cost
+	 effective than the conventional CPRI fronthaul capacity of
+	 120Gbps, requiring either multiple WDM channels or costly 100G
+	 transport systems. We achieved the largest number of LTE
+	 channels over an analog optical link reported in the literature
+	 and attribute the success to our development of wireless-fiber
+	 joint channel estimation, intelligent nonlinearity management
+	 for inter-modulation mitigation, and adaptive equalization based
+	 self-learning algorithm.
+
+      2. Contact: Ye Chenhui, Zhang Kaibin 
+
+** [#C] @huang_lei, D208, Lei.a.Huang@alcatel-sbell.com.cn, *Rank3*
+   1. [2015-10-10 Sat] sign 
+   2. [2016-02-01 Mon] gain award compensation
+*** @kwm, *用于信道复用和解复用的方法和装置* [2015-11-16 Mon]
+    1. 基于光载多中频系统的无线前端回传中的信道复用和解复用。
+    2. GCY： 说明书的第21和35段指出该方法可以更广泛地应用。 不建议写得
+       太限制，除非该方法只能用于该用途。
+    3. 并且本公开的实施例方法和装置并不限于在基于光载多中频的无线前端
+       回传环境中进行信道复用/解复用，而是可以更广泛地应用于需要信道复
+       用/解复用的其它场景中。
+*** HXA_CA8x1v1.m and HXA_CA8x1v2.m
+
+*** @kwm, [2015-10-13 Tue], Gao, Chunyan <gaochunyan@cn.kwm.com>
+   1. CCDF: Complementary Cumulative Distribution Function
+   2. figure 4 and 5 as attached
+      1. figure 4: CA8x1v1_64.png
+      2. figure 5: CA8x1v2_256.png
+   3. 3 papers as attached
+      1. paper 1: Cho2014cost
+      2. paper 2: Shibata2014256qam
+      3. paper 3: liu2014efficient
+   4. ith phase rotation can be described as exp{-j*2*pi*(i-1)/N}, where N is total
+      number of IF channels
+
+** National Science and Technology Major Project
+*** WDM-PON内部项目编号为：8DA10247AAAA
+    Dear all, 
+    
+    WDM-PON内部项目编号为：8DA10247AAAA, 以后申请出差可以用这个编号。
+    
+    发表论文时请注明: This work was supported by the National Science and Technology Major Project of the Ministry of Science and Technology of China (No. 2015ZX03001021). 
+    Zhensen
+
+** 原GlobalLevel  300  原GlobalGrade G15  
+** @key: [KEY] ICA [2015-04-03 Fri]
+*** Inventor portal - Status of inventions
+    1. We are unable to locate your UPICode. Please contact us with
+       this problem by clicking here. 
+*** 基于交错信道聚合的光载多中频系统 [2015-09-29 Tue]
+    1. 作为C-RAN网络的关键技术，无线前端回传（MFH）构建了基带处理单元
+       （BBU）和射频拉远端（RRH）之间的桥梁。
+
+*** channel aggregation 信道聚合 光载中频
+*** RE: Your Invention Submission -  818074, [2015-09-18 Fri]
+    1. Crucial - "10x" If analog fronthaul becomes deployed instead of
+       CPRI or midhaul in 5G, which is a realistic avenue given the
+       cost of CPRI and many Chinese research efforts look into this,
+       then this invention shows significant improvements in #
+       channels and PAPR
+       1. key issues in CPRI: limited capacity of 10Gbps (only to
+          support 8 Channels) and requires expensive high-speed
+          optical transmitter and receiver
+	  1. ARoF can transmit awireless signal with the same optical
+             bandwidth as thewireless bandwidth but the signal quality is
+             degradedcompared with DRoF.
+       2. analog fronthaul will become deployed to replace CPRI in
+          5G: NTT DOCOMO in Japan, ETRI in Korea and Huawei in China
+          are doing great efforts to deploy analog mobile fronthaul.
+       3. this invention verifies significant improvements in channel
+          numbers and PAPR, which can't be easily designed around.
+    2. Current CPRI can't support future CRAN in 5G because it has limited capacity of 10Gbps (only
+       supporting 8 channels) and requires expensive high-speed
+       optical transmitter and receiver. Analog fronthaul will become
+       deployed to replace CPRI in 5G due to high capacity and keep
+       the same optical bandwidth as the wireless. Therefore, Huawei
+       in China, NTT DOCOMO in Japan and ETRI in Korea are doing great
+       efforts to deploy analog mobile fronthaul for future high-speed
+       CRAN in 5G.
+    3. As we know, the shortage of the current CPRI solution is the
+       limited capacity and high cost. That’s why people are pursuing
+       other alternative solutions to get a trade-off between the
+       performance and the complexity & cost. Analog fronthaul is now
+       being regarded as the main fronthaul solution by more and more
+       vendors and industry.  Huawei, NTT DOCOMO in Japan and ETRI in
+       Korea, and some other research organization have been doing
+       great efforts on analog mobile fronthaul. They’ve already got
+       much progress in research work and demonstration as some papers
+       shown. Due to the obvious advantage in the capacity increase,
+       it is believed that the analog fronthaul will be the dominate
+       fronthaul solution serving the future CRAN in 5G era, and much
+       possibly implemented in the future products. This patent can
+       well protect our IPRs on this cutting edge technology and
+       prevent others from using the similar approach.
+    4. intellectual property rights (IPR)
+
+*** R&I FA<818074> [2015-04-20 Mon]
+
+*** revise [2015-04-10 Fri]
+ 1) Lastly, all interleaved OFDM IFs should be summed to AWG;
+ 2) first CPRI
+ 3) *figure be simple and highlight key block*
+ 4) simpler Multi-IFoF architecture of both OLT and RRH
+ 5) no OLT and just 1 RRH with multi-IF (channels)
+*** What is the technical problem that the inventor(s) had to solve
+ 1) One known form of  channel aggregation based
+    Multi-Intermedia Frequency over Fiber (MultiIFoF) for mobile
+    fronthaul (MFH) is DFT-S channel aggregation method proposed by
+    Huawei. However, it should be noted that the proposal by Huawei has
+    its complexity with N-point DFT and M-point IDFT processing, and
+    may be not applied in MFH uplink, due to repeated DFT-S solution
+    for LTE uplink. Furthermore, its PAPR is pretty high with large
+    M-point IDFT (6400), making RRHs cost-consuming.  In order to
+    improve the performance of MultiIFoF based on MFH,  this invention
+    provides interleaved channel aggregation (ICA) with lower PAPR and
+    simpler architecture.
+ 2) One known form of channel aggregation based Multi-Intermedia
+    Frequency over Fiber (Multi-IFoF) for mobile fronthaul (MFH) is
+    DFT-S channel aggregation method proposed by Huawei in Asia
+    Communications and Photonics Conference (ACP) 2014 (Authors: Xiang
+    Liu et al., AF4B–5). However, it should be noted that the proposal
+    by Huawei has its high complexity with N-point DFT and M-point
+    IDFT processing. Furthermore, its PAPR is pretty high with large
+    M-point IDFT (M is 6400), making OLT and RRHs cost-consuming. In
+    order to resolve the challenges posed by Huawei's proposal, this
+    invention provides novel interleaved channel aggregation (ICA)
+    based Multi-IFoF with simpler architecture and lower PAPR (7dB
+    reduction for green power solution). Moreover, it can support 48
+    LTE-A IFs with very low PAPR (17 dB reduction), for both downlink
+    and uplink in MFH, which may be viable technical solution for
+    future centralized radio access network (C-RAN) in LTE-A or 5G
+    networks.
+
+*** Part III Commercial value
+
+****  [2015-04-15 Wed] 
+ 1) values
+    1) high capacity: 48 IF channels, not supported by current CPRI
+       based MFH. Moreover, it will support more than 48 IFs for
+       future high-capacity CRAN
+
+    2) an cost-effective Multi-IFoF generation architecture between
+       BBU pool and RRH for A-RoF based MFH: no need of complex filter
+       design and multiple N-point DFTs and a M-point IDFT processing
+
+    3) low PAPR: decreasing PAPR is a key issue especially for the
+       transmitter in uplink.
+
+ 2) likelihood
+
+    1) very likely due to high capacity requirements for C-RAN in LTE-A or 5G (48 IF channels or more).
+
+    2) Moreover, it exhibits obvious performance enhancement, for example, low PAPR for RRH
+
+ 3) designed around
+
+    1) The proposed solution is a broad architecture for a
+       cost-effective MFH system based on an unique interconnection
+       between BBU pool and RRH, so the invention can't be easily
+       designed around.
+
+
+**** previous
+  1) It enables simpler architecture of both OLT and RRHs and power
+     saving with PAPR reduction for LTE-A MFH. Proposed solutions would
+     be useful for ALU productions.
+  2) Simplify OLT and RRHs to support MultiIFoF, and decrease PAPR
+     from 18 (28) to 11 (11) dB for 6 (48) channel aggregation,
+     corresponding to 1e-3 CCDF.
+  3) what is the likelihood of use by others?
+     1) vvery likely due to obvious performance improvement.
+  4) *how easily can the invention be designed around?*
+     1) difficultly
+
+
+** OurTalent Dialogue, goal plan
+https://tas-aluperf.taleo.net/
+
+*** OurTalent Dialogue 2015, goal plan
+http://172.24.208.168/tabid/8115/Default.aspx
+**** 1. Project Execution(30%)	
+	
+  1) 1.1 Contribution On time
+     1) x1=spec/deliverables/reports/simulator/demo/ transfer/project review/milestones, x2=on time; if x1>=Assigned, x2=1, then Y=1;  if x1>=Assigned, x2>=90% then Y=0.7;  if x180%) and X2=1, then Y=0.8;   if x1= partical achieved (>80%) and X2=0.5, then Y=0.5;       otherwise, Y=0
+     2) 10%
+  2) 1.2 Contribution Quality　
+     1) x1=New Algorithms or Solutions /Simulator/Demo/Transfer/ Standardization/   x2= Recogonized by BL, company or outsite;      if x1=all achieved and x2=1, then Y=1;  if x1=partical achieved (>80%) and X2=1, then Y=0.8;   if x1= partical achieved (>80%) and X2=0.5, then Y=0.5;   otherwise, Y=0
+     2) 10%
+  3) 1.3 Transfer
+     1) x1=  transfer enters GR2/Pre GR2 according to R&I definition, x2=   transfer enters GR2/Pre GR2 according to BL definition,   if x1>=1 or x2>=1, then Y=1;  if x1=0 , x2=0, then Y=0
+     2) 10%
+
+**** 2. Creating of assets(30%)
+ 1) 2.1 Patent Rank1/2
+    1) x1=Ran1/2,  if x1>=2,then Y=1   if x1=1, then Y=0.8, if x1=0, then Y=0
+    2) 12%
+ 2) 2.2 Standard Rank1/2
+    1) x1= submit, x2 =accepted,    if x1>=2 and x2>=1, then Y=1; if x1>=2 and x2=0, then Y=0.85; if x1=1, x2 =0,then Y = 0.6; otherwise Y=0;
+    2) 10%
+ 3) 2.3 Paper
+    1) x1= submit to top conference or journal, x2 =accepted,           if x1>=1 and x2>=1, then Y=1;  if x1 =1, x2 =0,then Y = 0.6; otherwise Y=0;
+    2) 8%
+
+
+**** 3. Creation of new project and dissruptive assets (15%) 
+ 1) 3.1 National project
+    1) x1= Successfully apply national key project, x2=fufill the current projects on time,on quality,and pass the review;                                                                                                                                                                                                                                                           if x1>=1, x2>=1, then Y=1; else if x1>=1, x2=0, then Y=0.6; else if x1=0, x2>=1 then Y=0.4; else Y=0
+    2) 8%
+ 2) 3.2 New Project proposal
+    1) x1= New product concept proposal, x2=Pass new idea GR0 review                                                                                                                                                                                                                                                               x1>=1, x2>=1, then Y=1; if x1>=1, x2=0 then Y=0.4; elso Y=0
+    2) 4%
+ 3) 3.3 Discruptive assets (e.g., grand challenges, new research direction)
+    1) x1= new proposal could fit into and accepted by BL as FX,10X; if x1>=1 then Y=1; else Y=0
+    2) 3%
+
+
+**** 4. Behavior(25%)
+ 1) 4.1 Open Innovation
+    1) Intra-team & inter-team cooperation and activities
+       1) x1=contribute to technical discussion and intra- or inter-team tasks or monthly talk or coffee break;  if x1=1, Y=1; else Y=0
+       2) 9%
+    2) External collaboration
+       1) x1=set up collaboration with univeristies and Leverage us  from the collaboration for new direction, introduce new ideas,skill sets from the partner ,gain new talents; if x1>=1, then Y=1; else Y=0
+       2) 4%
+    3) Custormer partnership
+       1) x1=Establish research parnership with one operator ;to verify and test our demos; if x1>=1, then Y=1; else Y=0
+       2) 4%
+ 2) 4.2 Regular management (e.g.,action piont, regular report including  weekly/montly/research report, temporary report etc.)
+    1) x1= On time, x2=good quality;  if x1=1, x2=1 then Y=1,  else Y=0
+    2) 8%
+
+
+**** NOTE: Total  represents 45%, the other 55% is company shared objective								
+ 1) NOTE: Total  represents 45%, the other 55% is company shared
+    objective
+
+
+** Technical report						      :@work:
+*** Deliverable report_Q12015_Technical Report on Interleaved Channel Aggregation Based Multi-Intermedia Frequency over Fiber System for Mobile Fronthaul
+**** Abstract 
+  1) [YCH]
+     This document describes technical feasibilities of the analog over
+     wireless fronthaul links with obvious capacity improvement over
+     current digital protocols such as CPRI. A set of
+     various experimental validations have been carried out in serial and
+     technical results have been analyzed. As the results indicate, the
+     transmission bandwidth in the optical fronthaul can be much relieved
+     and therefore fronthaul capacity over one single wavelength can be
+     greatly enhanced, which is appealing to current wireless fronthaul
+     applications with rapid capacity expansion.
+  2) revised
+     This document presents technical achievements of  analog
+     multiple LTE-A IFs over optical fiber links with lower PAPR and
+     simpler architecture than the proposal by Huawei, employing DFT-S
+     channel aggregation method. Detailed simulation results verify
+     that the interleaved channel aggregation proposal for mobile
+     fronthaul (MFH) outperform Huawei's DFT-S. Moreover, it can support
+     48 LTE-A IFs with very low PAPR, for both downlink and uplink in
+     MFH, which may be viable technical sulotion for future centralized
+     high capacity mobile access network.
+
+**** Executive Summary
+
+**** other, ONU to RRH
+Furthermore, its PAPR is pretty high with large M-point IDFT (6400),
+making RRHs cost-consuming. 
+
+
+***** [YCH]
+ Instead of transmitting quantized bits, RF symbols
+transmitted over the fiber link sustain in analog format for spectral
+efficiency enhancement
+
+With the massive increases in mobile data traffic enabled by the
+emerging long term evolution (LTE) or advanced technologies, baseband
+processing centralization has introduced large capacity explore in the
+fronthaul using current fronthaul protocols, e.g., Common Public Radio
+Interface (CPRI). To combat against the traffic congestion in the
+fronthaul link, we hereby propose IF-over-fiber architecture that
+facilitates wireless access and MFH transport for C-RAN implementation
+of next generation. Instead of transmitting quantized bits, RF symbols
+transmitted over the fiber link sustain in analog format for spectral
+efficiency enhancement; meanwhile, IF multiplexing technology has also
+been introduced to facilitate multiple channels of wireless data’s
+transmission parallelly in the fronthaul link. To realize that, we
+hereby demonstrate a wireless-optical converged access (WOCAS)
+solution, in which fiber transmission link is treated as an extinction
+part of the wireless interface. Therefore, comparing to conventional
+CPRI protocol, channelization in the fiber link will be added into the
+hybrid channelization of the wireless interface. As a result, signal
+degradation in the fiber link has to be considered and compensated in
+pre- or post- compensation procedurals. Furthermore, with the increase
+of channel quantities in the fronthaul link, inter-modulation
+distortion will be a major source of error, therefore, special
+technology has been introduced in DSP for error free transmission.  A
+serial of tests have been performed and analysis/conclusions are
+achieved based on. In the serial test, 1channel, 2 channels and 8
+channels of wireless data are carried and transmitted over the WOCAS,
+respectively. Key technical parameters are described and key outputs
+are analyzed. As the tests and evaluation results indicate, challenges
+as they are have be resolved and tremendous improvement in the
+transmission capacity enhancement of the wireless-optical-converged
+fronthaul system and robustness for wireless access service has been
+achieved. Based on that, we treat this new solution as a most
+promising candidate for Future XG featured access solution.
+
+
+***** [HXA]
+Emerging long term evolution (LTE), LTE-A and future 5G require
+baseband processing centralization, thus centralized radio access
+network (C-RAN) architecture has been introduced to improve network
+performance and increase network capacity. Mobile fronthaul (MFH), as
+a key of C-RAN network, builds a cost-effective connection between centralized baseband units (BBUs)
+and remote radio heads (RRHs), and is primarily realized by common public radio interface (CPRI) that
+transmits digitized baseband signals via on-off-keying (OOK). 
+
+However, the OOK based CPRI is not spectrally effective and requires
+expensive high-speed optical transmitter and receiver to support high
+data rate. To combat against the traffic congestion in the
+CPRI link, IF-over-fiber architecture that facilitates wireless access
+and MFH transport for C-RAN implementation of next generation has been
+reported by researchers, for example, Huawei proposed efficient mobile
+fronthaul transmission of multiple mobile channels in a single wavelength
+channel through DFT-S channel aggregation method.
+
+But, it should be noted that the proposal by Huawei has its
+complexity with N-point DFT and M-point IDFT processing, and can not be applied in MFH uplink, due to
+intrinsic DFT-S solution for LTE uplink. Furthermore, its PAPR is
+pretty high with larger M-point IDFT (6400), making ONUs cost-consuming. 
+ 
+Therefore, comparing to DFT-S proposal by Huawei, interleaved channel
+aggregation method has been firstly proposed to make transceiver
+cost-effective and lower PAPR. As the tests and evaluation results
+indicate, challenges posed by Huawei's proposal have been resolved and
+great improvements in system capacity and PAPR performance have been 
+achieved. Based on that, this new solution can be treated as a most
+promising candidate for future C-RAN access solution.
+
+
+**** 4. Further USRP Based Demonstration on Future’s Work of ICA Based MultiIFoF
+
+
+
+
+
+* Conference
+
+** [#C] @wikicfp, WIKICFP, http://www.wikicfp.com/cfp/
+
+*** WFWAC 2015 : Workshop on Fiber-Wireless (FiWi) Access Networks, in conjunction with the IEEE ICUWB 2015
+
+** @ICTON
+
+** @vlca, @yokohama, http://vlca.net/conference/icevlc2015/
+
+** EDAS, https://edas.info/doc/, ICUWB
+
+** ICAN, international conference on access network
+   1. https://www.waset.org/conference/2015/08/paris/ICAN
+** photonics west 2015
+
+** OECC OptoElectronics and Communication Conference
+
+** ACP
+** ECOC - European Conference on Optical Communication
+
+*** http://www.ecocexhibition.com/
+
+** OFC2016
+
+***  What is the deadline to submit a technical paper to OFC 2016?
+
+The deadline is 13 October 2015. The submission site is scheduled to
+open in June 2015.
+
+
+* Work @ASB 							      :@work:
+  1. \\asb-stone\RI_Common_Shared\会议
+** -战略与技术任命- [2015-11-23 Mon], S&T
+ 1. Establish the Strategy & Technology Management. It will be responsible for
+
+ 2. 桂洛宁继续担任研究与创新负责
+   战略与技术平台下的研究与创新（贝尔实验室）及首席信息官的组织机构和部门职责保持不变。
+   
+   以下人员的任命自2015年12月1日起生效：
+   
+   桂洛宁继续担任研究与创新负责人。
+   余瑞雄继续担任首席信息官。
+   郭韬担任战略与技术管理部负责人。
+   
+   以上人员向战略与技术平台兼任负责人袁欣汇报工作。
+   
+   袁欣
+   代理总经理
+
+ 3. 徐智群先生不再担任高级执行副总经理-战略与技
+
+   公司代理总经理袁欣先生兼任高级执行副总经理-战略与技术；
+    
+   徐智群先生不再担任高级执行副总经理-战略与技术；
+    
+   董事会对徐智群先生三十一年来为公司（含前上海贝尔）所做出的巨大贡献表示衷心感谢。
+
+** 13681755836 王廷
+
+** [#C] @bell_labs
+
+*** MLT候选人王文剑 [2015-12-22 Tue]
+    1. 从日本给大家带了些点心，在小会议室，请品尝
+
+*** 上海贝尔首获贝尔实验室最高荣誉——蒋智宁荣膺Bell Labs Fellows Award大奖
+
+**** 勇创第一——记Bell Labs Fellows Award获得者蒋智宁
+     1. 技术攻关，一马当先
+	1. 2000年，刚刚来到公司的蒋智宁即投入了2G GPRS/EDGE产品的研发工作，
+       	   他是MFS PTU架构、BSS B7中RLC/MAC协议栈设计以及后续BSS B8中增强
+       	   GPRS功能特性的主要完成人。2003年，蒋智宁主要参与了ATCA平台下全
+       	   新的多标准无线网络控制器的创新设计。2004年，他又参加了通用平台
+       	   下WiMAX无线接入控制器的架构设计。2005至2007年，蒋智宁作为WCDMA
+       	   RNC领域专家主要参与了HSPDA/HSUPA等产品功能特性的设计实现。
+
+	2. 蒋智宁现担任上海贝尔LTE TDD eNodeB产品的仿真、基带算法设计和无线性能领域的首席系统专家。
+
+*** 实验室电话开通, 7127
+
+*** 博士后研究中期工作报告_桂林R（updated）
+
+*** S&T 战略与技术(S&T) @asb
+
+*** Chief Innovation & Operating Office (CIOO) [2015-11-16 Mon]
+    1. http://all.alcatel-lucent.com/wps/portal/cf/announcement_november2015?lu_lang_code=en#tabAnchor2
+    2. using the power of Bell Labs and FutureWorks to shape Nokia's
+       vision across the business groups
+    3. CIOO would also drive the combined company's digital agenda
+       through IT and cloud in order to create an agile and
+       collaborative environment for the company's world-class
+       engineers.
+    4. The CTO and Bell Labs unit would set Nokia’s technology and
+       architecture vision, andshape the industry as a whole
+
+    5. Name of the proposed Unit | Name of the designated Leader
+    6. CTO and Bell Labs | Marcus Weldon
+
+*** [#C] @finance 56.36$, The Future X Network: A Bell Labs Perspective
+    1. Room D401, Building 3, No.388 Ningqiao Road, Pudong
+    2. Grand Total: 	$56.36
+    3. VAT only means something for people who live in Europe. 
+
+*** Nokia Technologies (TECH) 
+
+*** Dora van Veen, Murray Hill, NJ, USA
+    1. https://www.bell-labs.com/usr/dora.van_veen
+    2. DOUTJE VAN VEEN works as a Principle Investigator in the Bell
+       Labs Optical Access Research Program in Murray Hill, New
+       Jersey, USA.Doutje joined Bell Labs in 2000.
+    3. She has been a Lead Engineer in a team that has developed a
+       number of early demonstrations and has done research for
+       several generations of PON.
+
+*** 公共职能平台卡丁车比赛啦啦队报名表								
+*** IP Transport: Welcome Vivian ChenVivian 
+    1. (Xi) Chen received her B.E. degree in Telecommunication
+       Engineering in 2008 from the National University of Defense
+       Technology in China. In 2008 she worked at Huawei in the
+       wireless network area. She then pursued her graduate studies in
+       Optical Fiber Transmission at the University of Melbourne,
+       Australia, and received her Ph.D. in 2012, followed by a
+       Post-Doctoral Research Fellowship from 2013 to 2015. Vivian was
+       an International Intern Student at Bell Labs in NJ during the
+       summer of 2011. In 2014 she won the prestigious Discovery Early
+       Career Research Award from the Australian Government. She
+       joined the Bell Labs IP Transport Research Domain (Crawford
+       Hill, NJ) in June 2015. She is currently working on digital
+       signal processing for fiber transmission systems, mitigation of
+       signal distortions, and optical subsystem design.
+
+*** Fixed Networks and NECT: Demonstration of 25 Gb/s TDM-PON with Standard Class Optical Budget and 20 km Reach using 10 Gb/s Optical Components
+
+    1. We demonstrated the technical feasibility of a symmetrical 25
+       Gb/s TDM-PON with a 20 km reach and 31.5 dB optical power
+       budget using only 10 Gb/s optical components. We accomplished
+       this by using PAM4 downstream to boost the transmit signal with
+       an optical amplifier, and duobinary upstream for burst mode
+       transmission. We applied very simple low cost pre-distortion
+       schemes and commercial real-time EDC to increase dispersion
+       tolerance and implemented optical amplification at the CO side
+       (shared cost) to achieve an optical power budget of 31.5 dB for
+       a 20 km reach and 33 dB for a 10 km reach. Our technology
+       enables increasing the serial bit rate of PON beyond 10 Gb/s to
+       25 Gb/s at a similar cost and performance as 10 Gb/s
+       PON.
+    2. Contacts: Dora van Veen, Vincent Houtsma 
+
+** @shuigen: @mobile: 15001903987
+   1. [2015-12-07 Mon]
+Dear all,
+
+我这周五就要离职了，再见了。和各位兄弟姐妹相处了这么长时间，还是挺不舍的。
+
+以后多联系。我的手机：150 0190 3987
+
+Best regards,
+Shuigen Yang (杨水根)
+
+** @taotao, @LAA
+   1. Licensed-Assisted Access (LAA)
+   2. From: TAO Tao B  Sent: 2015年9月15日 10:46
+      1. To: SHI Nina
+      2. Subject: Seminar on RAN1 #82 and LAA workshop
+      3. Hi, Nina, I would like to organize a seminar on 3GPP RAN1 #82
+         meeting and LAA workshop.
+   3. 华为同运营商NTT Docomo合作在5GHz WiFi频谱上开发LTE网络
+      1. 近日日本电信运营商NTT Docomo的科研学者同华为公司共同合作尝试
+         开发未受认证通过被用于WiFi网络的5GHz无线频谱，一旦这项技术得
+         以成功那么运营商可以在该频谱上拓展LTE网络
+      2. 直接将 LTE 的频谱扩展到了一些 Wi-Fi 设备所使用的 5GHz 频谱
+      3. 这个全名为 Licensed-Assisted Access（LAA）的无线技术，可以让
+         高使用密度区域的 LTE 服务能使用较低干扰且未开放执照的频谱，进
+         而提供更高稳定度的移动网络服务
+      4. 辅助访问许可（LAA）
+      5. 华为Small Cell还基于Licensed-Assisted Access(LAA)技术利用非授
+         权频谱实现了高达3载波的载波聚合(3CC CA),可帮助运营商高效利用
+         非授权频谱资源
+      6. 授权频谱辅助接入(LAA,Licensed-Assisted Access)
+
+** @asb
+   1. @DL_CN_RES_China_ALL <DL_CN_RES_com@dl.alcatel.com>
+   2. @DL_CN_RES_LOC_SH_JinQiao
+      <DL_CN_RES_LOC_SH_JinQiao@dl.alcatel.com>;
+      @DL_CN_RES_LOC_SH_HeTian
+      <DL_CN_RES_LOC_SH_HeTian@dl.alcatel.com>;
+      @DL_CN_RES_LOC_SH_Chuangke Park
+      <DL_CN_RES_LOC_SH_Chuangke_Park@dl.alcatel.com>;
+      @DL_CN_RES_LOC_SH_ChuanSha
+      <DL_CN_RES_LOC_SH_ChuanSha@dl.alcatel.com>
+
+   3. Bell Labs-CTO All Hands <CTO_BLTeams@exchange.alcatel-lucent.com>
+
+   4. 袁　欣 : 中国华信邮电经济开发中心管理委员会主任，上海贝尔股份有限公司 董事长、党委书记
+   5. 中国华信邮电经济开发中心（简称“中国华信”）成立于1993年1月21日，
+      是原邮电部直属单位。2000年，中国华信划归中国电信集团。2011年7月1
+      日，国资委将中国华信划转中国国新控股有限责任公司持有。
+   6. 国新将代持上海贝尔 谢企华称不是接手差企业
+      1. 上世纪80年代，按照市场换技术的国家政策要求，在原邮电部的要求
+         下，几乎所有国际上大的跨国公司，都通过与中国邮电工业总公司
+         （中国普天公司的前身）的合作进入中国市场。包括比利时贝尔电话
+         设备制造公司。合资之初，中国邮电工业总公司占有60%的股份，贝尔
+         电话设备制造公司占40%。
+   7. 《大陸產業》諾基亞扎根大陸，攜手中國華信設新公司
+      1. 在競爭最為激烈的ICT領域，中資企業已形成以華為、聯想和中國華信
+         為代表三方，華為依靠的是自主研發，聯想依靠的是業務整合，而中
+         國華信走的則是隱居幕後資本運作。 
+
+** @fpga @GUJunrong <Junrong.Gu@alcatel-sbell.com.cn>
+   1. Xilinx Design Constraint (XDC) file
+   2. \\cccnassvr2\winv3\EDA_SOFT\ASIC_FPGA\Xilinx
+
+** @cran 云无线接入网络(CRAN)
+
+*** 将传统BBU集中为“云”，同时集中调配RRH与天线
+
+** Colleague
+
+*** @work, 小实验室电话 7127
+    1. 6楼小实验室电话已经开通，分机号7127，电话放在我们实验桌子最右边，请大家记一下
+
+*** @work: @zhang_haiyang, ZHANG Haiyang A
+    1. FPGA, VIVADO
+*** @work: @jianwen: Dr.Yuan Xiaojun from ShanghaiTech University
+    1. Gigabit Wireless Transmissions on E-band
+    2. The 71-76 GHz and 81-86 GHz e-band allocations
+
+
+*** HE JIANJUN, lightip, at the tip of lightwave technology
+    1. http://www.lightip.com/AboutUs.htm
+
+
+*** [WU LU] 武露 上海贝尔 leave [2015-07-13 Mon]
+*** [zhang_jianwen] \cite{zhang2013hermitian}, JASC, Cited by 23,  jwzhang920@gmail.com
+    1. Hermitian precoding for distributed MIMO systems with
+       individual channel state information
+    2. Jianwen Zhang, Xiaojun Yuan, Member, IEEE, and Li Ping, Fellow, IEEE
+    3. City University of Hong Kong
+    4. I hope we still have opportunities to cooperate with each
+       other. Please stay in touch: email: jwzhang920@gmail.com or
+       jzhang35-c@my.cityu.edu.hk.
+
+*** Gao Jiexing Moscow State University-(MSU), gaojxing@gmail.com
+    1. \cite{bogolyubov2011excitation}
+
+*** 巨纳新能源副总梁铮博士成为国际ISO专家
+  1. 泰州巨纳梁铮博士当选ISO专家
+
+*** 胡中骥, 湖南宸一, http://www.thinkey.com.cn/
+*** LU Jinxing
+
+
+** @asb, ping asbcc1 or 172.24.208.33 
+   1. 写时请尝试ping一下asbcc1，如若ping不通，请把asbcc1改写成172.24.208.33），之后保存并退出。
+
+** Peter
+
+*** x-haul, Data center, Universal remote, redude latency [2015-06-18 Thu]
+  1. Broadband Network Gateway (BNG). Customer-premises equipment
+  2.  XLG-PON (using a bit- interleaving protocol, i.e, NG-PON2, 40Gbps)
+
+
+*** Copper or aluminium-(cable)
+** 上海贝尔多名员工荣获2015年贝尔实验室杰出工程师奖(DMTS)
+  1. http://172.24.208.168/tabid/87/ArticleID/48248/Default.aspx
+  2. 张路博士,
+     1. 自2009年到2012年，他在贝尔实验室(中国区)任职研究科学家，从事
+        LTE-Advanced系统的网络架构、关键技术及产品的研究，和针对其它最
+        前沿的无线通信领域的创新性研究;期间，他申请了多项专利，发表了
+        近20篇学术论文(比如以第一作者在顶级国际期刊IEEE Transactions
+        on Communications发表的论文)。
+  3. 徐鹂，
+     1. 1999年加入上海贝尔公司，一直在多媒体视频终端、移动接入网、
+	移动核心网等领域从事研发工作。
+
+
+** TODO 献血 blood donation  [2015-04-30 Thu] 2014年4月30日8:30--11:00
+ 1) 地点：公司金桥总部1号楼1123室
+ 2) 报名时间从4月22日上午10:00开始至4月24日下午17：00
+ 3) 献血当天后可享受三个工作日休假（休假截止期为2016年12月31日，逾期视
+    作为自行放弃）。
+ 4) 献血慰问费税前每人3000元，营养品一份
+ 5) *提示：报名已经成功*
+
+** proxy server, 135.247.130.16, port:8080
+** USRP 13817386685
+Contact Information:
+Howard Fan(樊俊毅)
+021-64669185-812
+13817386685
+Howard_fan@tnm-corad.com.cn
+** [GUI] Lunch with Dr.Gui today from YU CHUNMEI <Chunmei.Yu@alcatel-sbell.com.cn>
+[2015-03-23 Mon]
+
+To: GU Junrong; ZHANG Haiyang A; SHI Xinghua; ZHANG Jianwen B; TAO Tao
+B; LIU Qi B; HUANG Xiaoan; GAO Jiexing; YANG Li E; WU Zhuo
+
+ 1) elite
+ 2) BD, business assess
+ 3) presentation skills
+ 4) xerox, microsoft, apple, GUI
+    1) 施乐(Xerox)是美国施乐公司一个著名商标和品牌
+    2) :施乐是图形化用户界面的始祖,苹果公司抄袭了施乐,微软公司又抄袭了
+       苹果公司
+    3) 比尔.盖茨曾对他的工程师说：做一台PC机，一个看上去处、工作起来就
+       像MAC的PC机。最初，Windows和Mac OS不仅在外观上雷同，几乎所有工
+       具箱/API接口都相同。
+    4) Windows中所有的好东西几乎都可以追溯到多年前的Mac机，而从Windows
+       中所有差的地方都可以发现，那都是微软试图对Mac机作出的改变
+    5) http://www.ergocn.com/news37.htm
+
+
+** Ruichuan, from PKU,  http://www.ruichuan.org/
+ I received my Ph.D. in Computer Science from Peking University in 2009
+** 斯图加特（Stuttgart）
+The Bell Labs team in Germany is located in Stuttgart 
+http://www3.alcatel-lucent.com/wps/portal/BellLabs/Global
+** 1. 请各位在每月5日前在“HR portal 日常考勤” 中完成上月的日常考勤说明
+** 2014年度年所得12万元以上个人自行申报纳税情况说明
+2014年度年所得12万元以上个人自行纳税申报事项已经启动。如果您2014年在公
+司的收入超过12万元，或者公司收入加上其他所得超过12万元的，应自行向税务
+机关申报。请您登录HR Portal，点击『薪资与福利』-『收入与所得税』页面了
+解详细情况。谢谢！
+
+** TODO 退早餐卡@6#，[2015-04-07 Tue 14:00-17:00]--[2015-04-30 Thu]
+** Fixed Networks and NAPS: Mobile Front-haul using Latency-improved TDM-PONs
+Transport of mobile front-haul traffic has a very tight latency
+requirement of about 250us one-way and the best solutions today are
+based on expensive point-to-point (PtP) fiber links and PtP
+WDM. TDM-PON is less expensive but has a poor latency of about 1ms. We
+have found ways of reducing TDM-PON latency to acceptable levels of
+250 usec or less. We accomplished this by using queuing theory to
+analyze the total latency and derived closed-form formulas that allow
+understanding of the tradeoffs enabled by the different system
+parameters. We have illustrated multiple application scenarios in
+which TDM-PON has acceptable latency, and have shared our results with
+the Fixed Networks CTO. 
+
+Contact: Prasanth Anthapadmanabhan, Anwar Walid
+
+** FX pitches Feb 2015-FutureX Project 'Pitch' Call
+[2015-02-09 周一]
+ASB_FN_Program_Review_v07.ppt
+ASB_FX pitches Feb 2015.ppt
+*** From World Wide Web to World Wide Chat
+*** FUTURE CORE
+DWDM的波长间隔0.8nm,CWDM的波长间隔20nm,差25倍
+S代表Short波段，C代表Conventional波段，L代表Long波段
+一般使用C波段，除了日本。而在一些海缆项目中，会同时用几个波段
+S:短波 1460-1530nm ；C:常规 1530-1565nm ；L:长波 1565-1625nm
+1) Current WDM systems: ~100lambda x 100G = 10T over ~2,000 km
+2) By 2020, mega-datacenter interconnects will need point-to-point
+   links, > 5,000 x 100G = 500T over ~80-km
+3) Key Disruptions: Use Spectrum and Space for >10X capacity increase
+   Ultra-wideband systems *(C-band -->S+C+L or 3xC-bandwidth)*,
+4) Ultra-wideband optical amplifiers demonstrated (3x C-band)
+5) Key Next Steps:
+   1) Ultra-wideband SOA performance improvement (NF, Pout)
+   2) Ultra-wideband system trade-offs, techno-economics, demo
+   3) SDM x WDM system trade-offs, techno-economics, demo
+   4) Key skills needed: Opto-electronic devices and systems, FPGAs
+*** Future data center
+1) Key Disruption: Marry the low fiber cost of WDM with the low
+   transceiver cost of VCSELs:
+2) *VCSEL-(LOW COST TRANSCEIVER, HIGH COST FIBER)*,
+3) WDM single-mode-(high cost transceiver, low cost fiber)
+
+
+
+
+
+
+
+
+
+
+** [#A] COMMENT FN_Program_Review_v07
+   - State "TODO"       from ""           [2014-12-24 周三 09:17]
+
+*** Copper at Fiber Speed: XG-Fast
+
+**** Copper access at fiber speeds
+XG-Fast: 10x faster than  G.fast-(VDSL)
+XG-Cable: 10x faster upstream than DOCSIS 3.1
+**** Faster PON feeder to universal remotes
+NG-PON2: the challenges of “W” in TWDM
+XLG-PON: breaking the “sound barrier” of TDM
+**** Future Remote: programmable universal access
+
+*** Copper at Fiber Speed: XG-Cable-(US and DS-not diplexer, both10/10Gbps)
+
+**** Key Goal: Symmetrical fiber-like services over cable
+     10x better than upstream in DOCSIS 3.1
+     # A diplexer is a passive device that implements frequency domain
+     # multiplexing
+     # Next Generation Access Networks (NGA)
+     # FutureRemote
+     # G.fast is a digital subscriber line (DSL) standard for local
+     # loops shorter than 250 m, 
+     # DSL的中文名是数字用户线路, 同轴电缆材料（Coax线缆）
+     # RF coaxial cable = loss of signal strength ... With a loss of
+     # 6.7 decibels (dB) per 100 feet (30 meters [m]) for LL cable
+     # coax, 20dB/100m
+     # Attenuation, 2.8dB/100m@1.5 MHz, 20dB/100m@100 MHz,
+     # 47dB/100m@500 MHz
+     
+     
+**** Key Disruption: What opportunity do we see ? 
+     MSO can compete against FTTH with FTTLA
+     Leverage Bell Labs’ DSL assets to lead the way in cable
+
+
+*** [#A] Colleague 
+**** [LG] \\CVT100620N1\Nero from //CVT100620N1/Nero
+
+*** job info 
+   - State "Huang"      from ""           [2014-12-02 周二 13:37]
+**** Farewell_xuyanli, <2015-01-22 周四>
+Email:xylzoe1@163.com
+Wechat:xuyanli487930
+Mobile No:15221059037
+
+**** bell wangyang, liu xiang and wanyan, @6F, LTE PCIE, and Linux ICC <2014-12-26>
+1) intel cpp compiler(简称icc,但是icc作为其一个命令
+
+**** bell yan.zhao@, ASB_stone
+Entered on [2014-12-02 周二 13:35]
+**** DONE 2014 cross department performance review <2014-12-24 周三 14:25>
+   CLOSED: [2015-01-20 周二 15:13]
+   - State "DONE"       from ""           [2015-01-20 周二 15:13]
+Dec. 24 2:45pm-3:00pm Dec. 24 3:00pm-4:20pm
+Researchers present & review  (8 Minutes every person) 
+ [[file:d:/GTD18/journal.org::*%5B#A%5D%20google,%20tmd123][google,
+ tmd123]]
+
+
+*** ASB other
+**** 专访C++之父Bjarne Stroustrup博士
+
+
+
+* Work Weekly report 						      :@work:
+  - State "Work"       from ""           [2014-11-28 Fri 15:12]
+** Progress of tasks.
+*** TODO progress, <2015-01-09 Fri +1w>
+**** [#C] TI devices integrating ADC and FPGA are now working. [2015-11-13 Fri]
+     1. Continuously make progress in real-time demo
+	1. Phase-2 in demo: AWG M8190A as a DAC is now working.
+	2. Phase-2 in demo: TI devices integrating ADC and FPGA are now working.
+	3. Phase-2 in demo: AWG M8190A transmits signal successfully
+	4. Phase-2 in demo: TI devices integrating ADC and FPGA successfully receive signal from AWG M8190A by functioning as a real-time ADC.
+	5. Phase-2 in demo: Further FPGA programming of OFDM is still ongoing, next for IFFT.
+	6. Phase-3 in demo: matlab programming should be replaced by FPGA programming step by step.
+
+**** Proposing MIMO (SFBC) and FBMC for converged mobile and optics [2015-05-22 Fri]
+  1) Proposing MIMO (SFBC) and FBMC for converged mobile and optics
+     1) Challenges of converged MFH: 1) Seamless connection between
+        fiber and wireless (or copper crosstalk issue) 2)
+        Inter-modulation distortion between IFs. 3) Random
+        distribution of UE (first consideration in optical domain)
+
+     2) Proposing SFBC in MFH: it can resolve the seamless connection
+        between optics and wireless due to random distribution of
+        UEs. As we know, SFBC is employed in current LTE system to
+        utilize frequency diversity in the MIMO system. However, SFBC
+        in MIMO is not yet considered in the converged optical and
+        wireless system.
+
+     3) FBMC in MFH: PAPR issue is a challenge even for FBMC although
+        FBMC can resolve IMD issue due to very low side-lobe leakage.
+
+  2) Continuously Make progress in interconnection between two
+     USRP2s  for CoMO Demo: decrease ping delay more. 
+
+**** COCRAN and (Software-defined Converged Access Network)- SCAN, [2015-05-15 Fri]
+
+  1) MFH
+
+     1) Challenges of OFDM in MFH: 1) frequency offset of subcarriers is
+	a drawback especially for uplink. 2) inter-modulation distortion
+	between IFs due to high sidelobe leakage.
+
+     2) Proposing FBMC in MFH: it can resolve the frequency offset and
+	cancel the CP, which is an important issue for high speed
+	5G. Moreover, very low sidelobe leakage is very benefit for MFH.
+
+     3) FBMC or UFMC in MFH: UFMC is more flexible and does not require
+	complex filter design.  So UFMC may be more viable in MFH. And
+	PAPR and EVM performance should be compared between FBMC and UFMC
+	in MFH system.
+
+  2) Converged Optical-Copper-Radio Access Network (COCRAN)
+
+     1) MIMO to reduce crosstalk in the Converged Optical-Copper-Radio
+        Access Network (COCRAN): crosstalk issue should be carefully
+        considered to reduce interference from the other 3 wired
+        lines. MIMO may be a solution to tackle this issue.
+
+
+
+**** [2015-05-08 Fri]
+
+ 1) Proposing a new modulation scheme for mobile front-haul uplink
+    1) Challenges of OFDM: 1) offset of subcarriers is a drawback
+       especially for uplink. 2) CP is required to mitigate ISI, so it
+       will lower bandwidth efficiency.
+
+    2) FBMC may be a viable solution for 5G due to cancelation of CP
+       and robustness against subcarrier frequency offset. Key of
+       FBMC: 1) Offset QAM to fully utilize spectrum resources; 2)
+       design the poly-phase filter.
+
+    3) FBMC for MFH: it can resolve the frequency offset and cancel
+       the CP, which is an important issue for high speed 5G. Also,
+       these issues are also important for MFH, due to fiber
+       dispersion and higher capacity. So, FBMC as a baseband module
+       should be considered for next generation MFH.
+
+**** [2015-04-29 Wed]
+
+ 1) Continuously Proposing Interleaved Channel Aggregation based
+    software-defined MFH to support 96 E-UTRA-like IFs.
+    1) 16 IFs for each bandwidth 1.4, 3, 5, 10, 15 and 20 MHz,
+       respectively.
+
+    2) CFO pre-compensation may be applied in MFH to simply RRH and
+       compensate phase offset due to fiber transmission.
+    3) EVM performances are firstly measured for all 64QAM
+       transmission in 96 channels: the larger bandwidth, the worse
+       EVM (the worst is 0.026).
+    4) Pre-compensation can be utilized to compensate the EVM penalty
+       especially for optical transmission of large bandwidth IF
+       signal.
+
+    5) Then flexible 4-256QAMs are transmitted, and even 256QAM can
+       be sucessfully transmitted with 0.016-EVM. 
+    6) PAPR can be reduced from 19 to 11-dB by employing ICA. 
+
+**** [2015-04-24 Fri]
+
+ 1) Continuously Proposing Interleaved Channel Aggregation based software-defined MFH to support 96 IFs and make system cost-effective and flexible.
+    1) Simulation demonstration of software-defined MFH enabling 96
+       E-TRAN-like IF signals: 16 IFs for each bandwidth 1.4, 3, 5,
+       10, 15 and 20 MHz, respectively. Current stage: finished ICA
+       based MFH supporting 96 E-TRAN-like IF channels and
+       software-defined QPSK, 16QAM and 64QAM and can be fulfilled.
+    2) CFO pre-compensation may be applied in MFH to simply RRH and
+       compensate phase offset due to fiber transmission.
+    3) PAPR and EVM performance should be measured to ensure the proposal.
+
+**** [2015-04-10 Fri]
+
+ 1) Enhance performance for CoMO system
+    1) Reviewing papers of OFC 2015: The research about “Real
+       time IFDMA-PON” by Kenji Ishii1 in Mitsubishi Electric
+       Corporation is pretty interesting, proposing
+       IFDMA/OFDMA/SC-FDMA-PON co-existence and CFO
+       pre-compensation.
+    2) Our proposed ICA maybe coexisting with DFT-S
+       by Huawei, and CFO pre-compensation may be applied in MFH to
+       simply RRH and compensate phase offset due to fiber
+       transmission.
+    3) Revising patent of proposed “Interleaved Channel
+       Aggregation Based Multi-IFoF System For Mobile Fronthaul”: This
+       invention provides ICA based Multi-IFoF with simpler
+       architecture and lower PAPR (8 dB reduction for green power
+       solution). AWG should be deleted due to repetition with ADC in
+       the architecture.
+
+ 2) narrowband for CoMO Demo
+    1) interconnect with Video
+       1) FDD: 2.41G and 2.5G, ping is decreased from 1-2s to 80ms
+
+       2) Ping delay 80ms is still not enough for video interconnection
+ 3) OFDM for CoMO Demo
+
+**** [2015-03-27 Fri]
+
+ 1) Enhance performance for CoMO system
+    1) Proposing Interleaved Channel Aggregation (ICA) algorithm
+       for MFH to support dense IFs and make system cost-effective.
+    2) Preparing technical report "Technical Report on Interleaved Channel Aggregation
+       Based Mobile Fronthaul" for deliverable report_Q12015: it is
+       time-consuming to write report, but valuable for me to
+       summarize latest research. 
+
+ 2) narrowband for CoMO Demo
+    1) interconnect with Video
+       1) FDD: 2.41G and 2.5G, ping is decreased from 1-2s to 80ms
+
+       2) Ping delay 80ms is still not enough for video interconnection
+ 3) OFDM for CoMO Demo
+
+**** [2015-03-20 Fri]
+ 1) narrowband for CoMO Demo
+    1) interconnect with Video
+       1) FDD: 2.41G and 2.5G, ping is from 1-2s to 100ms
+	  1) Node1 initiates the ping request to node2, node2 should
+             send back ARP reply.
+	  2) When the reply is too short, node1 can not receive reply.
+	  3) So increase reply time
+
+    2) fix in tunnel.py
+       1) time.sleep(0.009) # delay 9ms before sending out the
+          reply. And then the ping delay can be decreased to 100ms, so
+          video transmission becomes better.
+
+ 2) OFDM for CoMO Demo
+ 3) Enhance performance for CoMO system
+    1) Proposing Interleaved Channel Aggregation algorithm
+       for MFH to support dense IFs and make system cost-effective:
+       Interleaved proposal has lower complexity and PAPR than that
+       of HUAWEI-(PAPR decreased from 18 to 11 for 6 channel aggregation)
+
+    2) Optical transmission for the proposal  employing Optisystem
+       should be performed, especially for high-level 1024-QAM.
+
+**** [2015-03-13 Fri]
+ 1) narrowband for CoMO Demo
+    1) interconnect with Video
+       1) Success with gmsk modulation (800kbps), but large delay
+       2) decrease ping delay by FDD: discussed  with technical
+          supporters and decided to employ FDD solution, so try to
+          use 2.41G and 2.5G to suppress the interference for
+          tunnel. tried many times, but still failed.
+       3) maybe USRP1 can not support video Interconnection.
+ 2) OFDM for CoMO Demo
+ 3) Enhance performance for CoMO system
+    1) Proposing Interleaved channel aggregation algorithm
+       for MFH to support dense IFs and make system cost-effective:
+       Interleaved proposed has lower complexity and PAPR than that
+       of HUAWEI. PAPR performance of my proposal is half of HUAWEI's
+       SC, due to time interleaved solution. Moreover, that will decrease ONU's
+       cost and support both uplink and downlink for CoMO.
+
+**** [2015-03-06 Fri]
+1) narrowband for CoMO Demo
+   1) interconnect with Video
+      1) Success but low speed (100kbps)
+      2) ping duration is 2ms, and delay is large, so try to decrease delay by using
+         gmsk modulation, but still fail.
+2) OFDM for CoMO Demo
+   1) Success in benchmark_tx and benchmark_rx interconnection in OFDM
+      1) 
+   2) Stuck in /tunnel.py
+      1) ping is not yet fulfilled. I think modulations of psk and
+         qam in OFDM is not easy to be detected for USRP.
+      2) try to solve ping issue, but still fail
+3) Enhance performance for CoMO system
+   1) Proposing an advanced channel aggregation algorithm for MFH to
+      support dense IFs  and make system cost-effective: no need of
+      complex FIR design and lower complexity. The algorithm has lower
+      complexity than that of HUAWEI's proposal.
+   2) Initiate optical transmission for 1024QAM employing Optisystem:
+      in the simulation, receiver can not recover incoming signal,
+      due to simulation issue.
+
+**** [2015-02-06 Fri]
+1) USRP
+   1) Interconnection: try to fix the existing interconnection problem of
+      USRP1 and USRP2, still struggling
+2) Continuously Enhance performance for CoMO system
+   1) 200MHz*16CHNs MFH has been successfully verified: at first
+      64QAM-OFDM has been successfully received.
+   2) 1024QAM-OFDM has been required to be validated after group
+      discussion.
+   3) Make progress to realize 1024QAM transmission 
+#   3) 1024QAM-OFDM has been validated for MFH system.
+
+**** [2015-01-09 Fri]
+2) Continuously Enhance CoMO system
+   1) Initialize TDD algorithm research for CoMO system to support
+      48-IF: It can relieve complex FIR design and lower PAPR, but the
+      drawback is its huge bandwidth occupy.
+
+
+*** DONE target [2014-12-25 Thu]
+Continuously Enhance Mobile Front-Haul in LTE-A
+*** DONE <2014-12-19 Fri>
+Continuously Enhance OFDM-PON Mobile Front-Haul MFH system
+1) Completed MATLAB simulation of SC-FDMA: 7-dB PAPR can be enhanced
+   than that of OFDMA-(FFT size is 256, 16QAM).
+2) Denser IF channels for mobile front-haul: key limited
+   factor is high PAPR, due to inherent OFDM modulation format and
+   dense IF channels.
+3) Updated  equalization algorithm: current preamble
+   structure is not flexible for much larger FFT size. And IFFT size
+   of LTE is 1024 or 2048, therefore, current equalization algorithm
+   must be replaced.
+Continuously Reviewed journal papers about SCFDMA-PON
+1) SC-FDMA algorithm: There are two modes to generate SCFDMA
+   signal: interleaved and localized modes. Performance of 1st kind is
+   better, where 7-dB PAPR can be enhanced than that of OFDM for
+   16-QAM mapping.
+2) 
+3) Presented SCFDMA and IFDMA algorithms to our group on
+   Dec. 18: OFDMA-PON may be updated into SCFDMA-PON in next stage.
+
+
+# intrinsic into inherent, finished into completed, replaced into Updated
+
+
+*** DONE <2014-12-12 Fri>
+2) SC-FDMA algorithm: There are two modes to generate SCFDMA
+signal: interleaved and localized modes. Performance of 1st kind is
+better, where 7-dB PAPR can be enhanced than that of OFDM for 16-QAM
+mapping.
+
+*** DONE progress <2014-11-28 Fri>
+   - HFC and DOCSIS: The HFC is not a passive network, so maintenance
+     cost is not low. In order to balance that drawback, it is very
+     necessary
+
+
+** Task target next week
+
+*** TODO target <2015-01-09 Fri>
+[2015-03-20 Fri]
+ 1) submit technical report
+[2015-02-06 Fri]
+1) Continuously make progress to enhance performance for CoMO system:
+   especially to realize 1024QAM transmission
+
+[2015-01-09 Fri]
+1) Continuously make progress to enhance TDD algorithm for CoMO system.
+2) Continuously make progress to study GPP ICC development for CoMO
+3) Continuously make progress to study USRP MATLAB development for CoMO.
+*** DONE <2014-12-25 Thu>
+    - State "DONE"       from "TODO"       [2015-01-09 周五 10:41]
+
+*** DONE <2014-12-19 Fri>
+    - State "DONE"       from "TODO"       [2014-12-25 周四 10:52]
+3)  To simulate SCFDMA PON system in optical communication
+simulation software: optisystem.
+
+*** DONE <2014-12-12 Fri>
+1) Continuously enhance MATLAB simulation of SC-FDMA PON system to support much denser IF channels.
+2) Continuously make progress to design the OBM-OFDM to improve spectrum efficiency.
+3) Continuously design a better equalization algorithm for SC-FDMA PON system.
+
+*** DONE <2014-12-05>
+
+    - 1) Cooperate with YCH to make progress in SC-QAM in order to
+      support more dense IF channels in OFDM-PON
+    - 2) Continuously make
+      progress to design the OBM-OFDM to improve spectrum
+      efficiency.
+    - 3) Consider better optics device to support better
+      Q-factor, large extinction ratio to enhance dense IF channels. 
+
+      
+*** plan <2014-11-28 Fri>
+  - Continoulsly consider interface specs for the HFC, such as, power budget, Spectrum Allocation, Backward compatibility with Channel Bonding.
+  - Continuously make progress for the DOCSIS-v3.1, such as, to design the OBM-OFDM.
+  - Continuously propose a better optical up-conversion method for DOCSIS-v3.1.
+
+*** DONE plan 2014-11-21
+    1) State "DONE"       from ""           [2014-11-28 周五 10:47]
+    2) Continuously propocse a better optical up-conversion method for DOCSIS-v3.1.
+    3) Consider interface specs for the HFC, such as, power budget.
+    4) Continuously make progress for the DOCSIS-v3.1, such as, to design the OBM-OFDM.
+
+
+* OVERTIME加班 							   :OVERTIME:
+#  SCHEDULED: <2014-12-04 Thu +2w>
+ SCHEDULED: <2015-03-26 Thu +2w>
+** TODO schedule, <2015-03-26 Thu +2w>
+*** TODO [HXF]
+**** ONU energy 60%
+ 1) Access networks account for 81% energy consumption of optical network;
+  2) ONUs consumes more energy than central office due to the large
+     number of devices and equipments.
+
+**** Principle of hierarchical modulation
+ 1) Hierarchical modulation is a coding technique, which is widely
+    used in wireless communications and satellite communications; It
+    is the first time to introduce hierarchical modulation technique
+    to fiber communications.
+
+*** 异常加班说明*  Attended FA technical seminar  [2015-06-18]
+    1. 是否调休*   --请选择-- 是 否 否 预计发薪月:2015-09
+    2. Attend group paper study:
+       1. (1) [HXA]: current challenges in converged mobile and optics system.
+       2. (2) [LG]: review of network abstractions.
+*** [2015-06-05 Fri]
+ Attend FA group paper study:
+ 1. [GZS] advanced modulation technique for NG-PON
+ 2. [HXF] advanced modulation formats in optical communications
+*** [2015-05-22 Fri]
+ Attend FA group paper study:
+(1) [BFX]: requirement from carrier grade SDN and virtual network enabler.
+(2) [CQJ]: challenges for 100-Gb/s single-wavelength optical access.
+
+*** [2015-05-08 Fri]
+ Attend FA group seminar: 
+ 1) [GZS]: overview of OFC’2015 paper.
+ 2) [XSM]: the converged mobile backhaul and passive optical network.
+*** [2015-04-23 Thu]
+ Attend FA group seminar: 
+ 1) [WHB]: SDN/NFV in MSBN & MEF’s vision on Third Network.
+ 2) [YCH]: wireless fronthaul over Fiber and indoor wireless over hybrid fiber copper.
+
+*** [2015-03-26 Thu]
+ Attend FA group seminar: 
+ 1) [LG]  “OpenDaylight tutorial"
+ 2) [YCH] "OFC’2015 preview"
+
+*** plan
+Dear all,
+
+2015年组内paper study初步安排如下：
+
+1)	2015-03-26: LIU G, SUN X.
+
+2)	2015-04-09: WEN HB, YE CH.
+
+3)	2015-04-23: GAO ZS, XIAO SM.
+
+4)	2015-05-07: BIN FX, CHANG QJ.
+
+5)	2015-05-21: GAO ZS, HUANG XA.
+
+6)	2015-06-04: LIU G, SUN X.
+
+7)	2015-06-18: WEN HB, XIAO SM.
+
+8)	2015-07-02: YANG SG, YE CH.
+
+9)	2015-07-16: BIN FX, CHANG QJ.
+
+10)	2015-07-30: GAO ZS, HUANG XA.
+
+11)	2015-08-13: LIU G, SUN X.
+
+12)	2015-08-27: WEN HB, XIAO SM.
+
+13)	2015-09-10: YANG SG, YE CH.
+
+14)	2015-09-24: BIN FX, CHANG QJ.
+
+15)	2015-10-15: GAO ZS, HUANG XA.
+
+16)	2015-10-29: LIU G, SUN X.
+
+17)	2015-11-12: WEN HB, XIAO SM.
+
+18)	2015-11-26: YANG SG, YE CH.
+
+19)	2015-12-10: BIN FX, CHANG QJ.
+
+20)	2015-12-24: GAO ZS, HUANG XA.
+
+Best regards,
+Shuigen Yang (杨水根)
+
+
+** OVERTIME @home 						      :@home:
+
+*** KEY: OFDM_trx_BW_141230s2.m <2014-12-31 周三>
+
+***  [#A] KEY: to be simple. right. 32CH_Part_1_version256QAM_2_Gen141226s1.m
+<2014-12-26 周五>, 
+I_32CH_Part_1_version256QAM_2_Gen141226s4.m
+
+** Overtime  [2014-12-18 Thu]
+Attend FA group seminar:
+(1) [BFX] "collection of SDN viewpoint"
+(2) [HXA] "SCFDMA-PON"
+
+1) Overtime /141106 <2014-12 周四>
+
+   - 调休：否 加班地点  3#D400 big meeting room
+
+   - 开始日期*2014-11-06 17:00  结束日期*  2014-11-06 20:30  
+
+   - Attend FA group seminar: [LG]  “Neutron and network policy
+     abstraction”,  [YCH] "Mobile Fronthaul Related Issues"
+
+
+   - 您的加班申请被在2014-11-18 01:01:31审批通过。
+
+2) overtime /141023 <2014-10-23 周四>
+
+   - 是否调休*   --请选择-- 是 否
+
+   - 否 预计发薪月:2014-12  开始日期* 2014-10-23 17:30  结束日期*  2014-10-23 20:30
+
+   - 异常加班说明*  attend the technical seminar
+
+3) OVERTIME <2014-12-04>
+
+   1) Attend FA group seminar: (1) [YSG]: SD-351 “stage 1 – analysis
+      of fixed access network sharing” (2) [CQJ]: real-time DSP for
+      future optical access network.
+
+
+
+
+* Ideas
+** 
+ 
+ [[file:d:/Emacs14/dotemacsw.el::(setq%20org-remember-templates%20'(("New"%20?n%20"*%20%25?%20%25t%20\n%20%25i\n%20%25a"%20"D:/GTD18/inbox.org"%20)%20("Task"%20?t%20"**%20TODO%20%25?\n%20%25i\n%20%25a"%20"D:/GTD18/task.org"%20"Tasks")%20("Calendar"%20?c%20"**%20TODO%20%25?\n%20%25i\n%20%25a"%20"D:/GTD18/task.org"%20"Tasks")%20("Idea"%20?i%20"**%20%25?\n%20%25i\n%20%25a"%20"D:/GTD18/task.org"%20"Ideas")%20("Note"%20?r%20"*%20%25?\n%20%25i\n%20%25a"%20"D:/GTD18/note.org"%20)%20("Project"%20?p%20"**%20%25?\n%20%25i\n%20%25a"%20"D:/GTD18/project.org"%20%25g)%20))][file:d:/Emacs14/dotemacsw.el::(setq org-remember-templates '(("New" ?n "* %? %t \n %i\n %a" "D:/GTD18/inbox.org" ) ("Task" ?t "** TODO %?\n %i\n %a" "D:/GTD18/task.org" "Tasks") ("Calendar" ?c "** TODO %?\n %i\n %a" "D:/GTD18/task.org" "Tasks") ("Idea" ?i "** %?\n %i\n %a" "D:/GTD18/task.org" "Ideas") ("Note" ?r "* %?\n %i\n %a" "D:/GTD18/note.org" ) ("Project" ?p "** %?\n %i\n %a" "D:/GTD18/project.org" %g) ))]]
+
+* Tasks
+** TODO 
+  [[file:d:/GTD18/%5BHXA%5D.DOCSIS.org::*%5B#B%5D%20Al-Banna,%20ARRIS,][Al-Banna, ARRIS,]]
+
+
+

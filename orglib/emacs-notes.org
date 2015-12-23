@@ -1,0 +1,349 @@
+#+TITLE: Learn Emacs Lisp while customizing Emacs
+#+OPTIONS: toc:1
+#+PROPERTY: QUANTIFIED Emacs
+
+Work in progress. Questions/ideas? [[mailto:sacha@sachachua.com][sacha@sachachua.com]]
+
+Available at http://sach.ac/baby-steps-elisp \\
+Github: https://github.com/sachac/emacs-notes . Patches welcome. =)
+
+While I'm drafting this, you may want to check out the following resources:  
+
+- http://bzg.fr/learn-emacs-lisp-in-15-minutes.html
+- http://toumorokoshi.github.io/emacs-from-scratch-part-3-extending-emacs-with-elisp.html
+- [[https://www.gnu.org/software/emacs/manual/html_mono/eintr.html][An Introduction to Programming in Emacs Lisp]]: A bit abstract, but a good place to start. Read it even if you don't understand everything. Read it again. Refer to it frequently. Graduate to the [[http://www.gnu.org/software/emacs/manual/elisp.html][Emacs Lisp reference manual]] when you're more comfortable (or if you need to look up details).
+- http://ergoemacs.org/emacs/elisp.html: Good collection of idioms and common uses.
+- http://joelmccracken.github.io/entries/emacs-lisp-for-hackers-part-1-lisp-essentials/: Starts with ielm, focuses on data structures; other parts?
+- http://cjohansen.no/an-introduction-to-elisp: Focuses on Emacs Lisp as a way of extending Emacs, uses programming examples (test cases)
+- http://steve-yegge.blogspot.com/2008/01/emergency-elisp.html
+
+UPDATE: Go check out http://pages.sachachua.com/emacs-notes/how-to-read-emacs-lisp.html instead.
+ 
+Previous draft follows below.
+
+** Why learn Emacs Lisp?
+
+Emacs is amazingly customizable. If you want to tweak Emacs to support the way that you'd like to work, learning Emacs Lisp will definitely pay off. People have used Emacs Lisp to turn Emacs into a musical instrument, a TODO manager, a webserver, and all sorts of other things.
+
+You don't need to be a programmer in order to learn and use Emacs Lisp. Even though you'll technically be programming in it, just think of it as configuring Emacs. This guide will start you off with simple customizations, and then you can go from there. In this guide, you'll be changing options much like you might change them through other applications' Options dialog. It's just that in Emacs, it's easier to do most things in text.
+
+In addition to reading this guide, you may want to check out [[http://planet.emacsen.org][Planet Emacsen]] and [[http://www.emacswiki.org][Emacs Wiki]] for plenty of inspiration. Seeing what other people have done with Emacs can nudge you to explore more of the Emacs Lisp code that makes it possible.
+
+I'm going to assume that you've already installed Emacs 24 or later and that you're familiar with basic editing. If you haven't gone through the tutorial yet, you can click on the tutorial link that appears when Emacs starts up, or you can use =Ctrl-h t= (=help-with-tutorial=). All right. Let's start!
+
+** How to run Emacs Lisp code
+
+The first thing you need to learn is how to run Emacs Lisp. By default, Emacs starts up with a =*scratch*= buffer that's in Emacs Lisp mode. You can use this to try out code temporarily without saving it to your config. Type or paste in the code that you want to try, then use =M-x eval-buffer= to evaluate all the code in that buffer.
+
+If you want to run some of the code (but not all the code), you can select the region and then type =M-x eval-region=. 
+
+Emacs Lisp code is made up of expressions that are enclosed in sets of parentheses. To run just one expression, put your cursor right after the last parenthesis (but not on the parenthesis itself). Type =C-x C-e= (=eval-last-sexp=). You should see the results that expression.
+
+Let's try that with some examples. Type or copy the following into your =*scratch*= buffer and use =M-x eval-buffer=. It should show "Hello world" in the echo area near the bottom of your Emacs frame.
+
+#+begin_src emacs-lisp
+(message "Hello world")
+#+end_src
+
+Try =M-x eval-region= and =C-x C-e= (=eval-last-sexp=) as well.
+
+There are a few other ways to quickly evaluate Emacs Lisp code. If you just want to quickly evaluate something, try =M-:= (=eval-expression=). =M-x ielm= opens an interactive buffer where you can type code and then press =RET= (Enter). When you're starting out, you'll probably want to be able to easily read and modify the code, so I suggest using =M-x eval-buffer=, =M-x eval-region=, or =C-x C-e= (=eval-last-sexp=) instead. If you've downloaded =emacs-lisp-tutorial.org= and are reading this in Emacs, you can evaluate code by putting your text cursor on the =#+begin_src emacs-lisp= line and typing =C-c C-c=. Make sure to re-evaluate it if you make any changes. Might be handy.
+
+Since the =*scratch*= buffer is not automatically saved to a file, you may want to put your code into a file instead. You can create any file with the =.el= extension (ex: =test.el=) and Emacs will switch to Emacs Lisp mode when you open it.
+
+** How to save your configuration
+
+When you like something and you want to make it part of your configuration, open the file =~/.emacs.d/init.el=. If you started with an older version of Emacs and have a =~/.emacs= file instead, be sure to move its contents to =~/.emacs.d/init.el= and remove the =~/.emacs= file.
+
+It's usually safe to add your new code to the bottom of the file. If your =init.el= already contains some code, make sure you add your new code after the last closing parenthesis. If you're changing things like =load-path=, you may want to put the code earlier in the file (before the library is loaded). Save your =init.el= and restart Emacs.
+
+What if you added something to your =init.el= that caused an error when you started Emacs? Don't worry. You can find out which part caused the error with =emacs --debug-init=. You can also start Emacs without your configuration file by typing =emacs -q= at the command-line. Then you can open your =init.el=, remove the problematic line, and restart to see if that fixed it.
+
+Okay, let's start writing Emacs Lisp!
+
+** How to load modes to change the way that Emacs behaves
+
+Emacs has "modes" that load different pieces of functionality. You've already seen how Emacs Lisp Mode (or =emacs-lisp-mode=, which is the actual name in Emacs Lisp) changes the color of code in the =*scratch*= buffer. Other modes affect how you use Emacs. Here's an example of a mode that you may find useful. It turns on completion for =M-x=.
+
+#+begin_src emacs-lisp
+(icomplete-mode)
+#+end_src
+
+Put that in your =*scratch*= and use =M-x eval-buffer= to evaluate it. Now try =M-x= again, and start typing =eval-buffer=. As you type, Emacs will suggest possible completions. There are even more [[http://sachachua.com/blog/2014/03/emacs-basics-call-commands-name-m-x-tips-better-completion-using-ido-helm/][shortcuts for M-x]], but this is probably a good start for you.
+
+Here are some other modes that might be helpful:
+
+#+begin_src emacs-lisp
+(column-number-mode)
+(visual-line-mode)
+(global-hl-line-mode)
+#+end_src
+
+Try using =C-x C-e= (=eval-last-sexp=) to evaluate these lines one at a time. Put your cursor after the ending =)= on each line, then type =C-x C-e=.
+
+=icomplete-mode= and the other modes are all examples of *functions*. The first "word" after the opening parenthesis of an Emacs Lisp expression is usually a function. You can learn more about functions with =F1 f= (=describe-function=). There are tons of functions in Emacs (and even more once you start installing and loading packages). You can discover useful functions by browsing through other people's configuration, looking at the source code of other functions you're interested in, checking out [[http://emacswiki.org][EmacsWiki]], asking on mailing lists and newsgroups, or using the =M-x apropos-command= function.
+
+** How to specify options when you're calling functions
+
+Some functions need more information. For example, =prefer-coding-system= is a useful function if you work with files that have special characters or different languages. The following Emacs Lisp code sets the default to UTF-8, which is a common standard.
+
+#+begin_src emacs-lisp
+(prefer-coding-system 'utf-8)
+#+end_src
+
+Here's another example. Let's say that you want to open a file whenever you start Emacs. The function to open a file is called =find-file=, and you can give it the name of the file to open. The code below switches to a buffer visiting file "todo.org" in your home directory. If the buffer doesn't exist, it will be created. If the file doesn't exist, it will be created automatically when the buffer is saved - for example, when you press =C-x C-s= (=save-buffer=) in that buffer.
+
+#+begin_src emacs-lisp
+(find-file "~/todo.org")
+#+end_src
+
+(See [[baby-steps-org][A Baby Steps Guide to Managing Your Tasks with Org]] for more info on Org files.)
+
+Here's a third example, for when you get tired of typing "yes" or "no" to confirmation prompts:
+
+#+begin_src emacs-lisp
+(fset 'yes-or-no-p 'y-or-n-p)   
+#+end_src
+
+=fset= is a function that replaces a function (yes-or-no-p) with another function (y-or-n-p). Sounds complicated? A little. You can use the snippet right now without digging into how it works, and you'll learn more about functions over time.
+
+** How to set simple variables
+
+In addition to calling functions, you can also set values that affect what code does.
+Many functions check the value of different *variables*. For example, this tells Emacs to keep old versions.
+
+#+begin_src emacs-lisp
+(setq delete-old-versions -1)
+#+end_src
+
+=setq= means "Set this quoted variable to this value." The quoted part just means that the first argument (in this case, =delete-old-versions=) is treated as a variable name instead of being used to look up a *different* variable to set. The code is the same as the code below:
+
+#+begin_src emacs-lisp
+(set (quote delete-old-versions) -1)
+#+end_src
+
+... but the =setq= version is shorter, so everyone uses that instead. This is also why you should be careful to type =setq= instead of =set=, as =set= refers to a different function. If you accidentally use =set= instead, you'll usually see something like a =Wrong type argument: symbolp=, /value/
+
+To see the documentation for a variable, use =F1 v= (=describe-variable=) and type in the variable name. The variable name is the first argument to =setq=, so you would type in =F1 f delete-old-versions=. 
+
+You can customize many variables through the =M-x customize= interface, but you'll most often see people sharing their configuration with Emacs Lisp code instead. It can be shorter to say "Add this code to your init.el" than it is to say "Use =M-x customize-variable= to change the =user-email-address= value", especially if there are lots of options to change. Not everything can be changed through the Customize interface, too. Emacs Lisp is more powerful, and it's easier to read afterwards. I tend to use =M-x customize= to explore, but I use Emacs Lisp code to set things up.
+
+Like the way there are tons of functions, there are also tons of variables, and you can discover interesting variables using the same techniques: reading other people's code, exploring, etc. 
+
+** How to set buffer-local variables
+	 :LOGBOOK:
+	 CLOCK: [2014-04-18 Fri 15:10]--[2014-04-18 Fri 15:17] =>  0:07
+	 :END:
+	 :PROPERTIES:
+	 :Effort:   1:00
+	 :END:
+
+Some variables are *buffer-local*. This means that the value in one buffer (or file) is separate from the values in other buffers. To find out if a variable is local to a buffer, use =F1 v= (=describe-variable=) to look at the documentation for that variable. For example, the documentation for =tab-width= has "Automatically becomes buffer-local when set".
+
+You can set the default value of a buffer-local variable with =setq-default=. The following code sets the tab width to 2 by default:
+
+#+begin_src emacs-lisp
+(setq-default tab-width 2)
+#+end_src
+
+#+BEGIN_COMMENT
+
+You can also change global variables so that they're local to buffers, if you want to have different values in different files. There are two ways to do this. You can se
+
+#+begin_src emacs-lisp
+(make-local-variable ' 
+#+end_src
+
+Or you can make a variable buffer local wherever it's set:
+
+#+begin_src emacs-lisp
+(make-variable-buffer-local 
+#+end_src
+
+#+END_COMMENT 
+
+** How to set more complex variables
+
+Some variables contain lists of data. Here's an example:
+
+#+begin_src emacs-lisp
+(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+#+end_src
+
+This is one of the things people usually want to change right away. By default, Emacs saves backup files in the current directory. These are the files ending in =~= that are cluttering up your directory lists. This code stashes them in =~/.emacs.d/backups=, where you can find them with =C-x C-f= (=find-file=) when you need to.
+
+=alist= stands for *association list*. Each entry in the list is
+enclosed in (...). The first part of the list is the key that is used
+to look it up, like the way a dictionary has words. The second part of
+the list is the value that Emacs uses, like the definitions in a dictionary.
+If you're curious, the [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Association-Lists.html][Emacs Lisp reference manual]] has more details.
+** How to load libraries
+	 :LOGBOOK:
+	 CLOCK: [2014-04-18 Fri 15:17]--[2014-04-18 Fri 15:38] =>  0:21
+	 :END:
+	 :PROPERTIES:
+	 :Effort:   1:00
+	 :END:
+
+Emacs has a lot of libraries. To save memory and to simplify operation, not all of them are loaded at startup. In addition to the libraries that are built into Emacs, you can also download packages and Emacs Lisp files, save them to a directory that Emacs can find, and load them.
+
+Here is one way to load the code from an Emacs Lisp file.
+
+#+begin_src emacs-lisp
+(load-file "~/.emacs.secrets")
+#+end_src
+
+If the file doesn't exist, you'll get an error. You can check if it exists with:
+
+#+begin_src emacs-lisp
+  (if (file-exists-p "~/.emacs.secrets")
+      (load-file "~/.emacs.secrets"))
+#+end_src
+
+If you use your Emacs configuration on multiple systems, you might want to load some configuration based on the name of the system you're on. For example:
+
+#+begin_src emacs-lisp
+  (if (file-exists-p (concat "~/.emacs.d/" (system-name) ".el"))
+      (load-file (concat "~/.emacs.d/" (system-name) ".el")))
+#+end_src
+
+To find out which file the code is looking for, you can put your point *after* the closing =)= for in =.el")= (so it's on the second parentheses) and then type =C-x C-e= (=eval-last-sexp=). That will display the result of the expression in your echo area.
+
+=load-file= loads a specified file if you know its path. For libraries, though, it's easier to use =require=. Here's an example that loads the =eldoc= library and turns on the mode. Eldoc displays information about Emacs Lisp functions or variables in the minibuffer when you move your point.
+
+#+begin_src emacs-lisp
+  (require 'eldoc)
+  (eldoc-mode)
+#+end_src
+
+=require= takes the name of the feature to load. Here, it's ='eldoc=. the quotation mark before it means that it should be treated as a literal symbol, not as a variable to look at for a value. If this features has already been loaded, =require= does nothing. If not, =require= searches through the list of directories in =load-path= for an Emacs Lisp file with that name and which provides that feature. 
+
+If you've downloaded the Emacs Lisp file or package on your own, though, you'll want to add its directory to the load path. See [[How to add to lists]] for details.
+
+** How to add to lists
+	 :LOGBOOK:
+	 CLOCK: [2014-04-18 Fri 15:38]--[2014-04-18 Fri 15:45] =>  0:07
+	 :END:
+	 :PROPERTIES:
+	 :Effort:   1:00
+	 :END:
+
+=add-to-list= is a straightforward way to add an item to a list. Here's an example of adding something to =load-path=, which controls where Emacs looks for packages or features to load:
+
+#+begin_src emacs-lisp
+(add-to-list 'load-path "~/elisp")
+#+end_src
+
+If you want to add to the end of the list, you can specify =t= as the optional APPEND argument, which is the third argument in the list.
+
+#+begin_src emacs-lisp
+(add-to-list 'load-path "~/elisp/sample-mode" t)
+#+end_src
+
+=add-to-list= adds an item only if it doesn't already exist. The list must already be defined. If you try to add an item to a list that does not exist yet, you'll get the following error: =Symbol's value as variable is void:= /listname/. Make sure you load the feature before you add to any lists defined in that feature.
+
+If you want to always add something to the beginning of the list, you can delete it from the list and then add it back.
+
+#+begin_src emacs-lisp
+(setq load-path (delete "~/elisp" load-path))
+(add-to-list 'load-path "~/elisp"))
+#+end_src
+
+If you don't mind duplicates (or you want them), you can use =cons= instead. =cons= constructs a *cons cell*, which is the data structure that makes up lists. For more information about cons, see the Emacs Lisp Intro section on [[http://www.gnu.org/software/emacs/manual/html_node/eintr/car-cdr-_0026-cons.html][car, cdr, cons: Fundamental Functions]].
+
+#+begin_src emacs-lisp
+(setq load-path (cons "~/elisp" load-path))
+#+end_src
+
+** How to add package archives - to be written
+** How to add hooks - to be written
+
+** How to set up your own keyboard shortcuts
+
+   If you find that you regularly need to run one or more commands
+   that don't have a default key binding set up for them, it's time to
+   start defining your own key bindings.
+
+   Each key binding you define belongs to a specific [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Keymaps.html][keymap]].
+
+   If you want a binding to be available globally, irrespective of the
+   mode you are in, you can add it to the =global-map= like this:
+
+   #+BEGIN_SRC emacs-lisp
+   (global-set-key (kbd "M-s r b") 'revert-buffer)
+   #+END_SRC
+
+   Here, we are creating a global key binding (=M-s r b=) for the
+   =revert-buffer= function.
+
+   You can also override an existing key binding this way. For
+   instance, the function =list-buffers= (which brings up a list of
+   all buffers that are currently open) is bound to =C-x C-b= by
+   default. If you prefer =ibuffer= for listing and operating on open
+   buffers but have already built up muscle memory for the =C-x C-b=
+   binding, you can rebind it like this:
+
+   #+BEGIN_SRC emacs-lisp
+   (global-set-key (kbd "C-x C-b") 'ibuffer)
+   #+END_SRC
+
+   You can also set up keybindings to work only in /specific/ modes.
+   This is done with the help of the =define-key= function:
+
+   #+BEGIN_SRC emacs-lisp
+   (define-key org-mode-map (kbd "C-c a") 'org-agenda)
+   #+END_SRC
+
+   Here, we are telling Emacs to create a key binding for the
+   =org-agenda= command that will only work in =org-mode= buffers.
+
+   It is important to note that mode-specific key bindings will
+   override global bindings. So unless you are explicitly trying to
+   override an existing binding (as described above), before setting
+   up a new binding it is always a good idea to check if the key
+   sequence you are thinking of is already bound to a command. (This
+   can sometimes be a great way of discovering functionality you
+   hadn't been aware of!) To check whether a binding is currently in
+   use /in any of the modes that are enabled for the current buffer/,
+   type =C-h k= (=describe-key=) followed by the binding. If it isn't,
+   you will see a message in the echo area telling you that the
+   binding =is undefined=. If it /is/ bound to a command, Emacs will
+   bring up a =*Help*= window with documentation for the command.
+
+   It can sometimes be desirable to /unset/ specific key bindings. For
+   global bindings, you can use the =global-unset-key= function:
+
+   #+BEGIN_SRC emacs-lisp
+   (global-unset-key (kbd "M-g M-g"))
+   #+END_SRC
+
+   Mode-specific bindings can be disabled by setting them to =nil=:
+
+   #+BEGIN_SRC emacs-lisp
+   (define-key magit-mode-map (kbd "M-s") nil)
+   #+END_SRC
+
+	 If you define lots of custom keybindings, you may want to check out
+	 John Wiegley's =bind-key= package. If you install =bind-key= and
+	 use it to define keybindings, you can then use =M-x describe-personal-keybindings= to see which keybindings
+	 Here are some examples for =bind-key=:
+
+	 #+begin_src emacs-lisp
+	 (require 'bind-key)
+   (bind-key "C-c a" 'org-agenda)
+   (bind-key "C-+" 'text-scale-increase)
+   (bind-key "C--" 'text-scale-decrease)
+   ;; You can use bind-key to modify keymaps
+   (bind-key "i" 'org-agenda-clock-in org-agenda-mode-map)
+	 #+end_src
+
+** How to define your own functions - to be written
+** How to prompt for information - to be written
+** How to change existing functions with advice - to be written
+
+(c) 2014 Sacha Chua - Creative Commons Attribution License (feel free to use, share, remix)
+** Acknowledgements
+
+Thanks to:
+
+- itsjeyd for the section on keyboard shortcuts

@@ -1,0 +1,66 @@
+# ---org 
+# % Time-stamp: "xiaoanh 2015/09/10 20:28:51"
+# #+FILETAGS: @MFH
+#+STARTUP: beamer
+# #+TAGS: @Emacs(e)
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [9pt]
+#+BEAMER_FRAME_LEVEL: 2
+#+OPTIONS: ^:{}
+#+TITLE: \huge  \textsc{Research Stage}
+# #+TITLE: \huge \textsc{Further Research on ``Radio over Fiber"}
+# #+TITLE: \huge  \textsc{Current Challenges in Converged Mobile and Optical System} 
+#+AUTHOR: HUANG Xiaoan
+#+EMAIL: Xiaoan.Huang@alcatel-sbell.com.cn
+#+DATE: \today
+#+latex_header: \mode<beamer>
+#+latex_header: \usepackage[svgnames]{xcolor}
+#+latex_header: \setbeamertemplate{footline}{\rightline{\includegraphics[scale=0.25]{D:/figure1411/logo_ASBs.png}} \centerline{ COPYRIGHT \copyright ALCATEL-LUCENT SHANGHAI BELL.  ALL RIGHTS RESERVED \hspace{3em}  \insertframenumber{}/\inserttotalframenumber}}
+#+latex_header: \setbeamertemplate{frametitle}{\vspace{1em} \hline \small {\textbf{\secname} \Rightarrow \subsecname \\ \insertframetitle} \hline}
+#+latex_header: \setbeamertemplate{items}[ball]
+#+latex_header: \setbeamerfont{frametitle}{family=\rmfamily,shape=\itshape}
+#+latex_header: \setbeamerfont{caption}{size=\tiny, shape=\itshape}
+#+latex_header: \setbeamercolor{background canvas}{bg=white}
+
+#+latex_header: \definecolor{lightorange}{rgb}{0.8,0.33,0} 
+#+latex_header: \usecolortheme[named=lightorange]{structure} 
+# #+latex_header: \definecolor{blacks}{rgb}{0,0,0} 
+# #+latex_header: \usecolortheme[named=blacks]{structure} 
+
+#+latex_header: \usepackage{lmodern}
+#+latex_header: \hypersetup{colorlinks=true,linkcolor=orange,urlcolor=red, citecolor=blue}
+#+COLUMNS: %40ITEM %9BEAMER_env(Env) %9BEAMER_envargs(Env Args) %4BEAMER_col(Col) %10BEAMER_extra(Extra)
+
+#+ATTR_LaTeX: width=0.7 \textwidth
+#+LATEX_HEADER: \setbeamertemplate{bibliography item}[text]
+
+#+LATEX_HEADER: \usepackage{bibentry}
+#+LATEX_HEADER: \usepackage{footbib}
+#+LATEX_HEADER: \usepackage{setspace}	
+#+LATEX_HEADER: \usepackage{hyperref}	
+#+Latex_header: \usepackage{fancybox} 
+#+Latex_header: \usepackage{pifont}
+
+# #+Latex_header: \usepackage{tocloft}
+#+Latex_header: \setbeamertemplate{section in toc}[sections numbered]
+#+Latex_header: \setbeamertemplate{subsection in toc}[subsections numbered]
+#+Latex_header: \AtBeginSection{ \frame{\tableofcontents[sections={\thesection}]}}
+#+Latex_header: \setcounter{tocdepth}{3}
+
+#+LATEX_HEADER: \setbeamertemplate{caption}[numbered] 
+
+#+LATEX_HEADER: \setbeamerfont{caption}{size=\scriptsize,shape=\itshape} 
+
+#+LATEX_HEADER: \usepackage[style=verbose,backend=ieeetr]{biblatex}
+#+LATEX_HEADER: \addbibresource{D:/bib1410/bib1410.bib}
+#+LATEX_HEADER: \addbibresource{D:/bib1410/bib1505.bib}
+# #+latex_header: \usepackage[numbers]{natbib} 
+#+Latex_header: \newcommand{\bibfont}{\tiny}
+#+Latex_header: \usepackage{amsmath}
+#+Latex_header: \setbeamercovered{dynamic}
+
+#+latex_header: \institute{{\textbf{FIXED ACCESS} \\ \textbf{ALCATEL-LUCENT SHANGHAI BELL}}}
+#+latex_header: \date{Jan. 29 2015}
+#+STARTUP: latexpreview
+
+# #+TAGS: { @Paper: @Paper_precomp @Paper_CoMO }

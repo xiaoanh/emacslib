@@ -1,0 +1,4759 @@
+Content-Type: text/enriched
+Text-Width: 70
+
+
+
+<x-color><param>chocolate1</param>#  Time-stamp: "xiaoanh 2015/12/23 10:01:03"</x-color>
+
+<x-color><param>chocolate1</param># <<2015-01-15 Thu> add study to agenda</x-color>
+
+<x-color><param>chocolate1</param># #+TODO: Study(s@) TODO(t@) | DONE(d)</x-color>
+
+<x-color><param>chocolate1</param># #+TYP_TODO: Fred Sara Lucy Mike | DONE</x-color>
+
+<x-color><param>chocolate1</param># #+FILETAGS: :@study:</x-color>
+
+<x-color><param>chocolate1</param># #+TAGS: @Emacs @Lang</x-color>
+
+<x-bg-color><param>#EAEAFF</param><x-color><param>#008ED1</param>#+BEGIN_SRC emacs-lisp
+</x-color></x-bg-color>  (setq org-agenda-use-tag-inheritance nil)
+<x-bg-color><param>#EAEAFF</param><x-color><param>#008ED1</param>#+END_SRC
+
+</x-color></x-bg-color>
+
+<x-color><param>chocolate1</param># @problem: auto inherited @MFH, why, [2015-07-23 Thu]</x-color>
+
+<x-color><param>chocolate1</param># @solution: delete study todo type in dotemacs</x-color>
+
+* <x-bg-color><param>DarkOrange</param>TODO</x-bg-color> GPP_Intel, ICC
+  - State "TODO"       from ""           <x-color><param>Cyan</param>[2015-01-08 Thu 11:06]</x-color>
+** GPP_code list
+    1. D:\GPP_code\GPP_Intel\Intel 201112\LTE_L1_UL_DL\LTE_PDSCH_4x2\LTE_RAN_Emulator_Design\CodeDev\src\UE\phy
+    2. D:\GPP_code\GPP_Intel\Intel 201112\LTE_L1_UL_DL\LTE_PDSCH_4x2\LTE_RAN_Ref_Design\CodeDev\src\eNB\phy
+    3. D:\GPP_code\GPP_Intel\Intel 201112\LTE_L1_UL_DL\LTE_PDSCH_4x2\LTE_RAN_Ref_Design\CodeDev\include\eNB
+    4. D:\GPP_code\GPP_Intel\Intel 201112\LTE_L1_UL_DL\LTE_PDSCH_4x2\LTE_RAN_Ref_Design\CodeDev\project\linux\pdsch
+
+** [#C] GPP note [2015-07-14 Tue]
+
+  1. GE link, Gigabit Ethernet
+  2. SFP link, Small Form Factor Pluggable, optical transceiver for CPRI
+  3. SMA
+  4. PCIe interface
+  5. 15 kHz *2048 = 30.72MHz = 1/T_{s}
+  6. 2192*14=30720symbols, 30720*T_s ->1ms for 1 subframe
+
+
+
+** Data Display Debugger (GNU DDD)
+
+   1. Real Time Operating System (RTOS)
+
+** ICC 14.0.2 now using
+
+   1. where to download
+
+
+
+** [#C] GPP_DL, main_function.cpp,  eNB_rru_thread.cpp (sim CPRI), #include "eNB_PHY_DL.h", LTE_RAN_Ref_Design, @file eNB_phy_tx_init.cpp
+
+
+*** main_function.cpp in RX (OFDMSignalRX in UE_PHY_ofdm.cpp)
+
+     1. D:\GPP_code\GPP_Intel\Intel 201112\LTE_L1_UL_DL\LTE_PDSCH_4x2\LTE_RAN_Emulator_Design\CodeDev\project\Linux
+     2. D:\GPP_code\GPP_Intel\Intel 201112\LTE_L1_UL_DL\LTE_PDSCH_4x2\LTE_RAN_Emulator_Design\CodeDev\src\UE\phy
+	1. pRxFreqSymbol and fft2048
+     3. UE_PHY_DL.h
+	1. D:\GPP_code\GPP_Intel\Intel 201112\LTE_L1_UL_DL\LTE_PDSCH_4x2\LTE_RAN_Emulator_Design\CodeDev\include\UE
+
+*** [#C] main_function.cpp in TX (OFDMSignalTX in eNB_phy_tx_ofdm.cpp),  eNB_rru_thread.cpp (sim CPRI), #include "eNB_PHY_DL.h", LTE_RAN_Ref_Design, @file eNB_phy_tx_init.cpp
+
+    1. D:\GPP_code\GPP_Intel\Intel 201112\LTE_L1_UL_DL\LTE_PDSCH_4x2\LTE_RAN_Ref_Design\CodeDev\project\linux\pdsch
+    2. vBS is BBU, each eNB RRU has 2 ants, UE has 1 ant [2015-07-15 Wed].
+**** main_function.cpp
+       1. pPHYState->pTxTimeSignal memcpy to pframeInfo->TxTimeSignal
+	  1. tx.buffer 
+       2. // define structure
+
+	  #+BEGIN_SRC c++
+	 SectorControlBlockStruct *pSectorControlBlock = new SectorControlBlockStruct;
+	 PHYState *pPHYState = new PHYState;
+	 systemInfomation *psysInfo = new systemInfomation;
+	  #+END_SRC
+**** eNB_PHY_DL.h
+      1. D:\GPP_code\GPP_Intel\Intel 201112\LTE_L1_UL_DL\LTE_PDSCH_4x2\LTE_RAN_Ref_Design\CodeDev\include\eNB
+**** SectorControlBlockStruct *pSectorControlBlock
+     1. eNB_rt_phy_control.cpp, eNB_rt_phy_control.h
+     2. @file eNB_phy_tx_init.cpp
+**** rru_tx_func in eNB_rru_thread.cpp and *replace TCP socket with CPRI*
+    1. D:\GPP_code\GPP_Intel\Intel 201112\LTE_L1_UL_DL\LTE_PDSCH_4x2\LTE_RAN_Ref_Design\CodeDev\src\RTOS\linux
+    2. * @file eNB_rru_thread.cpp  * @brief : rru tx rx function, sim cpri
+    3. @brief  rru rx func(should replace with cpri func)
+    4. rru_trx_cb * txcb = (rru_trx_cb *)cb;
+    5. rru_trx_cb * rxcb = (rru_trx_cb *)cb;
+    6. RRU_typedef.h
+       1. typedef struct { unsigned char * buf;    int len; } rru_trx_cb;
+
+*** [#C] eNB_phy_tx_ofdm.cpp, eNB_phy_tx_modulation.cpp, [KEY], LTE_RAN_Ref_Design
+
+   1. D:\GPP_code\GPP_Intel\Intel 201112\LTE_L1_UL_DL\LTE_PDSCH_4x2\LTE_RAN_Ref_Design\CodeDev\src\eNB\phy
+   2. *_ofdm.cpp,
+      1. 14 RE, OFDMSignalTX
+      2. pOutSymbol in ifft2048
+
+
+*** [#C] eNB_typedef_DL.h, LTE_RAN_Ref_Design
+
+    1. D:\GPP_code\GPP_Intel\Intel 201112\LTE_L1_UL_DL\LTE_PDSCH_4x2\LTE_RAN_Ref_Design\CodeDev\include\eNB
+
+
+** [#C] GPP_UL, eNB_dmmc_thread.cpp and eNB_rt_main_phy.cpp in RTOS
+
+
+*** eNB_dmmc_thread.cpp and eNB_rt_main_phy.cpp in RTOS
+
+     1. D:\GPP_code\GPP_eNB\eNB_UL\CodeDev\src\RTOS\linux
+
+*** Integrated_UE. cpp and UE_PUSCH_1T.cpp
+
+    [2015-06-29 Mon]
+
+    1. GPP_Intel\Intel 201112\LTE_L1_UL_DL\LTE_PUSCH_1x4\LTE_RAN_Emulator_Design
+    2. D:\GPP_code\GPP_eNB\eNB_DL\CodeTest\IntTest\PHY
+** cpp tutorial
+
+   1. http://www.cplusplus.com/reference/cmath/
+      1. decl-specifiers (declaration specifiers)
+
+** RB resource block, Transmission Control Protocol (TCP)
+   [2015-06-25 Thu]
+
+   1. LTE: http://www.tutorialspoint.com/lte/lte_ofdm_technology.htm
+
+      1. Each user is allocated a number of so-called resource blocks in
+	 the time.frequency grid. The more resource blocks a user gets,
+	 and the higher the modulation used in the resource elements, the
+	 higher the bit-rate. Which resource blocks and how many the user
+	 gets at a given point in time depend on advanced scheduling
+	 mechanisms in thefrequency and time dimensions.
+
+      
+      2. The OFDM symbols are grouped into resource blocks. The resource
+	 blocks have a total size of 180kHz in the frequency domain and
+	 0.5ms in the time domain. Each 1ms Transmission Time Interval
+	 (TTI) consists oftwo slots (Tslot).
+   2. overview, http://rfmw.em.keysight.com/wireless/helpfiles/89600B/webhelp/subsystems/lte/content/lte_overview.htm
+
+      
+
+** DMRS stands for 'DeModulation Reference Signal'
+** eNB, UE, uee
+   1. 在3GPP LTE与LTE-A的标准中,用eNB来代表基站,与用户UE对应\Evolved
+      Node B，即演进型Node B(Base) 简称eNB，LTE中基站的名称 user
+      equipment (UE) 用户终端
+
+** SSE, SIMD, _m128i 
+Streaming SIMD Extensions
+单指令流多数据流(英语:Single Instruction Multiple Data,缩写:SIMD)
+
+
+** Precoding and remapping, SM, [2015-01-12 Mon]
+   假设4*4 SM，RI=2，那么layer mapping是把2个TB映射到2层，而precoding是要
+   把这2层数据流映射到4个天线上发送。也就是说precoding martrix的维数为M*N，
+   其中M为层数，N为发送天线数目，这样layer mapping之后的1*M维symbol乘上
+   M*N的预编码矩阵后，得到1*N维symbol，映射到N个天线口上RE资源上，经调制、
+   IRF处理后上天线发送。
+
+** Tech report
+first USRP, then GPP. [2015-01-12 Mon]
+*** pp14
+3.2.1.3	PDSCH code study
+3.2.1.3.1	UE emulator
+In directory
+/LTE_L1_UL_DL/LTE_PDSCH_4x2/LTE_RAN_Emulator_Design/CodeDev/project/linux/,
+the file main_function.cpp is main file for PDSCH receiving.	
+
+*** abbre
+1) DMRS Demodulation Reference Signal
+2) 资源映射（RE_mapping）
+3) [资料下载] LTE基础笔记 http://bbs.c114.net/forum.php?mod=viewthread&tid=802555
+4) 物理广播信道（PBCH）
+5) 层映射(layer mapping)和预编码(precoding)共同组成了 LTE 的 MIMO 部分
+6) HDL(Hardware Description Language)
+
+* <x-bg-color><param>DarkOrange</param>TODO</x-bg-color> USRP and SDR, MATLAB
+
+** USRP变速率采样原理及实现 
+http://blog.csdn.net/wensishuai/article/details/8608344
+1) 变速率采样, 100/6.25=16
+   1) 5M带宽的LTE系统中，采样率为512＊15k＝7.68MHz，而USRP2在不改变
+      FPGA代码的情况下仅支持100M的整数倍分频的采样率，最接近7.68M的采
+      样率为6.25M。所以在空口获得的数据采样率为6.25M，而LTE系统内部采
+      样率为7.68M，需要进行插值和抽取实现速率转换。
+   2) 插767个0（x00...0 x00..0 x...）——LPF低通滤波——抽取(每625个点抽取一
+   个)
+2) 多相滤波器简化运算  polyphase filter 
+3) MATLAB信号处理仿真-插值FIR滤波器 杨小牛 
+   1) http://blog.sina.com.cn/s/blog_b906c1070101cefl.html
+   2) http://blog.sina.com.cn/s/blog_b906c1070101ceff.html
+   3) 插值滤波器常用的有2个系列，FIR和CIC，其中FIR主要用于小倍率的插值，
+      而CIC则用于大倍率的插值. CIC不用乘法，但是只能抑制镜像频率附近的信号频带
+
+
+** install, USRP-MATLAB, peripheral, <x-color><param>Cyan</param><<2015-01-08 Thu></x-color>
+1) install
+
+   1) USRP® Support Package from Communications System Toolbox
+
+   2) targetinstall
+
+   3) Use of USRP® as a standalone peripheral for live RF data I/O, including: 
+      http://cn.mathworks.com/hardware-support/usrp.html
+
+   4) NURadio USRP 入门 V0.99
+
+2) USRPN210配置过程 
+   http://blog.csdn.net/erpindao/article/details/6884918
+3) 如何利用usrp2和matlab2013a结合
+   1) http://blog.csdn.net/lb_zhao/article/details/9372025
+
+   2) 下载usrpradio.zip后解压，
+
+   3) help sdru
+
+4) HDL Coder™ and UHD
+   HDL Coder™ 利用 MATLAB® 函数、Simulink® 模型和 Stateflow® 图生成可
+   移植、可综合的 Verilog® 和 VHDL® 代码。
+
+*** edit FPGARadioInMATLABExample
+
+*** FPGA is digital, then DAC-(quant, digital filter and RF need)
+1) 深入浅出玩转FPGA
+
+*** AD including clock inside USRP
+1) AD after FPGA
+*** front-end for analog, daughterboard
+  A modular front-end, called a daughterboard, is used for analog
+  operations such as up/down-conversion, filtering, and other signal
+  conditioning. 
+
+*** API（Application Programming Interface,应用程序编程接口）
+
+*** GNURadio-companion, USRP
+USRP<x-color><param>Cyan</param>[3]</x-color> 背后的基本设计理念是在主机CPU上完成所有波形相关方面的处理，比
+如调制和解调。所有诸如数字上下变频、抽样和内插等高速通用操作都在
+USRP<x-color><param>Cyan</param>[3]</x-color> 的FPGA 上完成。
+
+用MATLAB+TCP+HACKRF来“看”TD-LTE信号
+http://www.hackrf.net/2014/06/%E7%94%A8matlabtcphackrf%E6%9D%A5%E7%9C%8Btd-lte%E4%BF%A1%E5%8F%B7/
+
+  
+** FPGA
+
+*** FPGA, DSP, ARM
+1) FPGA 500MSPS
+<x-color><param>LightSkyBlue</param>|       | FPGA                   | DSP                   |</x-color>
+<x-color><param>LightSkyBlue</param>|-------+------------------------+-----------------------|</x-color>
+<x-color><param>LightSkyBlue</param>| speed | 500MHz/1clock= 500MSPS | 1GHz/256clock = 4MSPS |</x-color>
+<x-color><param>LightSkyBlue</param>|-------+------------------------+-----------------------|</x-color>
+<x-color><param>LightSkyBlue</param>|       | parallel               | serial                |</x-color>
+<x-color><param>LightSkyBlue</param>|-------+------------------------+-----------------------|</x-color>
+<x-color><param>LightSkyBlue</param>|       |           256MAC/1clock |           256MAC/256loops |</x-color>
+
+2) FPGA只不过披着软件的外衣，实际上是硬件。FPGA内部有两层相对独立的电
+   路。使用者“编码->编译”后生成一个映像，这个映像作用于第一层电路。
+   1) http://www.eepw.com.cn/article/221687.htm
+
+
+      
+
+* Study <x-bg-color><param>DodgerBlue</param>[#D]</x-bg-color> DSP, <x-color><param>Cyan</param>[2015-01-14 Wed]</x-color>
+
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> WIFI Internet of Things: 802.11af and 802.11ah, @IOT
+
+   1. 802.11af, also called Super Wi-Fi or White-Fi, employs unused TV
+      spectrum at frequencies between 54MHz and 790MHz
+   2. It has similar applications as 802.11ah, also known as Low
+      Power Wi-Fi, which will provide bandwidth for sensors and
+      monitors in gadgets and appliances that will join up to create
+      the Internet Of Things.
+   3. 4G bands LTE 700 / 1700 / 1800 / 2100 / 2300 / 2600
+   4. Although IEEE 802.11af and 802.11ah are both sub-1-GHz
+      standards, they are designed to fill different niches in upcoming IoT 
+   5. ipv4 is not enough, must use ipv6
+   6. World’s First TV White Space WiFi Prototype Based on IEEE
+      802.11af Draft Standard Developed 
+      1. http://www.nict.go.jp/en/press/2012/10/17-1.html
+      2. TV White Space (TVWS)
+
+     
+
+** DAS
+
+   1. In a DAS, multiple remote antenna units (RAUs) are connected to
+      a central unit via RoF transmissionlinks.
+
+      
+
+** Miracast, HDMI over Wifi, Mirroring technology
+
+   <x-color><param>Cyan</param>[2015-07-30 Thu]</x-color>
+
+   1. replacing the cable from the computer to the display.
+   2. Wi-Fi CERTIFIED Miracast™ is a groundbreaking solution for seamlessly displaying multimedia between devices, without cables or a network connection
+   3. 镜像技术(Mirroring Technology)
+
+
+** LLR-Log Likelihood Ratio, turbo decoding, Conditional Probability
+
+   1. likelihood就是一个条件概率：P(Y|X) 
+   2. Probability => P(X/q) (prediction of X based on parameter q)
+   3. Likelihood => L(q/X) (Estimation of q based on observed data X)
+   4. “Probability” is the prediction of outcome based on model parameters, whereas, “likelihood” is used to estimate model parameters based on observed data.
+   5. Log Likelihood Ratio = LLR = log (LR) = log(Lalternate) – log(Lnull)
+
+
+** MIMO
+
+*** [#C] diversity | NT*NR | reliability, multiplexing| min | data rate
+
+    [KEY] Understood until now, [2015-07-06 Mon]
+      1. [[http://www.gaussianwaves.com/2014/08/mimo-diversity-and-spatial-multiplexing/][DSP:gaussianwaves:MIMO]]
+      2. MIMO – implemented using diversity techniques – provides diversity gain – Aimed at improving the reliability
+      3. MIMO – implemented using spatial-multiplexing techniques – provides degrees of freedom or multiplexing gain - Aimed at improving the data rate of the system
+      4. DegreesofFreedom=min(NT,NR), Diversity=NT×NR
+
+
+** [#C] Equlization formula
+
+
+*** ML
+
+
+**** formula
+
+     1. \arg\!\min ||y-H \hat {X}||^2
+     2. \hat{X} is known
+
+
+*** \cite{DSP_MMSE_deduce}, \partial{e}{b} = 0
+   1. MMSE estimation example
+   2. \hat{Y}=g(X) =aX+b;
+   3. e(a, b) =E \{(Y-aX-b)^2\}
+   4. \argmin_{a,b} \{e(a,b) \}
+   5. \partial{e}{a} = E{2(Y-aX-b) \cdot -X} = 0
+   6. \partial{e}{b} = 0
+
+
+*** [#C] DFE formula
+
+    1. W_{k+1} = W_{k} - 2\mu \cdot  \frac{\partial e^2}{\partial W}
+    2. = W_{k} - 2\mu \cdot e  \frac{\partial e}{\partial W}
+    3. = W_{k} + 2\mu \cdot e  \frac{\partial WX}{\partial W}
+    4. = W_{k} + 2 \mu \cdot e X
+    5. e = \hat{y} - WX
+
+
+*** DFE, feedforward and feedback filter, nolinear
+
+    1. W(n+1) = W(n) - step*e(n)*X(n)
+    2. gradient
+
+
+** Precoding, NMF
+
+
+*** [#C] MIMO, classic
+
+    1. MIMO技术杂谈（三）：知己知彼，百战不殆--信道信息的获取和应用
+       1. [[http://www.douban.com/note/253309122/][ln:MIMO:douban]]
+       2. *unCORRLATION 不相关，秩越大 LARGE R，系统效率越高 more capacity*
+
+       3. key 
+	  1. 使用右酉阵V，可以对发送信号进行“预处理”，将传输过程转化
+             成具有“平行子信道”的对角阵形式
+	  2. 有了信道矩阵秩的信息（奇异值的个数），可以灵活的调整空间
+             流数（自由度），从而提高通信系统效率
+
+	     
+	  3. 知道了奇异值的个数和大小后，可以使用“注水
+             算法”分配发送功率，提升系统容量。
+
+	  
+
+
+*** NMF web, 关于NMF (Non-negative Matrix Factorization)
+
+    1. http://blog.sina.com.cn/s/blog_468651400100cgct.html
+       1. matlab源程序如下：dim=size(X);
+          %计算x的规格X=double(X);B=10*rand(dim(1),r);
+          %初始化BH，为非负数B=B./(ones(dim(1),1)*sum(B));
+          %归一化B的每一列H=10*rand(r,dim(2));maxiter=100;
+          %最大迭代次数for
+          iter=1:maxiterH=H.*(B'*(X./(B*H)));B=B.*((X./(B*H))*H');B=B./(ones(dim(1),1)*sum(B));end
+    2. broad.mit.edu
+       1. http://www.broadinstitute.org/mpr/publications/projects/NMF/nmf.m
+
+       
+
+	  
+
+	  
+
+*** QR, 矩阵分解(MATRIX FACTORIZATION)
+
+    1. link: https://inst.eecs.berkeley.edu/~ee127a/book/login/l_mats_qr.html
+    2. Gram-Schmidt procedure applied to the columns of the matrix,
+
+       
+
+
+*** SVD, Non-negative Matrix Factorization,NMF
+
+    1. svd decomposition
+
+    
+
+** FBMC 滤波器组多载波系统
+
+
+*** evolved OFDM, CP replaced by filter
+
+ 1) FBMC modulation can be considered as an evolved OFDM.
+
+    
+
+
+*** AFB:ployphase filter bank
+
+    
+
+** eNodeB=nodeB+RNC, X2
+
+   1) 也就是整个RRC，S1-AP,X2-AP，PDCP，RLC，MAC，PHY，RRM，CAC，负载
+      均衡等等都由eNodeB一个网元实现了。整个LTE的协议栈也比3G的要简化
+    了，楼主买本书看看吧
+   2) X2 Inter-eNB 切换
+      1) http://blog.sina.com.cn/s/blog_6617106b0102uyb1.html
+
+      
+
+** HUAWEI, 5G
+
+
+*** F-OFDM and wavelet-OFDM
+
+    1) 华为表示，针对自适应软件定义的空口设计：基于SCMA（Sparse Code
+       Multiple Access）和F-OFDM（Filtered-Orthogonal Frequency
+       Division  Multiplexing）
+    2) 5G：OFDM没有遗言（revised）
+       1) http://zhan.renren.com/callmewirelesswhale?gid=3602888498057934163&checked=true
+       2) LTE-A系统所能达到的时延的下限是1ms（由OFDM资源分配中的TTI参
+          数决定），远远超过了realtime的要求
+       3) 对于同步要求较高的OFDM也是一头雾水
+       4) OFDM的高速高效传送需要的是整齐、同步——像军队
+       5) OFDM 的同步问题,包括符号定时同步和载波频率同步
+
+	  
+
+
+*** FMT(Filtered MultiTone)也是多载波调制技术中的一种
+
+
+** [#C] gnuradio detection, [2015-02-06 Fri]
+
+*** Two methods implemented:
+
+**** Maximum Likelihood
+– Correlate with cyclic prefix
+– J. van de Beek, M. Sandell, P. Ola. Borjesson, “ML
+Estimation of Time and Frequency Offset in OFDM
+Systems,” IEEE Trans. On Signal Processing, vol. 45,
+no. 7, pp. 1800—1805, July 1997.
+
+**** PN Sequence correlation
+– Transmit known symbol with repetition in the time
+domain
+– T. M. Schmidl and D. C. Cox, “Robust Frequency and
+Timing Synchronization for OFDM,” IEEE Trans.
+Communications, vol. 45, no. 12, pp. 1613—1621, Dec.
+1997.
+
+     
+
+** [#C] [YXN] MS_test1.m,  插值滤波器常用的有2个系列，FIR和CIC
+1) [KEY]: Previous for quant_bits-1, gen_quant_multi_sin.m,
+   1) http://blog.sina.com.cn/s/articlelist_3104227591_0_1.html
+   2) 
+2) MATLAB信号处理仿真-FIR滤波器
+   1) http://blog.sina.com.cn/s/blog_b906c1070101cefj.html
+   2) 通常先用matlab来做个仿真，然后对着这个仿真来编写C程序或是verilog
+      代码，这样硬件上的信号处理开发就变成了“大家来找碴”的游戏，即：对
+      着matlab仿真里面的正确数据来判断硬件环境里面的数据是否正确。
+   3) fir的运算量是IIR的十几倍很常见
+   4) 通常信号处理的软件使用C语言编写，数字电路用verilog或是vhdl来设计，
+      但是在硬件的环境中，调试是一件比较麻烦的事情
+
+
+
+** [#C] ML for CFO, \Delta{f} = arg(corr/(2*\pi)), correlation, syn_ml.m
+一种改进的OFDM载波同步算法
+carrier frequency offset
+
+** DUC, DDC, CIC 
+ 1) 级联积分-梳状(Cascaded Integrator–Comb, CIC) 滤波器, 是一种...在软
+    件无线电通信系统中, 发送端的数字上变频器 (DUC). 级联积分-梳状
+    (Cascaded Integrator–Comb, CIC) 滤波器. 级联梳状滤波器
+    1) 基于matlab FPGA verilog的CIC滤波器的设计(原创):
+       1) http://blog.sina.com.cn/s/blog_66c807290101amvw.html
+       2) 滤波器的Z变换, Integrator
+    2) CIC其实是LPF一种高效实现形式，也可以理解成你说的带抽取的FIR搜索，
+       但是抽取倍数是2^N次倍，而且CIC对于带内高频部分有比较严重的衰减
+    3) CIC没有乘法器, FIR (Finite Impulse Response)
+ 2) 半带滤波器是一种特殊的低通FIR数字滤波器。这种滤波器由于通带和阻带
+    相对于二分之一Nyquist频率对称，因而有近一半的滤波器系数精确为零。
+    也就是，其偶数系数全部精确为零，滤波器系数集可写为
+    {x,0,x,0,x,0,.....}
+    1) http://www.ilovematlab.cn/thread-77953-1-1.html
+    2) remez和fir1是两种不同设计FIR滤波器的方法
+** Nyquist
+    1) ADC他的输入时钟频率就是采样频率-sps, 使用16-bit的量化级来描述自然
+       要比使用8-bit来描述精确得多。采样位数越高，声音就越清析
+
+** gf8 = gf([0:7],3); % Galois vector in GF(2^3
+
+** [KEY]: DSP_DTMF.m							
+
+
+** [#C] Signal processing Toolbox-->demos-->misc, 
+1) spectrogram
+2) fwht and transforms
+   1) y = fwht(x);                      % Fast Walsh-Hadamard transform
+   2) record electro-cardiogram (ECG)
+   3) 
+3) Application demos, {} for cell
+   1) Dual-Tone Multi-Frequency (DTMF) Signal Detection
+   2) symbol = {'1','2','3','4','5','6','7','8','9','*','0','#'};  symbol{toneChoice}
+
+** [#C] Communications Toolbox  DEMOS
+1) Adaptive Equalizer Simulation (Part I), lineareq, lms,
+   1) adapteqpt2 
+      for block = 1:nBlocks, adapteqpt2; end  % Run Part II script in loop.
+2) KEY: Getting started-->Studying Components of a Communication
+   System
+   1) Pulse Shaping Using a Raised Cosine Filter
+     Filter the Modulated Signal.   To filter the modulated signal, replace
+    the Transmitted Signal section with following.
+      
+    %% Transmitted Signal
+    % Upsample and apply square root raised cosine filter.
+    ytx = rcosflt(y,1,nsamp,'filter',rrcfilter);
+      %% Received Signal
+    % Filter received signal using square root raised cosine filter.
+    yrx = rcosflt(ynoisy,1,nsamp,'Fs/filter',rrcfilter)
+      delay = filtorder/(nsamp*2); % Group delay (# of input samples)
+
+3) user guide--> Equalizing Using a Training Sequence
+
+4) Raised Cosine Filtering, fvtool, fdesign.decimator, Nsym/2*sampsPerSym
+
+   1) DSP_rcosFlt.m and upsample([x; zeros(Nsym/2,1)], sampsPerSym)
+
+      1) Toolbox--> comm-->rcosdemo.m
+
+      2) x and yr2(filtered data), a little changed
+
+      3) % fltDelay*Fs, is Nsym*sampsPerSym/2, 6*8/2
+
+      4) % Design polyphase decimation filters
+	  rcosDecimSpec = fdesign.decimator(sampsPerSym, 'Square Root Raised Cosine', ...
+	 sampsPerSym, 'Nsym,Beta', Nsym, beta);
+	  rcosDecim = design(rcosDecimSpec);
+
+      5) % Upsample and filter.
+	  yo = filter(rcosFlt, upsample([x; zeros(Nsym/2,1)], sampsPerSym));
+	  % Time vector sampled at sampling frequency in milliseconds
+	  to = 1000 * (0: (DataL+Nsym/2)*sampsPerSym - 1) / Fs;
+
+      6) The plot compares the digital data and the upsampled, filtered
+         signal. It is difficult to compare the two signals because
+         the peak response of the filter is delayed by the group delay
+         of the filter (Nsym/(2*R)). Note that, we append Nsym/2 zeros
+         at the end of X to flush all the useful samples out of the
+         filter
+      7) This step compensates for the raised cosine filter group
+         delay by delaying the input signal. Now it is easy to see how
+         the raised cosine filter upsamples and filters the
+         signal. The filtered signal is identical to the delayed input
+         signal at the input sample times. This demonstrates the
+         raised cosine filter capability to band-limit the signal
+         while avoiding ISI.
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> Filter design toolbox -> Getting started
+1) Basic Filter Design Process
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> matlab cmd
+1) open ifft
+2) which ifft
+3) doc ifft
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> MS_multi_sin.m matlab sprintf(num2str) 'BackgroundColor',
+<x-color><param>Cyan</param><<2014-12-29 周一></x-color>
+*** <x-bg-color><param>DarkOrange</param>[#B]</x-bg-color> multi_sin.m quant and data length
+from multi_sin.m
+<<2014-12-29 周一>
+% quant signal, the range is (-max_q, +max_q)
+max_q     = 2^(quant_bits-1)-1;
+
+data_len    = 1024 ;% 1024 or 256, 基4or基2,signal data length
+idx_n         = [0:data_len-1]  ;  % :KEY:, HXA<<2014-12-29> n index
+idx_phase   = 2*pi*idx_n*freq/fs    ; %  phase  index
+
+*** [#B] multi_sin.m, exp: MATLAB信号处理仿真-使用函数封装，多音正弦和谱分析
+http://bbs.ednchina.com/BLOG_ARTICLE_3007923.HTM
+1) 在软件行业里面，重用是非常重要的思想，把经常要重用的代码用函数（面
+   向过程）或是类（面向对象）封装起来，留出接口的数据类型定义，以后就
+   可以很方便的再次用到。
+2) 信号的向量长度是多少；以及信号的量化精度是多少。嗯，对于数字信号处
+   理的新手同学们，请一定要时刻想着离散信号的采样率和量化精度。
+
+3) 在频率成分较多的情况下，12比特的量化噪声毛刺已经突破了-80dB大关了
+   （-80dB是某些通信设备的一个规格门限），对于观察噪声这事情吧，通常咱
+   们看频域，因为时域里面实在是充满了伪装。
+4) 同时，俺也非常衷心的希望你能在调节这些仿真参数的时候明白“时域和频域
+   的互相测不准”的道理，即：为了提高频域的物理分辨率，唯一的方法就是提
+   高记录时间长度，其他的都无效。
+5) 因为这个的确是信号处理领域里面一个太基础而重要的话题，无论是探测隐
+   身飞机，还是从电视画面中学习总书记同志的重要讲话，以及用wifi从互联
+   网上面翻墙看个视频啥的，底层的信号链路通通要用到类似的过程。
+6) 为什么说是探测出存在，而不是测量出数值呢，因为“有和无”是比“多与少”
+   更重要的话题，“有和无”决定了无线路由器是否开启，频率上是否有广播节
+   目，以及. . . . . .敌人的飞弹是否来袭
+
+
+*** 基4-FFT 1024, 基2-FFT 256
+exp is Basics
+
+** FDM, from wenku <<2014-12-29 Mon>
+频分复用 
+*** Multi
+http://www.pudn.com/downloads92/sourcecode/math/detail352694.html
+
+
+
+** [#C] DTMF16双音多频, MATLAB 原来我也可以用你破解别人电话号码
+<<2014-12-29 周一>
+http://bbs.elecfans.com/jishu_300323_1_1.html
+超看双音多频DTMF（Dual Tone Multi Frequency），双音多频，由高频群和低
+频群组成，高低频群各包含4个频率。一个高频信号和一个低频信号叠加组成一
+个组合信号，代表一个数字。DTMF信号有16个编码。
+
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> kaiser, filter, freqs and freqz, larger FFT, better resolution
+
+1) filter <x-color><param>Cyan</param><<2014-12-30 周二></x-color>
+    filter([1,2],1,[1,2,3,4,5]) 实现 y[k]=x[k]+2*x[k-1] 
+    y<x-color><param>Cyan</param>[1]</x-color>=x<x-color><param>Cyan</param>[1]</x-color>+2*0=1%(x<x-color><param>Cyan</param>[1]</x-color>之前状态都用0) y<x-color><param>Cyan</param>[2]</x-color>=x<x-color><param>Cyan</param>[2]</x-color>+2*x<x-color><param>Cyan</param>[1]</x-color>=2+2*1=4
+   1) doc filter y = filter(b,a,X), b/a
+      na is the feedback filter order, and nb is the feedforward filter order
+2) freqs
+    a = [1 0.4 1];
+    b = [0.2 0.3 1];
+    w = logspace(-1,1);
+    freqs(b,a,w)
+3) Bilinear
+    Bilinear transformation method for analog-to-digital filter conversion
+4) fft
+   1) 函数使用的注意：
+    nfft越大，频域的分辨率就越高（分辨率=fs/nfft），但离瞬时频率就越远；
+    noverlap影响时间轴的分辨率，越接近nfft，分辨率越高，相应的冗余就越
+      多，计算量越大，但计算机只要能承受，问题不大
+
+基于Matlab的FIR滤波器设计与实现
+http://www.cnblogs.com/sunev/archive/2011/11/23/2260579.html 
+数字频率 = 模拟频率/采样频率
+
+
+** MS_transmitpulseshapefilter.m, Nyquist filter
+Transmit pulse shaping filter – rectangular and sinc (Nyquist)
+http://www.dsplog.com/2008/04/14/transmit-pulse-shape-nyquist-sinc-rectangular/
+% sinc filter
+gt2 = sin(pi*[-fs:1/fs:fs])./(pi*[-fs:1/fs:fs]);
+gt2(fs*fs+1) = 1;
+
+** IFDMA
+  g(t)=f(t)*e^( j*p(w)t )  where j=sqrt(-1), e=2.7169... and p(w) is your
+frequency function. this will have the effect of  G(w)=F( w - p(w) ).
+
+** Replicate and tile array, repmat
+
+** [#C] mathworks, lteOFDMModulate, lteEqualizeMMSE
+
+LTE Downlink Channel Estimation and Equalization
+http://fr.mathworks.com/help/lte/examples/lte-downlink-channel-estimation-and-equalization.html
+
+** study of chn estimation, training sequence
+
+*** study <<2014-12-08 周一>
+   - http://blog.csdn.net/mike190267481/article/details/7194399
+   - 802.11a white paper
+http://www.vocal.com/wp-content/uploads/2012/05/80211a_wp1pdf.pdf
+
+   - seq_train.m 
+http://www.codeforge.com/read/214245/seq_train.m__html
+
+   - 而训练序列由于往往只是由OFDM帧中的前若干个OFDM实现，它假定的是在
+     一个帧长的时间内信道是慢衰落的，即根据训练序列所估计的信道特性来
+     补偿后面其他OFDM符号的幅度和相位变化。因此往往不能适应快衰落信道。
+   - sc 算法
+
+
+
+** LDPC matlab *fec.ldpcenc*  <<2014-12-08>  
+i = [1  3  2  4  1  2  3  3  4];   % row indices of 1s
+j = [1  1  2  2  3  4  4  5  6];   % column indices of 1s
+H = sparse(i,j,ones(length(i),1)); % parity-check matrix H
+l = fec.ldpcenc(H);
+http://fr.mathworks.com/matlabcentral/answers/57566-time-frequency-training-tft-ofdm
+
+
+** 北京邮电大学-小学期-基于MATLAB的CDMA2000前向业务信道仿真
+
+*** wenku
+
+
+** FDM_matlab, baidu wenku
+一​个​双​脊​波​导​的​有​限​差​分​法​m​a​t​l​a​b​程​序​,​很​珍​贵​的​哦​,​要​的​赶​快​下​吧​!
+
+** Interleaver reshape, 因为matlab是按列读取的
+
+
+** FPGA_MATLAB
+<<2015-01-09 周五>
+http://cn.mathworks.com/help/comm/examples/matlab-connectivity-to-fpga-based-radio.html
+
+
+** [#C] optsim 
+paper: ML.Behavior of OFDM System Using Matlab
+paper: OPTSIM.OFDM, Modelling and Reporting Parameters of Optical OFDM
+System Using Different Modulation Techniques
+
+
+* Study <x-bg-color><param>yellow</param>[#C]</x-bg-color> DSP Basics 					  
+  - State "Study"      from "TODO"       <x-color><param>Cyan</param>[2014-11-25 Tue 14:17]</x-color>
+  - State "TODO"       from ""           <x-color><param>Cyan</param>[2014-11-25 Tue 14:11]</x-color>
+
+
+** 软件无线电原理与应用(杨小牛), pdf
+
+** Nyquist, Sampling
+
+
+*** Sampling, data rate relies on sampling rate
+
+ 1) how does sampling rate 30.72( 2048*15Hz) fit within 20Mhz bandwidth ?
+    1) >> Sampling rate is in time domain.
+ 2) sampling rate may be 4*bandwidth (DAC)
+    1) bandwidth is analog
+ 3) 采样定理描述了两个过程：其一是采样，这一过程将连续时间信号转换为离
+    散时间信号；其二是信号的重建，这一过程离散信号还原成连续信号。
+
+    
+
+
+** 托普利兹(Toeplitz)矩阵
+
+** TODO # anti-alias filter, 抗混叠滤波器 
+http://www.maximintegrated.com/en/app-notes/index.mvp/id/928
+# However, in Figure 2b, note how the Nyquist criterion is not met as
+# the highest frequency in the band of interest is greater than half the
+# sampling rate. 
+解决频谱混淆的方法
+
+
+数字信号处理导论-MATLAB实现
+
+1.增加抽样率fs>=2fmax
+
+2.使用anti-alising滤波器(不超过π)
+
+http://blog.csdn.net/gwh111/article/details/11796427
+
+
+** [#C] basic, Coding 						  
+   - State "Study"      from ""           [2014-11-25 周二 09:45]
+   - BCH and RS belonging to cyclic coding, 非线性分组码
+
+** [#C] basic, OFDM 					
+
+
+*** 我赞成IFFT的输入实际上不是真的频域信号，只是“好像”是而已。
+
+    - 每个子信道上的信号带宽小于信道的相关带宽，因此每个子信道上的可以
+      看成平坦性衰落，从而可以消除符号间干扰。而且由于每个子信道的带宽
+      仅仅是原信道带宽的一小部分，信道均衡变得相对容易。
+      <<2014-12-02 周二>
+
+    - 频率分辨率可以从两个方面来定义：一是某一个算法(如谱分析方法，功率
+      谱估计方法等)将原信号x(n)中两个靠的很近的谱峰仍然能保持分开的能力。
+      二是在使用DFT时，在频率轴上的所能得到的最小频率间隔Δf。”后面又说
+      到“在本章，因是讨论DFT问题，故使用第二个定义，即(3.7.2)式。”（即
+      Δf=fs/N）。LZ问的问题是当数据少，直接做FFT后笫2种的分辨率降低了，
+      这时可以通过补0把FFT变换的长度增加，以提高笫2种的分辨率；但是用补
+      0的方法是没有办法提高笫1种的分辨率。要想用FFT提高笫1种的分辨率，
+      惟有增加数据的长度，或使用其它谱分析的方法
+
+    - 分辨率=采样频率/fft点数. 当样本数量小于fft点数时，fft通过补零来对
+      原数据扩充，注意N一定是2的k次幂，否则无法进行fft
+
+
+    - PAPR: 部分传输序列(PTS)技术和限幅滤波技术
+
+    - State "Study"      from "Work"       [2014-11-24 周一 09:18]
+
+    - IDFT is N^2, FFT is N/2 \log_2N, when N is larger than 32, FFT is
+      better solution
+
+
+** multiplexing (merged into one TX channel)
+Entered on [2014-12-02 周二 13:42]
+
+** DAC [2014-12-10 Wed]
+8Bits的DAC分辨率是256，转换范围是0～2.55V,就是把0～2.55V分成256份，每
+一份近似10mV(0.01V),将输入的二进制11001010（十进制202）乘以0.01V就是输
+出的电压值为2.02V.
+
+
+
+*
+
+
+# Time-stamp: "xiaoanh 2015/06/25 10:26:24"
+# inbox.org--> [[file:GPP.org][GPP]
+
+
+
+
+
+* Study <x-bg-color><param>yellow</param>[#C]</x-bg-color> Org
+  - State "Study"      from "Fun"        <x-color><param>Cyan</param>[2014-11-25 Tue 09:28]</x-color>
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> #+setupfile: "D:\GTD18\macro.org"
+
+   1. <x-color><param>Cyan</param>[2015-07-14 Tue]</x-color>
+
+*** <x-bg-color><param>yellow</param>[#C]</x-bg-color> [superb] must add #+Latex_beamer, not include #+Latex_header
+
+#+setupfile: "D:\GTD18\macro.org" 
+
+#+STARTUP: beamer
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [9pt]
+#+BEAMER_FRAME_LEVEL: 2
+
+*** visit
+
+C-c '    Visit the include file at point. 
+
+*** can not use #+INCLUDE
+
+*** inculde pdfs in latex
+
+<x-bg-color><param>#EAEAFF</param><x-color><param>#008ED1</param>    #+BEGIN_LaTeX
+</x-color></x-bg-color>    \usepackage{pdfpages}
+    \includepdf[pages={1-2}]{HXA.OFDM.PON.pdf}
+<x-bg-color><param>#EAEAFF</param><x-color><param>#008ED1</param>    #+END_LaTeX
+
+</x-color></x-bg-color>** Org_Manuals
+
+   1. hacking
+      1. http://orgmode.org/manual/Hacking.html
+
+** cdlatex <x-color><param>Cyan</param>[2015-12-02 Wed]</x-color>
+
+   1. Orgmode内置了加快latex输入的cdlatex组件(minor mode？)。在orgmode
+      里不建议使用$符号， 而使用\(\)和\[\]作为行内公式和行间公式标志。
+   2. 以前emacs的知识是小白阶段， orgmode用了一段时间就丢掉了。后来跟
+      牛人交流， 才发现orgmode对数学，计算机，物理是真的好用。 
+
+      
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> template, <<s, #+BEGIN_SR
+
+   1. http://orgmode.org/manual/Easy-Templates.html
+   2. s 	#+BEGIN_SRC ... #+END_SRC
+   3. I 	#+INCLUDE: line
+   4. typing "<<e" and then pressing TAB, will expand into a complete
+      EXAMPLE template. 
+
+      
+
+** babel
+
+   1. 支持 “文学编程” （orgmode 中叫 Bable），可以直接在文档内部运行程
+      序片段，将结果（文字、图像、表格）嵌入到文档中
+   2. [[http://dayigu.github.io/WhyUseOrgModeToWriteBlog.html][github:dayigu]]
+
+
+
+** firefox org-mode capture
+
+   1. https://addons.mozilla.org/en-us/firefox/addon/org-mode-capture/
+
+** date format, <x-color><param>Cyan</param>[2015-03-04 Wed]</x-color>
+
+   这时我们可以通过M-x set-locale-environment，指定“ENG”，我们就能看到
+   所有出现时间的地方都是以英文显示星期了。
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> TEX, LATEX
+
+
+*** \partial, \frac, fraction vs. factor <x-color><param>Cyan</param>[2015-06-26 Fri]</x-color>
+
+*** \usepackage{pifont}, \cmark, \checkmark, \xmark
+
+*** \cdot cdots dots and begin{center} vs. centering 
+
+*** bmatrix, overbrace
+
+    <x-color><param>Cyan</param>[2015-05-14 Thu]</x-color>
+
+ 1) \overbrace{ \begin{bmatrix} h_{1} & h_{2} \\ h^*_2 & -h^*_1 \end{bmatrix}}^H
+
+
+*** cref
+
+    1) cleveref\usepackage{cleveref}
+       1) \cref{...} instead of figure~\ref 
+       2) http://bbs.pinggu.org/forum.php?mod=viewthread&tid=3183687
+
+** org drag
+
+   1. https://github.com/abo-abo/org-download
+
+** org: link
+
+   1)  docview:HXA_Report.pdf::10
+   2) 描述列表用‘::’将项和描述分开。
+   3) 3.5 分隔线, 五条短线或以上显示为分隔线。-----
+   4) #+TAGS: { 桌面(d) 服务器(s) }  编辑器(e) 浏览器(f) 多媒体(m) 压缩(z)
+   5) file:~/xx.org::MyTarget                    找到目标‘<<<<My Target>>’
+   6) http://blog.csdn.net/hmsiwtv/article/details/17060735
+
+
+** org Template 						      :@work:
+
+   - State "Study"      from "Work"       <x-color><param>Cyan</param>[2014-11-24 Mon 14:47]</x-color>
+   - org.manual
+     - 15.2 Easy Templates
+       - type a ‘<<’, followed by a template selector and TAB
+       - customizing the variable org-structuretemplate-alist.
+
+
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> org_beamer 	
+
+
+*** <x-bg-color><param>yellow</param>[#C]</x-bg-color> LATEX
+
+  1. #+LaTeX_CLASS_OPTIONS: [9pt], <x-color><param>Cyan</param>[2015-06-09 Tue]</x-color>
+  2. \arg\!\min, argmin
+
+
+*** org_beamer
+
+    1. State "Study"      from "Work"       <x-color><param>Cyan</param>[2014-11-20 周四 12:54]</x-color>
+    2. if you use \addtobeamertemplate instead of \setbeamertemplate
+       you keep the symbols
+       1. http://tex.stackexchange.com/questions/137022/how-to-insert-page-number-in-beamer-navigation-bars
+    3. #+TOC: headlines [currentsection]
+    4. :BEAMER_envargs: [shrink] [2014-12-10 周三]
+       1. I use this all the time for options such as shrink and allowframebreaks.
+*** setbeamertemplate
+   1. setbeamertemplate, rightline, centerline, \begin{flushright}
+   2. #+latex_header:
+      \setbeamertemplate{footline}{\rightline{\includegraphics[height =
+      0.8cm]{D:/figure1411/logo.ASB.png}} \centerline{ COPYRIGHT
+      \copyright ALCATEL-LUCENT SHANGHAI BELL.  ALL RIGHTS RESERVED
+      \hspace{3em}  \insertframenumber{}/\inserttotalframenumber}}
+   3. \secname, \subsecname, \insertframetitle [2014-12-17 Wed]
+      1. #+latex_header: \setbeamertemplate{frametitle}{\vspace{1em}
+         \hline \scriptsize {\secname ->\subsecname \par
+         \insertframetitle} \hline}
+      2. \Rightarrow, \rightarrow or \to
+   4. #+Latex_header: \setbeamertemplate{section in toc}[sections
+      numbered], [2015-02-13 Fri]
+   5. #+Latex_header: \AtBeginSection{ \frame{\tableofcontents[sections={\thesection}]}}
+
+*** frametitledef
+
+    1. in huangthesispres
+
+    \newcommand{\frametitledef}{\frametitle{}}
+
+    
+*** other
+       1. \\ ends a line, the following text starts at the beginning of
+	  a new line. The next line belongs to the same (logical)
+	  paragraph. \par ends the paragraph
+       2. color
+	  1. M-x enriched-mode
+	  2. http://comments.gmane.org/gmane.emacs.orgmode/28388
+	     1. ;; org-mode color (org-add-link-type  "color" nil
+** [#C] emacs skeleton org plantuml <<2014-12-17>
+     1. Org Mode - Organize Your Life In Plain Text!
+	1. http://doc.norang.ca/org-mode.html
+     2. http://www.emacswiki.org/emacs/SkeletonMode#toc2
+     3. KEY: @startuml
+     4. ditaa m-x picture
+	1. http://emacs-fu.blogspot.fr/2009/01/drawing-pictures.html
+
+
+
+*** [#B] LATEX学习-用Beamer做简报:
+
+    - State "Study"      from "Work"       [2014-11-20 周四 14:14]
+
+
+      1. http://www.docin.com/p-676558332.html
+      2. \begin{frame}[shrink=5]
+      3. \alert, \alert<<2>, \color{red}{text}
+      4. \only<<2->, from pp2, defferent from \only<<2>
+      5. \setbeambackground
+      6. #+latex_header: \setbeamertemplate{frametitle}{\vspace{1em}
+         \hline {\insertframetiatle} \hline}
+      7. \setbeamertemplate
+      8. \begin{frame}[label=here] \hyperlink{here}{\beambutton{go}}
+      9. \usepackage{multimedia} \movie
+      10. \insertframenumber \inserttotalframenumber
+      11. \rule{\textwidth}{1pt} \\[0.3cm]
+      12. # #+TITLE:  \begin{center} \rule{\textwidth}{1pt} \\[0.3cm]
+          \textsc{DOCSIS-v3.1 Review}  \\[0.3cm]
+          \rule{\textwidth}{1pt} \end{center}
+      13. latex signal
+	  1. \surd
+
+
+
+    - writelatex: www.writelatex.com
+      - http://www.latextemplates.com/template/stylish-colored-title-page
+
+
+      - http://www.latextemplates.com/cat/title-pages
+
+
+      - \newenvironment{titlepage}{}
+
+
+
+** org-mode 使用
+
+   - State "Study"      from "Work"       [2014-11-20 周四 10:09]
+
+
+   - URL: http://blog.sina.com.cn/s/blog_818b48820101pmmu.html
+
+
+  [[file:d:/Emacs14/dotemacsw.el]]
+
+
+
+** org-table
+
+   - State "Study"      from "Work"       [2014-11-19 周三 16:36]
+   - M-x orgtbl-mode
+   - @3$2, row is 3, col is 2
+
+
+   - C-c `, C-c |
+
+
+   - *group elements: /, << >*
+     |   | N  | N^2 | N^3 | N^4 | sqrt(n) | sqrt(N)    |
+     |---+----+-----+-----+-----+---------+------------|
+     |---+----+-----+-----+-----+---------+------------|
+     | / | <<> | <<   |     | >   | <<       | >          |
+     | # | 1  | 1   |   1 | 1   | 1       | 1          |
+
+
+   - http://orgmode.org/worg/index.html
+
+
+  [[file:d:/Chapters1411/%5BHXA%5D.DOCSIS.org::*DOCSIS-v3.1-PHY][DOCSIS-v3.1-PHY]]
+
+
+**  [#C] MobileOrg141113
+
+   - State "TODO"       from ""           [2014-11-27 周四 13:55]
+
+*** TODO Sync your Emacs diary with your iPhone <<2014-12-11>
+
+ http://blog.austinseraphin.com/2010/07/24/how-to-sync-your-emacs-diary-with-your-iphone-or-ipad/
+
+
+*** TODO Sync Org-Mode Agenda files with MobileOrg
+
+http://frosch03.de/id/201410262032
+
+
+*** TODO [#A] setq org-mobile-directory 			     :@Emacs:
+
+     - State "TODO"       from ""           [2014-11-27 周四 14:52]
+
+     - C-h i <<2014-12-19>
+
+       - http://orgmode.org/worg/org-faq.html#mobileorg_webdav
+
+
+     - agenda: *org-agenda*
+
+
+     - mobileOrg:手机端的Org神器 <<2014-11-13 周四>, MobileOrg通过
+       DropBox与电脑上的org进行同步,-
+       [[http://darksun.blog.51cto.com/3874064/1302920]]
+
+
+     - 推荐几个支持 WebDAV 的网盘，同时附上自建方法 <<2014-11-13 周四>,
+
+
+       - [[http://www.zntec.cn/archives/webdav-netdisk.html]]
+
+
+*** emacs tramp <<2014-11-13 周四>: Emacs + Plink + Tramp, 爽到想不到
+
+  (2011-05-15 15:43:18)
+
+
+    - 上述配置在windows平台上不能使Emacs正常使用tramp. Windows上推荐
+      使用tramp+putty,
+      - http://man.ddvip.com/soft/emacszh/emacs-packages.html#AEN350
+
+
+*** org-mode and Worg:
+
+ [[http://dreamrunner.org/wiki/public_html/Emacs/org-mode.html#sec-2-3]]
+
+
+*** emacs video
+
+[[http://vdisk.weibo.com/s/A2UdJFfhA_GG5/1412260686#_loginLayer_1415859656094]]
+
+
+*** filecache 和 anything
+
+
+ - http://www.wanglianghome.org/org/programming/emacsbook/emacs.html#sec-6-1
+
+
+ - 使用时有一个小窍门，在使用 C-x C-f 打开文 件时，不用管前面的目录名
+   是什么，直接在后面输入文件名，然后用 C-TAB 补 全，目录名会自动被替
+   换，无需手工修改。
+
+
+
+**  [#C] markdown 						      :@work:
+
+   - State "Study"      from "Fun"        [2014-11-25 周二 10:53]
+
+
+   - Markdown 的设计初衷就是为了更简单方便的书写 HTML ，而且 Markdown
+     做的确实不错。但是如果将 Markdown 用在其他领域（写大文档、书籍、
+     报告）就会有很多的坑
+
+
+
+** [#C] org-capture						      :@work:
+
+- State "Study"      from ""           [2014-11-25 周二 14:25]
+
+*** [#B] org [2014-11-27 Thu] emacs setting
+
+    - State "Study"      from ""           [2014-11-27 周四 15:23]
+ - ; org-capture, nice for C-c C-k /141127
+   (setq org-capture-templates '(
+   ("t" "Task" entry (file+headline "D:/GTD18/task.org" "Tasks") "* TODO %?\n %i\n %a")
+   ("j" "Journal" entry (file+datetree "D:/GTD18/journal.org") "* %?\nEntered on %U\n %i\n %a")
+   ("n" "Note" entry (file+datetree "D:/GTD18/note.org") "* %?\nEntered on %U\n %i\n %a")
+   ("p" "Project" entry (file+datetree "D:/GTD18/project.org") "* %?\nEntered on %U\n %i\n %a")
+   ))
+
+
+- Org.manual, /141125
+  - Up to version 6.36, Org used a special setup for remember.el, then replaced it with
+    org-remember.el. As of version 8.0, org-remember.el has been completely replaced by
+    org-capture.el.
+- inbox.org_archive for ARCHIVE_FILE
+  - C-c C-x C-a for ARCHIVE_FILE
+- C-c c for capture
+- C-c C-w
+
+
+*** TODO ORG INTO BEAMER
+
+<<2014-11-17 周一>
+
+
+- org-complete
+  - Emacs would not be Emacs without completion, and Org mode uses it
+       whenever it makes sense. http://orgmode.org/manual/Completion.html#Completion
+  - Completion/M-tab. then you may use [ESCAPE]-[TAB] except that you
+    first press the escape key and then the tab key
+
+
+- Emacs Org-Mode Note . http://blog.csdn.net/pfanaya/article/details/6676307
+  - #+BEGIN_CENTER与 #+END_CENTER之间的文本居中
+  - #+BEGIN_VERSE #+END_VERSE和#+BEGIN_QUOTE #+END_QUOTE可以保留引文的格式
+  - #+BEGIN_SRC #+END_SRC 源码环境
+  - *figure width and caption*
+    - #+ATTR_HTML:  align="centering"
+    - #+ATTR_Latex:  width= 0.6\textwidth
+    - #+CAPTION: DOCSIS-3.0-Channel-Bonding
+    - #+LABEL: CB
+    - #+LATEX_HEADER: \setbeamertemplate{caption}[numbered] #+LATEX_HEADER: \setbeamerfont{caption}{size=\scriptsize,shape=\itshape}
+
+**** BEAMER_envargs: [allowframebreaks], \framebreak <<2014-12-10>
+
+  - #+latex_header: \setbeamerfont{caption}{size=\tiny}, <<2014-12-11>
+    - #+latex_header:
+      \setbeamerfont{frametitle}{family=\rmfamily,shape=\itshape} #+latex_header:
+      \setbeamerfont{caption}{size=\tiny, shape=\itshape}
+
+
+  - BEAMER_col, before, \scriptsize, and 0.9\textwidth. <<2014-12-11>
+
+
+**** [#B] \addbibresource, no with nanbib, NO footcite and footfullcite, <<2014-12-11>
+
+must after #+LATEX_HEADER: \usepackage{footbib}, otherwise, dead loop
+
+***** \printbibliography with addbibresource
+
+
+**** font
+
+
+***** #+LaTeX_CLASS_OPTIONS: [9pt]
+
+
+***** \documentclass[12pt]{book}
+
+\emph{...}= {\em ...} \textit{...}={\itshape} \textsc{...}={\scshape} \textnormal{...}={\normalfont}
+{\Large\tableofcontents}
+
+
+**** 利用Pandoc转换markdown和HTML、LaTeX
+
+http://johnmacfarlane.net/pandoc/demos.html
+
+
+
+
+<<2014-11-14 周五>
+- #+LaTeX_CLASS: beamer
+  #+BEAMER_FRAME_LEVEL: 2
+  #+OPTIONS: ^:{}
+  #+TITLE: DOCSIS-v3.1 Review
+  #+AUTHOR: HUANG Xiaoan
+  # \\usepackage must be into \usepackage
+  #+latex_header: \usepackage{lmodern}
+  #+latex_header: \hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+
+
+- http://orgmode.org/worg/exporters/beamer/tutorial.html
+
+
+- org-beamer技巧:
+  - URL: http://alpha-blog.wanglianghome.org/2012/06/13/org-beamer-tricks/
+  - 表格直接用org table；画图用ditaa；图片直接用file链接，控制图片比例
+    的配置方法是：#+ATTR_LaTeX: width=0.7\linewidth
+
+
+- 配置Emacs org-mode利用latex生成pdf文件: URL:
+     http://blog.csdn.net/pfanaya/article/details/7669364
+
+
+- org-mode的中文Beamer幻灯片模板
+  - 两个”@”不能生成alert效果: URL:  http://www.douban.com/note/270383500/.
+
+
+    - org-export-latex-emphasis-alist (quote((“*” “\\textbf{%s}”
+      nil)(“/” “\\emph{%s}” nil)(“_” “\\underline{%s}” nil)(“+”
+      “\\texttt{%s}” nil)(“=” “\\verb=%s=” nil)(“~” “\\verb~%s~”
+      t)(“@” “\\alert{%s}” nil))))
+
+
+
+** ORG-remember <<2014-11-18 Tue>
+
+
+   - C-c C-c, into C:\Users\xiaoanh\AppData\Roaming\.notes
+
+
+   - GTD工具通常会定义一个Inbox，用于快速记录想法、任务。万能的Inbox工
+     具是纸和笔，之前我也尝试过gmail、EverNote和doit.im, 但都感觉不够
+     敏捷。 而Emacs 下的org-mode + remember-mode 能够满足我的要求。
+
+
+     - http://www.cnblogs.com/holbrook/archive/2012/04/17/2454619.html#sec-3-2
+
+
+     - D:\Chapters1411\GTD18
+
+
+** ORG.LEARN.141110							:ORG:
+
+
+*** ORG INTO LATEX, /141110
+
+- all ~ into -, must change, /141112
+
+
+- can not use _text_
+   ! missing $ inserted.
+   <<inserted text>
+  $
+   l.106 mso（_
+  multiple system operator_，多系统运营商
+	    ! missing $ inserted.
+
+
+   配置EMACS ORG-MODE利用LATEX生成PDF文件
+  [[ HTTP://BLOG.CSDN.NET/PFANAYA/ARTICLE/DETAILS/7669364]]
+
+
+- 用 ORG-MODE 写 LATEX 						    :ORGDTEX:
+   话说我以前用 LATEX 处理中文都是用 CJK 的方式, 直到上次去 FJLUG 上被 鱼一尾 告知我用的技术是几年前的, 被狠狠鄙视了一把之后, 我才知道原来用 XELATEX 处理中文如此简单.
+   [[HTTP://MATHSLINUX.ORG/?P=58]]
+
+
+
+*** <x-bg-color><param>DarkOrange</param>[#B]</x-bg-color> org-basics
+
+    - State "Study"      from ""           <x-color><param>Cyan</param>[2014-11-26 周三 10:41]</x-color>
+
+
+    - Time-stamp sloved until <x-color><param>Cyan</param><<2014-12-03 周三>--<<2014-12-05 周五></x-color>
+
+
+    - 搭配这个autoload, Emacs还提供了一个eval-after-load函数, 该函数定义如下
+      - (eval-after-load file form)
+      - http://emacser.com/eval-after-load.htm
+
+
+    - 配置 Emacs 的小技巧
+
+
+      - site-lisp 目录下的 site-start.el 文件作用也差不多，不过它是全局的，
+	而且在 dotemacs 之前启动
+      - https://linuxtoy.org/archives/conf-emacs-tips.html
+
+
+
+    - Org-mode写作的几个快捷方式
+      - http://emacser.com/org-mode-tricks.htm/comment-page-1
+
+
+    - org-mode 使用
+      - [[http://blog.sina.com.cn/s/blog_818b48820101pmmu.html]]
+    stars keyword priority title tags
+    #** TODO [#2] 优先级为2的待办事项  :@家庭作业:
+    虽然TODO关键词、优先级和标签属于标题的成分，但由于设定较复杂而且功能重要，有关内容将在后面介绍。
+    #** HEADLINE 2 	   :LABEL2:LABEL3:
+
+
+   1.1 BASIC
+     M-ENTER 可以生成标题
+     /ITALIC/斜体
+     *BOLD*黑体
+     _UNDERLINED_下划线
+    [[ HTTP://BLOG.CSDN.NET/PFANAYA/ARTICLE/DETAILS/6676307]]
+
+
+
+
+*** <x-bg-color><param>DarkOrange</param>TODO</x-bg-color> Bitbucket, osomac, and git <x-color><param>Cyan</param><<2104-12-15></x-color>
+
+Org-mode – Moving forward
+I host the git repo on Bitbucket, although this does not really
+matter; I used github before, and switched because Bitbucket offers
+private repos for free. I have a small script which commits local
+changes, pulls remote changes, and pushes local changes every 30
+minutes.
+http://www.osomac.com/2013/09/23/org-mode-moving-forward/
+
+
+
+* Study <x-bg-color><param>yellow</param>[#C]</x-bg-color> Python and lua <x-color><param>Cyan</param>[2014-12-18 Thu]</x-color>
+
+
+** [KEY]: Python
+
+
+*** naming
+
+1) const, CONST
+2) args, args
+
+   
+
+*** modules/packages. packages must include _init_
+
+
+*** python vs cpp
+
+   <x-color><param>LightSkyBlue</param>|                 | python | cpp     |</x-color>
+   <x-color><param>LightSkyBlue</param>|-----------------+--------+---------|</x-color>
+   <x-color><param>LightSkyBlue</param>|                 | option | argv    |</x-color>
+   <x-color><param>LightSkyBlue</param>|                 | </x-color><x-color><param>LightSkyBlue</param>_name_</x-color><x-color><param>LightSkyBlue</param> | main    |</x-color>
+   <x-color><param>LightSkyBlue</param>|                 | import | include |</x-color>
+   <x-color><param>LightSkyBlue</param>| domain-域操作符 | ::     | ::      |</x-color>
+** Py study
+
+
+*** study web
+
+1) naming
+
+    所有其它的标识符（identifiers）都是使用小写，比如：
+   words_separated_like_this 。宏 - macros和常量 - constant values是采
+   用大写，比如：UPPER_CASE。
+
+   
+
+2) emacs
+
+http://www.johndcook.com/blog/2012/02/09/python-org-mode/
+
+#+begin_src R
+sqrt(42)
+#+end_src
+
+
+#+RESULTS:
+
+#+begin_src python
+from math import sqrt
+sqrt(42)
+#+end_src
+
+#+RESULTS:
+
+
+** Python tutorial
+
+
+*** [KEY]: Python2.5Tutorial简体中文版, PDF
+
+<x-color><param>Cyan</param><<2015-01-15 Thu></x-color>
+ 1) http://pan.baidu.com/share/link?shareid=3447562520&uk=1478811291
+**** pp46, Ch5, modules
+1) module fibo
+2) import fibo
+3) fibo._name_
+4) sec5.3 dir(fibo)
+   1) dir(sys)
+**** pp91, Ch9, lib
+1) os.system
+2) os.getcwd
+3) os.chdir
+4) dir()
+5) hep()
+6) import shutil
+7) file wildcards
+   1) glob.glob(’*.py’)
+8) 9.3 Command Line Arguments
+   1) print sys.argv
+9) 9.5 regular expression tools
+10) 9.7 Internet Access
+    1) import urllib2
+    2) import smtplib
+**** Ch3 More Control Flow Tools
+1) The keyword ‘elif’ is short for ‘else if’,
+2) for x in a: ... print x, len(x)
+3) range
+4) pass
+**** Ch4, Data Structures, lists
+1) len
+2) index
+3) insert
+4) append
+5) set
+6) dict is {}, keys is []
+   1) tel = {’jack’: 4098, ’sape’: 4139}
+   2) tel.keys()
+   3) tel.has_key(’guido’)
+   4) tel[’guido’] = 4127
+7) tuple
+   1) t = 12345, 54321, ’hello!’
+   2) t[0]
+
+	   
+
+**** Ch8 class
+
+1) It is a mixture of the class mechanisms found in C++ and Modula-3. As
+2) 8.3.2 Class Objects
+   1) attribute references
+      1) class MyClass:, MyClass.i and MyClass.f
+   2) instance: x = MyClass()
+3) 8.5 Inheritance, derived继承派生
+   1) class DerivedClassName(BaseClassName):
+   2) c++ *class derived_class_name: public base_class_name;*
+4) 8.9 iterator, <<2015-01-16 周五>
+   1) _iter_
+   2) next
+
+
+**** Ch1 whetting your appetite
+
+     1) Python is just the language for you.
+     2) Python is an interpreted language,
+     3) Python is extensible:
+*** Python学习手册(第3版)-附录
+
+*** tutorial web
+
+**** Python语言十分钟快速入门, <<2015-01-13 Tue>
+
+     1) http://www.pythondoc.com/pythontutorial3/
+http://developer.51cto.com/art/201207/347006.htm
+
+1) [文件类型]
+   1) Python的文件类型分为3种，即源代码、字节代码和优化代码
+   2) .py, .pyc, .pyo.
+2) [对象和类]
+   1) python用class保留字来定义一个类，类名的首字符要大写
+   2) 一个对象被创建后，包含了三方面的特性，即对象的句柄、属性和方法
+      1) class Fruit:  def grow(self):  print “Fruit grow”
+3) 函数相关
+   1) 包必须含有一个__init__.py文件，它用于标识当前文件夹是一个包
+4) 运算符和表达式
+   1) python不支持自增运算符和自减运算符。例如i++/i–是错误的，但i+=1是可以的
+5) 控制语句
+   1) 7 python不支持类似c的for(i=0;i<<5;i++)这样的循环语句，但可以借助range模拟：
+    for x in range(0,5,2): 
+
+
+**** Python模块学习——optparse
+1) 处理命令行参数
+   1) http://www.cnblogs.com/captain_jack/archive/2011/01/11/1933366.html
+
+
+
+* Study <x-bg-color><param>yellow</param>[#C]</x-bg-color> Emacs						     :@Emacs:
+<x-color><param>chocolate1</param># # EMACS，即Editor MACroS（宏编辑器）的缩写</x-color>
+<x-color><param>chocolate1</param># - TRAMP: Transparent Remote access multi-protocal.</x-color>
+<x-color><param>chocolate1</param>  # Emacs是计算机界的大牛Richard Stallman的力作</x-color>
+
+  State "Study"      from "Work"       <x-color><param>Cyan</param>[2014-11-24 Mon 16:07]</x-color>
+
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> @key @dotemacs
+
+
+*** Ctrl-h v, user-init-file, and user-mail-address <x-color><param>Cyan</param>[2015-12-18]</x-color>
+
+    1. user-full-name 
+       1. // Author          : HUANG XIAOAN
+
+
+*** flycheck
+
+    1. https://github.com/flycheck/flycheck
+
+
+*** <x-bg-color><param>yellow</param>[#C]</x-bg-color> insert date, @defun, C-u for prefix, cond and let
+
+    1. http://www.emacswiki.org/emacs/InsertDate
+    2. ; insert date, defun, interactive, prefix, cond, let,  <x-color><param>Cyan</param>[2015-12-11]</x-color>
+
+
+*** (global-font-lock-mode t)
+
+    1. 默认emacs有很多功能都没有打开，亚语法高良，只要M-x
+       global-font-lock-mode,把global-font-lock-mode打开就可以了，或者
+       在你的.emacs里面加一句(global-font-lock-mode t)也一样！
+
+
+*** redo m-x redo <x-color><param>Cyan</param>[2015-08-14 Fri]</x-color>
+
+
+*** <x-bg-color><param>yellow</param>[#C]</x-bg-color> @key (set-locale-environment "English")
+; @key, DONE <x-color><param>Cyan</param>[2015-08-07]</x-color>
+
+
+*** @lisp
+
+**** <x-bg-color><param>DodgerBlue</param>[#D]</x-bg-color> @key: *cancel study todo type*, study.org always inherit @MFH
+       1. ;; # @problem: auto inherited @MFH, why, <x-color><param>Cyan</param>[2015-07-23 Thu]</x-color>
+       2. ;; # @solution: delete study todo type in dotemacs. ;    (type "Work(w!)" "Huang(h!)" "Study(s!)" "|")
+       3. ;; # finally @emacs and @lang can not inherit @MFH
+***** art of lisp
+       1. 以前听说过一句话 ：lisp本身就是数学，而数学是不会过时的。当时很不明白这句话 ，lisp怎么能是数学呢？看了看Mathematica中的虚拟全书 ，明白了一点。elisp的表达式 和Mathematica的表达式是一样的：
+
+
+*** anything like quicksilver  <x-color><param>Cyan</param>[2015-07-15 Wed]</x-color>
+
+   1. anything-c-source-locate ; find files everywhere
+   2. anything-c-source-google-suggest ; do a quick google search
+
+*** Smex,  A smart M-x enhancement for Emacs.
+
+    1. <x-color><param>Cyan</param>[2015-07-15 Wed]</x-color>
+
+*** dotemacs config
+
+**** org-dotemacs
+
+     1. https://github.com/vapniks/org-dotemacs
+
+**** set-locale-environment
+
+      1) 我的Emacs配置文件
+       	 1) http://blog.chinaunix.net/uid-25830557-id-317944.html
+      2) m-x set-locale-environment ENG, <x-color><param>Cyan</param>[2015-03-09 Mon]</x-color>
+
+       
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> @sacha <x-color><param>Cyan</param>[2015-12-21 Mon]</x-color>
+
+
+*** http://pages.sachachua.com/sharing/blog.html#orgheadline45
+
+
+*** BBDB is the Insidious Big Brother Database for GNU Emacs. 
+
+
+** @mooz @purcell @keysnail <x-color><param>Cyan</param>[2015-12-18 Fri]</x-color>
+
+*** @planet-emacs
+
+    1 .http://planet.emacsen.org/
+
+
+*** @mooz, Masafumi Oyamada
+
+    1. https://github.com/mooz
+    2. http://mooz.github.io/
+    3. js2-mode的维护者Masafumi Oyamada(网名mooz)也开发了keysnail和
+       percol. 特别是percol,使我命令行效率提高了10倍.这个阶段可称之为
+       心中有剑,手中无剑
+*** 一年成为Emacs高手(像神一样使用编辑器) @redguardtoo
+
+    1. https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/guide-zh.org
+    2. 陈斌(redguardtoo)
+    3. 我应一开始就照抄世界级大师 Steve Purcell的Emacs 配置.
+    4. 网页浏览, 强烈建议用Keysnail.
+    5. 再强调一下本文最重要的观点:
+       1. 以 基于解决实际问题产生的兴趣引导
+       2. 完全照抄世界顶尖高手如Steve Purcell的配置,尽量避免自己写Lisp
+       3. 给高手报bug就是最好的学习,
+       4. 学习Emacs和 学任何专业技能(拉小提琴,解数学题)的方法论都是一样的,请参考一万小时天才理论.
+
+
+*** @purcell, Steve Purcell
+
+    1. http://www.sanityinc.com/about/
+    2. https://github.com/purcell/
+
+    
+
+*** @keysnail
+
+    1. https://github.com/mooz/keysnail
+
+
+** elfeed <x-color><param>Cyan</param>[2015-12-17]</x-color>
+
+   1. https://github.com/skeeto/elfeed
+
+
+** HideShow, fold, <x-color><param>Cyan</param>[2015-12-04 Fri]</x-color>
+
+   1. http://www.emacswiki.org/emacs/HideShow
+*** <x-bg-color><param>yellow</param>[#C]</x-bg-color> m-x describe variable ->hs-special-mode-alist <x-color><param>Cyan</param>[2015-12-17 Thu]</x-color>
+
+
+** @win, 在windows下装emacs23+w3m
+
+   1. http://kidneyball.iteye.com/blog/1036162
+
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> shift+right, change 1) , 1. *, interesting <x-color><param>Cyan</param>[2015-11-17 Tue]</x-color>
+
+** @lifestyle: @emacs, lifestyle of emacs
+  1. vi是一种工作，用emacs是一种生活态度 
+
+  2. emacs 是一个操作系统
+
+** <x-bg-color><param>DodgerBlue</param>[#D]</x-bg-color> undo-tree and m-x recover-session <x-color><param>Cyan</param>[2015-08-14 Fri]</x-color>
+
+   1. C-x u 进入 undo-tree-visualizer-mode , p n 上下移动，在分支之前
+      b f 左右切换，t 显示时间戳，选定需要的状态后， q 退出。这是主要
+      的操作，其它的自己摸索好了
+
+      
+
+(require 'undo-tree)
+(global-undo-tree-mode)
+
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> recording macros
+
+   1. c-x (
+   2. m-d and enter
+   3. Press M-} (forward-paragraph). This takes you to the beginning
+      of the next paragraph. 
+   4. c-x )
+   5. c-x e
+   6. http://www.emacs.uniyar.ac.ru/doc/em24h/emacs110.htm
+
+
+** latex macro, c-c c-m
+
+   1. Emacs + LaTeX 快速上手
+      1. http://cs2.swfc.edu.cn/~wx672/lecture_notes/linux/latex/latex_tutorial.html
+      2. http://cs2.swfu.edu.cn/office/to-student/
+      3. 西南林业大学
+
+
+** link
+
+   1. #+LINK: bib file:~/research/refs.bib::%s
+   2. #+LINK: note file:~/research/org/notes.org::%s
+
+
+** bbs using m-x ansi-term
+
+   1. 水果机上用 Welly
+   2. BBS by Emacs
+      1. http://jensonhjt.blogspot.fr/2007/01/bbs-by-emacs.html
+      2.  必须使用cygwin中的telnet.exe，或者替换windows中的telnet.exe程序。 
+
+** bookmark m-x list-bookmarks
+
+   1. not bookmark
+** m-x doctor
+
+   1. spoil the fun and hurt your recovery 
+
+
+** m-x butterfly
+
+
+** ERC
+
+   1.for IRC,  Internet Relay Chat
+
+** Reference BOOK
+
+
+*** The Craft of Text Editing: Emacs for the Modern World
+
+** epresent and reveal
+
+*** ; epresent and reveal fail, due to ox missing and latest org-mode 8.0, <x-color><param>Cyan</param>[2015-07-07]</x-color>
+
+    1. mixed installation
+
+** Evil
+
+   1. Lightning intro to Emacs using evil-mode and org-mode
+   2. [[http://www.emacswiki.org/emacs/Evil][Emacs:evil]]
+   3. https://github.com/edwtjo/evil-org-mode
+   4. [[http://blog.binchen.org/posts/my-emacs-skills-is-improved-after-3-years.html][binchen:evil]]
+      1. My Emacs skill is improved after 3 years
+
+
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> org-mode, math-mode, m-x latex-math-mode, 'u
+
+   1. 1st <x-color><param>Cyan</param>[2015-07-10 Fri]</x-color>
+
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> ctrl-u number ctrl-f, repeat using ctrl-u  <x-color><param>Cyan</param>[2015-09-10 Thu]</x-color>
+
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> shift +D for uppercase of d  <x-color><param>Cyan</param>[2015-09-10 Thu]</x-color> 
+
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> [KEY] C-c C-v for pdf review no need to cd dir <x-color><param>Cyan</param>[2015-07-01 Wed]</x-color>
+
+
+*** C+shift+s for REGEXP
+
+
+*** Meta+shift+!, eshell, emacs -q
+
+
+*** m-x org-version and info
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> sachac
+
+*** [[https://gist.github.com/sachac/5278905][emacs:sachac]]
+
+
+** org-ac, and ac-math
+
+
+*** ac-math
+
+    1. https://github.com/vspinu/ac-math
+    2. [ERROR]: CAN NOT  load math-symbol-list
+    3. [SOL]: https://github.com/vspinu/math-symbol-lists
+
+
+*** <x-bg-color><param>yellow</param>[#C]</x-bg-color> dotemacs, ac MUST dependency  pcmp, log4e and yaxception from <x-color><param>Cyan</param>[2015-07-01 Wed]</x-color> :@Emacs:
+
+    
+(add-to-list 'load-path "D:/Emacs14/auto-complete-master/")
+(require 'log4e)
+(require 'yaxception)
+(require 'auto-complete-pcmp)
+(require 'org-ac)
+;; missing auto-complete-pcmp, https://github.com/aki2o/auto-complete-pcmp
+;; Make config suit for you. About the config item, eval the following sexp.
+;; (customize-group "org-ac")
+
+(org-ac/config-default)
+
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> c++, /cscope/,  helm, source insight, ctags, company-mode (ac-mode)
+
+
+*** Emacs 下使用 cscope
+
+    1. http://blog.sina.com.cn/s/blog_53e2845b010005xp.html
+
+*** install, clang, source insight, cscope, cedet Global, and helm
+
+   1. intro: http://tuhdo.github.io/helm-intro.html
+      1. Helm sets out to clean up the legacy code in anything.el and
+	 provide a cleaner, leaner and more modular tool, that's not tied
+	 in the trap of backward compatibility.
+   2. github install, https://github.com/emacs-helm/helm
+   3. source insight, cscope, cedet and ecb
+      1. 安装cedet和ecb
+      2. cscope：这是一个可以使emacs实现类似source insight那种符号查找
+         等功能的软件。它最常用的功能就是找到任何一个变量、函数、结构
+         体等是在哪里被定义，被引用的。cscope的官方网站在
+         http://cscope.sourceforge.net/。这里可以下载到cscope的源码，
+         源码中有一个叫做xcscope的目录，将其拷贝到你emacs的site-lisp目
+         录下。xcscope是lisp脚本，它是与平台无关的语言。然而，这个脚本
+         依赖cscope可执行文件。但cscope是不能直接在windows下运行的。我
+         在网上找了很久，终于在一个俄罗斯网站上找到了cscope的windows编
+         译。这个网站是：http://iamphet.nm.ru/cscope/index.html。下载
+         后将cscope.exe解压到emacs的bin目录下即可。
+   4. apt-get install global and gtags
+   5. clang是一个C/C++、Obj-C/Obj-C++的编译器前端
+   6. You can use GNU Global with ggtags or helm-gtags, which can be installed through MELPA.
+
+	 
+
+
+** Qt, qusar
+
+     
+
+** 王垠：完全用Linux工作
+
+
+*** yinwang, http://www.yinwang.org/
+
+
+**** TeXmacs, TEX+EMACS
+
+   
+
+*** Emacs是一种信仰！世界最强编辑器介绍
+
+*** 幻灯都是用 ConTeXt 做的，用起来很简单
+
+    1. ConTeXt 没有 LaTeX 那么多的专用与论文的宏包，可能在论文方面不行
+       但是它在非正规的文档，比如幻灯片，海报……上很有长处如果你用
+       LaTeX 处理这些文档就显得太规矩了
+    2. http://www.math.zju.edu.cn/ligangliu/LaTeXForum/
+** Dropbox, Nutstore
+
+   坚果云- Nutstore 
+       	
+** reftex, org, <x-color><param>Cyan</param>[2015-01-27 Tue]</x-color>
+
+   1) %s, %l
+   2) https://wiki.freebsdchina.org/doc/r/reference
+   3) Emacs Org Mode 与 BibTeX 的结合
+      1) http://blog.waterlin.org/articles/bind-emacs-org-mode-with-bibtex.html
+
+** backup
+
+ 1) http://blog.chinaunix.net/uid-25830557-id-317944.html
+
+   (setq backup-directory-alist '(("." . "~/backups")));;设置备份文件的路径
+
+
+** listi of emacs
+
+   1) http://ergoemacs.org/emacs/emacs_unix.html
+   2) Emacs和它的朋友们——阅读源代码篇
+      1) http://baohaojun.github.io/reading-source-code-cn.html
+   3) 8张图片让你的emacs水平从走到飞
+      1) http://scmbob.org/emacs_manual_pictures.html
+   4)  ~/.emacs.d/init.el, 内容如下:
+;;; init.el --- Where all the magic begins        # => ; 在lisp中表示注释.
+(if (file-exists-p "~/.emacs.d/.emacs") (load "~/.emacs.d/.emacs")) #
+=> 如果存在~/.emacs.d/.emacs, 则调用它.
+;;; init.el ends here
+
+*** humor, deldo, <x-color><param>Cyan</param>[2015-01-27 周二]</x-color>
+
+     1) http://www.emacswiki.org/emacs/Deldo
+
+
+	
+
+** Tags and TODOs, <x-color><param>Cyan</param><<2015-01-19 Mon></x-color>
+
+*** #+TAGS: { @Paper: @Paper_precomp @Paper_CoMO }
+
+*** #+TODO: Study(s@) TODO(t@) | DONE(d)
+
+<x-color><param>chocolate1</param>    # #+TYP_TODO: Fred Sara Lucy Mike | DONE</x-color>
+
+** color-theme <x-color><param>Cyan</param><<2014-12-25 Thu></x-color>
+
+1) Note141224 from outlook
+  https://github.com/alloy-d/color-theme-molokai
+2) (color-theme-matrix), nice, <x-color><param>Cyan</param><<2015-01-26 周一></x-color>
+   1) (setq color-theme-is-global t)
+
+    
+
+    
+
+** Sams Teach Yourself Emacs in 24 Hours(非常好的学习emacs书
+
+<x-color><param>chocolate1</param>   # <<2015-01-16 周五></x-color>
+
+   1) begin learn from tutorial
+
+** telnet
+
+*** permission denied, <x-color><param>Cyan</param><<2015-01-15 周四></x-color>
+   1) (setq telnet-program "C:\\WINDOWS\\system32\\telnet.exe")
+   2) 
+
+
+** regexp
+
+<x-color><param>chocolate1</param>   # <<2015-01-16 周五></x-color>
+
+   1) Emacs 正则表达式简介(From 水木清华)
+      1) http://dsec.pku.edu.cn/~rli/WiKi/EmacsRegexp.html
+      2) ^ and  $
+      3) \b, \( \)
+      4) ? and * and . , c.a, c*a, c+a
+
+
+** Verilog
+
+   1) 在 emacs 里开发 verilog
+      1) http://blog.sina.com.cn/s/blog_53e2845b0100062p.html
+      2) www.verilog.com 可以下载到 verilog-mode。
+   2) install
+
+      1) http://www.verilog.com/register.html
+
+** w3m, <x-color><param>Cyan</param><<2014-12-03 Wed></x-color>
+
+   - State "Study"      from ""           <x-color><param>Cyan</param>[2014-12-03 周三 11:42]</x-color>
+   - http://emacs-w3m.namazu.org/#download
+   - chengxiaopeng: windows平台在emacs中使用w3m浏览网页
+     - http://blog.chinaunix.net/uid-20680669-id-3339757.html
+     - http://blog.csdn.net/neverforeverzy/article/details/6080187
+     - 主页 http://emacs-w3m.namazu.org 作者 17名日本程序员
+
+   
+
+** Dired, <x-color><param>Cyan</param><<2014-12-16 Tue></x-color>
+
+
+*** sorting c-u s, -alS, -alc, -alX  <x-color><param>Cyan</param>[2015-07-15 Wed]</x-color>
+
+
+*** Dired, web, %m .py$
+
+
+**** Emacs -- 强大的文件管理器
+
+http://lifegoo.pluskid.org/wiki/EmacsAsFileManger.html
+
+
+    - * % REGEXP <<RET>
+    - u 去除当前行的标记
+    - C 拷贝文件。把 dired-recursive-copies 设为非 nil 的值可以递归拷
+      贝目 录，通常我们设定为 top ，这表示对于顶层目录 dired 会先进行
+      询问是否 要递归拷贝，而其中的子目录则不再询问。如果嫌询问太麻烦，
+      可以直接设 置为 always 。
+      - D 删除文件。类似的有一个 dired-recursive-deletes 变量可以控制递归删 除。
+      - R 重命名文件，也就是移动文件。
+      - H 创建硬链接。
+	S 创建软链接。
+	M 修改权限位，即 shell 里面的 chmod 命令。
+	G 修改文件所属的组。
+	O 修改文件的所有者。
+
+
+
+**** %m .py$, Emacs文件和目录操作模式Dired
+
+首先创建一个目录
++ python
+然后选取所有以py为结尾的文件
+%m .py$
+
+
+
+m ;;标记文件
+
+
+%m ;;使用正则标记
+
+
+
+** buffer
+
+you can list all buffers with C-x C-b, mark buffers in the list for
+deletion with d, and then use x to remove them.
+
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> @git <x-color><param>Cyan</param>[2014-12-17 Wed]</x-color>
+
+
+*** @git, Finally @success <x-color><param>Cyan</param>[2015-12-22 Tue]</x-color>
+
+
+**** note1411 -> gitlib
+
+
+*** git for win, Git-1.9.4-preview20140929
+
+
+    - curl uses $HOME/_netrc instead of $HOME/.netrc.
+
+
+**** <x-bg-color><param>yellow</param>[#C]</x-bg-color> git clone https://8x1@bitbucket.org/8x1/git1412.git, <x-color><param>Cyan</param>[2015-11-06 Fri]</x-color>
+
+
+     - echo "8x1" >> contributors.txt
+     - git add contributors.txt
+     - git commit -m 'Initial commit with contributors'
+     - git remote add origin https://8x1@bitbucket.org/8x1/git1412.git
+     - git push -u origin master
+
+**** git bash, git add .
+
+      - Git历险记（二）——Git的安装和配置
+	- 而在windows下则要先打开“Git Bash”，进入msysGit命令行界面，再用
+	  git config命令进行相应的配置操作。好了，前面安装好了Git，现在我
+	  们开始配置：
+	- http://www.infoq.com/cn/news/2011/01/git-adventures-install-config
+      - Git 历险记（三）——创建一个自己的本地仓库
+	- http://www.infoq.com/cn/news/2011/02/git-adventures-local-repository
+	- $ git init #在当前的目录下创建一个新的空的本地仓库
+	- Initialized empty Git repository in <italic>/home/user/test_proj/</italic>.git/
+	- $ git add . #把前目录下的所有文件全部添加到暂存区
+	- $ git commit -m 'project init' #创建提交
+      - Git历险记（四）——索引与提交的幕后故事
+	- http://www.infoq.com/cn/news/2011/03/git-adventures-index-commit
+
+	 
+***** git error
+
+- git remote set-url origin
+- failed to connect to github 443 windows
+- git config --global http.proxy http://login:password@proxyServer:proxyPort
+- If your country block github, e.g. China mainland, then you can build
+a proxy, e.g. use goagent & gae, then set proxy address for git, e.g.
+
+git config --global http.proxy 127.0.0.1:8087
+
+	
+***** csdn code
+
+
+      - 一次偶然的机会我发现了CSDN CODE平台，一篇报道上说是中国的
+        github，我心想这真是太好啦。然后就去看了一看。
+      - http://www.cnblogs.com/blqw/p/3329956.html
+      - https://code.csdn.net/
+	- security: yougen, run
+	- git@code.csdn.net:xiaoanh/git-test.git
+
+       
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> yas, yasnippet
+
+- State "Study"      from ""           <x-color><param>Cyan</param>[2014-11-25 周二 09:53]</x-color>
+- yas <x-color><param>Cyan</param><<2014-11-27 周四></x-color>
+  https://github.com/live5156go51/org-note-files/commit/64d59f2ac33d22f0bb572008897a94bff444c0f2
+
+
+- ac is very quick, view video, /141125
+- install yas
+  - github.com/capitaomorte/yasnippet
+  - (yas/global-mode 1)
+  - (yas/minor-mode-on)
+  - (global-set-key (kbd "C-c e") 'yas/expand)
+  - # bind 'yas-expand' outside of yas-minor-mode
+  - http://capitaomorte.github.io/yasnippet/
+  - https://github.com/AndreaCrotti/yasnippet-snippets
+
+
+- auto complete和yasnippet的区别
+
+
+  - http://emacser.com/auto-complete_yasnippet.htm
+
+
+- GNU Emacs 24.3 即将发布:
+
+
+  - Yas的代码我没好好看过，喜欢是因为毕竟作者是咱中国人
+  - 和TextMate的snippet语法很像，并且可以导入TextMate的snippet；
+  - https://linuxtoy.org/archives/gnu-emacs-24-3-will-release-soon.html
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> hotkey, <x-color><param>Cyan</param>[2015-01-27 Tue]</x-color>
+
+*** hotkey <x-color><param>Cyan</param>[2015-07-10 Fri]</x-color>
+
+    1. <<q+tab
+    2. <<s+tab
+    3. <<v+tab
+    4. C+h b
+    5. C+c | for table
+    6. C+c C+l
+    7. C+c \ for tags, @
+
+
+*** dotemacs hotkey
+
+; emacs, key, /141107
+
+; m-x lisp-interaction-mode
+;  for lisp, /141110
+; (+ 2(+ 1 1))
+
+; d:/Emacs14 $ which latex
+; c:/ctex/miktex/miktex/bin/latex.exe
+
+;C-x C-b   列出当前所有的缓冲区（b->buffer）
+;C-x b 缓冲区名：切换到指定的缓冲区（例如：C-x b M<<tab>：切换到以M开头的缓冲区）
+;C-x s：保存spell/diema	LATEXcs中所有的缓冲区（s->save）
+;C-x right：切换到下一个缓冲区
+;C-x left：切换到前一个缓冲区s
+
+; c-h t, c-h k, 
+; c-x c-b, for butter
+; c-v, and m-v (view) 
+
+; m-x eshell
+; m-x debug
+; m-x run
+; m-x config
+; m-x setenv
+; m-x customize
+; m-d, m-f, m-delete,
+
+
+** <x-bg-color><param>DarkOrange</param>TODO</x-bg-color> LATEX						
+
+
+  - multi-fig one frame
+    - \begin{frame}\frametitle{Umgebung}
+      \only<<1>{\centering\includegraphics{a.pdf}}
+      \only<<2>{\centering\includegraphics{b.pdf}}
+      \only<<3>{\centering\includegraphics{c.pdf}}
+      \end{frame}
+
+	 
+
+     
+
+* Study <x-bg-color><param>yellow</param>[#C]</x-bg-color> Emacs ERROR
+
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> setq reftex-default-bib, add bib1505, <x-color><param>Cyan</param>[2015-05-28 Thu]</x-color>
+
+   
+
+*** (setq reftex-default-bibliography
+      (quote
+       ("D:/bib1410/bib1307.bib" "D:/bib1410/bib1410.bib"
+       "D:/bib1410/bib1505.bib" )))
+
+
+*** org-link-abbrev-alist
+(setq org-link-abbrev-alist
+ '(("bib" . "D:/bib1410/bib1410.bib::%s, D:/bib1410/bib1505.bib::%s")
+   ("notes" . "D:/GTD18/notes.org::#%s")
+   ("figs" . "D:/figure1411/%s.png")
+   ("papers" . "D:/bib1410/paper1410/%s.pdf")))
+       
+
+** colortheme err, [2015-01-27 Tue]
+
+   1) http://stackoverflow.com/questions/11690980/why-cant-i-use-old-theme-style-file-under-emacs-24-1
+
+  
+
+** Emacs error org-mobile-checksum-binary
+
+*** mobileorg - "No executable found to compute checksums
+
+http://comments.gmane.org/gmane.emacs.orgmode/26838
+org-mobile-checksum-binary
+You don't need everything from that package, just the one .exe.
+Sync Org-Mode Agenda files with MobileOrg
+http://frosch03.de/id/201410262032
+
+
+   - emacs wrong type argument stringp \\documentclass
+   - ; (global-set-key (kbd "M-/") 'auto-complete)
+   - ;(autoload 'predictive-mode "D:/Emacs14/predictive/predictive"
+     "Turn on Predictive Completion Mode." t); delete predictive,
+     /141110
+
+** error org
+
+  - (org-remember-insinuate)
+  - flyspell-mode error, ; (ispell-set-spellchecker-params) <<2014-11-26 周三>
+  - $\mu s $ should be \mu s
+
+** error yas
+
+***  (setq yas/trigger-key (kbd "<<f4>"))
+
+   - error # bind 'yas-expand' outside of yas-minor-mode<<2014-11-26 周三>
+
+*** [#A] error key yas snippets will load just in time,
+
+    - the key for error is ; (yas/global-mode 1)
+
+
+** [#B] error ac
+
+
+***  (auto-complete-mode 1) <<2014-11-28 周五>
+
+
+**** M-tab, error, ESC-tab replaced <<2014-12-12>
+
+After ‘#+’, complete the special keywords like ‘TYP_TODO’ or ‘OPTIONS’
+which set file-specific options for Org mode.
+
+
+*** [#A] (ac-set-trigger-key "<<M-/>")
+
+
+  - (setq ac-auto-start nil)              ;auto complete using clang
+    is CPU sensitive (ac-set-trigger-key "<<M-/>")
+  - (add-to-list 'load-path "D:/Emacs14/") (require 'popup)
+
+*** [#B] error key is ac-mode is auto,
+
+    - no need for any trigger. no need for popup to add-to-list
+
+
+
+*** AC141112								 :AC:
+
+
+- m-x auto-complete-mode vs. m-x ac-ispell
+- ac-dictionary-directories is volid, why, only today detected,
+  invalidate, then emacs works, /141111, *the key is the order*, must
+  put last, /141112
+(add-to-list 'load-path "d:/emacs14/auto-complete-master")
+; (add-to-list 'ac-dictionary-directories "d:/emacs14/auto-complete-master/ac-dict")
+(require 'auto-complete)
+(require 'auto-complete-config)
+(ac-config-default)
+(add-to-list 'ac-dictionary-directories "d:/emacs14/auto-complete-master/ac-dict")
+
+
+- (setq ispell-personal-dictionary "c:/program files
+  (x86)/aspell/dict").
+
+*; (add-to-list 'load-path "d:/emacs14/auto-complete-master/ac-ispell.el")*
+
+; delete ac-ispell.el, /141112
+(add-to-list 'load-path "d:/emacs14/auto-complete-master/")
+
+
+* Study Vim
+
+<x-color><param>chocolate1</param>  # begun [2015-01-29 周四]</x-color>
+
+<x-color><param>chocolate1</param>  # Vim all the same, but emacs has style </x-color>
+
+
+
+** vim macros, qz
+
+   1. http://www.ibm.com/developerworks/cn/linux/l-tip-prompt/tip15/
+   2. 用好Vim的Recording功能
+      1. http://blog.sina.com.cn/s/blog_4b0d4cdd010005ps.html
+      2. qz
+      3. 1.  gg  把光标放在文件的最开始
+
+      4. qz  开始Recording Macro z
+
+      5. /abc<x-color><param>Cyan</param>[267]</x-color><<Enter>  查找abc2, abc6或者abc7
+
+      6. I     准备在含有abc2, 6或者7的这行开头插入
+
+      7. #    插入# ， 这样就使这行配置无效了
+
+      8. <<Esc>j 把光标放到下一行
+
+      9. q      停止Recording
+
+
+
+** Basics
+
+*** 如何调用vi
+
+    1) vi filename
+    2) Linux vi/vim 编辑命令总结
+       1) http://anxiongbo.blog.51cto.com/805770/163582
+       2) http://blog.csdn.net/xiajun07061225/article/details/7039413
+    3) vi是“visual interface”的缩写，vim是vi IMproved(增强版的vi)
+
+
+*** hotkey
+
+**** basic hotkey
+	 1) yy复制游标所在行整行。或大写一个Y。
+    2yy或y2y复制两行。 ㄟ ，请举一反三好不好！ :-)
+    y^复制至行首，或y0。不含游标所在处字元。
+    y$复制至行尾。含游标所在处字元。
+    yw复制一个word。
+    y2w复制两个字（单词）。
+    yG复制至档尾。
+    y1G复制至档首。
+    p小写p代表贴至游标后（下）。
+    P大写P代表贴至游标前（上）
+
+    
+
+**** basic <x-color><param>Cyan</param>[2015-06-15 Mon]</x-color>
+      1) ZZ    保存并退出(按住Shift, 再按两次z) 
+      2) p 在光标之后粘帖；shift+p 在光标之前粘帖
+      3) :s /the/THE/g, replace
+      4) man vi 和vi --help
+      5) : !ls
+      6) :r !s
+      7) vim命令模式下在命令前加上!或者r!就能执行了.
+      8) No.1 可以直接在Vim/Vi中执行UNIX/Linux命令不需退出Vim/Vi
+	 1) : !ls /etc
+      9) No.2 可以直接将其他文件内容导入当前编辑文件中
+	 1) :r /etc/issue
+      10) :r !命令
+      11) <bold>*:ab 替代符 原始信息, 传说中的命令“ab”*</bold>
+	  1) :ab sammail sam_helen@vip.163.com
+      12) <bold>*VIM的两柄瑞士军刀*</bold>,  :s是替换操作，:g是查找匹配模式的行，:!g
+ 是查找不匹配模式的行
+
+ 
+      13) :map 快捷键 执行命令
+      14) 查找, /search ?search
+	  1) /SEARCH 注：正向查找，按n键把光标移动到下一个符合条件的地方；
+      15) ctrl-p (n)虽然不象命令能补齐
+      16) comment :1,20s/^/#/g
+      17) ctrl+b, ctrl+f
+      18) 0 (这是数字0) 移动到这一行的第一个字符处(常用)
+      19) $  移动到这一行的最后一个字符处(常用)
+      20) G  移动到这个文件的最后一行(常用)
+      21) dd      //删除当前行
+      22) :set fileformat=unix   //将文件修改为unix格式，如win下面的文
+          本文件在linux下会出现^M。
+
+
+*** vi 的三种命令模式
+
+    1) Command（命令）模式，用于输入命令；
+       1) :w
+       2) :q
+       3) :wq! 保存退出
+    2) Insert（插入）模式，用于插入文本；
+       1) i
+       2) u 如果您想撤消多个以前的修改或删除操作，请按多按几次u。这和
+          Word的撤消操作没有太大的区别；
+
+	  
+    3) Visual（可视）模式，用于视化的的高亮并选定正文；
+
+       1) --VISUAL--
+
+
+** Study MD
+
+*** 马克飞象
+
+   http://www.maxiang.info/
+
+*** install MD, 使用Emacs编辑markdown文件
+
+    http://jblevins.org/projects/markdown-mode/
+
+
+       	
+
+* Study <x-bg-color><param>yellow</param>[#C]</x-bg-color> @eng Eng 						      :@Lang:
+
+  
+  1. <x-color><param>Cyan</param>[2014-12-09 Tue]</x-color>
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> @eng eng_tech
+
+*** @key <x-color><param>Cyan</param>[2015-12-03 Thu]</x-color>
+
+    1. smug | snug
+    2. joyous
+    3. tedious, tedium
+    4. publishes consistently
+    5. <bold>*greeted by*</bold>
+    6. latex rubber
+    7. octet
+    8. incredibly proud
+    9. <bold>*stub-hassle*</bold>
+    10. <bold>*topless-fontify-generic*</bold>
+    11. <bold>*Instantiate-compromise-unary-unset-autoinst*</bold>
+    12. <bold>*mi月传*</bold>
+    13. <bold>*hands-on, -eslite-elite*</bold>
+
+*** @key: <x-color><param>Cyan</param>[2015-11-17 Tue]</x-color>
+
+    1. <bold>*integrity-fontify*</bold>
+    2. <bold>*strip down*</bold>
+    3. <bold>*smack-my-bitch-up, cron-job*</bold>
+    4. <bold>*in more depth*</bold>
+    5. <bold>*procedural*</bold>
+    6. <bold>*feud-spirited-rivalry*</bold>
+    7. <bold>*Instantiate the Unit Under Test (UUT*</bold>
+    8. <bold>*election, at the helm of *
+    9. *Cont'd*</bold>, <bold>*continued*</bold>
+       1. 英文的確是 continued。
+       2. 中文的意思是「待續」、「請接下文」...之類。
+    10. at a leisurely pace
+    
+
+*** @key: <x-color><param>Cyan</param>[2015-08-31 Mon]</x-color>
+
+
+    1. a phishing test
+    2. <bold>*Refer below screenshot:*</bold>
+    3. The attached file is the document that you requested
+    4. hyphen, ˈhīfən, -
+    5. assassination
+    6. patriot, Legendary Patriot or Corrupt Egotist
+       1. 爱国者
+    7. <bold>*Qty.*</bold> quantity
+    8. instance, INST_
+    9. tenure track
+    10. perservance
+    11. Couch Surfing（沙发客）
+	1. How to use couchsurfing to hook up
+	2. CouchSurfing = FuckSurfing
+    12. persecute feminists
+    13. A HYPOCRITICAL CRIMINAL
+    14. HYPOCRITICAL
+	1. sham
+    15. nuke
+	1. a nuclear weapon.
+    16. perceptibly
+    17. the lights are effectively (perceptibly)."
+    18. *High-directivity*, *intellectual property rights (IPR)*
+    19. *a world renowned expert*
+    20. Unleash Your Inner Geek
+    21. People's Liberation Army (PLA)
+    22. 小三叫 mistress 或者 the other woman
+    23. 靳东 Jìn dōng
+    24. Mission: Impossible - Rogue Nation
+    25. noticeably better 
+    26. alma mater
+    27. genre, vocal
+    28. Internet Slang
+	1. effin
+    29. RSS (Rich Site Summary; originally RDF Site Summary; often called Really Simple Syndication),
+    30. Prescription, ethical, and otc (over the counter)
+
+*** @key: <x-color><param>Cyan</param>[2015-07-23 Thu]</x-color>
+
+    1. high resilience 
+    2. <bold>*it is envisioned that*</bold>
+    3. <bold>*stringent*</bold>
+       1. strict 
+    4. marshmallow, 棉花糖
+    5. taboo, tattoo
+    6. caret
+    7. semantic
+       1. language or logic 
+    8. gain notoriety, infamy notorious
+    9. abide by society's moral standard"
+    10. test bench
+    11. resting on your laurels,  foliage of bay tree
+    12. pearl of wisdom:  Hamming talk “you and your research”
+    13. To foster the discussions
+    14. maserati, hamster
+    15. groundbreaking
+    16. latch, lock
+    17. art of and all the best for you
+    18. spoof, groove, belly dance
+    19. quadratic, quadrature
+
+*** <x-bg-color><param>DarkOrange</param>TODO</x-bg-color> eng, <x-color><param>Cyan</param>[2015-06-29 Mon]</x-color>
+
+    - Revenant
+    - <bold>*gnu, stallman*</bold>
+    - <bold>*console, helm, deprecated, defy*</bold>
+    - <bold>*Courtesy to:*</bold>
+    - <bold>*sterilize you, perspiration, inspiration, crummy, articulate*</bold>
+    - <bold>*spoil, on the verge of, on the eve of*</bold>
+    - <bold>*despise weakness, centum*</bold>
+    - <bold>*capricious, expunge*</bold>
+    - <bold>*assassin, fanatical*</bold>
+
+
+*** <x-bg-color><param>azure</param>DONE</x-bg-color> eng, <x-color><param>Cyan</param>[2015-03-06 Fri]</x-color>
+
+    CLOSED: <x-color><param>Cyan</param>[2015-07-17 Fri 10:27]</x-color>
+    - <bold>*what an honor, demos, democracy, mockingjay*</bold>
+    - <bold>*gnu, stallman*</bold>
+    - <bold>*capricious, precious, undertake*</bold>
+    - *unravel, pre-ejaculate, mean, generous, Generalized*
+    - *booth, aggre-gate, supersede, concretely, gridless*
+    - *technical report, empress, emperor*
+    - 电话分机(=extension)； 外面的，外部的(=exterior)
+    - *proof of concept (POC), agile, adopt*
+    - *layoff, outright, likehood of use, designed around*, [2015-04-03 Fri]
+    - laureate, terrestrial, E.T. the Extra-Terrestrial
+    - ute
+    - INDIGENE, Debrief：发生在事后，通常用于总结, densify
+    - *air interface, ergodic capacity*
+    - *pioneering, instructive method, in a nutshell*
+    - *in the light of, mimick, contiguous(discrete)*
+    - *an elegant solution in essence in Principle*
+    - *appreciate any clarification on the issue*
+    - *mediate, immediate, On a personal note*
+    - *ponder, fledge, wish all the best for you*
+    - *As a perspective, as note above*
+    - *steroid, purge, dependency*
+    - *cowardly refusing*
+    - *stdout, stout, plump, pedestrian*
+
+     
+*** <x-bg-color><param>azure</param>DONE</x-bg-color> eng, <x-color><param>Cyan</param>[2015-01-06 Tue]</x-color>
+
+    - <bold>*suppress, cirtus, Previous "hero" experiments, throttle*</bold>
+    - <bold>*ambiguous, Key Disruption*</bold>
+    - reality is the situation
+    - <bold>*offical Transcripts*</bold>
+    - <bold>*aforementioned, insets*</bold>
+    - <bold>*far-reaching significance, profound*</bold>
+    - <bold>*Occupy, procure*</bold>
+    - <bold>*peri, beauty*</bold>
+    - <bold>*Corruption, verbose*</bold>, corruption <x-color><param>Cyan</param><<2011-11-01 周二></x-color>
+
+    - python, tuple
+
+    - <bold>*Whetting your appetite*</bold>
+
+    - <bold>*indent, outdent, promote and demote, hype*</bold>
+
+    - <bold>*quarrel, first-class Hons, guru, insightful, landmark work*</bold>
+
+    - *hereafter, corridor, agnostic*
+
+
+      
+    - season表季节 例如low season是“淡季”的意思 quater表季度 例如each
+      quarter是“每季度”的意思
+    - abode, abdominal, abdo, abodomen
+    - evolved
+    - asterisked, #”的术语是“octothorpe”, number sign, hash key, pound key
+    - period  is ., dash is -. apostrophe is , . apos
+    - 句号：period
+    - 英式英语里pound sign的说法是专指英镑
+    - #在讨论竞选结果时，人们往往会用“压倒性胜利”、“完胜”、“险胜”等词„„”
+    - Peripheral, peripheral economic,
+    - skateboard
+ 
+
+  
+
+*** <x-bg-color><param>azure</param>DONE</x-bg-color> eng <x-color><param>Cyan</param>[2014-12-16 Tue]</x-color>
+    - State "DONE"       from ""           <x-color><param>Cyan</param>[2015-01-07 周三 11:33]</x-color>
+    - expunge
+    - wax, glue, curl
+    - <bold>*imply, imply, implicite, explicite, explanate*</bold>
+    - emperical, emperic
+    - suffix, prefix, suf, pre
+
+e
+
+
+* Study <x-bg-color><param>yellow</param>[#C]</x-bg-color> @jp, JP 						      :@Lang:
+
+
+** @jp, JP, <x-color><param>Cyan</param>[2015-01-15 Thu]</x-color>
+
+*** @jp: @note
+
+**** <x-color><param>Cyan</param>[2015-08-31 Mon]</x-color>
+
+     1. ブヒアニメ
+	1. 猪叫动画
+     2. 糞すぎて
+	1. Kuso sugite
+     3. 日本のパクリ
+	1. 盗むの隠語「パクる」
+     4. 真っ二つにする
+	1. 撕成两半
+     5. キャラとは、キャラクター（英: character、性格・人格）
+     6. ガセネタ |  Black propaganda
+     7. たまげて. 魂消て.
+     8. 写真偶像（グラビアアイドル，gravure idol）又称为水著女优
+     9. ハンスト, hunger strike
+     10. プライベート
+	 1. private
+
+**** <x-color><param>Cyan</param>[2015-08-21 Fri]</x-color>
+
+     1. http://www.sankei.com/west/ranking/west-r.html
+     2. やらかす
+     3. リボン頭
+	1. ribbon head
+     4. 永遠の乙女
+	1. otome, maiden
+     5. トイレットペーパー
+	1. toliet paper
+     6. おちつま -堕妻, ochitsuma
+     7. ハメトラレ, saddle
+	1. hame torare
+     8. マナーがガチで
+	1. 同義語として「激、超、マジ」がある。
+     9. 犯される, okasu
+	1. Okasareru, rape
+     10. 満悦
+	 1. Man'etsu
+     11. 行方不明
+	 1. Yukue fumei
+     12. 和風美人
+	 1. Wafū bijin
+     13. 呆然
+	 1. Bōzen
+     14. 味方
+	 1. mikata, ally
+     15. あばら家
+     16. 衝撃
+	 1. Shōgeki
+     17. 言い出せず
+	 1. dare not to speak
+     18. 過ごさせて
+	 1. Sugosa sete, spend
+     19. 給与明細
+	 1. Kyūyo meisai
+     20. お嫁
+	 1. oyome, daughter-in-law
+     21. 蹴られて
+	 1. Kera rete
+     22. 過激
+	 1. kageki
+     23. 禁忌
+	 1. kinki
+     24. ひょんな事
+     25. 取引先
+	 1. Torihikisaki, suppliers
+     26. うぬぼれる【自惚れる／己惚れる
+	 1. conceit 
+     27. ネガティブ, inazuma
+     28. 破局
+	 1. Hakyoku
+     29. 人妻
+	 1. Hitodzuma
+     30. 激安
+	 1. gekiyasu
+     31. SP是スッペシャルSpecial
+     32. 官能的な絡み
+	 1. Kan'nō-tekina karami
+     33. abide by society's moral standard"
+     34. ステキング
+	 1. STING -スティング
+     35. 大陸
+	 1. Tairiku
+     36. 貼って
+	 1. hatte 
+     37. 朗报（ろうほう）
+     38. 蔑視
+	 1. Besshi,  scorn slight
+     39. くっついて寝る, くっつく
+	 1. Kuttsuite neru
+     40. SHINKI(神器)
+     41. musou 
+     42. Sengoku Musou (戦国無双)
+     43. 陽あたり良好
+	 1. Hiatari ryōkō
+     44. パンスト, panstoking, stocking, hose
+	 1. Pantyhose
+     45. アニオタ化 痛部屋
+	 1. 「アニメオタク」の略で、アニメを愛好するオタクを指す語。
+     46. もしくは
+     47. 驚愕
+	 1. Kyōgaku
+     48. 米側に筒抜け
+	 1. Amerika-gawa ni tsutsunuke
+	 2. be clearly [distinctly] heard
+     49. 日本へのスパイ
+     50. 中国網
+	 1. Chūgoku-mō
+	 2. ami
+     51. 炎上
+	 1. Enjō
+     52. 一目ぼれ
+
+	 1. Hitomebore, love at first sight
+
+     53. senno, 鬼畜kichiku
+
+     54. 惚れる ほれる【惚れる
+
+	 1. Horeru, fall in love
+
+     55. チェンジなし 絶対に惚れるセクシーすぎる美人アイドル
+
+     56. つなぎなさい, つなぐ
+
+     57. jinmyaku
+     58. kuromaku
+     59. honso
+     60. atsuryoku
+
+     61. 格闘
+
+	 1. kakuto
+
+     62. ハラスメント, セクハラ
+
+	 1. Harassment
+
+     63. 強要や威圧
+
+	 1. Kyōyō ya iatsu
+
+     64. 愛の試練
+
+	 1. Ai no shiren
+
+     65. 試される日本のタフネス
+
+	 1. Tamesa reru Nihon no tafunesu
+
+     66. ボディコン-bodycon
+
+	 1. sexually flattering clothing
+	 
+	 2. body conscious
+
+     67. ソウルから　倭人の眼
+
+	 1. wajin no me
+
+     68. 力アップ
+
+     69. 書かなすぎ
+	 1. ブログ書かなすぎと言われたので11月からは頑張ってかくぞ
+     70. 暴落- bōraku, 負の連鎖
+	 1. バブル（泡, bubble
+	 2. 「逆ミンスキー現象」と呼ばれる負の連鎖－これから中国で地獄が始まる　（ｉＲＯＮＮＡ発
+
+**** おきながら, 苦笑い-nigawarai, ひきこもり, 露骨な合コン, 合コンgokon, 女子力のなさ, 力アップ, NG
+
+*** <x-color><param>Cyan</param>[2015-12-15 Tue]</x-color>
+
+    1. eroge (エロゲ, eroge
+
+*** <x-color><param>Cyan</param>[2015-09-06 Sun]</x-color>
+
+    1. 尻拭い
+       1. Shirinugui, 尻拭い(シリヌグイ)
+       2. clean up someone's mess
+    2. キャンプ
+       1. camp
+    3. シルバーウィーク
+       1. Silver Week
+    4. アニメータ
+       1. Animator
+    5. 一目おかれたい
+       1. Hitome oka retai
+    6. おかれたい
+       1. 置かれ
+       2. want to put
+    7. ヤンキー
+    8. 丸裸
+       1. Maruhadaka
+    9. 蹴った
+       1. Ketta
+    10. 女子アナ 日本のアナウンサー
+	1. Announcer
+    11. 博士論文
+	1. Hakushironbun
+    12. 選り抜き
+	1. yorinuki, choice
+    13. 眼福 眼福 (がんぷく : ganpuku)
+	1. Ganpuku
+    14. 退陣
+	1. Taijin
+    15. 美乳
+	1. Binyū
+    16. 某ネット民、扇風機に放尿
+	1. Bō netto-min, senpūki ni hōnyō
+    17. 博多／はかた Hakata
+    18. 孤立する
+	1. koritsu
+    19. ヤンママ
+	1. young mother
+    20. スマホsmartphone
+    21. 満喫
+	1. Mankitsu, 充分享受まんきつ
+
+*** <x-color><param>Cyan</param>[2015-08-24 Mon]</x-color>
+
+    1. バイパス
+       1. bypass
+    2. 見返り美人
+       1. mikaeri
+    3. 騒ぎ
+       1. Sawagi
+
+*** <x-color><param>Cyan</param>[2015-08-17 Mon]</x-color> 
+
+    1. 不審人物
+       1. Fushin jinbutsu
+    2. 無駄
+       1. useless
+    3. チャイルドシート
+       1. Child seat
+    4. 相手
+       1. opponent
+    5. 追突
+       1. Zhuītū
+    6. 絶賛
+       1. Zessan
+
+*** <x-color><param>Cyan</param>[2015-08-10 Mon]</x-color>
+
+    1. 周辺一帯
+       1. Shūhen ittai
+    2. 稲妻inazuma
+       1. lightning
+    3. ネガティブ
+       1. negative 
+    4. 惨事
+       1. sanji
+    5. 焼け焦げ
+       1. Yakekoge
+    6. ホイホイ
+       1. recklessly; thoughtlessly; carelessly
+    7. 殺到
+       1. Sattō
+    8. もうすべての植物にKoreanって付けたらええやん？
+    9. 悲惨
+       1. hisan
+    10. 激ヤセ
+	1. Geki yase
+    11. 腐女子
+	1. Fujoshi
+    12. 魅惑
+	1. Miwaku, lure
+    13. 胸に刺さりました
+	1. Mune ni sasarimashita
+    14. 超絶
+	1. Chōzetsu
+    15. ふぇすた
+	1. Festa
+    16. 姉妹
+	1. shimai
+    17. カッコよく
+    18. 甲子園 
+	1. Kōshien 甲子園 
+    19. 一体感
+	1.Ichi taikan 
+    20. 結成
+	1. Kessei
+
+*** <x-color><param>Cyan</param>[2015-08-03 Mon]</x-color>
+
+    1. ベッドシーン Bedroom scene bedscene
+       1. Beddoshīn
+    2. 痴漢えん罪
+       1. 痴漢冤罪（ちかんえんざい）
+    3. 預金
+       1. Yokin, deposit
+
+*** <x-color><param>Cyan</param>[2015-07-29 Wed]</x-color>
+
+   1. 洗脳
+      1. Sen'nō
+   2. ちらつく
+   3. いわば
+      1. so to speak
+   4. 人脈
+      1. Jinmyaku
+   5. 黒幕
+      1. Kuromaku
+   6. 奔走
+      1. Honsō
+   7. 独立騒動
+      1. Dokuritsu sōdō
+   8. 狙い
+      1. Nerai
+   9. タフネス
+      1. toughness
+   10. 滋賀
+       1. shiga
+   11. 愛しき抗いよ、導け光へ
+       1. Itoshiki kō Iyo, michibike hikari e
+   12. 浮き彫り
+       1. Ukibori, reveal
+   13. 手ぐすねを引く
+   14. 頓挫
+       1. Tonza
+
+*** <x-color><param>Cyan</param>[2015-07-22 Wed]</x-color>
+
+
+       1. 乳パッド
+	  1. Chichi paddo
+       2. 無音のくしゃみ
+	  1. Muon no kushami
+       3. 穴が空いて
+	  1. Ana ga suite
+       4. 小型カメラ忍ばせ, conceal
+	  1. Kogata kamera shinobase
+       5. 爆訪
+       6. 誘致方針
+	  1. Yūchi hōshin
+	  2. Attract policy
+       7. 負の連鎖
+	  1. Fu no rensa
+       8. 上海株暴落
+	  1. Shanhai kabu bōraku
+       9. 虚偽
+	  1. Kyogi
+       10. 慰安所, ianfu (慰安婦,いあんふ)
+	   1. Comfort women, sexual slavery
+	   2. In Japanese this word can be used to show military prostitute in any counties.
+	   3. iansho
+       11. 毀損する
+	   1. Kison suru
+       12. 心身衰弱
+	   1. shinkei suijaku
+	   2. Shinshin suijaku
+       13. 盗撮
+	   1. Tōsatsu
+       14. 返還
+	   1. Henkan
+       15. 同僚
+	   1. Dōryō
+       16. 偽装した
+	   1. Gisō shita
+       17. 苦言
+	   1. Kugen
+       18. ざっくり, quick and easy
+	   1. Zakkuri
+       19. 深い溝, depp groove, 深いみぞ 
+	   1. Fukai mizo
+       20. レスラー
+	   1. Wrestler
+       21. 容疑
+	   1. Yōgi
+       22. 選り抜き
+	   1. Yorinuki
+       23. 媚びている
+	   1. kobite, flatter
+       24. 姿勢を正しくして
+	   1. shisei
+       25. 力アップ
+	   1. Chikara appu
+	   2. 「ごめんなさい」ばかり言ってしまうのもNGです。
+       26. トレンド
+	   1. trend
+       27. 幻滅
+	   1. Genmetsu
+       28. 内科的
+	   1. naika-teki
+       29. 合併症
+	   1. Gappeishō
+       30. 加えて
+	   1. kuwaete
+       31. 耳鳴り
+	   1. Miminari
+       32. 膿が出る
+	   1. Nō ga deru
+       33. 勧める
+	   1. Susumeru
+       34. 頻繁
+	   1. Hinpan
+       35. 悪臭
+	   1. Akushū
+       36. べきではない
+	   1. It should not be
+       37. びっぽ
+	   1. vipper
+       38. 可愛い
+       39. 直後に
+
+	   1. chokugoni, Immediately after
+
+       40. 正式, プロパー
+
+	   1. seishiki
+
+       41. 義姉
+	   1. gishi, sister-in-law
+
+       42. パグ
+	   1. pug
+       43. 島崎遥香 佐々木希を抑え
+	   1. osae
+       44. 最高の憧れ
+	   1. Saikō no akogare
+       45. 増刷
+	   1. Zōsatsu
+       46. 一等賞
+	   1. Ichitōshō
+       47. 投稿
+	   1. Tōkō
+       48. ウケるんだ, ウケる
+	   1. appeal to do
+       49. 露骨な合コン, 合コン
+	   1. Rokotsu na gōkon
+       50. 担う要, かなめ
+	   1. Ninau kaname
+       51. すっぴん
+	   1. no makeup
+       52. ぱるる
+	   1. 島崎遥香
+       53. 悲報
+	   1. Hihō
+       54. 堅実, kenjitsui, 堅くないKatakunai
+       55. コネが強そうだ, connection
+       56. マダオ，即MADAO
+       57. オタク
+	   1. hikikomori
+       58. 梦まぼろし
+       59. あたかも
+	   1. although
+       60. 品切れになる
+	   1. Shinagire ni naru
+       61. 片言で謝り
+	   1. katakoto de ayamari
+       62. 文化大革命
+	   1. Bunka daikakumei
+       63. 孔子
+	   1. Kōshi, koshi
+       64. 君主
+	   1. kunshu
+       65. 毛沢東
+	   1. Mōtakutō
+
+*** keizoku
+   2) gochi
+   3) kabah
+   4) jishin mahmah
+
+
+
+* Study <x-bg-color><param>DodgerBlue</param>[#D]</x-bg-color> Win
+
+** Study Visio
+
+*** Shapes-->Callouts
+
+  1) Visio文档中，依次点击“文件(File)”—“形状(Shapes)”--“其他Visio方案
+     (Visio Extras)”—“标注(Callouts)”
+
+     
+
+*** Visio UML
+
+    1) Visio画UML图基本操作及技巧解析
+       1) http://blog.csdn.net/wconvey/article/details/8713154
+    2) VISIO最新最全的网络通信图标库
+       1) http://bbs.c114.net/thread-709987-1-1.html
+       2) 
+
+
+** @CMD
+
+
+*** diskmgmt and decmgmt <x-color><param>Cyan</param>[2015-12-22 Tue]</x-color>
+
+
+*** Hard Links C:\dir1 linked to Z:\dir2
+
+
+** WORD
+
+
+*** TOC, help YING and ZIJUN
+
+    1) ERROR, then soon redo, OK. <x-color><param>Cyan</param><<2015-01-15 周四></x-color>
+    2) [KEY]: TOC setting heading types at first. check updating
+    3) TOC page begin, previous is i,ii, set by layout-->section
+
+
+
+** Partition
+
+   1. admin tool-->computer management-->shrink volume
+
+
+* Study PON study
+  - State "Study"      from ""           <x-color><param>Cyan</param>[2014-12-02 周二 16:18]</x-color>
+
+    Study PON study amd Eng and  Basic moved from task.org into
+    note.org. <x-color><param>Cyan</param>[2014-12-23 Tue]</x-color>
+
+** DOCSIS | 1.8GHz, XG.Fast | 500MHz, <x-color><param>Cyan</param>[2015-06-15 Mon]</x-color> 
+
+** <x-bg-color><param>DarkOrange</param>[#B]</x-bg-color> TOF, filter, FBG-(reflector), OFCG, FBG+circulator+OFCG=changable RF
+
+   optical frequency comb generation (OFCG)
+
+** WXC, WSS
+
+   1) XC: cross connection
+   2) WSS: wavelength selecitve switch
+
+** WDM, /SCL/
+
+   1) DWDM的波长间隔0.8nm,CWDM的波长间隔20nm,差25倍
+   2) S代表Short波段，C代表Conventional波段，L代表Long波段
+   3) 一般使用C波段，除了日本。而在一些海缆项目中，会同时用几个波段
+   4) S:短波 1460-1530nm ；C:常规 1530-1565nm ；L:长波 1565-1625nm
+
+** FP, Form-factor Pluggable, C form-factor pluggable (CFP)
+
+1. Quad Small Form-factor Pluggable
+2. 850nm, 1310nm 或1550nm
+3. Small Form Factor
+
+** FSAN/ITU-T
+*** A Proposal for DOCSIS 4.0－D-PON
+    - DOCSIS PON (DPON) DOCSIS 4.0
+    - http://www.ccbn.com.cn/thread-80049-1-1.html
+
+*** feeder fiber, drop fiber
+
+    - 馈线光纤（Feeder Fiber）及终端光纤（Drop Fiber）
+    - FTTF-(fiber to the feeder)
+
+
+* Study LINUX
+
+  
+
+
+** ERROR, @err
+
+
+*** cowardly refusing to create an empty archive
+
+
+*** gzip: stdin: not in gzip format, tar xvpdf into tar xf
+
+    
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> bash, sed @coolshell, @vbird @cnlogs
+
+*** <x-bg-color><param>DarkOrange</param>TODO</x-bg-color> @note, @cmd: @net <x-color><param>Cyan</param><<2015-12-11 Fri></x-color>
+
+<x-color><param>LightSkyBlue</param>| linux | mac           | dos             |</x-color>
+<x-color><param>LightSkyBlue</param>| fdisk | diskutil list | diskmgmt        |</x-color>
+<x-color><param>LightSkyBlue</param>|       |               | net             |</x-color>
+<x-color><param>LightSkyBlue</param>| uname | uname         | ver, systeminfo |</x-color>
+
+
+*** <x-bg-color><param>yellow</param>[#C]</x-bg-color> @ibm, @note
+
+    1. [[http://www.ibm.com/developerworks/library/l-bash/][@ibm:@bash]]
+    2. generic, A=${P}.tar.gz
+    3. myfun(){}
+    4. chop strings: echo ${MYVAR##.*fo}
+    5. ~/.bashrc and ~/.bash_profile
+    6. dirname and basename
+**** part1
+
+     1. gcc myenv.c -o myenv
+     2. Chopping strings overview
+	1. dirname
+	2. basename
+	3. echo ${MYVAR##*fo}
+	   1. MYVAR=foodforthought.jpg
+	   2. two ##s, and a wildcard ("<bold>*fo").
+	4. echo ${MYFOO%%.*</bold>}
+	   1. MYFOO="chickensoup.tar.gz"
+     3. Applying string chopping
+	1. type "chmod 755 mytar.sh" t
+	2. if [ "${1##*.}" = "tar" ]
+**** part2
+
+     1. https://www.ibm.com/developerworks/cn/linux/shell/bash/bash-2/
+     2. $1, $#, $@
+     3. 方便的条件语句
+	1. -lt | -le
+	2. -gt | -ge
+	3. -x filename
+	4. -d filename
+	5. -z | Zero-length string
+	6. -lt	Numeric strict less than
+	7. -gt	Numeric strict greater than
+	8. -ge	Numeric greater than or equals
+	9. -f	Exists and is regular file
+     4. 如果要扩展环境变量，则必须将它们用 双引号、而不是单引号括起
+	1. if [ "$myvar" = "foo bar oni" ]
+	   1. [ foo bar oni = "foo bar oni" ]
+	      1. [: too many arguments
+     5. 循环结构："for"
+	1. for x in ../* mystuff/*
+	   1. 相对路径
+	2. 可以使用 "basename" 可执行程序来除去前面的路径信息
+	   1. echo `basename $x` is a file living in /var/log
+     6. Shell 算术
+	1. 用 "$((" 和 "))" 括起
+	2. until [ $myvar -eq 10 ]
+     7. Case 语句
+	1. case "${x##*.}" in
+	2. gz)
+	3. ;;
+	4. "${x##.*}" 除去文件中最后句点后文本之外的所有文本
+     8. 别忘了，可以将函数（如上面的函数）放在 ~/.bashrc 或
+        ~/.bash_profile 中，以便在 bash 中随时使用它们
+
+	   
+     9. 函数与名称空间
+	1. tarview() { }
+	2. 在 C 中是这样，但在 bash 中却不是。在 bash 中，每当在函数内
+           部创建环境变量，就将其添加到 全局名称空间
+	3. 当使用 "local" 在函数内部创建变量时，将把它们放在 局部名称空间中
+
+	   
+
+**** part3
+
+     1. http://www.ibm.com/developerworks/library/l-bash3/index.html
+     2. A new, more general script, ${P}.tar.gz
+	1. # P is the package name
+	2. P=sed-3.02
+	3. # A is the archive name
+	4. A=${P}.tar.gz
+
+
+*** UNIX Shell范例精解 
+
+*** Tutotial, @tldp, linux document processing
+
+    1. http://www.tldp.org/LDP/Bash-Beginners-Guide/Bash-Beginners-Guide.pdf
+
+
+*** 15 Useful Bash Shell Built-in Commands
+
+    1. http://www.thegeekstuff.com/2010/08/bash-shell-builtin-commands/
+    2. “export -p” command also displays all the exported variable in the current shell.
+    3. Bash hash Command Example
+
+*** @etc You can find references to "et cetera" in old Bell Labs UNIX manuals
+
+*** @cnblogs:@skywang12345
+
+**** Linux bash总结(一) 基础部分(适合初学者学习和非初学者参考) <x-color><param>Cyan</param>[2015-12-04 Fri]</x-color>
+
+     1. http://www.cnblogs.com/skywang12345/archive/2013/05/30/3106570.html
+     2. shell俗称壳，它是指UNIX系统下的一个命令解析器；主要用于用户和系统的交互
+     3. bash，全称为Bourne-Again Shell。它是一个为GNU项目编写的Unix shell
+     4. 4 for循环
+     5. 1.2 []条件判断
+	1. [ "$num" -eq "100" ]
+     6. 第六部分 数值运算
+	1. 数值元算主要有4种实现方式：(())、let、expr、bc。
+     7. 第七部分 字符运算
+	1. echo ${str%world}
+	2. echo ${str//l/m}
+     8. 第九部分 bash调试
+	1. bash
+	2. echo
+	3. printf
+     9. 第十部分 bash注释
+	1. # echo "single line"
+     10. 第十一部分 bash内建指令
+	 1. （08）"."(点)
+	 2. export
+	 3. echo
+
+*** <x-bg-color><param>yellow</param>[#C]</x-bg-color> @vbird <x-color><param>Cyan</param>[2015-12-04 Fri]</x-color>
+
+**** @note
+
+     1. @emacs, @python
+	1. https://www.masteringemacs.org/article/running-shells-in-emacs-overview
+	2. One of Emacs’s strongest selling-points is its shell integration and terminal emulation
+	3. Python（或其它）作为系统Shell，一定就比Bash或者POSIX Shell更经济吗
+	4. just a quick-and-dirty example
+     2. 管线命令 (pipe), | less
+     3. 撷取命令： cut, grep
+	1. cut -d '分隔字符' -f fields
+	2. [root@www ~]# export | cut -c 12-
+	   1. 我们还可以指定某个范围的值，例如第 12-20 的字符，就是
+              cut -c 12-20 等等！	      
+     4. 排序命令： sort, wc, uniq
+	1. cat /etc/passwd | sort -t ':' -k 3
+	   1. 范例二：/etc/passwd 内容是以 : 来分隔的，我想以第三栏来排序，该如何？
+	   2. cat /etc/passwd | sort -t ':' -k 3 -n
+	      1. 这样才行啊！用那个 -n 来告知 sort 以数字来排序啊！
+	   3. -t  ：分隔符，默认是用 [tab] 键来分隔；
+     5. ` ` 两个『 ` 』中间为可以先运行的命令，亦可使用 $( ) 
+     6. type
+     7. export
+     8. name=${name}yes
+     9. cd <italic>/lib/modules/</italic>  `uname -r` /kernel
+
+**** 鸟哥的Linux 私房菜
+
+     1. http://linux.vbird.org/linux_basic/0330regularex.php#awk
+     2. http://vbird.dic.ksu.edu.tw/linux_basic/0320bash.php
+     3. 同鸡蛋的外壳一样，因此这个咚咚也就被称呼为壳程序 (shell) 啰
+     4. shell 就记录在 /etc/passwd 这个文件内
+     5. 命令别名配置功能： (alias)
+	1. alias lm='ls -al'
+***** Shell 的变量功能  ${变量}
+	1. 变量的取用与配置：echo, 变量配置守则, unset
+	2. 利用 echo 就能够读出，只是需要在变量名称前面加上 $ ， 或者
+           是以 ${变量} 的方式来取用都可以
+	3. 变量的配置守则
+	   1. 等号两边不能直接接空格符
+	   2. 变量名称只能是英文字母与数字，但是开头字符不能是数字
+	   3. 变量内容若有空格符可使用双引号『"』或单引号『'』将变量内容结合起来
+	      1. <bold>*单引号内的特殊字符则仅为一般字符 (纯文本)*</bold>
+		 1. ，如下所示：『var='lang is $LANG'』则『echo $var』可得『lang is $LANG』
+	   4. 可用跳脱字符『 \ 』将特殊符号(如 [Enter], $, \, 空格符, '等)变成一般字符
+	   5. 在一串命令中，可以使用单引号『`命令`』或 『$(命令)
+
+	   6. *通常大写字符为系统默认变量，自行配置变量可以使用小写字符，方便判断 』
+
+	     
+	   7. 若该变量需要在其他子程序运行，则需要以 <bold>*export 来使变量变成环境变量*</bold>
+	   8. 若该变量为扩增变量内容时，则可用 "$变量名称" 或 <bold>*${变量} 累加内容*</bold>
+	      1. PATH="$PATH":/home/bin』
+	      2. name=$nameyes  # @err
+		 1. name="$name"yes
+		 2. name=${name}yes
+	   9. 取消变量的方法为使用 unset
+
+	  
+
+*** 应该知道的Linux技巧
+
+    1. http://coolshell.cn/articles/8883.html
+    2. 在 bash 里，使用 Ctrl-R 而不是上下光标键来查找历史命令
+    3. CTRL-W
+    4. cd -
+    5. xargs
+    6. 在bash 脚本中，subshells (写在圆括号里的) 是一个很方便的方式来组合一些命令
+
+*** Sed简介 Sed:Stream Editor, /dsc\g/
+
+**** <x-bg-color><param>yellow</param>[#C]</x-bg-color> @coolshell, sed 简明教程, /[^,]* and .*/ , . 任意字符, /&and\/
+
+     1. http://coolshell.cn/articles/9104.html
+     2. sed全名叫stream editor，流编辑器
+     3. sed基本上就是玩正则模式匹配，所以，玩sed的人，正则表达式一般都比较强。
+     4. s表示替换命令，/my/表示匹配my，/Hao Chen’s/表示把匹配替换成Hao
+        Chen’s，/g 表示一行上的替换所有的匹配
+     5. 正则表达式
+	1. [ ] 字符集合
+     6. 圆括号匹配 \( [^,]* \)
+	1. $ sed 's/This is my \([^,]*\),.*is \(.*\)/\1:\2/g' my.txt
+	2.  sed 's/<<[^>]*>//g' html.txt
+     7. $ sed 's/my/[&]/g' my.txt
+
+**** linux sed命令详解
+
+     1. http://www.cnblogs.com/ggjucheng/archive/2013/01/13/2856901.html
+     2. '2,$d'
+     3. <italic>/pattern/p
+     4. s/</italic>\.$/\!/g
+     5. |sed -n '/txt/p'
+     6. [root@www ~]# /sbin/ifconfig eth0 | grep 'inet addr' | sed
+        's/^.*addr://g' | sed 's/Bcast.*$//g'
+
+**** AWK是贝尔实验室1977年搞出来的文本出现神器
+
+     1. AWK 简明教程, topless
+	1. AWK是因为其取了三位创始人 Alfred Aho，Peter Weinberger, 和
+           Brian Kernighan 的FamilyName的首字符
+	2. 我只想让这篇博文像一个火辣的脱衣舞女挑起你的兴趣，然后还要你自己去下工夫去撸	
+	3. 我们开始脱吧（注：这里只是topless）
+
+	
+
+*** for, for i in $(ls *.txt)
+
+    1. Linux Shell for循环写法总结
+       1. for in语句与` `和$( )合用，利用` `或$( )的将多行合为一行的缺陷，
+	  实际是合为一个字符串数组
+       2. [[http://blog.chinaunix.net/uid-20754793-id-177766.html][bash:for]]
+
+	  
+
+** backup, ghost
+
+
+*** tar cvpzf backup.tgz / --exclude=/proc --exclude=/lost+found --exclude=/backup.tgz --exclude=/mnt --exclude=/media
+
+    tar cvpzf backup.tgz –exclude=/proc –exclude=/lost+found –exclude=/backup.tgz –exclude=/mnt 
+
+  1. http://wsfei.iteye.com/blog/1100534
+
+
+*** fdisk, fdisk -l /dev/sda
+
+
+
+** LINUX install
+
+*** UNIX
+1) Linux和UNIX的最大的区别是,前者是开发源代码的自由软件,而后者是对源代
+   码实行知识产权保护的传统商业软件
+2) UNIX系统基本上需要有偿使用
+
+*** yum是一个交互式的,基于rpm的软件包管理器
+*** Fedora14, dev 开发者版本-develop
+stable 稳定版
+
+*** AWK
+Awk是由Aho、Weinberger和Kernighan三位科学家开发的，特别擅长文本处理的
+linux 工具，该工具是 linux 下最常用的工具之一。Awk不是普通的工具，其实，
+也是一种编程语言，在编程语言排行榜上也能排上号的。
+
+
+
+** 共享物理信道 （PUSCH&PDSCH）<x-color><param>Cyan</param>[2015-01-05 Mon]</x-color>
+   1. 物理上行共享信道（PUSCH，Physical Uplink Shared CHannel）用于承载来自传输信道USCH的数据。
+   2. 物理下行共享信道（PDSCH：Physical Downlink Shared CHannel）用于
+      承载来自传输信道DSCH的数据。
+
+      
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> command, @cmd
+
+*** dpkg -s uhd <x-color><param>Cyan</param>[2015-12-02 Wed]</x-color>
+
+*** diskmgmt.msc <x-color><param>Cyan</param>[2015-11-18 Wed]</x-color>
+
+   1. MSC(Microsoft Snap-In Control)文件，是微软管理控制台
+      MMC(Microsoft Management Console)用来添加/删除的嵌入式管理单元文
+      件
+
+      
+
+*** study tutorial
+
+    1. http://www.cheat-sheets.org/saved-copy/ubunturef.pdf
+    2. http://vic.gedris.org/Manual-ShellIntro/1.2/ShellIntro.pdf
+
+    
+
+*** flash, cd /media/fa/FLA91
+
+
+*** split -b 1000M -d --verbose backup.tar.gz backup.tar.gz-
+
+  1. http://www.prartweb.com/blog/2011/03/weblinux-vol3.php
+
+*** cat backup.tar.gz-* > backup2.tar.gz
+
+*** sudo su
+
+*** whereis
+
+****  usrp ~/uhd <x-color><param>Cyan</param>[2015-06-02 Tue]</x-color>
+
+*** sudo make uninstall, cd /uhd/host/build
+
+*** mv, rm dir is rm -r, recursive
+
+*** cp and rsync, cp -r
+
+    1) WIN, % CMD: copy STO_est.png D:\figure1411
+
+*** find
+1) tty ctrl+alt+f1~f6:文字界面tty1~tty6终端 ·ctrl+alt+f7 :图形界面
+2) dpkg --help, dpkg -i *.deb
+3) *find . -type f dir*
+4) sudo !!
+   1) http://blog.csdn.net/kiwi_coder/article/details/9229913
+   2) !$
+   3) !:-
+   4) !!:gs /sub0/sub1
+   5) ^sub0^sub1
+   6) 快捷键"Alt + ."　的意思是　上一次命令的最后一个词(The last word/segment)
+5) apt-get and yum, apt/yum/brew:Advanced Packaging Tools,简称:APT
+   1) apt-get 是Ubuntu 带的
+   2) fedora好像没有apt-get命令。应该是yum命令
+   3) Yum（全称为 Yellow dog Updater, Modified）是
+6) pwd 全称:Print Work Directory
+7) source
+   1) source FileName
+   作用:在当前bash环境下读取并执行FileName中的命令。
+   注：该命令通常用命令“.”来替代。
+   如：source .bash_rc 与 . .bash_rc 是等效的。
+   1) shell编程中的命令有时和C语言是一样的。&&表示与，||表示或。把两个
+      命令用&&联接起来，如make mrproper && make menuconfig，表示要第一
+      个命令执行成功才能执行第二个命令
+
+
+
+* Study GNURadio
+
+  1. like saying “grew”
+
+** gr-mimo,
+
+
+*** 802.11n+, academia sinica, http://nms.citi.sinica.edu.tw/n+/software.html
+
+
+ 1) sinica=china，就是和sina一样
+ 2) Network and Mobile Systems (NMS) Lab
+
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> install again, --recursive, <x-color><param>Cyan</param>[2015-06-01 Mon]</x-color>
+
+   1) Segmentation Fault (Core Dump)
+*** <x-bg-color><param>yellow</param>[#C]</x-bg-color> Install Dependencies <x-color><param>Cyan</param>[2015-12-02 Wed]</x-color>
+
+    1. http://gnuradio.org/redmine/projects/gnuradio/wiki/UbuntuInstall
+    2. The name “GNU” is a recursive acronym for “GNU's Not Unix.”
+       “GNU” is pronounced g'noo, as one syllable, like saying “grew”
+       but replacing the r with n
+    3. gnuradio, latest is 3.7.8, mine is 3.7.4
+
+       
+
+*** <x-bg-color><param>yellow</param>[#C]</x-bg-color> recursive install, VOLK err 
+
+  1) git clone --recursive www.
+
+*** UHD: Device not managed by NetworkManager or unavailable
+
+  1) gedit /etc/NetworkManager/NetworkManager.conf
+  2) uhd_find_devices --args addr=192.168.10.2
+  3) http://files.ettus.com/manual/page_usrp2.html#debugging-networking-problems
+  4) disable your firewall settings, ufw
+     1) sudo ufw disable
+     2) sudo ufw status
+  5) UHD
+     1) uhd_usrp_probe --args="addr=192.168.0.2"
+     2) Finally, when I checked in ~/uhd/host/build/lib/usrp/usrp1, it
+        was empty.
+     3) https://www.ruby-forum.com/topic/4174639
+     4) UHD_003.009.git-171-g51bc00ee (003.008 sucessfully)
+	1) uhd_images_downloader.py
+	2) /usr/local/lib/uhd/util
+	3) <bold>*replace uhd_images_downloader.py and images
+           dir-(/usr/local/share/uhd), but still fail*</bold>
+
+	  	   
+	4) <bold>*re-install UHD delete build, still fail, how to uninstall*</bold>
+
+	   1) cd ~/uhd/host/build
+
+	   2) sudo uninstall <x-color><param>Cyan</param>[2015-06-05 Fri]</x-color>
+     5) uhd_usrp_probe
+	1) usrp empty device address
+
+	2) self.u = uhd.usrp_source(device_addr=options.args,...to
+           self.u = uhd.usrp_source(device_addr="addr=192.168.10.2",
+
+	   
+
+*** gnuradio 3.7.7
+
+
+
+*** GR-UHD detected ABI compatibility mismatch with UHD library
+
+   1) GR-UHD ABI: 3.8.0
+   2) but UHD library os 3.8.2
+
+** ARP and RTP
+
+
+*** ARP, IP to mac（Address Resolution Protocol，地址解析协议）
+
+    1) 是一个位于TCP/IP协议栈中的网络层，负责将某个IP地址解析成对应的
+   MAC地址
+
+   
+
+** Damon.qiu <<damon_qiu@tnm-corad.com.cn>
+
+
+*** tunnel.py
+
+    <x-color><param>Cyan</param>[2015-03-11 Wed]</x-color>
+
+    1. 设置程序收发异频。这个比较容易实现。我用了一下参数做测试：
+       1. 节点A： sudo python tunnel.py -m gmsk -r 1e6 --rx-freq=433e6 --rx-gain=20 --tx-freq=429e6 --tx-gain=5
+       2. 节点B： sudo python tunnel.py -m gmsk -r 1e6 --rx-freq=429e6 --rx-gain=20 --tx-freq=433e6 --tx-gain=5
+    2. 如果你要收发同频，建议做成TDD的方式。数据包传输完立即停止发
+       射信号，这种方式为burst模式，每个数据包的iq数据都包含在一个
+       burst中，在 gnuradio中用标签（tag）方式来实现burst模式. 这些标
+       签的用法请参考：
+       1. gnuradio/gr-uhd /examples/c++/tags_demo.cc
+       2. gnuradio/examples/uhd/tags_demo
+
+** install, <x-color><param>Cyan</param>[2015-01-21 Wed]</x-color>
+
+   1) sudo apt-get update
+   2) sudo apt-get install gnuradio
+      1) ftp://ftp.gnu.org/gnu/gnuradio/
+   3) <bold>*apt-get remove gnuradio*</bold>
+   4) <bold>*sudo chmod 777 source.list*</bold>
+   5) sudo gedit source.list
+      1) cd <italic>/etc/apt/</italic>
+   6) gnuradio.org can not log on, <bold>*source.list*</bold>
+   7) ubuntu14.04(13.10)安装UHD+gnuradio的方法
+      1) http://gnuradio.cc/read.php?tid-965.html
+   8) apt-get autoremove
+   9) sudo apt-get autoclean
+   10) 海曼USRP使用说明new, from wenku
+       1) http://gnuradio.squarespace.com/gr-tutorial/
+   11) CMake Error: The source directory “*” does not appear to
+       contain CMakeLists.txt.
+       1) 刚开始也一时不解，后来得知是安装版本错了
+   12) configure: error: Could not link against
+       1) 对于64位机：./configure --with-boost-libdir=/usr/lib/x86_64-linux-gnu
+       2) 对于32位机：./configure --with-boost-libdir=/usr/lib/i386-linux-gnu(测试可用)
+   13) <bold>*first ping 192.168.11.3*</bold>
+       1) connection  info: 192.168.11.3, router: 192.168.11.0
+   14) howard_fan@tnm-corad.com.cn
+       1) 刚才电话中听说你们用的系统是ubuntu 14.04，所以在安装时使用的
+          依赖包和附件《01_有网络条件下安装UHD和GNU Radio》的有所不同。
+          将第2步骤内容换为
+   15) <bold>*must install UHD*</bold>
+
+
+** Error, <x-color><param>Cyan</param>[2015-02-05 Thu]</x-color>
+
+  1) .gr_fftw_wisdom permission denied, sudo fixed
+     1) with 664 permission
+	1) 4 indicates read permission.
+	2) 2 indicates write permission.
+	3) 1 indicates execute permission.
+	4) 664 (read+write or 4+2, read+write or 4+2, read-only or 4).
+	5) http://www.peachpit.com/articles/article.aspx?p=684657&seqNum=7
+	6) http://www.gfsoso.com/
+
+     2) http://lists.gnu.org/archive/html/discuss-gnuradio/2006-09/msg00102.html
+  2) tunnel.py, An Adaptive Video Streaming Platform with Adaptive Channel Coding
+     1) http://www.wu.ece.ufl.edu/projects/wirelessVideo/project/uflmcn_testbed/testbed.htm
+  3) sudo: unable to change to root gid:不允许的操作
+     1) 登入 guest 帳號 是不能使用 sudo 的
+  4) VLC
+     1) https://sites.google.com/site/ufmcntestbed/experiment-1
+  5) RTP是实时传送协议(Real-time Transport Protocol)
+
+     
+
+
+** version cat /etc/issue
+
+
+** Video, gr-ieee802-11
+
+可以考虑在WIFI开源项目基础上实现实时视频传输：
+gr-ieee802-11： https://github.com/bastibl/gr-ieee802-11.git
+你们可以在这个项目的物理层基础上，实现自己的mac层以及以上协
+
+
+** [KEY] gnuradio
+
+*** <x-bg-color><param>DarkOrange</param>[#B]</x-bg-color> [KEY] gnuradio.org, gr_tutorial
+
+    Simplified Wrapper and Interface
+Generator (SWIG) is used as the interface compiler which
+allows the integration between C++ and Python language.
+
+**** wiki
+    http://gnuradio.org/redmine/projects/gnuradio/wiki/Presentations
+
+    http://gnuradio.org/redmine/projects/gnuradio/wiki/Tutorials
+
+    http://gnuradio.org/redmine/projects/gnuradio/wiki/TutorialsQTGUI
+
+    http://gnuradio.org/redmine/projects/gnuradio/wiki/FAQ
+**** squarespace
+    http://gnuradio.squarespace.com/storage/tutorial/gr_tutorial.pdf
+
+*** gnuradio
+
+   1) ruby-forum
+      1) https://www.ruby-forum.com/forum/gnuradio
+
+   2) /usr/local/share/doc/gnuradio-3.7.7git/html
+
+   3) <bold>*whereis  locate find*</bold>
+
+   4) verbose表示详细信息
+   5) <bold>*meteor，很热心，很牛，几乎有问必答*</bold>
+   6) 需要重新初始化，需要注意的是configure 需指定路径为 /usr
+      1) ./configure --prefix=/usr
+   7) 手把手教你如何编写自己的信号处理模块
+      1) http://gnuradio.cc/simple/?t150.html
+      2) ftp://ftp.gnu.org/gnu/gnuradio/
+
+    
+
+** <x-bg-color><param>DarkOrange</param>[#B]</x-bg-color> examples, gr_mpsk
+
+*** gr_mpsk, mpsk_scripts
+
+    1) from http://gnuradio.squarespace.com/examples
+
+*** examples
+
+    1) http://www.trondeau.com/
+    2) http://www.trondeau.com/examples/
+    3) https://github.com/trondeau/gnuradio
+    4) http://www.wu.ece.ufl.edu/projects/wirelessVideo/project/GNU_Radio_USRP/#Introduction
+
+    5) http://www.tnm-corad.com.cn/video/play-105.html
+
+       1) 视频：GNU Radio与usrp实验3
+
+    6) https://tech.ebu.ch/docs/events/radiosummit11/presentations/ebu_radiosummit11_lefebvre-crc.pdf
+
+      
+    7) 第一个GNURadio应用程序心得
+       1) http://blog.csdn.net/yuan1164345228/article/details/12976881
+       2) Benchmark代码详细解析有gnuradio中文论坛版大meteor的解释非常详
+          细，对读懂这个程序有很大帮助。因为gnuradio就是为了实现各种无
+          线电应用，也就是一个收发通信系统，所以在阅读其他程序之前也非
+          常有必要先把这个物理层的收发程序读懂
+       3) gr.sizeof_gr_complex 规律：所有gnuradio的模块调用前缀都是
+          gr.后面有横杠表示类的私有函数
+       4) 安装一个python编辑调试器IDLE非常有必要！！！安装IDLE以后会有
+          一个强大的帮助文档，类同matlab的帮助文档
+    8) Benchmark代码详细
+
+       1) http://gnuradio.cc/simple/?t622.html
+   
+
+** Ubuntu
+
+*** tutorial, ubuntu系统介绍, wenku
+1) etc 大部分系统程序的配置文件保存于/etc目录
+2) apt-get moo
+3) Linux中没有注册表这个概念。安装软件，理论上讲，只要拷贝所有相关文件，
+   并运行它的主程序就可以了
+4) fish
+   1) Fish是一款非常友好的Shell，大力推荐！使用命令sudo apt-get
+      install fish安装它
+   2) whereis fish 
+
+
+*** shell
+1) command -options [argument]
+2) <bold>*find path -name*</bold>
+3) <italic>/etc/apt/</italic>, <bold>*chmod 777*</bold>, <bold>*gedit source.list*</bold>
+4) ls -1 /home
+5) pwd  #查看当前目录的绝对路径
+6) cd ~  #切换到当前用户主目录
+7) su [选项] [用户名]  #切换用户
+
+** tutorial of GNURadio USRP 入门 V0.99
+
+*** Ch1 GNU Radio 是什么
+1) 1.3.2 <bold>*数字中频——FPGA的职责*</bold>, pp11
+   1) 简单的说，USRP 上的FPGA 的职责就是做上下变频，在数字中频和基带信
+      号之间进行转换。
+
+**** 1.2.2, pp10
+GNU Radio 所包含的丰富的block，包括各种滤波器、FFT 变换、调制／解调模
+块、时频同步模块
+
+*** Ch2 第2章 USRP，GNU Radio 的硬件平台
+1) 从本质上讲，它充当了一个无线电通讯系统的数字基带和中频部分。
+2) 2.1.5 FPGA
+    对GNU Radio 用户来说，或许最重要的部分是理解USRP FPGA 上所发生的事
+    情。如下图所示，所有的ADCs 和DACs 都连接到FPGA。这块FPGA 在USRP系
+   统中起着关键作用
+
+*** Ch3 GNU Radio 安装
+*** Ch4 GNU Radio编程基础, Python like Matlab, pp32--pp85
+1) GNU Radio 的软件结构包含两层。所有的信号处理模块都用C++语言写，而
+   Python 则用作创建网络和流图并将这些模块连接在一起
+2) http://www.gnu.org/software/gnuradio/doc/exploring-gnuradio.html
+3) Python 语言是一种解释性的语言，像Matlab 一样。没有编译和链接这些步骤
+4) pp41, indent replace end, 在Python 中没有这样明确的标记，是用“行缩
+   进”的方式来标明一组语句的开始和结束. 你可能已经注意到Python 并不要
+   求变量或参数的声明。这与C 语言中的“使用之前必须声明”的概念完全不同
+5) SWIG 为C++和Python 之间提供了接口。
+****  4.6 GNU Radio中常用的 block, pp54
+1) 4.6.5 滤波器（Filters）
+   1) 4.6.5 滤波器（Filters）,  pp63, Block：gr.firdes 
+      1) gr.firdes::low_pass
+   2) 4.6.5.9 FIR抽取滤波器（FIR Decimation Filters）
+      1) Block：gr.fir_filter_ccc
+   3) 4.6.5.10 FIR插值滤波器（FIR Interpolation Filters）
+      1) gr.interp_fir_filter_ccc
+   4) 4.6.5.11 带有FIR抽取滤波器的DDC（数字下变频器）decimator
+      1) Block：gr.freq_xlating_fir_filter_ccc
+      2) digit downconversion filter 
+2) 4.6.6 FFT, pp68, Block：gr.fft_vcc gr.fft_vfc
+
+
+*** Ch5 应用范例解读 
+1) 本章将详细讲解GNU Radio 自带的两个例子，一是OFDM，另一个是MIMO。
+**** 5.1 OFDM Tunnel
+1) pp89, Ofdm_demod 类的代码在文件ofdm.py 中，
+
+       
+
+* Study Cpp, class, c#, obj-c
+
+
+** obj-c, QT, @objc
+
+
+*** @objc vs. cpp <x-color><param>Cyan</param>[2015-12-07 Mon]</x-color>
+
+    1. <bold>*class is objective*</bold>
+    2. @interface
+    3. Objective-C最大的特色是承自Smalltalk的訊息傳遞模型（message passing
+    4. C++里类与方法的关系严格清楚，一个方法必定属于一个类
+    5. 但在Objective-C，类与消息的关系比较松散, [obj method: args]
+       1. @cpp: obj.method(argument);
+       2. @objc: [obj method: argument];
+       3. [car fly];
+	  1. 典型的C++意义解读是“调用car类的fly方法”。若car类里头没有
+             定义fly方法，那编译肯定不会通过。但是Objective-C里，我们
+             应当解读为“发提交一个fly的消息给car对象”	     
+       4. Objective-C中强制要求将类的定义（interface）与实现
+          （implementation）分为两个部分。类的定义文件遵循C语言之惯例
+          以.h为后缀，实现文件以.m为后缀。
+	  1. 方法前面的 - 号代表函数的类型：加号（+）代表类方法
+             （class method），不需要实例就可以调用，与C++ 的静态函数
+             （static member function）相似。减号（-）即是一般的实例方
+             法（instance method）
+
+	     
+
+*** @qt
+
+   1. 个人推荐你看下Qt5.2.0，支持android，IOS等主流的移动平台
+   2. apple开发都是用obj-C语言.面向对象C语言.比C++简单一些.难度和java,C#差不多
+
+
+
+** cplusplus.com
+
+http://www.cplusplus.com/reference/cstring/memcpy/
+
+*** memcpy
+
+    1. void * memcpy ( void * destination, const void * source, size_t num );
+
+
+*** atof, string to double
+
+
+*** atoi, string to integer
+
+
+*** new, allocate mem
+
+    1. define structure 
+
+** <x-bg-color><param>red</param>[#A]</x-bg-color> [KEY]: CS_TD_SCDMA_3.cpp
+
+   1) http://www.pudn.com/downloads189/sourcecode/comm/detail889010.html
+
+** CPP tutorial PDF
+
+*** 引用 ---- 变量的别名, &; 
+*** C++初学者入门全篇
+
+*** C++程序设计_(谭浩强超级完整版)绝对完整!!<x-color><param>Cyan</param>[1]</x-color>
+
+*** 十分有用的c++实例(非常适合初学者)
+it is C, not CPP, <x-color><param>Cyan</param>[2015-01-14 Wed]</x-color>
+
+*** <x-bg-color><param>DarkOrange</param>[#B]</x-bg-color> C++基础实例教程, <x-color><param>Cyan</param>[2015-01-14 Wed]</x-color>
+**** pp50, Sec2.3 Func II, CS_fn.cpp
+   1) declaration, type name ( argument_type1, argument_type2, ...);
+**** sec3.3 pointers, pp75
+   1) andy = 25; fred = andy; ted = &andy;  // ted is address, not
+      25, ted is 1776-address
+   2) 存储其它变量地址的变量-(如上面例子中的ted )，我们称之为指针(pointer)
+   3) asterisk * asterisk (*)来存储该指针指向的变量所存储的数值，它可
+      以被翻译为“所指向的数值”（"value pointed by"）beth = *ted;  //
+      beth is 25, not 1776, beth = ted; // beth 等于 ted ( 1776 )
+   4) pp75, 声明指针的格式如下：type * pointer_name; type 是指针所指向的数据
+      的类型，而不是指针自己的类型. int * number; ampersand (&)
+   5) 注意在声明每一个指针的时候前面加上星号asterisk (*)
+   6) 原因是引用操作符(*) 的优先级顺序与类型声明的相同，因此，由于它们
+      都是向右结合的操作，星号被优先计算
+   7) int *p1, *p2;  // int * p1, different, 1st declare pointer, 2nd
+      declare data type
+   8) *pp82, Pointers to functions, <<2015-01-15 Thu>*
+      1) sizeof 是C++的一个操作符，用来返回其参数的长度字节数常量。
+      2) int (* minus)(int,int) = subtraction;
+	 1)  int (*minus)(int int)实际是在定义一个指针变量，这个指针的
+             名字叫做minus，这个指针的类型是指向一个函数，函数的类型是
+             有两个整型参数并返回一个整型值。
+
+**** *pp101, 4.1 类Classes, obj_name1.fn; //fn is public*
+
+1) *pp101, 4.1 类Classes, obj_name1.fn; //fn is public*
+   1) 定义类的关键字为class ，其功能与C语言中的struct类似，不同之处是
+      class可以包含函数，而不像struct只能包含数据元素。
+   2) int a; // int 是class名称 (类型名) ，而a 是对象名 object name (变量)。
+   3) *class class_name{...}obj_name*
+   4) class_name obj_name1obj_name2 ; obj_name1.fn; //fn is public
+   5) 定义函数set_values().使用的范围操作符(双冒号:: )
+   6) 我们讨论的class (object的类型)是CRectangle，有两个实例(instance)，
+      或称对象(object)：rect 和 rectb，每一个有它自己的成员变量和成员
+      函数。
+2) pp96, typedef
+   1) typedef existing_type new_type_name;
+   2) 在C中,struct不能包含函数。在C++中,对struct进行了扩展
+   3) typedef struct tagMyStruct{..} MyStruct; 因此，MyStruct实际上相
+      当于struct tagMyStruct
+3) enum
+   1) 枚举的定义要用到关键字enum,就像类的定义用class,结构体用struct一样,
+4) const
+5) inherent, *class derived_class_name: public base_class_name;*
+   1) class CRectangle: public CPolygon {}
+
+
+
+**** include, pp161
+
+     1) #include "file"
+     2) #include <<file>
+     3) macro names
+	1) _LINE_
+	2) _DATE_
+	3) _FILE_
+
+*** OOP-Object-Oriented Programming
+
+*** ITPP
+# <<2015-01-14 Wed>
+1) ITPP+MATLAB
+   1) #include <<itpp/itcomm.h>using namespace itpp;
+   2) itload('rayleigh_test.it');
+   3) ITPP是一个C++的通信信号处理算法库
+   4) http://blog.sina.com.cn/s/blog_4d48cc5d01008tnu.html
+
+
+*** Dev-C++, EMACS, GCC
+1) install
+   1) http://bloodshed-dev-c.en.softonic.com/download
+   2) http://sourceforge.net/projects/dev-cpp/
+2) 注意：EMACS可以调用GCC，但是EMACS本身不含GCC，所以需要安装DEV-C++之
+   类的编译工具.
+   1) 输入M-X COMPILE RET 此时会出现MAKE -K，按BACKSPACE，
+   2) 删除MAKE -K,键入：GCC HELLO.C -O HELLO RET 此时EMACS会开启一窗口，
+      显示： COMPILATION FINISHED AT FRI AUG 22 11:05:15，恭喜你编译成功。
+   3) 你可以在终端或EMACS下运行./HELLO了。(M-! ./HELLO)
+   4) http://blog.csdn.net/woohello/article/details/7299919
+3) 怎样短时间内学好C++
+   1) 切记，学C++最重要的是把你所见到的代码在IDE上写一遍，运行并反复改动
+      代码，达到对你遇到的所有代码都有一个功能-语法的对应。你知道改后的效
+      果，并要以此格式去类推。
+   2) 化简，化简很重要，解决问题的时候，当问题对你来说看似复杂，你应该分
+      清主次，并把最关键的内容抽象出来，当做独立的问题，并思考你能否解决。
+      再扩展回归到复杂问题。
+   3) 这个结构与OSI 的7 层结构有一些相似之处。底层向高层提供服务，而高
+      层则无需关注底层的执行细节，但需要关注必要的接口和函数的调用
+4) C++面向对象高效编程.pdf, from vdisk
+
+** cpp Basics
+
+*** c=a>b?a:b 
+
+*** Structure vs class in C++
+
+    1. Members of a class are private by default and members of struct are public by default
+    2. Classes may contain functions, whereas structs can't.
+    3. C的struct与C++的class的区别：struct只是作为一种复杂数据类型定义，不能用于面向对象编程。
+    4. C++中的struct和class的区别：对于成员访问权限以及继承方式，class中默认的是private的，而struct中则是public的。class还可以用于表示模板类型，struct则不行。
+    5. C++中保留struct的关键字是为了使C++编译器能够兼容C开发的程序。
+    6. -type argument 
+
+*** dot and arrow pointer, . vs ->
+
+     1. (*pointervariable).foo = pointvariable->foo
+
+*** C# (pronounced "See Sharp") 
+
+*** template, function, class and variable, 泛型编程 (GenericProgramming) 
+
+    1. example
+       1. template <<typename Type>
+         Type max(Type a, Type b) {return a > b ? a : b;}
+       2. template<<class T> A<<T>::A(){}
+       3. A<<int> a;
+    2. 使用模板的目的就是能够让程序员编写与类型无关的代码。
+
+*** cpp basics 
+1) JAVA与C++区别(一) 首先,引用一句Thinking in java中作者一直在强调的一
+   句话:一切皆对象
+
+   1) java是解释性语言,
+
+   2) 首先应该清楚,Java 是由 C++发展而来的
+
+   3) 不过速度没有c++快，所以一般是不用java来编写应用程序和电脑游戏。
+
+   4) java的可移植性是最闪亮的一点.
+
+   5) http://www.rumenla.com/biancheng/
+
+2) C语言是面向过程的,而C++是面向对象的
+   面向对象主要体现在类上面   ，因为类使得模块之间隔离开   
+   但是类和别的东西在本质上是不一样的   这就是为啥c无法编写大型复杂程序
+   展而c++却可以的原因.
+   1) 面向对象编程具有以下3个基本特征：封装、继承和多态。
+   2) 对象是人们要进行研究的任何事物
+   3) C++是编译语言，性能良好，效率更高。它不像Java、PHP、ASP等解释型
+      语言，需要在运行时转换为机器码，或者读一条语句执行一条。它直接被
+      编译为机器可识别的机器码。
+
+3) Dev-C++是Windows平台下的开源C++编程环境。它集成了GCC、MinGW32等众多
+   自由软件，界面类似Visual Studio，但体积要小的多。
+4) cpp文件是用C++语言编写的源代码文件格式
+5) 我知道一个是面向过程，一个是面向对象。
+   但是如果一个问题是分别用c和c++输出hello world
+   c: #include<<stdio.h> int main(){printf("hello world\n");return 0;}
+   c++:#include<<iostream.h> void main() {cout<<<<"hello world"<<<<endl;}
+
+6) -> 成员访问操作符. ->和.都是一个意思，例如一个类，->左边是类的实例，
+   右边是类的参数或者函数. struct student
+   student1={"Lily",79},*p=&student1;
+   printf("%s,%4f\n",p->name,p->score[0]);//指针成员访问就用这个符号。
+
+7) ~$   是 正在编辑的临时文件
+
+8) 第一个字符必须是字母或下划线
+
+9) 保留字: extern, template, explicit, using, new, public, catch,
+   this,
+
+10) 第2部分——预处理部分
+
+    1) 有时还会看到#include <<iostream>的引入方式，这也是Visual Studio中
+       鼓励使用的方式。但是采用这种方式时，还需要用“using namespace
+       std;”引入std命名空间；否则系统会提示cin和cout找不到
+
+    2) cout是一个代表标准输出设备（在这里指显示器）的对象: 输出的操作符
+       用“<<<<”表示，它表示将操作符右边的内容输出到操作符左边的对象上
+
+    3) 第3个操作符的右边是endl，它表示一个“回车换行”操作。
+
+    4) 行注释用“//”，一次注释一行。块注释用“/* */"
+
+11) 在头文件中使用#ifdef和＃ifndef是非常重要的
+
+12) extern, *a and a[]
+
+    1) 不可以，程序运行时会告诉你非法访问。原因在于，指向类型T的指针并不等价于类型T的数组。extern char *a声明的是一个指针变量而不是字符数组，因此与实际的定义不同，从而造成运行时非法访问。应该将声明改为extern char a[ ]。
+
+    2) 例子分析如下，如果a[] = "abcd",则外部变量a=0x61626364 (abcd的
+       ASCII码值)，*a显然没有意义 显然a指向的空间（0x61626364）没有意
+       义，易出现非法内存访问。
+
+    3) 这提示我们，在使用extern时候要严格对应声明时的格式，在实际编程
+       中，这样的错误屡见不鲜。
+
+    4) extern用在变量声明中常常有这样一个作用，你在*.c文件中声明了
+       一个全局的变量，这个全局的变量如果要被引用，就放在*.h中并用
+       extern来声明。
+
+
+   
+
+* Study Verilog, HDL, FPGA, ADC
+
+  1. verilog vs vhdl
+  2. VERIfication of LOGic, acronym
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> @emacs, @ac, auto-complete, AUTOINST,  <x-color><param>Cyan</param>[2015-12-04 Fri]</x-color>
+
+*** AUTOARGS C-c C-t I/O
+
+*** AUTOINST
+
+*** AUTOSENSE C-c C-t a for always
+
+** IEEE1588协议
+
+** 深入浅出玩转FPGA
+
+** @veri, veri+matlab cosimulation
+
+*** matlab与ModelSim联合仿真
+
+    1. $readmemh("sin.txt",data_mem); //将sin.txt中的数据读入存储器data_mem
+    2. 利用Matlab内部自带的各种函数，产生需要的信号，再经过定点化，就作为FPGA接收模块的输入信号了。这样做无疑会节约很多时间和精力
+    3. http://bbs.eeworld.com.cn/thread-292301-1-1.html
+
+*** vsim 一个simulink和modelsim联合仿真的简单例子
+
+    1. http://www.eefocus.com/cbhust/blog/07-12/77594_f2e4b.html
+    2. 在命令窗口中输入configuremodelsim
+    3. simulink and modelsim
+
+** @vhdl
+
+*** Concurrent statements
+
+    1. Concurrent statements are order-independent and asynchronous
+
+*** variable Passed: bit := '1';
+
+** @veri hardware
+
+*** ADC: texas instruments
+
+    1. High Speed Data Converter Pro GUI
+    2. ADC12J2700 Evaluation Module
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> @veri cmd and note
+
+*** task and function
+
+    1. function包含输入声明并返回一个值（一般为reg类型或者integer类型），
+       当被调用时，函数立即执行因此在函数中不可以有时间控制结构。相比
+       而言，task结构更加的灵活，该结构可以包含有输入，输出以及双向端
+      口的声明同时可以包含有时间控制结构
+    2. Task
+       1. 在第一行“task”语句中不能列出端口名称
+       2. 在任务定义结构内不能出现 initial和 always过程块
+
+       
+
+*** FIFO, first in first out.
+
+*** multi-lines using begin-end 
+
+*** @key: *nonblocking is key for Sequential, REG and hardware, q <<= {q[2:0],sin};*
+
+**** 阻塞赋值和非阻塞赋值
+
+     1. always块来描述组合逻辑（combinational logic）时，应当使用阻塞赋值。
+
+     2. (sequential logic)的描述和建模，应当使用非阻塞赋值。
+
+     3. 千万不要将这两种赋值方法与assign赋值语句混淆起来，assign赋值语
+        句根本不允许出现在always语句块中
+
+     4. 非阻塞赋值语句都会在其中任何一条语句执行完成之前开始执行。这正是硬件电路的特点
+
+	
+     5. http://blog.csdn.net/u012373020/article/details/25097393
+
+     6. q[1]得到的是 q[0]的原始值，而非sin的值（在第一条语句中，sin 的
+        值被赋给了q[0]）。这正是我们期望得到的实际硬件电路。当然，我
+        们可以把上边的四条语句合并写成一条简短的语句：q<<= {q[2:0],sin}。
+
+     7. 但是阻塞赋值语句并不是准确的硬件工作模型。下面考虑使用阻塞赋值
+        语句来实现同一模块可以得到什么结果。在始终clk的上升沿，verilog
+        将会把sin的值赋给q[0]，然后 q[0]的新值被赋给q[1]，如此继续执行
+        下去。最终所有的四个寄存器都会得到相同的值：sin的值。
+
+     8. 使用非阻塞赋值方法，其中的每个<<=都可以理解为一个寄存器
+
+     9. 而在同一个时钟下面采用的非阻塞赋值方法，模块内所有寄存器都同时
+        随时钟跳变。这是硬件处理的精髓，也是时序电路中大量使用非阻塞赋
+        值的原因
+
+
+	
+
+#+BEGIN_SRC verilog
+
+ begin
+       q[0] <<= sin;//非阻塞赋值：<<=
+       q[1] <<= q[0];
+       q[2] <<= q[1]
+       q[3] <<= q[2];
+       //这里写作q <<= {q[2:0],sin};更简单更好一些
+   end
+#+END_SRC	
+
+**** Verilog阻塞赋值与非阻塞赋值 
+
+     1. http://blog.sina.com.cn/s/blog_640029b301012pcx.html
+
+*** Latches -> Flip-flops (1bit)-> Registers [2015-07-24 Fri]
+
+    1. a flip-flop or latch is a circuit that has two stable states
+    2. Latches and Flip-Flops – single bit. – Registers – multiple
+    3. Flip-Flops and Registers
+       1. http://cpuville.com/register.htm
+       2. R-S (reset-set) latch
+
+*** FF: RS-FF and DFF (Q_{next} = D), 2 states, 触发器
+
+    1. RS-FF: Q_{next} = S+\bar{R}Q
+    2. DFF: Q_{next} = D
+
+*** SystemVerilog, module as class
+
+*** Sequential Circuits
+
+   1. blocking | series, nonblocking | parallel
+      1. Verilog - Blocking Assignment (=)
+      2. Verilog – Non-blocking Assignment (<<=)
+	 1. verilog_11.pdf
+	 2. http://www.ecs.umass.edu/ece/ece232/
+
+#+BEGIN_SRC verilog
+module DFF-non-blocking(D, Clock, Q1, Q2);
+input D, Clock;
+output Q1, Q2;
+reg Q1, Q2;
+always @(posedge Clock)
+begin
+// non blocking assignment - can be done in
+parallel (or any order)
+Q1 <<= D;
+Q2 <<= Q1;
+end
+endmodule
+
+#+END_SRC
+
+
+#+BEGIN_SRC verilog
+
+ module pal_serial_4(       //四位并串转换程序
+     clk,rst,load,
+     din,dout
+     );
+     
+input clk,rst,load;
+input[3:0] din;
+output dout;
+
+reg[3:0] databuff; 
+
+always @ (posedge clk or negedge rst or posedge load)
+ begin
+  if(!rst) databuff<<=4'b0;
+  else if(load) databuff<<=din; 
+  else //databuff<<={databuff[2:0],1'b0};
+  databuff<<=databuff<<<<1;  //将寄存器内的值左移，依次读出
+ end
+ 
+assign dout=databuff[3];
+
+endmodule
+
+#+END_SRC
+
+
+   2. D Flip-flop DFF, D触发器 (data flip-flop或delay flip-flop)
+      1. always @(posedge Clk)
+      2. The D flip-flop captures the value of the D-input at a
+         definite portion of the clock cycle (such as the rising edge
+         of the clock). That captured value becomes the Q output. At
+         other times, the output Q does not change.[22][23] The D
+         flip-flop can be viewed as a memory cell
+
+#+BEGIN_SRC verilog
+
+module smpl_circuit(A,B,C,x,y);
+input A,B,C;
+output x,y;
+wire e;
+and g1(e,A,B);
+not g2(y,C);
+or g3(x,e,y);
+endmodule
+#+END_SRC
+
+#+BEGIN_SRC verilog
+module D-flipflop (D, Clk, Q);
+input D, Clk;
+output Q;
+reg Q;
+always @(posedge Clk)
+Q = D;
+endmodule
+#+END_SRC
+*** net type, truth table
+
+    1. wire-assign, 逻辑电路
+    2. tri
+    3. assign [delay] net_name = expression; 如：assign #2 A = B；
+    4. 线网的声明语法形式：net_kind[msb:lsb]net1, net2, .........,netN;
+*** reg-always
+
+    1. reg [msb: lsb] reg1, reg2, . . . reg N;
+    2. reg的类型不一定是寄存器，只有带有时钟的always块才能是寄存器，
+*** other
+
+    1. 语言编译的结果是指令，而Verilog编译的结果是电路，需要使用电路设
+       计的思想去写Verilog。
+
+*** always and if, for, c|v|py
+
+    1. if() {} | if() begin end | for x in range(0, 3): | if a>1: else:
+
+*** Expression
+
+     1. and(or) name (ouput, input, input)
+     2. [size] 'base value
+	1. 5 'o37 5位八进制数
+     3. ^（二元异或）
+     4. 运算符及表达式: 这里和C语言几乎一样，就不做过多解释了吧。就说一下位拼接运算符和位减运算符，这里C语言里面没有。
+
+** @zhihu
+
+*** FPGA学习之路求教？ - 硬件 - 知乎
+
+    1. 所以你看嘛，一个人的命运，当然要靠自我奋斗，但是也要考虑历史的进
+       程。逆潮流而行，再努力也是没有用的。早点考虑转行吧。。。
+    2. 基本功在本科生里很少有比我更扎实的了，几百行以内的Verilog不用调
+       试，一遍就过；本科毕业时有科研经历，还有论文，gpa还是top 1
+    3. 面试的时候，如果你没有项目，就没有办法证明你会这些，你说你看过书，
+       那没有任何意义。
+    4. FPGA这种东西，没什么后端，也用不上tcl。找集成电路或者FPGA的工作，
+       只会笔试你的verilog。我工作这么久都没有用过C语言，只用verilog和
+       perl脚本。信号完整性也不用学，那是做板子的人才应该学的
+
+       
+
+** 赛灵思电子Xilinx的博客
+
+  1. http://blog.sina.com.cn/u/2150910802
+
+** @book 工程技术丛书：Xilinx新一代FPGA设计套件Vivado应用指南
+
+   1. vivado入门与提高
+
+** <x-bg-color><param>DodgerBlue</param>[#D]</x-bg-color> Verilog的135个经典设计实例
+
+   1. pp41,【例 9.27】4 位串并转换器
+   2. pp76,【例 12.7】11 阶FIR 数字滤波器
+   3. http://www.pudn.com/downloads139/sourcecode/others/detail597667.html
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> @vhdl \cite{pan2000vhdl}, [[papers:pan2000vhdl][pan2000vhdl-paper]],  VHDL实用教程_潘松_王国栋
+
+*** 第6 章 VHDL 并行语句, pp141
+
+*** § 6.6 类属映射语句, pp155
+
+    1. GENERIC map 类属表
+    2. 类属映射语句与端口映射语句
+
+*** § 6.5 元件例化语句, pp153
+
+    1. 程序6-14
+    2. 一种是名字关联方式在这种关联方式下例化元件的端口名和关联连接符
+       号=> 两者都是必须存在的这时端口名与连接端口名的对应式在PORT MAP
+    句中的位置可以是任意的
+
+    
+    3. 元件例化是使VHDL 设计实体构成自上而下层次化设计的一种重要途径
+    4. COMPONENT 元件名 IS
+    5. 元件名 PORT MAP
+    6. 程序6-14
+       1. u3 : nd2 PORT MAP (x, y, c => z1) ;
+
+*** 6.3 并行信号赋值语句, pp148
+
+    1. 式中赋值目标的数据对象必须是信号
+    2. 赋值目标 <<= 表达式
+
+**** 6.3.2 条件信号赋值语句
+
+    1. 赋值目标<<= 表达式 WHEN 赋值条件 ELSE
+
+**** 6.3.3 选择信号赋值语句, with select, pp149
+
+     1. 选择信号赋值语句的每一子句结尾是逗号最后一句是分号
+     2. WITH 选择表达式 SELECT 赋值目标信号<<=表达式WHEN 选择值
+     3. 与CASE 语句相类似选择赋值语句对子句条件选择值的测试具有同期性,
+        不像以上的条件信号赋值语句那样是按照子句的书写顺序从上至下逐条测试的
+
+*** 6.1 进程语句
+
+    1. 进程语句是VHDL 程序中使用最频繁和最能体现VHDL 语言特点的一种语句其原因大概是由于它的并行和顺序行为的双重
+
+*** § 5.7 其它语句和说明, pp130
+
+    1. 程序 5-34
+    2. 1. 信号类属性
+       1. clock ’EVENT AND clock='1'
+	  1. 则表示对clock 信号上升沿的测试
+
+*** § 5.2 流程控制语句, pp109
+
+**** 5.2.2 CASE 语句, pp112
+
+     1. CASE 表达式 IS When 选择值=> 顺序语句
+
+*** § 4.2 VHDL 数据对象, pp68
+
+**** 4.2.1 变量(VARIABLE)
+
+     1. VARIABLE 变量名数据类型:= 初始值
+
+       
+
+*** § 3.5 子程序(SUBPROGRAM), pp45
+
+
+**** 3.5.1 函数FUNCTION, pp45
+
+    1. 子程序有两种类型即过程PROCEDURE 和函数FUNCTION
+    2. VHDL 子程序具有可重载性的特点即允许有许多重名的子程
+    3. FUNCTION 函数名参数表RETURN 数据类型--函数首
+    4. PACKAGE packexp IS --定义程序包
+    5. USE WORK. packexp.ALL
+    6. FUNCTION 函数名参数表 RETURN 数据类型 IS -- 函数体
+    7. PACKAGE BODY packexp IS
+
+**** 3.5.3 过程 PROCEDURE, pp52
+
+     1. 而过程的调用是将所定义的过程名作为一条语句来执行
+
+**** 3.5.4 重载过程OVERLOADED PROCEDURE
+
+*** § 3.4 进程 PROCESS 程序3-15, pp42
+
+    1. (4) 进程的激活必须由敏感信号表中定义的任一敏感信号的变化来启动
+       否则必须有一个显式的WAIT 语句来激励
+
+*** § 3.1 实体 ENTITY, pp28
+
+**** 程序3-5, pp31
+
+     1. 程序3-5 给出了类属映射语句GENERIC MAP ( )配合端口映射语句PORT MAP ( ) 语句的使用范例
+     2. u1: andn GENERIC MAP (n =>2)
+
+**** 3. GENERIC 类属说明语句
+
+     1. 类属与常数不同常数只能从设计实体的内部得到赋值且不能再改变而类属的值可以由设计实体外部提供
+     2. GENERIC (addrwidth : INTEGER := 16);
+
+** <x-bg-color><param>yellow</param>[#C]</x-bg-color> veri_硬件描述语言Verilog, A Verilog HDL Primer \cite{bhasker2000verilog}
+
+   1. DFF
+   2. Finite State Machines (FSM) -有限状态机
+
+*** 12.6 通用移位寄存器, pp149
+
+**** m o d u l e S h i f t R e g (D, Clock, Z) ;
+
+     1. / / 6位移位寄存器：Shift_Reg SRA (Data, Clk, Za) ;
+     2. / / 4位移位寄存器：Shift_Reg # 4 SRB (Data, Clk, Zb) ;
+     3. for (P = 1; P<< N U M R E G; P = P + 1) Q[P+1] = Q[P] ;
+
+<x-bg-color><param>#EAEAFF</param><x-color><param>#008ED1</param>#+BEGIN_SRC verilog
+</x-color></x-bg-color><x-color><param>Cyan1</param>module</x-color> S h i f t R e <x-color><param>LightSkyBlue</param>g</x-color> (D, Clock, Z) ;
+i n p u t D, Clock;
+o u t p u t Z;
+p a r a m e t e r NUM_REG = 6,
+r e g [1: N U M R E G ] Q;
+i n t e g e r P;
+a l w a y s <x-color><param>PaleGreen</param>@</x-color> (n e g e d g e C l o c k) b e g i n
+/ /寄存器右移一位：
+<x-color><param>Cyan1</param>for</x-color> (P = 1; P<< N U M R E G; P = P + 1)
+Q[P+1] = Q[P] ;
+/ /加载串行数据：
+Q[1] = D;
+e n d
+/ /从最右端寄存器获取输出：
+a s s i g n  Z = Q [NUM_REG];
+<x-color><param>PaleGreen</param>end</x-color>  <x-color><param>Cyan1</param>module</x-color>
+
+
+<x-bg-color><param>#EAEAFF</param><x-color><param>#008ED1</param>#+END_SRC
+
+</x-color></x-bg-color>*** 11.2 波形产生
+
+**** 11.2.1 值序列
+
+     1. 因为使用的是阻塞性过程赋值，上面语句中的时延是相对时延。如果使
+        用绝对时延，可用带有语句内时延的非阻塞性过程性赋值
+
+#+BEGIN_SRC verilog
+
+i n i t i a l
+b e g i n
+R e s e t = 0;
+R e s e t = #100 1;
+R e s e t = #80 0;
+R e s e t = #30 1;
+e n d
+#+END_SRC
+
+------
+
+#+BEGIN_SRC verilog
+
+i n i t i a l
+b e g i n
+R e s e t <<= 0;
+R e s e t <<= #100 1;
+R e s e t <<= #180 0;
+R e s e t <<= #210 1;
+e n d
+
+#+END_SRC
+
+------
+
+#+BEGIN_SRC ditaa
+
+  ROOT      
+  |
+  +--foo
+  |  +----bar
+  |  
+  +--baz   
+  +--bax   
+  +--src   
+  |  +--main
+  |  |  +---java
+  |  |  |   +---something
+  |  |  |
+  |  |  +---fine
+  |  |
+  |  +--yes
+  |  +--no
+
+#+END_SRC
+
+------
+
+*** 9.3 模块实例语句, pp87
+
+    1. module_name instance_name(port_a s s o c i a t i o n s) ;
+    2. HA h1 (P, Q, S1, C1); //通过位置关联。
+    3. HA h2 ( .A(C i n), .S(S u m), .B(S 1), .C(C 2)); //通过端口与信号的名字关联。
+
+*** 8.2 时序控制
+
+**** 8.2.1 时延控制
+
+     1. #delay procedural_statement
+     2. 实例如下；#2 Tx = R x- 5 ;
+
+**** 8.2.2 事件控制, pp68
+
+      1. @ event procedural_statement
+      2. @ (p o s e d g e C l o c k) C u r r S t a t e = N e x t S t a t e
+      3. 上例中，如果C l o c k信号从低电平变为高电平（正沿），就执行赋
+         值语句；否则进程被挂起,直到C l o c k信号产生下一个正跳边沿。
+      4. 在Verilog HDL中p o s e d g e和n e g e d g e是表示正沿和负沿的关键字
+
+<x-bg-color><param>#EAEAFF</param><x-color><param>#008ED1</param>#+BEGIN_SRC verilog
+
+</x-color></x-bg-color>t i m e RiseEdge, OnDelay;
+i n i t i a l
+b e g i n
+/ /等待，直到在时钟上发生正边沿：
+<x-color><param>PaleGreen</param>@</x-color> (p o s e d g e C l o c k A) ;
+R i s e E d g e = <x-color><param>Cyan1</param>$t</x-color> i m e;
+/ /等待，直到在时钟上发生负边沿：
+<x-color><param>PaleGreen</param>@</x-color> (n e g e d g e C l o c k A) ;
+O n D e l a y = <x-color><param>Cyan1</param>$t</x-color> i m e - R i s e E d g e;
+<x-color><param>Cyan1</param>$d</x-color> i s p l a <x-color><param>LightSkyBlue</param>y</x-color> (<x-color><param>LightSalmon</param>"The on-period of clock is %t."</x-color>D, e l a y) ;
+e n d
+<x-bg-color><param>#EAEAFF</param><x-color><param>#008ED1</param>#+END_SRC	 
+
+</x-color></x-bg-color>	 
+
+*** 8.3 语句块, begin end | fork join
+
+
+**** 1) 顺序语句块(b e g i n . . . e n d)：语句块中的语句按给定次序顺序执行。
+
+
+**** 2) 并行语句块(f o r k . . . j o i n)：语句块中的语句并行执行。
+
+
+*** 8.4 过程性赋值, pp72, i n i t i a l语句或a l w a y s
+
+  1. always 语句和i n i t i a l语句（切记只有寄存器类型数据可以在这两种  句中赋值
+
+
+**** 8.4.2 阻塞性过程赋值, =, pp74
+
+
+**** 8.4.3 非阻塞性过程赋值, <<=, pp75
+
+     1. 非阻塞性赋值执行次序变得彼此不相关
+
+
+**** 8.4.4 连续赋值与过程赋值的比较, initial, always | assign
+
+
+*** 8.8 过程性连续赋值, pp82
+
+
+**** 8.8.1 赋值—重新赋值, deassign
+
+*** 10.1 任务, pp95
+
+
+*** 10.2 函数, pp97
+
+    1. 。函数与任务的不同之处是函数只能返回一个值，它不能包含任何时延或时序控制
+
+
+*** 10.3 系统任务和系统函数, pp102
+
+   1. monitor | strobe, Display | write
+   2. $r e a d m e m b( " r x . v e x " , M e m A , 1 5 , 3 0 ) ; 
+
+
+*** 10.10 指定程序块, pp117
+
+
+**** 边沿敏感通路, (p o s e d g e C l o c k => (Qb +: Da)) = (2:3:2);
+
+
+**** source *> destination
+/ /指定一个完全连接：源参数上的每一位都与目的参数的所有位相连接。
+source => destination
+/ /指定一个并行连接：源参数上的每一位分别与目的参数的位一一连接。
+
+*** 6.1 UDP的定义, pp53, primitive, table
+
+    1. p r i m i t i v e  U D P n a m e (OutputName, List_of_inpu)ts
+
+
+*** 5.3 多输出门 buf | not
+    1. 多输出门有:buf not
+    2. buf not 这些门都只有单个输入，一个或多个输出
+
+
+*** 5.4 三态门
+    1. 三态门电路有哪三态: 高电平、低电平、高阻态
+    2. t r i s t a t e g a t e[i n s t a n c e n a m e] (OutputA, InputB,Control)C
+
+
+*** 4.2 操作符, pp34
+
+
+**** 4.2.6 归约操作符
+     1. &A
+
+
+**** 4.2.9 连接和复制操作, pp41
+
+     1. {e x p r 1, e x p r 2, . . .，e x p r N}
+	1. A b u s = {3{4'b1011}}; /位/向量1 2 ' b 1 0 1 1 1 0 1 1 1 0 1 1）
+
+
+**** 4.2.7 移位操作符, <<<< and >>, pp40
+
+
+**** 2. 无符号数和有符号数, pp36
+
+r e g [0:5] B a r;
+i n t e g e r T a b;
+. . .
+B a r = -4'd12; //寄存器变量B a r的十进制数为5 2，向量值为1 1 0 1 0 0。
+T a b = -4'd12; //整数T a b的十进制数为- 1 2，位形式为1 1 0 1 0 0。
+
+
+*** 2.5 结构化描述形式
+
+    1. gate
+
+
+*** 2.4 行为描述方式, initial, always
+
+
+*** 2.3 数据流描述方式, pp9, assign
+
+    1. a s s i g n  [d e l a y]  L H S n e t = RHS_ expression
+
+
+
+** veri vs c
+
+*** veri | 8bit, c | 16bit
+
+** ASIC, xilinxi, tutorial, Modelsim
+
+*** tutorial code
+
+    1. 建议买《硬件描述语言Verilog》和夏宇闻的《Verilog数字系统设计教
+       程》第二版这两本书
+
+       
+    2. [[http://www.rfwireless-world.com/source-code/VERILOG/][rfwireless: veri]] 
+       1. MUX/DEMUX
+
+*** tutoial web
+
+    1. http://www.asic-world.com/systemverilog/basic.html
+    2. http://euler.ecs.umass.edu/ece232/pdf/03-verilog-11.pdf
+    3. http://rcir.sjtu.edu.cn/~cgliu/en/resource/ppt/emacs_verilog.pdf
+    4. http://www.veripool.org/
+    5. http://www.physi.uni-heidelberg.de/~angelov/VHDL/VHDL_SS09_Teil06.pdf
+    6. http://www.verilogtutorial.info/chapter_3.htm
+    7. https://courses.cit.cornell.edu/ece576/DE2/fpgaDSP.html
+
+** FPGA Mezzanine Card (FMC), SMA (SubMiniature version A), ISE
+
+   Xilinx ISE (Integrated Synthesis Environment)
+
+** matlab generatehdl
+
+   1)  matlab生成verilog 语言的CIC interpolation filter
+
+http://www.eefocus.com/daisywmc/blog/10-10/197629_99442.html
+** 零基础学FPGA(三)Verilog语法基基础基础(上)
+   1) http://www.eepw.com.cn/article/267551.htm
+   2) 对于初学者来说，数据类型只要掌握好reg，wire，integer和parameter
+      型就够了，其他类型可以暂时不用去理会。
+      1) reg xiaomo[m-1:0];代表一个名为“小墨”的存储器，里面有m个1位的reg型寄存器
+   3) basic
+      1) Verilog的设计初衷是成为一种基本语法与C语言相近的硬件描述语言。
+      2) 它还具有一些独特的语言要素，例如向量形式的线网和寄存器、过程
+         中的非阻塞赋值等。
+      3) Verilog是一种大小写敏感的硬件描述语言。其中，它的所有系统关键
+         字都是小写的。
+      4) 两种过程: 在Verilog中，可以声明两种不同的过程：always过程和initial过程。
+      5) HDL:Hardware Description Language
+
+
+     
+
+
+
+   
+
+
+ 
