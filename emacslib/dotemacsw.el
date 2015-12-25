@@ -1,87 +1,50 @@
 
-;; ** @emacs @org [2015-12-23]
-;; *** D:/GTD18 -> D:\gitlib\orglib [2015-12-23]
-;; ***** @err, check position ctrl-x =
-;; @err org-agenda-files, can't use concat
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;; init.el --- Where all the magic begins
+  ;;
+  ;; This file loads Org-mode and then loads the rest of our Emacs initialization from Emacs lisp
+  ;; embedded in literate Org-mode files.
+  
+  ;; Load up Org Mode and (now included) Org Babel for elisp embedded in Org Mode files
+  (setq dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name)))
+  (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
+  (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
+  (require 'org-install)
+  (require 'ob-tangle)
+  (setq initial-user-file (concat dotfiles-dir "dotemacsw.el"))
+  ;; load up all literate org-mode files in this directory
+  ; (mapc #'org-babel-load-file (directory-files dotfiles-dir t "\\.org$"))
+ 
+ ; @key: exec then unexec inside .org [2015-12-25 Fri]    
+ ; (org-babel-load-file (concat dotfiles-dir "dotemacsw.org"))
+  ;;; init.el ends here
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; @err Reading at buffer position 25403
-;;    ("notes" . (concat git-to "notes.org::%s") )
-;; ;   ("notes" . "(concat git-to "notes.org") ::%s")
-;; ;  (invalid-read-syntax ". in wrong context")
+;; font. m-x just once, support CHN, /141104
+  (set-locale-environment "English")
+  ; @key, DONE [2015-08-07]
+  (set-language-environment "utf-8")
+  (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (prefer-coding-system 'utf-8)
+  
+  ;; Face set-faces, /[2014-10-23]
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(default ((t (:inherit nil :stipple nil :background "Black" :foreground "gray85" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "apple" :family "Menlo")))))
+  (put 'upcase-region 'disabled nil)
+  (put 'downcase-region 'disabled nil)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; ** @git
-;; *** @github, note1411 -> gitlib
-;; dotemacs, can't push from hp ProBook 6470b
-
-;; *** @bitbucket, 8x1 -> xiaoanh, can be changed, [2015-12-23]
-;; xiaoanhuang@163.com
-;; https://xiaoanh@bitbucket.org/xiaoanh/gitlib.git
-;; @bitbucket, 8x1 to xiaoanh
-;; @repo: git1412 to gitlib
-;; **** @err fatal remote origin already exists
-;; @success: -> git remote rm origin
-
-
-; ** @dotemacs @debug
-; *** @debug, eshell-> /emacs --debug-init/
-; Debugger entered--Lisp error: (wrong-type-argument sequencep t)
-;    (autoload 'predictive-mode (concat path-to "predictive/") "Turn on Predictive Completion Mode." t)
-;    (autoload 'predictive-mode (concat path-to "predictive/" "Turn on Predictive Completion Mode." t))
-;   concat("D:/dotemacsw/" "predictive/" "Turn on Predictive Completion Mode." t)
-;   (autoload (quote predictive-mode) (concat path-to "predictive/" "Turn on Predictive Completion Mode." t))
-
-; ** @lisp, @emacs @key [2015-12-21]
-; *** @ac
-; *** @org
-; *** @org-doing
-; *** @smex
-; *** @org-ac
-; *** @elfeed
-; *** @helm-bibtex [2015-12-22]
-; *** @aspell, installed in windows, but not work well  [2015-12-22]
-
-;; @emacs
-; http://dotemacs.de/
-
-; ** @sachac, sachachua, shanchahua to remember [2015-12-22]
-; https://github.com/sachac/emacs-notes
-; ** @redguardtoo (chen bin)
-
-; Time-stamp: "xiaoanh 2015/12/21 15:09:23"
-; (eval-after-load "myvar" )
-; Time-stamp: "xiaoanh 2015/12/08 16:43:17"
-
-; @err, end of file during parsing, /20141113, [/( brace missing
-; setq is set quoted, setf and set
-
-; @cmd @win, /141107
-;; CMD-->set
-;;; %windir%, example set %windir% = C:\WINDOWS , 环境变量一般是包含在一对 "%" 号之间的，你可以在 CMD 下输入 "set" 来查看系统所有的环境变量，这里我说几个默认的而且非常常用的环境变量。
-
-;(load-file "D:/Emacs14/dotemacs.el")
-
- ;; load-PATH MUST HAVE A COLON:, /131109
-;; programs-->GNU EMacs-->open home directory-->.emacs-->(load-file "D:/Emacs14/dotemacs.el") ÕâÀïÒ»¶¨ÒªÐÞ¸Ä
-
-;; change into doteamcsw,/141106
-;; auto add PATH of miktex in the env var, miktex can work, no need to set in dotemacsw, /141106 
-; original init-file: <2014-12-16> C:\Users\xiaoanh\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Gnu Emacs
-;; USER-INIT-FILE, FOR DROPBOX, [2013-11-14]
-
-; ** @mac @org  [2015-12-23]
-; D:/GTD18 -> D:\gitlib\orglib [2015-12-23]
-; (setq git-to "D:/gitlib/orglib/")
-; (setq path-too "/Volumes/xiaoanh/gitlib/emacslib/") 
-; replace " D:/GTD18 -> (concat git-to "
-; ** @mac [2015-12-23]
-; Emacs Lisp: Determine OS, Emacs Version, Machine Host Name
-; http://ergoemacs.org/emacs/elisp_determine_OS_version.html
 ;; check OS type
 (cond
  ((string-equal system-type "windows-nt") ; Microsoft Windows
   (progn
 ;    (message "Microsoft Windows") ))
-    (concat (message "Microsoft Windows: ") (setq path-to "D:/github/orglib/")) ) )
+    (concat (message "Microsoft Windows: ") (setq path-to "D:/gitlib/orglib/emacslib/")) ) )
 ;    (message "Microsoft Windows") (setq path-to "D:/dotemacsw/")))
  ((string-equal system-type "darwin") ; Mac OS X
   (progn
@@ -91,115 +54,203 @@
   (progn
     (message "Linux"))))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (cond
  ((string-equal system-type "windows-nt") ; Microsoft Windows
   (progn
 ;    (message "Microsoft Windows") ))
-    (concat (message "Microsoft Windows: ") (setq git-to "D:/github/orglib/")) ) )
+    (concat (message "Microsoft Windows: ") (setq git-to "D:/bitlib/orglib/")) ) )
 ;    (message "Microsoft Windows") (setq path-to "D:/dotemacsw/")))
  ((string-equal system-type "darwin") ; Mac OS X
   (progn
-    (concat (message "Mac OS X") (setq git-to "/Volumes/xiaoanh/gitlib/orglib/"))) )
+    (concat (message "Mac OS X") (setq git-to "/Volumes/xiaoanh/bitlib/orglib/"))) )
+; 
+;    (concat (message "Mac OS X") (setq git-to "/Volumes/xiaoanh/gitlib/orglib/"))) )
 ;    (message "Mac OS X") (setq path-to "~/Dropbox/emacslib/"))) 
  ((string-equal system-type "gnu/linux") ; linux
   (progn
     (message "Linux"))))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; * @dotemacs, [2015-12-22]
-; ** path-to, replace "D:/dotemacsw/ -> (concat path-to "
-; (setq path-to "D:/dotemacsw/")
-(setq user-init-file (concat path-to "dotemacsw.el") )
-; (setq user-init-file "D:/dotemacsw/dotemacsw.el")
-; user-init-file is a variable defined in `C source code'.
-; Its value is "c:/Users/xiaoanh/AppData/Roaming/.emacs"
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; emacs 自带的 bs.el 更好用, cool, /141107
+; http://blog.csdn.net/ruglcc/article/details/7826604
+(global-set-key "\C-x\C-b" 'bs-show) 
+   ;; or another key
+(global-set-key "\M-p"  'bs-cycle-previous)
+(global-set-key "\M-n"  'bs-cycle-next)
 
-;; font. m-x just once, support CHN, /141104
-(set-locale-environment "English")
-; @key, DONE [2015-08-07]
-(set-language-environment "utf-8")
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(prefer-coding-system 'utf-8)
+; session to recover last  butter. /141107
+; (require 'session) 
+;;加载session
+; (add-hook 'after-init-hook 'session-initialize) 
+; (desktop-save-mode 1)
+; Java有生成文档的javadoc，C++的话，就要用Doxygen了。
+;; 语法高亮, [2014-11-07]
+; (global-font-lock-mode t)
 
-;; Face set-faces, /141023
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "Black" :foreground "gray85" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "apple" :family "Menlo")))))
-(put 'upcase-region 'disabled nil)
-(put 'downcase-region 'disabled nil)
+; :Enabling Flyspell mode gave an error  (ispell-set-spellchecker-params)
+; /141110
 
-; org-mode lisp, re-install org-mode, [2015-07-07]
-; M-S-!, emacs eshell, emacs -q
-; (package-initialize nil)
-; (add-to-list 'load-path "D:/Emacs14/org-mode-master/lisp/")
-; (package-initialize t)
-; (require 'org)
-; (require 'org-install)
-; (setq package-enable-at-startup nil)
-; (require 'ox)
-; Symbol's value as variable is void: org-list-allow-alphabetical
-; cause: org-mode is obsolete
-; can not load file org-macro
-; (require 'ox-html)
+; /141113,  emacs中如何设置自动换行的功能, 1、M－x：customize-option；2、输入truncate-partial-width-windows，使用过程中为防止命令拼写错误，可以用Tab键补齐；3、将设置页面中的参数改为off，然后点击保存按钮（save for furture sessions），再点击finish按钮。
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; linum forcefully, /131113
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; (require 'tramp)
+; (setq tramp-default-method "plink")
+
+; comment-region, nice /141117.
+(global-set-key (kbd "C-c C-/") 'comment-region)
+(global-set-key (kbd "C-c C-/") 'uncomment-region)
+(global-set-key [?\C-c ?\C-/] 'comment-or-uncomment-region)
+
+; (setq org-completion-use-iswitchb t)
+;  c-h v iswitchb-mode，然后点 customize 就行了。
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; @defun insert-date
+(defun insert-date (prefix)
+    "Insert the current date. With prefix-argument, use ISO format. With
+   two prefix arguments, write out the day and month name."
+    (interactive "P")
+    (let ((format (cond
+;            ((not prefix) "%Y-%m-%d")
+                   ((not prefix) "[%Y-%m-%d]")
+                   ((equal prefix '(4)) "%d.%m.%Y")
+                   ((equal prefix '(16)) "%A, %d. %B %Y")))
+          (system-time-locale "de_DE"))
+      (insert (format-time-string format))))
+(global-set-key (kbd "C-c d") 'insert-date)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-hook 'write-file-hooks 'time-stamp)
+(setq time-stamp-format "%:u %04y/%02m/%02d %02H:%02M:%02S")
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(add-to-list 'load-path (concat path-to "emacs-async-master/"))
+(autoload 'dired-async-mode "dired-async.el" nil t)
+(dired-async-mode 1)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; @anything to @helm [2015-12-25]
+  ; https://github.com/emacs-helm/helm
+;; [Facultative] Only if you have installed async.
+  (add-to-list 'load-path (concat path-to "helm-master/"))
+;  (package-install 'helm)
+;  (require 'helm-config)
+  (global-set-key (kbd "C-c h") 'helm-mini)
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; A smart M-x enhancement for Emacs.  [2015-07-15]
+(add-to-list 'load-path (concat path-to "smex-master/"))
+(require 'smex) 
+; Not needed if you use package.el
+(smex-initialize) 
+; Can be omitted. This might cause a (minimal) delay
+                  ; when Smex is auto-initialized on its first run.
+
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  @helm, helm-bibtex
+; @err, can not load parsebib
+; @success, Cannot open load file -> (add-to-list ‘load-path “/Users/user_name/bin/”)
+; ;; Requirements are parsebib, helm, s, dash, and f.  The easiest way
+; *** @parsebib @google, https://github.com/joostkremers/parsebib, @Preamble, @String, or @Comment
+; https://github.com/tmalsburg/helm-bibtex
+; *** @dash can not load parsebib
+; https://github.com/magnars/dash.el
+; *** @s can not load s and f
+; https://github.com/magnars/s.el
+; https://github.com/rejeep/f.el
+; *** @success, parsebib, dash, s and f finally
+(add-to-list 'load-path (concat path-to "f.el-master/"))
+(require 'f)
+(add-to-list 'load-path (concat path-to "s.el-master/"))
+(require 's)
+(add-to-list 'load-path (concat path-to "dash.el-master/"))
+(require 'dash) 
+; A modern list library for Emacs 
+; All functions and constructs in the library are prefixed with a dash (-).
+
+(add-to-list 'load-path (concat path-to "parsebib-master/"))
+(require 'parsebib)
+(add-to-list 'load-path (concat path-to "helm-bibtex-master/"))
+(autoload 'helm-bibtex "helm-bibtex" "" t)
+; (setq helm-bibtex-bibliography '("/path/to/bibtex-file-1.bib" "/path/to/bibtex-file-2.bib"))
+(setq helm-bibtex-bibliography '("D:/bib1410/bib1410.bib" "D:/bib1410/bib1505.bib" "D:/bib1410/bib1506.bib" ))
+ 
+(setq helm-bibtex-library-path "D:/bib1410/paper1410/" )
+; (setq helm-bibtex-library-path '("/path1/to/pdfs" "/path2/to/pdfs"))
+; (setq helm-bibtex-notes-path "/path/to/notes.org")
+(setq helm-bibtex-notes-path "D:/GTD18/bib_notes.org")
+(setq helm-bibtex-pdf-symbol "⌘")
+(setq helm-bibtex-notes-symbol "✎")
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-to-list 'load-path path-to)  
-; [2015-12-22]
-; (add-to-list 'load-path "D:/dotemacsw")  ; /20141023
 (require 'linum)
 (global-linum-mode 1)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Ctex: C:\CTEX\MiKTeX\miktex\bin
-;(setq path "C:\CTEX\MiKTeX\miktex\bin:")
-;(setenv "PATH" path)
- 
-;;Auctex, /141023
-(add-to-list 'load-path (concat path-to "site-lisp/site-start.d"))
-(add-to-list 'load-path (concat path-to "site-lisp/site-start.d"))  ; very important, /20141023
-(load "auctex.el" nil t t)
-(load "preview-latex.el" nil t t)
-(setq TeX-auto-save t)
-(setq TeX-parse-self t)
-(setq-default TeX-master nil)
-(setq preview-scale-function 1.3)
-(setq LaTeX-math-menu-unicode t)
-(setq TeX-insert-braces nil)
-(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-;; RefTeX with AUCTeX
-;; reftex, /141023
-(setq reftex-plug-into-auctex t)
-(add-hook 'latex-mode-hook 'turn-on-reftex) 
-(setq reftex-cite-format 'natbib) 
- ; cite-style, /141023
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;  C:\Program Files (x86)\Git [2015-12-23]
+;; (add-to-list 'load-path (concat path-to "git-emacs-master/"))
+;; ;(add-to-list 'load-path "C:/git-emacs-master")
+;; ;(add-to-list 'load-path "C:/Program Files (x86)/git-emacs-master")
+;; (if (string-equal system-type "windows-nt")
+;; (progn (add-to-list 'exec-path "C:/Program Files (x86)/Git/bin")))
+;; ; * @emacs
+;; ; (add-to-list 'exec-path "C:/Program Files (x86)/Git/bin")
+;; (require 'git-emacs)
+;; ; @key, @success, 'exec-path, ctrl-h v check value
+;; ; permisson denied, git
+;; ; add its path (location) to the value of exec-path.
 
+;; ; ** @git-emacs, defvar, ctrl-h v: git--repository-dir for git-init
+;; (setq git--repository-dir git-to)
 
-;; "XeLaTeX", xetex, /141103
-;(setq TeX-PDF-mode t) ; annual, c-c,c-t, c -p, /140318
-(add-hook 'LaTeX-mode-hook (lambda()
-                              (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
-                              (setq TeX-command-default "XeLaTeX")
-                                 (setq TeX-save-query  nil )
-                                  (setq TeX-show-compilation t) 
-                                                               ))
-(setq tex-engine 'xetex)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;predictive, 141104
-  ;; predictive install location
-     (add-to-list 'load-path (concat path-to "predictive"))
-     ;; dictionary locations
-     (add-to-list 'load-path (concat path-to "predictive/latex/"))
-     (add-to-list 'load-path (concat path-to "predictive/texinfo/"))
-     (add-to-list 'load-path (concat path-to "predictive/html/"))
-    (autoload 'predictive-mode (concat path-to "predictive/") "Turn on Predictive Completion Mode." t)
-;    (autoload 'predictive-mode (concat path-to "predictive/" "Turn on Predictive Completion Mode." t))
-     ;; load predictive package
-;     (require 'predictive)
-;(autoload 'predictive-mode "D:/Emacs14/predictive/predictive" "Turn on Predictive Completion Mode." t)
-; delete predictive, /141110
+;; 高亮当前行：hi-line.el,emacs自己带的, /[2014-11-06]
+; (require 'hl-line)  
+; (global-hl-line-mode t) 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; auto-complete, [2014-11-06]
+(add-to-list 'load-path (concat path-to "auto-complete-master/"))
+; (add-to-list 'load-path (concat path-to "auto-complete-master"))
+; (add-to-list 'ac-dictionary-directories "D:/dotemacsw/auto-complete-master/ac-dict")
+(require 'auto-complete)
+(require 'auto-complete-config)
+(ac-config-default)
+(add-to-list 'ac-dictionary-directories (concat path-to "auto-complete-master/ac-dict"))
+(auto-complete-mode 1) 
+; add, /141126
+;; (add-to-list 'load-path "D:/dotemacsw/")
+;; (require 'popup)
+; 2.6 设置auto-complete的触发键, [[http://blog.csdn.net/winterttr/article/details/7524336]]
+(add-to-list 'load-path (concat path-to "auto-complete-master/"))
+; (add-to-list 'load-path "D:/dotemacsw/auto-complete-master/")
+(require 'ac-ispell)
+(eval-after-load "auto-complete" '(progn (ac-ispell-setup)))
+(add-hook 'git-commit-mode-hook 'ac-ispell-ac-setup)
+(add-hook 'mail-mode-hook 'ac-ispell-ac-setup)
+
+; error enabling flyspell mode, ispell-set-spellcheker, /141106
+(setq flyspell-issue-welcome-flag nil)
+;; fix flyspell problem
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; must require ac-ispell, error, /141104
 ;(add-to-list 'load-path "D:/Emacs14/auto-complete-master")
@@ -232,171 +283,131 @@
 (ispell-minor-mode) 
 ; (ispell-set-spellchecker-params)
  ; Initialize variables and dicts alists
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; auto-complete, /141106
-(add-to-list 'load-path (concat path-to "auto-complete-master"))
-; (add-to-list 'ac-dictionary-directories "D:/dotemacsw/auto-complete-master/ac-dict")
-(require 'auto-complete)
-(require 'auto-complete-config)
-(ac-config-default)
-(add-to-list 'ac-dictionary-directories (concat path-to "auto-complete-master/ac-dict"))
-(auto-complete-mode 1) 
-; add, /141126
-;; (add-to-list 'load-path "D:/dotemacsw/")
-;; (require 'popup)
-
-;; (add-to-list 'load-path "D:/dotemacsw/")
-;; (require 'fuzzy)
-;; (setq ac-fuzzy-enable t)
-; 使用pos-tip模式 or popup (previous mac), /141112
-; fuzzy, https://github.com/m2ym/fuzzy-el
-
-;revise for win, /141106,  must put last, /140309
-
-; 2.6 设置auto-complete的触发键, [[http://blog.csdn.net/winterttr/article/details/7524336]]
-; (setq ac-auto-start nil)              ;auto complete using clang is CPU sensitive
-; (ac-set-trigger-key "<C-return>")
-; (ac-set-trigger-key "<M-return>")
-; (ac-set-trigger-key "<S-return>")
-; ALT INTO M-return, /141112
-
-; auto-complete, /141118
-; (global-set-key "\C-cp" 'auto-complete) 
-; (global-set-key (kbd "M-/") 'auto-complete)  
-;; 补全的快捷键，用于需要提前补全
-; 如何修改Win7默认的快捷键: http://www.qi9.cn/html/739_1704.html
-; emacs中使用auto-complete的详细设置 http://blog.csdn.net/winterttr/article/details/7524336
-; M-tab into M-/, Esc-tab, /141124
-;; (setq ac-auto-start nil)              ;auto complete using clang is CPU sensitive
-;; (ac-set-trigger-key "<M-/>")
-
-;; must require ac-ispell, /140309, must not use, then success /140309 
-; (add-to-list 'load-path "D:/dotemacsw/auto-complete-master/ac-ispell.el")
-; delete ac-ispell.el, / [2014-11-12]
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Ctex: C:\CTEX\MiKTeX\miktex\bin
+;(setq path "C:\CTEX\MiKTeX\miktex\bin:")
+;(setenv "PATH" path)
+ 
+;; Auctex, /[2014-10-23]
+;; (add-to-list 'load-path (concat path-to "site-lisp/site-start.d"))
+;; (add-to-list 'load-path (concat path-to "site-lisp/site-start.d"))  ; very important, /20141023
+;; (load "auctex.el" nil t t)
+;; (load "preview-latex.el" nil t t)
+;; (setq TeX-auto-save t)
+;; (setq TeX-parse-self t)
+;; (setq-default TeX-master nil)
+;; (setq preview-scale-function 1.3)
+;; (setq LaTeX-math-menu-unicode t)
+;; (setq TeX-insert-braces nil)
+;; (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+;; ;; RefTeX with AUCTeX
+;; ;; reftex, /141023
+;; (setq reftex-plug-into-auctex t)
+;; (add-hook 'latex-mode-hook 'turn-on-reftex) 
+;; (setq reftex-cite-format 'natbib) 
+ ; cite-style, /141023
 
 
-(add-to-list 'load-path (concat path-to "auto-complete-master/"))
-; (add-to-list 'load-path "D:/dotemacsw/auto-complete-master/")
-(require 'ac-ispell)
-(eval-after-load "auto-complete" '(progn (ac-ispell-setup)))
-(add-hook 'git-commit-mode-hook 'ac-ispell-ac-setup)
-(add-hook 'mail-mode-hook 'ac-ispell-ac-setup)
+;; "XeLaTeX", xetex, / [2014-11-03]
+;(setq TeX-PDF-mode t) ; annual, c-c,c-t, c -p, /140318
+;; (add-hook 'LaTeX-mode-hook (lambda()
+;;                               (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
+;;                               (setq TeX-command-default "XeLaTeX")
+;;                                  (setq TeX-save-query  nil )
+;;                                   (setq TeX-show-compilation t) 
+;;                                                                ))
+;; (setq tex-engine 'xetex)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; error enabling flyspell mode, ispell-set-spellcheker, /141106
-(setq flyspell-issue-welcome-flag nil)
-;; fix flyspell problem
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq auto-save-default t)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; ** @git-emac git-emacs, [2015-12-23] / [2014-11-06]
-; *** C:\Program Files (x86)\Git [2015-12-23]
-(add-to-list 'load-path (concat path-to "git-emacs-master/"))
-;(add-to-list 'load-path "C:/git-emacs-master")
-;(add-to-list 'load-path "C:/Program Files (x86)/git-emacs-master")
-(if (string-equal system-type "windows-nt")
-(progn (add-to-list 'exec-path "C:/Program Files (x86)/Git/bin")))
-; * @emacs
-; (add-to-list 'exec-path "C:/Program Files (x86)/Git/bin")
-(require 'git-emacs)
-; @key, @success, 'exec-path, ctrl-h v check value
-; permisson denied, git
-; add its path (location) to the value of exec-path.
-
-; ** @git-emacs, defvar, ctrl-h v: git--repository-dir for git-init
-(setq git--repository-dir git-to)
-
-;; 高亮当前行：hi-line.el,emacs自己带的, /[2014-11-06]
-; (require 'hl-line)  
-; (global-hl-line-mode t) 
-
-; time-stamp, /141106
-(add-hook 'write-file-hooks 'time-stamp)
-(setq time-stamp-format "%:u %04y/%02m/%02d %02H:%02M:%02S")
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; @mew, email, @success, work [2015-12-21]
-    ;;装载Mew, /141107
-    (add-to-list 'load-path (concat path-to "mew-lisp"))
-    (autoload 'mew "mew" nil t)
-    (autoload 'mew-send "mew" nil t)
-    (setq mew-icon-directory (concat path-to "mew-lisp/etc"))
-    (setq mew-use-cached-passwd t)
-    (if (boundp 'read-mail-command)
-    (setq read-mail-command 'mew))
-    (autoload 'mew-user-agent-compose "mew" nil t)
-    (if (boundp 'mail-user-agent)
-    (setq mail-user-agent 'mew-user-agent))
-    (if (fboundp 'define-mail-user-agent)
-    (define-mail-user-agent
-    'mew-user-agent
-    'mew-user-agent-compose
-    'mew-draft-send-message
-    'mew-draft-kill
-    'mew-send-hook))
-    (setq mew-pop-size 0)
-    (setq mew-smtp-auth-list nil)
-    (setq toolbar-mail-reader 'Mew)
-    (set-default 'mew-decode-quoted 't)
-    (when (boundp 'utf-translate-cjk)
-    (setq utf-translate-cjk t)
-    (custom-set-variables
-    '(utf-translate-cjk t)))
-    (if (fboundp 'utf-translate-cjk-mode)
-    (utf-translate-cjk-mode 1))
-   ; (require 'mew-w3m) ;需要w3m支持，看html邮件
-    (setq mew-config-alist '(
-    ("default"
-    ("name" . "xiaoanhuang")
-    ("user" . "xiaoanhuang")
-    ("smtp-server" . "smtp.163.com")
-    ("smtp-port" . "25")
-    ("pop-server" . "pop3.163.com")
-    ("pop-port" . "110")
-    ("smtp-user" . "xiaoanhuang")
-    ("pop-user" . "xiaoanhuang")
-    ("mail-domain" . "163.com")
-    ("mailbox-type" . pop)
-    ("pop-auth" . pass)
-    ("smtp-auth-list" . ("PLAIN" "LOGIN" "CRAM-MD5"))
-    )
-    ))
-    (setq mew-ssl-verify-level 0)
+    ;;装载Mew, [2014-11-07]
+    ;; (add-to-list 'load-path (concat path-to "mew-lisp"))
+    ;; (autoload 'mew "mew" nil t)
+    ;; (autoload 'mew-send "mew" nil t)
+    ;; (setq mew-icon-directory (concat path-to "mew-lisp/etc"))
+    ;; (setq mew-use-cached-passwd t)
+    ;; (if (boundp 'read-mail-command)
+    ;; (setq read-mail-command 'mew))
+    ;; (autoload 'mew-user-agent-compose "mew" nil t)
+    ;; (if (boundp 'mail-user-agent)
+    ;; (setq mail-user-agent 'mew-user-agent))
+    ;; (if (fboundp 'define-mail-user-agent)
+    ;; (define-mail-user-agent
+    ;; 'mew-user-agent
+    ;; 'mew-user-agent-compose
+    ;; 'mew-draft-send-message
+    ;; 'mew-draft-kill
+    ;; 'mew-send-hook))
+    ;; (setq mew-pop-size 0)
+    ;; (setq mew-smtp-auth-list nil)
+    ;; (setq toolbar-mail-reader 'Mew)
+    ;; (set-default 'mew-decode-quoted 't)
+    ;; (when (boundp 'utf-translate-cjk)
+    ;; (setq utf-translate-cjk t)
+    ;; (custom-set-variables
+    ;; '(utf-translate-cjk t)))
+    ;; (if (fboundp 'utf-translate-cjk-mode)
+    ;; (utf-translate-cjk-mode 1))
+    ;; (setq mew-config-alist '(
+    ;; ("default"
+    ;; ("name" . "xiaoanhuang")
+    ;; ("user" . "xiaoanhuang")
+    ;; ("smtp-server" . "smtp.163.com")
+    ;; ("smtp-port" . "25")
+    ;; ("pop-server" . "pop3.163.com")
+    ;; ("pop-port" . "110")
+    ;; ("smtp-user" . "xiaoanhuang")
+    ;; ("pop-user" . "xiaoanhuang")
+    ;; ("mail-domain" . "163.com")
+    ;; ("mailbox-type" . pop)
+    ;; ("pop-auth" . pass)
+    ;; ("smtp-auth-list" . ("PLAIN" "LOGIN" "CRAM-MD5"))
+    ;; )
+    ;; ))
+;     (setq mew-ssl-verify-level 0)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; predictive install location
+(add-to-list 'load-path (concat path-to "predictive"))
+     ;; dictionary locations
+(add-to-list 'load-path (concat path-to "predictive/latex/"))
+(add-to-list 'load-path (concat path-to "predictive/texinfo/"))
+ (add-to-list 'load-path (concat path-to "predictive/html/"))
+ (autoload 'predictive-mode (concat path-to "predictive/") "Turn on Predictive Completion Mode." t)
+;    (autoload 'predictive-mode (concat path-to "predictive/" "Turn on Predictive Completion Mode." t))
+     ;; load predictive package
+;     (require 'predictive)
+;(autoload 'predictive-mode "D:/Emacs14/predictive/predictive" "Turn on Predictive Completion Mode." t)
+; delete predictive, /141110
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; emacs 自带的 bs.el 更好用, cool, /141107
-; http://blog.csdn.net/ruglcc/article/details/7826604
-(global-set-key "\C-x\C-b" 'bs-show) 
-   ;; or another key
-(global-set-key "\M-p"  'bs-cycle-previous)
-(global-set-key "\M-n"  'bs-cycle-next)
-
-; session to recover last  butter. /141107
-; (require 'session) 
-;;加载session
-; (add-hook 'after-init-hook 'session-initialize) 
-
-;; 启动时初始化session
-(desktop-save-mode 1)
-; Java有生成文档的javadoc，C++的话，就要用Doxygen了。
-;; 语法高亮, /141107
-(global-font-lock-mode t)
-
-; :Enabling Flyspell mode gave an error  (ispell-set-spellchecker-params)
-; /141110
-
-; /141113,  emacs中如何设置自动换行的功能, 1、M－x：customize-option；2、输入truncate-partial-width-windows，使用过程中为防止命令拼写错误，可以用Tab键补齐；3、将设置页面中的参数改为off，然后点击保存按钮（save for furture sessions），再点击finish按钮。
-
-; (require 'tramp)
-; (setq tramp-default-method "plink")
-
-; comment-region, nice /141117.
-(global-set-key (kbd "C-c C-/") 'comment-region)
-(global-set-key (kbd "C-c C-/") 'uncomment-region)
-(global-set-key [?\C-c ?\C-/] 'comment-or-uncomment-region)
-
-; (setq org-completion-use-iswitchb t)
-;  c-h v iswitchb-mode，然后点 customize 就行了。
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-cc" 'org-capture)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cb" 'org-iswitchb)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; mobile-org, [2014-12-16]
+; (setq org-mobile-directory "D:/GTD18/mobile-org/")
+(setq org-mobile-files (quote ( (concat git-to "HXA.OFDM.PON.org")  (concat git-to "journal.org")  (concat git-to "project.org")  (concat git-to "task.org")  (concat git-to "note.org") )))
+; (setq org-mobile-index-file "D:/GTD18/inbox.org")
+; (setq org-mobile-index-file "inbox.org")
+; (setq org-mobile-inbox-for-pull "D:/GTD18/fromMobile.org")
+; (setq org-mobile-inbox-for-pull "D:/GTD18/inbox.org")
+; no executable found to compute checksums
+;; (defcustom org-mobile-checksum-binary (or (executable-find "shasum")
+;;                                          (executable-find "sha1sum")
+;;                                          (executable-find "md5sum")
+;;                                          (executable-find "md5"))
+;;  "Executable used for computing checksums of agenda files."
+;;  :group 'org-mobile
+;;  :type 'string)
+; org-mobile-checksum-binary: nil
+;  Basically the checksums.dat file only contains the checksums for index.org, mobileorg.org and agendas.org.
+; mobileorg - "No executable found to compute checksums": -http://comments.gmane.org/gmane.emacs.orgmode/26838
 
 ; org-capture, / [2014-11-27]
 (setq org-capture-templates '(
@@ -419,8 +430,6 @@
 ; (setq org-directory (concat git-to "/") 
 (setq org-remember-templates '(("New" ?n "* %? %t \n %i\n %a" (concat git-to "inbox.org") ) ("Task" ?t "** TODO %?\n %i\n %a" (concat git-to "task.org") "Tasks") ("Calendar" ?c "** TODO %?\n %i\n %a" (concat git-to "task.org") "Tasks") ("Idea" ?i "** %?\n %i\n %a" (concat git-to "task.org") "Ideas") ("Note" ?r "* %?\n %i\n %a" (concat git-to "note.org") ) ("Project" ?p "** %?\n %i\n %a" (concat git-to "project.org") %g)  ("Journal" ?j "* %?\n %i\n %a" (concat git-to "journal.org") )  )) 
 (setq org-default-notes-file (concat org-directory "inbox.org"))
-
-
 ; set org-remember, /141118
 ; (org-remember-insinuate)
 ; (setq org-directory "D:/GTD18/") 
@@ -450,75 +459,18 @@
 ;; beamer class, for presentations
 ;; (setq org-export-latex-classes nil)
 ;; (add-to-list 'org-export-latex-classes 
-;; 	     '("beamer"
-;; 	       \documentclass{beamer}
-;; 	       \mode
-;; 	       \usetheme{{{{Warsaw}}}}
-;; 	       \beamertemplateballitem
-;; 	       \setbeameroption{show notes}
-;; 	       \usepackage{graphicx}
-;; 	       \usepackage{lmodern}
-;; 	       \hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
-;; 	       ;\mode<beamer>{\usetheme{Boadilla}}
-;; 	       ;\AtBeginSection[]{\begin{frame}<beamer>\frametitle{Topic}\tableofcontents[currentsection]\end{frame}}  
+;;           '("beamer"
+;;             \documentclass{beamer}
+;;             \mode
+;;             \usetheme{{{{Warsaw}}}}
+;;             \beamertemplateballitem
+;;             \setbeameroption{show notes}
+;;             \usepackage{graphicx}
+;;             \usepackage{lmodern}
+;;             \hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+;;             ;\mode<beamer>{\usetheme{Boadilla}}
+;;             ;\AtBeginSection[]{\begin{frame}<beamer>\frametitle{Topic}\tableofcontents[currentsection]\end{frame}}  
 ;; ) )
-
-
- ;; VERY CAREFUL, m-x customize-variable, /141118, custom-set-variables was added by Custom.
-; C:\Users\xiaoanh\AppData\Roaming\.notes
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(elfeed-db-directory (concat path-to "elfeed_db"))
- '(elfeed-feeds (quote ("youtube.com" "http://nullprogram.com/feed/" "http://www.terminally-incoherent.com/blog/feed/")))
-  '(org-agenda-files (quote ("d:/gitlib/orglib/HXA_Report.org" "d:/gitlib/orglib/paper.org" "d:/gitlib/orglib/study.org" "d:/gitlib/orglib/journal.org" "d:/gitlib/orglib/project.org" "d:/gitlib/orglib/task.org" "d:/gitlib/orglib/note.org")))
-;  '(org-agenda-files (quote ( (concat path-to "HXA_Report.org") (concat path-to "paper.org" ) (concat path-to "study.org") (concat path-to "journal.org") (concat path-to "project.org") (concat path-to "task.org") (concat path-to "note.org"))))
-; '(org-agenda-files (quote ("d:/GTD18/HXA_Report.org" "d:/GTD18/paper.org" "d:/GTD18/study.org" "d:/GTD18/journal.org" "d:/GTD18/project.org" "d:/GTD18/task.org" "d:/GTD18/note.org")))
- '(org-capture-templates (quote (("t" "Task" entry (file+headline (concat git-to "task.org") "Tasks") "* TODO %?
- %i
- %a") ("j" "Journal" entry (file+datetree (concat git-to "journal.org")) "* %?
-Entered on %U
- %i
- %a") ("n" "Note" entry (file+datetree (concat git-to "note.org")) "* %?
-Entered on %U
- %i
- %a") ("p" "Project" entry (file+datetree (concat git-to "project.org")) "* %?
-Entered on %U
- %i
- %a"))) t)
- '(org-mobile-directory "D:/mobile-org/")
- '(session-use-package t nil (session))
- '(show-paren-mode t)
- '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
- '(truncate-partial-width-windows nil)
- '(user-full-name "xiaoanh")
- '(user-mail-address "xiaoanhuang@163.com"))
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
-
-; mobile-org, [2014-12-16]
-; (setq org-mobile-directory "D:/GTD18/mobile-org/")
-(setq org-mobile-files (quote ( (concat git-to "HXA.OFDM.PON.org")  (concat git-to "journal.org")  (concat git-to "project.org")  (concat git-to "task.org")  (concat git-to "note.org") )))
-; (setq org-mobile-index-file "D:/GTD18/inbox.org")
-; (setq org-mobile-index-file "inbox.org")
-; (setq org-mobile-inbox-for-pull "D:/GTD18/fromMobile.org")
-; (setq org-mobile-inbox-for-pull "D:/GTD18/inbox.org")
-; no executable found to compute checksums
-;; (defcustom org-mobile-checksum-binary (or (executable-find "shasum")
-;;                                          (executable-find "sha1sum")
-;;                                          (executable-find "md5sum")
-;;                                          (executable-find "md5"))
-;;  "Executable used for computing checksums of agenda files."
-;;  :group 'org-mobile
-;;  :type 'string)
-; org-mobile-checksum-binary: nil
-;  Basically the checksums.dat file only contains the checksums for index.org, mobileorg.org and agendas.org.
-; mobileorg - "No executable found to compute checksums": -http://comments.gmane.org/gmane.emacs.orgmode/26838
-
 
 ; todo, tag, pre-setting
 ; org-mode 使用: URL: http://blog.sina.com.cn/s/blog_818b48820101pmmu.html
@@ -559,28 +511,6 @@ Entered on %U
     (?E . (:background "SkyBlue" :foreground "black" :weight bold))
 ))
 
-
-; auto-save, /141121
-(setq auto-save-default t)
-
-
-;yas install, /141125
-(add-to-list 'load-path (concat path-to "yasnippet-master/"))
-(require 'yasnippet)
-; (setq yas/prompt-functions '(yas/dropdown-prompt yas/x-prompt yas/completing-prompt yas/ido-prompt yas/no-prompt))
-; 以minor mode打开，这样才能配合主mode使用
-; yas, snippet, /141125
-; (yas/initialize)
-; (add-to-list 'yas/root-directory (concat path-to "yasnippet-master/snippets/"))
-;; default TAB key is occupied by auto-complete
-; (global-set-key (kbd "C-c e") 'yas/expand)
-
-;; default hotkey `C-c & C-s` is still valid
-; (global-set-key (kbd "C-c ; s") 'yas/insert-snippet)
-; (yas/global-mode 1)
-;(yas/minor-mode-on) 
-
-
 ; ORG-capture, /141126
 ; M-x org-capture-import-remember-templates RET
 ; (setq org-directory "D:/GTD18/") 
@@ -593,26 +523,27 @@ Entered on %U
 
 ; Epresent <2014-12-10>
 ; Debugger entered--Lisp error: (file-error "Cannot open load file" "ox")  require(ox)
-(add-to-list 'load-path (concat path-to "epresent-master"))
+; (add-to-list 'load-path (concat path-to "epresent-master"))
 ; (require 'epresent)
 ; epresent and reveal fail, due to ox missing and latest org-mode 8.0, [2015-07-07]
 
+;; *** org-present no use
 ; replace epresent with org-present, [2015-07-06]
-(autoload 'org-present "org-present" nil t)
-(eval-after-load "org-present"
-  '(progn
-     (add-hook 'org-present-mode-hook
-               (lambda ()
-                 (org-present-big)
-                 (org-display-inline-images)
-                 (org-present-hide-cursor)
-                 (org-present-read-only)))
-     (add-hook 'org-present-mode-quit-hook
-               (lambda ()
-                 (org-present-small)
-                 (org-remove-inline-images)
-                 (org-present-show-cursor)
-                 (org-present-read-write)))))
+;; (autoload 'org-present "org-present" nil t)
+;; (eval-after-load "org-present"
+;;   '(progn
+;;      (add-hook 'org-present-mode-hook
+;;                (lambda ()
+;;                  (org-present-big)
+;;                  (org-display-inline-images)
+;;                  (org-present-hide-cursor)
+;;                  (org-present-read-only)))
+;;      (add-hook 'org-present-mode-quit-hook
+;;                (lambda ()
+;;                  (org-present-small)
+;;                  (org-remove-inline-images)
+;;                  (org-present-show-cursor)
+;;                  (org-present-read-write)))))
 
 ; org-presie, https://github.com/nicferrier/org-presie
 ; (require 'org-presie)
@@ -642,21 +573,22 @@ Entered on %U
 ; can not find ditaa.jar can be found in contrib/scripts
 ; C:\Users\xiaoanh\Downloads\Emacs24.3\lisp
 
+;; *** @ido and tabbar, no use
 ; ido, anything, <2014-12-24>
-(require 'ido)
-(ido-mode t)
+;; (require 'ido)
+;; (ido-mode t)
 
  
-; tabbar, speedbar, <2014-12-24>
-; http://blog.csdn.net/CherylNatsu/article/details/6204737
-; http://laokaddk.blog.51cto.com/368606/593613/
-(add-to-list 'load-path  path-to)  
-(require 'tabbar)
-(tabbar-mode 1)
-(global-set-key [(meta j)] 'tabbar-backward)  
-(global-set-key [(meta k)] 'tabbar-forward)  
-(global-set-key  [(meta g)]  'tabbar-backward-group)
-(global-set-key  [(meta h)]  'tabbar-forward-group)
+;; ; tabbar, speedbar, <2014-12-24>
+;; ; http://blog.csdn.net/CherylNatsu/article/details/6204737
+;; ; http://laokaddk.blog.51cto.com/368606/593613/
+;; (add-to-list 'load-path  path-to)  
+;; (require 'tabbar)
+;; (tabbar-mode 1)
+;; (global-set-key [(meta j)] 'tabbar-backward)  
+;; (global-set-key [(meta k)] 'tabbar-forward)  
+;; (global-set-key  [(meta g)]  'tabbar-backward-group)
+;; (global-set-key  [(meta h)]  'tabbar-forward-group)
 ;(global-set-key (kbd "<M-left>") 'tabbar-backward)
 ;(global-set-key (kbd "<M-right>") 'tabbar-forward)
 
@@ -671,8 +603,8 @@ Entered on %U
 ; define color theme 
 ;(load "D:/dotemacsw/color-theme-molokai.el")
 
-(add-to-list 'load-path (concat path-to "themes"))
-(require 'color-theme)
+; (add-to-list 'load-path (concat path-to "themes"))
+; (require 'color-theme)
 ; (setq color-theme-is-global t)
 ; (color-theme-initialize)
 ; (color-theme-matrix)
@@ -684,15 +616,15 @@ Entered on %U
 
 ; redo,<2015-01-16>
 ; http://www.wonderworks.com/download/redo.el
-(add-to-list 'load-path  path-to)  
-(require 'redo) 
-(global-set-key ( kbd "C-.") 'redo)
+;; (add-to-list 'load-path  path-to)  
+;; (require 'redo) 
+;; (global-set-key ( kbd "C-.") 'redo)
 
 ; 进度记录 <2015-01-16>
 (setq org-log-done 'time)
 (setq org-log-done 'note)
 
-
+;; ** @bib
 ; http://blog.waterlin.org/articles/bind-emacs-org-mode-with-bibtex.html
 (setq reftex-default-bibliography
       (quote
@@ -700,6 +632,7 @@ Entered on %U
 ; (define-key org-mode-map (kbd "C-c )") 'reftex-citation)
 ; repeat, [2015-01-30]
 
+;; ** @bib
 ;; 利用 Emacs 的 org-mode 管理文献, <2015-01-27>
 ;; https://wiki.freebsdchina.org/doc/r/reference
 ;; 定义 org-mode-reftex-search
@@ -716,3 +649,4 @@ Entered on %U
 ;    ("notes" . (concat git-to "notes.org::%s")
    ("figs" . "D:/figure1411/%s.png")
    ("papers" . "D:/bib1410/paper1410/%s.pdf")))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
