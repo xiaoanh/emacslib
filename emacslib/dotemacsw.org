@@ -1,6 +1,52 @@
 
 * @basic
+** @basic: @init
+#+BEGIN_SRC emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;;; init.el --- Where all the magic begins
+    ;;
+    ;; This file loads Org-mode and then loads the rest of our Emacs initialization from Emacs lisp
+    ;; embedded in literate Org-mode files.
+    
+    ;; Load up Org Mode and (now included) Org Babel for elisp embedded in Org Mode files
+    (setq dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name)))
+    (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
+    (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
+    (require 'org-install)
+    (require 'ob-tangle)
+    (setq initial-user-file (concat dotfiles-dir "dotemacsw.el"))
+    ;; load up all literate org-mode files in this directory
+    ; (mapc #'org-babel-load-file (directory-files dotfiles-dir t "\\.org$"))
+   
+   ; @key: exec then unexec inside .org [2015-12-25 Fri]    
+   ; (org-babel-load-file (concat dotfiles-dir "dotemacsw.org"))
+    ;;; init.el ends here
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
+** @basic: @custom
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+BEGIN_SRC emacs-lisp
+ ;; font. m-x just once, support CHN, /141104
+  (set-locale-environment "English")
+  ; @key, DONE [2015-08-07]
+  (set-language-environment "utf-8")
+  (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (prefer-coding-system 'utf-8)
+  
+  ;; Face set-faces, /[2014-10-23]
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(default ((t (:inherit nil :stipple nil :background "Black" :foreground "gray85" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "apple" :family "Menlo")))))
+  (put 'upcase-region 'disabled nil)
+  (put 'downcase-region 'disabled nil)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+#+END_SRC
 ** @basic: @gitlib: path-to  [2015-12-24]
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+BEGIN_SRC emacs-lisp
   ;; check OS type
   (cond
@@ -17,10 +63,11 @@
     (progn
       (message "Linux"))))
 #+END_SRC
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ** @basic: @bitlib: git-to, is for org files, [2015-12-24]
 
 #+BEGIN_SRC emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (cond
  ((string-equal system-type "windows-nt") ; Microsoft Windows
   (progn
@@ -36,10 +83,12 @@
  ((string-equal system-type "gnu/linux") ; linux
   (progn
     (message "Linux"))))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 
 ** @basic: @kbd
 #+BEGIN_SRC emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; emacs 自带的 bs.el 更好用, cool, /141107
 ; http://blog.csdn.net/ruglcc/article/details/7826604
 (global-set-key "\C-x\C-b" 'bs-show) 
@@ -60,11 +109,13 @@
 ; /141110
 
 ; /141113,  emacs中如何设置自动换行的功能, 1、M－x：customize-option；2、输入truncate-partial-width-windows，使用过程中为防止命令拼写错误，可以用Tab键补齐；3、将设置页面中的参数改为off，然后点击保存按钮（save for furture sessions），再点击finish按钮。
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 
 ** @basic: @kbd
 
 #+BEGIN_SRC emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; (require 'tramp)
 ; (setq tramp-default-method "plink")
 
@@ -79,17 +130,111 @@
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 
+*** @defun
+#+BEGIN_SRC emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; @defun insert-date
+(defun insert-date (prefix)
+    "Insert the current date. With prefix-argument, use ISO format. With
+   two prefix arguments, write out the day and month name."
+    (interactive "P")
+    (let ((format (cond
+;	     ((not prefix) "%Y-%m-%d")
+                   ((not prefix) "[%Y-%m-%d]")
+                   ((equal prefix '(4)) "%d.%m.%Y")
+                   ((equal prefix '(16)) "%A, %d. %B %Y")))
+          (system-time-locale "de_DE"))
+      (insert (format-time-string format))))
+(global-set-key (kbd "C-c d") 'insert-date)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
 ** @basic: time-stamp, [2014-11-06]
 #+BEGIN_SRC emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-hook 'write-file-hooks 'time-stamp)
 (setq time-stamp-format "%:u %04y/%02m/%02d %02H:%02M:%02S")
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 
 * @other
+** @async emacs-async-master for helm
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'load-path (concat path-to "emacs-async-master/"))
+(autoload 'dired-async-mode "dired-async.el" nil t)
+(dired-async-mode 1)
+#+END_SRC
+** @helm, fail, delete @anything [2015-12-25]
+#+BEGIN_SRC emacs-lisp
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ; @anything to @helm [2015-12-25]
+    ; https://github.com/emacs-helm/helm
+  ;; [Facultative] Only if you have installed async.
+    (add-to-list 'load-path (concat path-to "helm-master/"))
+  ;  (package-install 'helm)
+  ;  (require 'helm-config)
+    (global-set-key (kbd "C-c h") 'helm-mini)
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
+** @smex [2015-12-25]
+#+BEGIN_SRC emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; A smart M-x enhancement for Emacs.  [2015-07-15]
+(add-to-list 'load-path (concat path-to "smex-master/"))
+(require 'smex) 
+; Not needed if you use package.el
+(smex-initialize) 
+; Can be omitted. This might cause a (minimal) delay
+                  ; when Smex is auto-initialized on its first run.
+
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
+** @helm-bibtex-master
+#+BEGIN_SRC emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  @helm, helm-bibtex
+; @err, can not load parsebib
+; @success, Cannot open load file -> (add-to-list ‘load-path “/Users/user_name/bin/”)
+; ;; Requirements are parsebib, helm, s, dash, and f.  The easiest way
+; *** @parsebib @google, https://github.com/joostkremers/parsebib, @Preamble, @String, or @Comment
+; https://github.com/tmalsburg/helm-bibtex
+; *** @dash can not load parsebib
+; https://github.com/magnars/dash.el
+; *** @s can not load s and f
+; https://github.com/magnars/s.el
+; https://github.com/rejeep/f.el
+; *** @success, parsebib, dash, s and f finally
+(add-to-list 'load-path (concat path-to "f.el-master/"))
+(require 'f)
+(add-to-list 'load-path (concat path-to "s.el-master/"))
+(require 's)
+(add-to-list 'load-path (concat path-to "dash.el-master/"))
+(require 'dash) 
+; A modern list library for Emacs 
+; All functions and constructs in the library are prefixed with a dash (-).
+
+(add-to-list 'load-path (concat path-to "parsebib-master/"))
+(require 'parsebib)
+(add-to-list 'load-path (concat path-to "helm-bibtex-master/"))
+(autoload 'helm-bibtex "helm-bibtex" "" t)
+; (setq helm-bibtex-bibliography '("/path/to/bibtex-file-1.bib" "/path/to/bibtex-file-2.bib"))
+(setq helm-bibtex-bibliography '("D:/bib1410/bib1410.bib" "D:/bib1410/bib1505.bib" "D:/bib1410/bib1506.bib" ))
+ 
+(setq helm-bibtex-library-path "D:/bib1410/paper1410/" )
+; (setq helm-bibtex-library-path '("/path1/to/pdfs" "/path2/to/pdfs"))
+; (setq helm-bibtex-notes-path "/path/to/notes.org")
+(setq helm-bibtex-notes-path "D:/GTD18/bib_notes.org")
+(setq helm-bibtex-pdf-symbol "⌘")
+(setq helm-bibtex-notes-symbol "✎")
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
 ** @linum forcefully, [2013-11-13]
 #+BEGIN_SRC emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-to-list 'load-path path-to)  
 (require 'linum)
 (global-linum-mode 1)
@@ -97,7 +242,8 @@
 #+END_SRC
 ** @git-emac git-emacs, [2015-12-23] / [2014-11-06]
 #+BEGIN_SRC emacs-lisp
-; *** C:\Program Files (x86)\Git [2015-12-23]
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;  C:\Program Files (x86)\Git [2015-12-23]
 ;; (add-to-list 'load-path (concat path-to "git-emacs-master/"))
 ;; ;(add-to-list 'load-path "C:/git-emacs-master")
 ;; ;(add-to-list 'load-path "C:/Program Files (x86)/git-emacs-master")
@@ -122,6 +268,7 @@
 #+END_SRC
 
 ** @ac
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+BEGIN_SRC emacs-lisp
 ;; auto-complete, [2014-11-06]
 (add-to-list 'load-path (concat path-to "auto-complete-master/"))
@@ -185,6 +332,7 @@
 #+END_SRC
 ** @auctex, no use [2015-12-24]
 #+BEGIN_SRC emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Ctex: C:\CTEX\MiKTeX\miktex\bin
 ;(setq path "C:\CTEX\MiKTeX\miktex\bin:")
 ;(setenv "PATH" path)
@@ -222,12 +370,16 @@
 #+END_SRC
 
 ** @auto-save, /141121
+
 #+BEGIN_SRC emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq auto-save-default t)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 
 ** @mew, no use
 #+BEGIN_SRC emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; @mew, email, @success, work [2015-12-21]
     ;;装载Mew, [2014-11-07]
     ;; (add-to-list 'load-path (concat path-to "mew-lisp"))
@@ -274,10 +426,12 @@
     ;; )
     ;; ))
 ;     (setq mew-ssl-verify-level 0)
-#+END_SRC
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
+
 ** @predictive, [2014-11-04]
 #+BEGIN_SRC emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; predictive install location
 (add-to-list 'load-path (concat path-to "predictive"))
      ;; dictionary locations
@@ -290,12 +444,14 @@
 ;     (require 'predictive)
 ;(autoload 'predictive-mode "D:/Emacs14/predictive/predictive" "Turn on Predictive Completion Mode." t)
 ; delete predictive, /141110
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 
 
 ** @org all left is org
 
 #+BEGIN_SRC emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; mobile-org, [2014-12-16]
 ; (setq org-mobile-directory "D:/GTD18/mobile-org/")
 (setq org-mobile-files (quote ( (concat git-to "HXA.OFDM.PON.org")  (concat git-to "journal.org")  (concat git-to "project.org")  (concat git-to "task.org")  (concat git-to "note.org") )))
@@ -555,4 +711,5 @@
 ;    ("notes" . (concat git-to "notes.org::%s")
    ("figs" . "D:/figure1411/%s.png")
    ("papers" . "D:/bib1410/paper1410/%s.pdf")))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
