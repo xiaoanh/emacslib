@@ -1,0 +1,206 @@
+
+
+* @dotemacs_org [2015-12-24 Thu]
+** Emacs Initialization with Babel
+   1. http://orgmode.org/worg/org-contrib/babel/intro.html
+#+BEGIN_SRC emacs-lisp
+  ;;; init.el --- Where all the magic begins
+  ;;
+  ;; This file loads Org-mode and then loads the rest of our Emacs initialization from Emacs lisp
+  ;; embedded in literate Org-mode files.
+  
+  (buffer-file-name)
+  ; -> nil
+  (or (buffer-file-name) load-file-name)
+  ; load-file-name is a variable defined in `C source code'.
+  ; -> Its value is "d:/gitlib/orglib/emacslib/dotemacsw.el"
+  (expand-file-name
+                   "lisp" (expand-file-name
+                           "org" (expand-file-name
+                                  "src" dotfiles-dir)))
+  
+  ;; Load up Org Mode and (now included) Org Babel for elisp embedded in Org Mode files
+  
+  (expand-file-name
+                   "lisp" (expand-file-name
+                           "org-mode-master"  dotfiles-dir))
+  
+  (expand-file-name
+                           "lisp" (expand-file-name
+                                   "contrib" (expand-file-name
+                           "org-mode-master"  dotfiles-dir)))
+
+  (let* ((org-dir (expand-file-name
+                   "lisp" (expand-file-name
+                           "org-mode-master"  dotfiles-dir)))
+         (org-contrib-dir (expand-file-name
+                           "lisp" (expand-file-name
+                                   "contrib" (expand-file-name
+                           "org-mode-master"  dotfiles-dir))))
+         (load-path (append (list org-dir org-contrib-dir)
+                            (or load-path nil)))))
+  ;; (let* ((org-dir (expand-file-name
+  ;;                  "lisp" (expand-file-name
+  ;;                          "org" (expand-file-name
+  ;;                                 "src" dotfiles-dir))))
+  ;;        (org-contrib-dir (expand-file-name
+  ;;                          "lisp" (expand-file-name
+  ;;                                  "contrib" (expand-file-name
+  ;;                                             ".." org-dir))))
+  ;;        (load-path (append (list org-dir org-contrib-dir)
+  ;                          (or load-path nil))))
+  (let* ((org-dir (expand-file-name
+                   "lisp" (expand-file-name
+                           "org-mode-master"  dotfiles-dir))))
+         (org-contrib-dir (expand-file-name
+                           "lisp" (expand-file-name
+                                   "contrib" (expand-file-name
+                           "org-mode-master"  dotfiles-dir))))
+         (load-path (append (list org-dir org-contrib-dir)
+                            (or load-path nil))))
+    ;; load up Org-mode and Org-babel
+    (require 'org-install)
+    (require 'ob-tangle))
+  ;; load up all literate org-mode files in this directory
+  (mapc #'org-babel-load-file (directory-files dotfiles-dir t "\\.org$"))
+  ;;; init.el ends here
+#+END_SRC
+
+** @debug: @err
+*** [#C] @auto, org-install, ob-tangle, recursively load dotemacsw.el for org-bebal-load-filed
+    1. ctrl-h f: ob-tangle.el
+**** @key:   ; (org-babel-load-file (concat dotfiles-dir "dotemacsw.org"))
+       1. comment in dotemacsw.org
+       2. @auto, replace dotemacsw.el
+       3. update, just uncomment in .el
+** @sacha
+*** Configuration
+     1. http://pages.sachachua.com/.emacs.d/Sacha.html
+**** @basic, About this file
+***** org-babel-load-file
+      1. (org-babel-load-file "/path/to/file")
+
+***** C-c ' (org-edit-special)
+***** M-x edebug-defun
+
+* @dotemacs [2015-12-24]
+** @seamless with @win @mac [2015-12-24 Thu]
+*** D:/GTD18 -> D:\gitlib\orglib [2015-12-23]
+*** @helm, helm-bibtex, no use
+*** @auctex, no use @win
+*** @mew, no use @win 
+*** @yas no use, @win install, [2014-11-25]
+*** @org-present no use
+*** @ido and tabbar, no use
+ *** git-emac empty
+***  @git-emac, no use [2015-12-23]
+     1. not in @github
+*** @session no use
+;  '(session-use-package t nil (session))
+** @debug @err [2015-12-23]
+*** M-x toggle-debug-on-error
+    1. Debug on Error disabled globally
+    
+
+*** first git add:push git-emacs and org-mode fail [2015-12-25]
+    1. cut to other place
+    2. git add
+    3. git status
+    4. git commit -m
+*** org-mode lisp, re-install org-mode, [2015-07-07]
+    1. ; M-S-!, emacs eshell, emacs -q
+
+*** @err, check position ctrl-x =
+*** @err org-agenda-files, can't use concat path-to
+
+*** @debug, @win    
+**** user-init-file
+     1. c:/Users/xiaoanh/AppData/Roaming/.emacs
+     2. (load-file "D:/gitlib/orglib/emacslib/dotemacsw.el")
+     3. programs-->GNU EMacs-->open home directory-->.emacs-->(load-file "D:/Emacs14/dotemacs.el") ÕâÀïÒ»¶¨ÒªÐÞ¸Ä
+     4. change into doteamcsw,/141106
+       	1. auto add PATH of miktex in the env var, miktex can work, no need to set in dotemacsw, /141106
+     5. original init-file: [2014-12-16] C:\Users\xiaoanh\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Gnu Emacs
+     6. USER-INIT-FILE, FOR DROPBOX, [2013-11-14]
+
+**** @dubug, ctrl-h v
+     1. ctrl-h v -> user-init-file; [2015-12-22]
+     2. (load-file "D:/Emacs14/dotemacsw.el")
+     3. @err Reading at buffer position 25403
+       	1. ("notes" . (concat git-to "notes.org::%s") )
+       	2. ;   ("notes" . "(concat git-to "notes.org") ::%s")
+     4. ;  (invalid-read-syntax ". in wrong context")
+
+
+*** @debug, eshell-> /emacs --debug-init/
+    1. @err, end of file during parsing, /20141113, [/( brace missing
+    2. setq is set quoted, setf and set
+    3. Debugger entered--Lisp error: (wrong-type-argument sequencep t)
+    4. (autoload 'predictive-mode (concat path-to "predictive/") "Turn on Predictive Completion Mode." t)
+    5. (autoload 'predictive-mode (concat path-to "predictive/" "Turn on Predictive Completion Mode." t))
+    6. concat("D:/dotemacsw/" "predictive/" "Turn on Predictive Completion Mode." t)
+    7. (autoload (quote predictive-mode) (concat path-to "predictive/" "Turn on Predictive Completion Mode." t))
+** @cmd
+*** Time-stamp: "xiaoanh 2015/12/21 15:09:23"
+   1. (eval-after-load "myvar" )
+   2. Time-stamp: "xiaoanh 2015/12/08 16:43:17"
+*** @cmd @win, [2014-11-07 Fri]
+    1. CMD-->set
+       1. %windir%, example set %windir% = C:\WINDOWS , 环境变量一般是
+          包含在一对 "%" 号之间的，你可以在 CMD 下输入 "set" 来查看系
+          统所有的环境变量，这里我说几个默认的而且非常常用的环境变量。
+*** (load-file "D:/Emacs14/dotemacs.el")
+    1. load-PATH MUST HAVE A COLON:, /131109
+
+** [#C] @key: @dotemacs [2015-12-21]
+
+*** @mac @org  [2015-12-23]
+    1. D:/GTD18 -> D:\gitlib\orglib [2015-12-
+    2. (setq git-to "D:/gitlib/orglib/")
+    3. (setq path-too "/Volumes/xiaoanh/gitlib/emacslib/")
+    4. replace " D:/GTD18 -> (concat git-to "
+*** @ac
+*** @smex
+*** @auctex
+*** @org-doing
+*** @org-ac
+*** @elfeed
+*** @helm-bibtex [2015-12-22]
+*** @aspell, installed in windows, but not work well  [2015-12-22]
+** @ln, http://dotemacs.de/
+*** @redguardtoo (chen bin)
+*** @mac [2015-12-23]
+    1. Emacs Lisp: Determine OS, Emacs Version, Machine Host Name
+    2. http://ergoemacs.org/emacs/elisp_determine_OS_version.html
+
+*** @sachac, sachachua, shanchahua to remember [2015-12-22]
+    1. https://github.com/sachac/emacs-notes
+* @lisp
+
+** let
+#+BEGIN_SRC emacs-lisp
+(let ((zebra 'stripes)
+      (tiger 'fierce))
+  (message "One kind of animal has %s and another is %s."
+           zebra tiger))
+(let* ((zebra 'stripes)
+      (tiger 'fierce))
+  (message "One kind of animal has %s and another is %s."
+           zebra tiger))
+#+END_SRC
+
+** add-to-list, LIST-VAR
+
+** when, or, unless, put [2015-12-25]
+* @git, [2015-12-24 Thu]
+** [#D] @success first, git push @mac [2015-12-23 Wed]
+** @github, note1411 -> gitlib
+   1. dotemacs, can't push from hp ProBook 6470b
+
+** @bitbucket, 8x1 -> xiaoanh, can be changed, [2015-12-23]
+   1. xiaoanhuang@163.com
+   2. https://xiaoanh@bitbucket.org/xiaoanh/gitlib.git
+   3. @bitbucket, 8x1 to xiaoanh
+   4. @repo: git1412 to gitlib
+*** @err fatal remote origin already exists
+    1. @success: -> git remote rm origin
