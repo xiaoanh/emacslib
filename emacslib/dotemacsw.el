@@ -1,23 +1,39 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;; init.el --- Where all the magic begins
-  ;;
-  ;; This file loads Org-mode and then loads the rest of our Emacs initialization from Emacs lisp
-  ;; embedded in literate Org-mode files.
-  
-  ;; Load up Org Mode and (now included) Org Babel for elisp embedded in Org Mode files
-  (setq dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name)))
-  (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
-  (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
-  (require 'org-install)
-  (require 'ob-tangle)
-  (setq initial-user-file (concat dotfiles-dir "dotemacsw.el"))
-  ;; load up all literate org-mode files in this directory
-  ; (mapc #'org-babel-load-file (directory-files dotfiles-dir t "\\.org$"))
- 
- ; @key: exec then unexec inside .org [2015-12-25 Fri]    
- ; (org-babel-load-file (concat dotfiles-dir "dotemacsw.org"))
-  ;;; init.el ends here
+; @gitlib: path-to
+  ;; check OS type
+  (cond
+   ((string-equal system-type "windows-nt") ; Microsoft Windows
+    (progn
+  ;    (message "Microsoft Windows") ))
+      (concat (message "Microsoft Windows: ") (setq path-to "D:/gitlib/orglib/emacslib/")) ) )
+  ;    (message "Microsoft Windows") (setq path-to "D:/dotemacsw/")))
+   ((string-equal system-type "darwin") ; Mac OS X
+    (progn
+      (concat (message "Mac OS X") (setq path-to "/Volumes/xiaoanh/gitlib/emacslib/"))) )
+  ;    (message "Mac OS X") (setq path-to "~/Dropbox/emacslib/"))) 
+   ((string-equal system-type "gnu/linux") ; linux
+    (progn
+      (message "Linux"))))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; @biblib: git-to
+(cond
+ ((string-equal system-type "windows-nt") ; Microsoft Windows
+  (progn
+;    (message "Microsoft Windows") ))
+    (concat (message "Microsoft Windows: ") (setq git-to "D:/bitlib/orglib/")) ) )
+;    (message "Microsoft Windows") (setq path-to "D:/dotemacsw/")))
+ ((string-equal system-type "darwin") ; Mac OS X
+  (progn
+    (concat (message "Mac OS X") (setq git-to "/Volumes/xiaoanh/bitlib/orglib/"))) )
+; 
+;    (concat (message "Mac OS X") (setq git-to "/Volumes/xiaoanh/gitlib/orglib/"))) )
+;    (message "Mac OS X") (setq path-to "~/Dropbox/emacslib/"))) 
+ ((string-equal system-type "gnu/linux") ; linux
+  (progn
+    (message "Linux"))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; font. m-x just once, support CHN, /141104
@@ -39,40 +55,43 @@
   (put 'downcase-region 'disabled nil)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; check OS type
-(cond
- ((string-equal system-type "windows-nt") ; Microsoft Windows
-  (progn
-;    (message "Microsoft Windows") ))
-    (concat (message "Microsoft Windows: ") (setq path-to "D:/gitlib/orglib/emacslib/")) ) )
-;    (message "Microsoft Windows") (setq path-to "D:/dotemacsw/")))
- ((string-equal system-type "darwin") ; Mac OS X
-  (progn
-    (concat (message "Mac OS X") (setq path-to "/Volumes/xiaoanh/gitlib/emacslib/"))) )
-;    (message "Mac OS X") (setq path-to "~/Dropbox/emacslib/"))) 
- ((string-equal system-type "gnu/linux") ; linux
-  (progn
-    (message "Linux"))))
+;;; init.el --- Where all the magic begins
+  ;;
+  ;; This file loads Org-mode and then loads the rest of our Emacs initialization from Emacs lisp
+  ;; embedded in literate Org-mode files.
+  
+  ;; Load up Org Mode and (now included) Org Babel for elisp embedded in Org Mode files
+  ; (setq dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name)))
+  ; (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
+  ; (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
+  (setq dotfiles-dir path-to)
+  (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
+  (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
+  
+  ;; # (let* ((org-dir (expand-file-name
+  ;; #                  "lisp" (expand-file-name
+  ;; #                          "org" (expand-file-name
+  ;; #                                 "src" dotfiles-dir))))
+  ;; #        (org-contrib-dir (expand-file-name
+  ;; #                          "lisp" (expand-file-name
+  ;; #                                  "contrib" (expand-file-name
+  ;; #                                             ".." org-dir))))
+  ;; #        (load-path (append (list org-dir org-contrib-dir)
+  ;; #                           (or load-path nil))))
+    ;; load up Org-mode and Org-babel
+  (require 'org-install)
+  (require 'ob-tangle)
+  (setq initial-user-file (concat dotfiles-dir "dotemacsw.el"))
+  ;; load up all literate org-mode files in this directory
+  ; (mapc #'org-babel-load-file (directory-files dotfiles-dir t "\\.org$"))
+;  (org-babel-load-file (concat dotfiles-dir "dotemacsw.org"))
+  ;;; init.el ends here
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(cond
- ((string-equal system-type "windows-nt") ; Microsoft Windows
-  (progn
-;    (message "Microsoft Windows") ))
-    (concat (message "Microsoft Windows: ") (setq git-to "D:/bitlib/orglib/")) ) )
-;    (message "Microsoft Windows") (setq path-to "D:/dotemacsw/")))
- ((string-equal system-type "darwin") ; Mac OS X
-  (progn
-    (concat (message "Mac OS X") (setq git-to "/Volumes/xiaoanh/bitlib/orglib/"))) )
-; 
-;    (concat (message "Mac OS X") (setq git-to "/Volumes/xiaoanh/gitlib/orglib/"))) )
-;    (message "Mac OS X") (setq path-to "~/Dropbox/emacslib/"))) 
- ((string-equal system-type "gnu/linux") ; linux
-  (progn
-    (message "Linux"))))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; @mac, ctrl [2015-12-25]
+(setq mac-command-modifier 'ctrl)
+(define-key global-map [?\M-¥] "\\")
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; emacs 自带的 bs.el 更好用, cool, /141107
 ; http://blog.csdn.net/ruglcc/article/details/7826604
 (global-set-key "\C-x\C-b" 'bs-show) 
@@ -133,6 +152,7 @@
 (setq time-stamp-format "%:u %04y/%02m/%02d %02H:%02M:%02S")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+; https://github.com/jwiegley/emacs-async
 (add-to-list 'load-path (concat path-to "emacs-async-master/"))
 (autoload 'dired-async-mode "dired-async.el" nil t)
 (dired-async-mode 1)
@@ -143,11 +163,13 @@
 ;; [Facultative] Only if you have installed async.
   (add-to-list 'load-path (concat path-to "helm-master/"))
 ;  (package-install 'helm)
-;  (require 'helm-config)
+; "Cannot open load file" "helm-autoloads [2015-12-25]
+; (require 'helm-config)
   (global-set-key (kbd "C-c h") 'helm-mini)
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; https://github.com/nonsequitur/smex
 ; A smart M-x enhancement for Emacs.  [2015-07-15]
 (add-to-list 'load-path (concat path-to "smex-master/"))
 (require 'smex) 
@@ -173,10 +195,10 @@
 ; https://github.com/magnars/s.el
 ; https://github.com/rejeep/f.el
 ; *** @success, parsebib, dash, s and f finally
-(add-to-list 'load-path (concat path-to "f.el-master/"))
-(require 'f)
 (add-to-list 'load-path (concat path-to "s.el-master/"))
 (require 's)
+(add-to-list 'load-path (concat path-to "f.el-master/"))
+(require 'f)
 (add-to-list 'load-path (concat path-to "dash.el-master/"))
 (require 'dash) 
 ; A modern list library for Emacs 
