@@ -4,22 +4,22 @@
 # http://www.cygwin.com/
 # 最初由Cygnus Solutions开发
 
-# ** @date @sort, @cut [2015-12-07]
-#   1. /no , and (), -> space and [] [2015-12-16]/
-#   2. let a=1;
+** @date @sort, @cut [2015-12-07]
+  1. /no , and (), -> space and [] [2015-12-16]/
+  2. let a=1;
 
-# ** @emacs, ctrl-u, history  [2015-12-16]
-# *** ctrl-u
+*** @emacs, ctrl-u, history  [2015-12-16]
 #   在这里是 3 个单词，分别是 opt, IBM 和 ITM，现在输入 Ctrl-u 3 Ctrl-x a l 组合键
 #   Ctrl-u 在 Emacs 里面是一个非常有用的组合键，它代表一个通用前缀，通常在后面跟一个数字参数
-# *** Ctrl-x a add-mode-abbrev
-# *** history | grep  ' '
+*** Ctrl-x a add-mode-abbrev
+*** history | grep  ' '
 # 这里增加的第一步操作实际上代替了通常情况下需要的拷贝粘贴操作
 
-# ** @grep, \{5\}  '^[^48]'   [2015-12-21]]
+*** @grep, \{5\}  '^[^48]'   [2015-12-21]]
 # http://www.cnblogs.com/end/archive/2012/02/21/2360965.html
 # linux grep命令
-# *** grep pattern1 files | grep pattern2 
+*** grep pattern1 files | grep pattern2 
+#+BEGIN_SRC bash
 grep pattern1 | pattern2 files # ：显示匹配 pattern1 或 pattern2 的行，
 grep pattern1 files | grep pattern2 # ：显示既匹配 pattern1 又匹配 pattern2 的行。
 
@@ -52,23 +52,27 @@ let a=1;
 while [ $a -lt 10 ]; do
     
 done
+#+END_SRC
 
-# 管线命令 (pipe)
+** @pipe, 管线命令 (pipe)
 # 管线命令使用的是『 | 』这个界定符号
 # 例如 less, more, head, tail 
-# 撷取命令： cut, grep
+** @grep, @cut # 撷取命令： cut, grep
 # 撷取信息通常是针对『一行一行』来分析的
 # grep [-acinv] [--color=auto] '搜寻字符串' filename
 # grep 是个很棒的命令喔
 
 # 参数代换： xargs
-# @sort, @cut
+** @sort, @cut
+
+#+BEGIN_SRC bash
 ls -l | cut -t ':' -k 3;
 sort -d ':'
 ${MYVAR##*ppp}
 ${1##*.} # withdraw tar
-
-# @date @awk, @grep [2015-12-08]
+#+END_SRC
+** @date @awk, @grep [2015-12-08]
+#+BEGIN_SRC bash
 # awk 主要是處理『每一行的欄位內的資料』
 # @ln: http://linux.vbird.org/linux_basic/0330regularex.php#awk
 # 11.4.2 awk：好用的資料處理工具
@@ -96,8 +100,11 @@ grep -v '\.$' regular_express.txt
 sh showname.sh
 # 利用 source 來執行腳本：在父程序中執行
 # 需要使用『 source ~/.bashrc 』而不能使用『 bash ~/.bashrc 』是一樣的啊！
+#+END_SRC
 
+** [#D] @fdisk, @diskutil for mac 
 
-# @fdisk, @diskutil for mac 
+#+BEGIN_SRC bash
 fdisk -l;
 df -lh
+#+END_SRC
