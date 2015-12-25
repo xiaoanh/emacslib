@@ -67,6 +67,10 @@
 #+END_SRC
 
 ** @debug: @err
+
+*** git push @err, should merge -> git stash
+    1. git stash pop <id>
+    2. git stash list
 *** [#C] @auto, org-install, ob-tangle, recursively load dotemacsw.el for org-bebal-load-filed
     1. ctrl-h f: ob-tangle.el
 **** @key:   ; (org-babel-load-file (concat dotfiles-dir "dotemacsw.org"))
@@ -84,6 +88,8 @@
 ***** M-x edebug-defun
 
 * @dotemacs [2015-12-24]
+** @mac, @ln, ctrl-command [2015-12-25]
+*** ln -s /Volumes/xiaoanh/gitlib/emacslib/dotemacsw.el ~/.emacs.el
 ** @seamless with @win @mac [2015-12-24 Thu]
 *** D:/GTD18 -> D:\gitlib\orglib [2015-12-23]
 *** @helm, helm-bibtex, no use
