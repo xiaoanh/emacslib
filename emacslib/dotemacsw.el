@@ -55,37 +55,41 @@
   (put 'downcase-region 'disabled nil)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(elfeed-db-directory (concat path-to "elfeed_db"))
+ '(elfeed-feeds (quote ("youtube.com" "http://nullprogram.com/feed/" "http://www.terminally-incoherent.com/blog/feed/")))
+  '(org-agenda-files (quote ("d:/bitlib/orglib/paper.org" "d:/bitlib/orglib/study.org" "d:/bitlib/orglib/journal.org" "d:/bitlib/orglib/project.org" "d:/bitlib/orglib/task.org" "d:/bitlib/orglib/note.org")))
+; '(session-use-package t nil (session))
+ '(show-paren-mode t)
+ '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
+ '(truncate-partial-width-windows nil)
+ '(user-full-name "xiaoanh"))
+
 ;;; init.el --- Where all the magic begins
-;;
-;; This file loads Org-mode and then loads the rest of our Emacs initialization from Emacs lisp
-;; embedded in literate Org-mode files.
+  ;;
+  ;; This file loads Org-mode and then loads the rest of our Emacs initialization from Emacs lisp
+  ;; embedded in literate Org-mode files.
+  
+  ;; Load up Org Mode and (now included) Org Babel for elisp embedded in Org Mode files
+  ; (setq dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name)))
+  ; (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
+  ; (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
+  (setq dotfiles-dir path-to)
+  (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
+  (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
 
-;; Load up Org Mode and (now included) Org Babel for elisp embedded in Org Mode files
-; (setq dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name)))
-; (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
-; (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
-(setq dotfiles-dir path-to)
-(setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
-(setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
-
-;; # (let* ((org-dir (expand-file-name
-;; #                  "lisp" (expand-file-name
-;; #                          "org" (expand-file-name
-;; #                                 "src" dotfiles-dir))))
-;; #        (org-contrib-dir (expand-file-name
-;; #                          "lisp" (expand-file-name
-;; #                                  "contrib" (expand-file-name
-;; #                                             ".." org-dir))))
-;; #        (load-path (append (list org-dir org-contrib-dir)
-;; #                           (or load-path nil))))
-  ;; load up Org-mode and Org-babel
-(require 'org-install)
-(require 'ob-tangle)
-(setq initial-user-file (concat dotfiles-dir "dotemacsw.el"))
-;; load up all literate org-mode files in this directory
-; (mapc #'org-babel-load-file (directory-files dotfiles-dir t "\\.org$"))
-; (org-babel-load-file (concat dotfiles-dir "dotemacsw.org"))
-;;; init.el ends here
+    ;; load up Org-mode and Org-babel
+  (require 'org-install)
+  (require 'ob-tangle)
+  (setq initial-user-file (concat dotfiles-dir "dotemacsw.el"))
+  ;; load up all literate org-mode files in this directory
+  ; (mapc #'org-babel-load-file (directory-files dotfiles-dir t "\\.org$"))
+;  (org-babel-load-file (concat dotfiles-dir "dotemacsw.org"))
+  ;;; init.el ends here
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; @mac, ctrl [2015-12-25]
@@ -184,41 +188,48 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;  @helm, helm-bibtex
-; @err, can not load parsebib
-; @success, Cannot open load file -> (add-to-list ‘load-path “/Users/user_name/bin/”)
-; ;; Requirements are parsebib, helm, s, dash, and f.  The easiest way
-; *** @parsebib @google, https://github.com/joostkremers/parsebib, @Preamble, @String, or @Comment
-; https://github.com/tmalsburg/helm-bibtex
-; *** @dash can not load parsebib
-; https://github.com/magnars/dash.el
-; *** @s can not load s and f
-; https://github.com/magnars/s.el
-; https://github.com/rejeep/f.el
-; *** @success, parsebib, dash, s and f finally
-(add-to-list 'load-path (concat path-to "s.el-master/"))
-(require 's)
-(add-to-list 'load-path (concat path-to "f.el-master/"))
-(require 'f)
-(add-to-list 'load-path (concat path-to "dash.el-master/"))
-(require 'dash) 
-; A modern list library for Emacs 
-; All functions and constructs in the library are prefixed with a dash (-).
-
-(add-to-list 'load-path (concat path-to "parsebib-master/"))
-(require 'parsebib)
-(add-to-list 'load-path (concat path-to "helm-bibtex-master/"))
-(autoload 'helm-bibtex "helm-bibtex" "" t)
-; (setq helm-bibtex-bibliography '("/path/to/bibtex-file-1.bib" "/path/to/bibtex-file-2.bib"))
-(setq helm-bibtex-bibliography '("D:/bib1410/bib1410.bib" "D:/bib1410/bib1505.bib" "D:/bib1410/bib1506.bib" ))
+    ;;  @helm, helm-bibtex
+    ; @err, can not load parsebib
+    ; @success, Cannot open load file -> (add-to-list ‘load-path “/Users/user_name/bin/”)
+    ; ;; Requirements are parsebib, helm, s, dash, and f.  The easiest way
+    ; *** @parsebib @google, https://github.com/joostkremers/parsebib, @Preamble, @String, or @Comment
+    ; https://github.com/tmalsburg/helm-bibtex
+    ; *** @dash can not load parsebib
+    ; https://github.com/magnars/dash.el
+    ; *** @s can not load s and f
+    ; https://github.com/magnars/s.el
+    ; https://github.com/rejeep/f.el
+    ; *** @success, parsebib, dash, s and f finally
+    (add-to-list 'load-path (concat path-to "dash.el-master/"))
+    (require 'dash) 
+    (add-to-list 'load-path (concat path-to "s.el-master/"))
+    (require 's)
+    (add-to-list 'load-path (concat path-to "f.el-master/"))
+    (require 'f)
+    ; A modern list library for Emacs 
+    ; All functions and constructs in the library are prefixed with a dash (-).
+    
+    (add-to-list 'load-path (concat path-to "parsebib-master/"))
+    (require 'parsebib)
+    (add-to-list 'load-path (concat path-to "helm-bibtex-master/"))
+    (autoload 'helm-bibtex "helm-bibtex" "" t)
+    ; (setq helm-bibtex-bibliography '("/path/to/bibtex-file-1.bib" "/path/to/bibtex-file-2.bib"))
+    ; helm-bibtex, bitlib->gitlib [2015-12-28]
+    (setq helm-bibtex-bibliography (list (concat path-to "bib1410.bib") (concat path-to "bib1505.bib") (concat path-to "bib1506.bib") ))
+;    (setq helm-bibtex-bibliography '( (concat path-to "bib1410.bib") (concat path-to "bib1505.bib") (concat path-to "bib1506.bib") ))
+  ;  (setq helm-bibtex-bibliography '("D:/gitlib/bib1410.bib" "D:/gitlib/bib1505.bib" "D:/gitlib/bib1506.bib" ))
+  ;  (setq helm-bibtex-bibliography '("D:/gitlib/orglib/bib1410.bib" "D:/gitlib/orglib/bib1505.bib" "D:/gitlib/orglib/bib1506.bib" ))
+    ; (setq helm-bibtex-bibliography '("D:/bitlib/orglib/bib1410.bib" "D:/bitlib/orglib/bib1505.bib" "D:/bitlib/orglib/bib1506.bib" ))
  
-(setq helm-bibtex-library-path "D:/bib1410/paper1410/" )
-; (setq helm-bibtex-library-path '("/path1/to/pdfs" "/path2/to/pdfs"))
-; (setq helm-bibtex-notes-path "/path/to/notes.org")
-(setq helm-bibtex-notes-path "D:/GTD18/bib_notes.org")
-(setq helm-bibtex-pdf-symbol "⌘")
-(setq helm-bibtex-notes-symbol "✎")
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    (setq helm-bibtex-library-path (list (concat git-to "paper1512/") ))    
+;    (setq helm-bibtex-library-path (concat git-to "paper1512/") )    
+;    (setq helm-bibtex-library-path "D:/bitlib/orglib/paper1512/" )
+    ; (setq helm-bibtex-library-path '("/path1/to/pdfs" "/path2/to/pdfs"))
+    ; (setq helm-bibtex-notes-path "/path/to/notes.org")
+    (setq helm-bibtex-notes-path "D:/gitlib/bib_notes.org")
+    (setq helm-bibtex-pdf-symbol "⌘")
+    (setq helm-bibtex-notes-symbol "✎")
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-to-list 'load-path path-to)  
@@ -263,18 +274,8 @@
 ;; (add-to-list 'load-path "D:/dotemacsw/")
 ;; (require 'popup)
 ; 2.6 设置auto-complete的触发键, [[http://blog.csdn.net/winterttr/article/details/7524336]]
-(add-to-list 'load-path (concat path-to "auto-complete-master/"))
-; (add-to-list 'load-path "D:/dotemacsw/auto-complete-master/")
-(require 'ac-ispell)
-(eval-after-load "auto-complete" '(progn (ac-ispell-setup)))
-(add-hook 'git-commit-mode-hook 'ac-ispell-ac-setup)
-(add-hook 'mail-mode-hook 'ac-ispell-ac-setup)
 
-; error enabling flyspell mode, ispell-set-spellcheker, /141106
-(setq flyspell-issue-welcome-flag nil)
-;; fix flyspell problem
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 ;; must require ac-ispell, error, /141104
 ;(add-to-list 'load-path "D:/Emacs14/auto-complete-master")
 ;(require 'ac-ispell)
@@ -306,6 +307,19 @@
 (ispell-minor-mode) 
 ; (ispell-set-spellchecker-params)
  ; Initialize variables and dicts alists
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'load-path (concat path-to "auto-complete-master/"))
+; (add-to-list 'load-path "D:/dotemacsw/auto-complete-master/")
+(require 'ac-ispell)
+(eval-after-load "auto-complete" '(progn (ac-ispell-setup)))
+(add-hook 'git-commit-mode-hook 'ac-ispell-ac-setup)
+(add-hook 'mail-mode-hook 'ac-ispell-ac-setup)
+
+; error enabling flyspell mode, ispell-set-spellcheker, /141106
+(setq flyspell-issue-welcome-flag nil)
+;; fix flyspell problem
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -412,25 +426,18 @@
 ; delete predictive, /141110
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(add-to-list 'load-path path-to)
+(require 'session)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; mobile-org, [2014-12-16]
-; (setq org-mobile-directory "D:/GTD18/mobile-org/")
-(setq org-mobile-files (quote ( (concat git-to "HXA.OFDM.PON.org")  (concat git-to "journal.org")  (concat git-to "project.org")  (concat git-to "task.org")  (concat git-to "note.org") )))
+; comment org-mobile-files [2015-12-28]
+; (setq org-mobile-files (quote ( (concat git-to "HXA.OFDM.PON.org")  (concat git-to "journal.org")  (concat git-to "project.org")  (concat git-to "task.org")  (concat git-to "note.org") )))
 ; (setq org-mobile-index-file "D:/GTD18/inbox.org")
 ; (setq org-mobile-index-file "inbox.org")
 ; (setq org-mobile-inbox-for-pull "D:/GTD18/fromMobile.org")
 ; (setq org-mobile-inbox-for-pull "D:/GTD18/inbox.org")
-; no executable found to compute checksums
-;; (defcustom org-mobile-checksum-binary (or (executable-find "shasum")
-;;                                          (executable-find "sha1sum")
-;;                                          (executable-find "md5sum")
-;;                                          (executable-find "md5"))
-;;  "Executable used for computing checksums of agenda files."
-;;  :group 'org-mobile
-;;  :type 'string)
-; org-mobile-checksum-binary: nil
-;  Basically the checksums.dat file only contains the checksums for index.org, mobileorg.org and agendas.org.
-; mobileorg - "No executable found to compute checksums": -http://comments.gmane.org/gmane.emacs.orgmode/26838
+
 
 ; org-capture, / [2014-11-27]
 (setq org-capture-templates '(
@@ -453,52 +460,7 @@
 ; (setq org-directory (concat git-to "/") 
 (setq org-remember-templates '(("New" ?n "* %? %t \n %i\n %a" (concat git-to "inbox.org") ) ("Task" ?t "** TODO %?\n %i\n %a" (concat git-to "task.org") "Tasks") ("Calendar" ?c "** TODO %?\n %i\n %a" (concat git-to "task.org") "Tasks") ("Idea" ?i "** %?\n %i\n %a" (concat git-to "task.org") "Ideas") ("Note" ?r "* %?\n %i\n %a" (concat git-to "note.org") ) ("Project" ?p "** %?\n %i\n %a" (concat git-to "project.org") %g)  ("Journal" ?j "* %?\n %i\n %a" (concat git-to "journal.org") )  )) 
 (setq org-default-notes-file (concat org-directory "inbox.org"))
-; set org-remember, /141118
-; (org-remember-insinuate)
-; (setq org-directory "D:/GTD18/") 
-; (setq org-default-notes-file (concat org-directory "inbox.org"))
-; (setq org-default-notes-file "D:/GTD18/.notes")
-;  (setq org-directory "D:/GTD18/inbox.org")
 
-;; (autoload 'remember "remember" nil t)
-;; (autoload 'remember-region "remember" nil t)
-;; (setq org-reverse-note-order t)
-;; (when (file-exists-p "D:/GTD18/")
-;;   (define-key global-map [(f9)] 'org-remember)
-;;   (setq remember-annotation-functions '(org-remember-annotation))
-;;   (setq remember-handler-functions '(org-remember-handler))
-;;   (add-hook 'remember-mode-hook 'org-remember-apply-template)
-;;  (setq org-directory "D:/GTD18/inbox.org")
-;; ; '(org-agenda-files (quote ("d:/Chapters1411/JOB141110.org" "d:/Chapters1411/DOCSIS.org" "d:/Chapters1411/EMACS141110.org")))
-;;  '(org-agenda-files nil)
-;;   (setq org-remember-templates
-;;         '((?t "* TODO %?\n  %i", (expand-file-name "todo.org" org-directory) "Tasks")
-;;           (?m "* %U\n\n  %?%i\n  %a", (expand-file-name "notes.org" org-directory) "Notes")))
-;;   (let ((todo (expand-file-name "todo.org" org-directory)))
-;;     (when (file-exists-p todo)
-;;       (add-to-list 'org-agenda-files todo)))
-
-;; org-mode 导出Beamer的设置, /141114
-;; beamer class, for presentations
-;; (setq org-export-latex-classes nil)
-;; (add-to-list 'org-export-latex-classes 
-;;           '("beamer"
-;;             \documentclass{beamer}
-;;             \mode
-;;             \usetheme{{{{Warsaw}}}}
-;;             \beamertemplateballitem
-;;             \setbeameroption{show notes}
-;;             \usepackage{graphicx}
-;;             \usepackage{lmodern}
-;;             \hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
-;;             ;\mode<beamer>{\usetheme{Boadilla}}
-;;             ;\AtBeginSection[]{\begin{frame}<beamer>\frametitle{Topic}\tableofcontents[currentsection]\end{frame}}  
-;; ) )
-
-; todo, tag, pre-setting
-; org-mode 使用: URL: http://blog.sina.com.cn/s/blog_818b48820101pmmu.html
-; 关键词后括号内的字母为快捷选择键，当使用 C-c C-t 设置或改变当前标题的TODO状态或类型时将出现选项菜单，此时可以用快捷键进行选择。
-;  "Study(s!)" "Fun(f!)" delete, <2015-01-16>
 (setq org-todo-keywords
   '((type "Work(w!)" "Huang(h!)" "|")
 ;    (type "Work(w!)" "Huang(h!)" "Study(s!)" "|")
@@ -651,7 +613,7 @@
 ; http://blog.waterlin.org/articles/bind-emacs-org-mode-with-bibtex.html
 (setq reftex-default-bibliography
       (quote
-       ("D:/bib1410/bib1307.bib" "D:/bib1410/bib1410.bib"  "D:/bib1410/bib1506.bib" "D:/bib1410/bib1505.bib" ))) 
+       ("D:/bitlib/orglib/bib1307.bib" "D:/bitlib/orglib/bib1410.bib"  "D:/bitlib/orglib/bib1506.bib" "D:/bitlib/orglib/bib1505.bib" ))) 
 ; (define-key org-mode-map (kbd "C-c )") 'reftex-citation)
 ; repeat, [2015-01-30]
 
@@ -665,11 +627,12 @@
  (org-open-link-from-string (format "[[notes:%s]]" (reftex-citation t))))
 
 (setq org-link-abbrev-alist
- '(("bib" . "D:/bib1410/bib1410.bib::%s, D:/bib1410/bib1505.bib::%s, D:/bib1410/bib1506.bib::%s")
+ '(("bib" . "D:/bitlib/orglib/bitlib/orglib.bib::%s, D:/bitlib/orglib/bib1505.bib::%s, D:/bitlib/orglib/bib1506.bib::%s")
    ("notes" . (concat git-to "notes.org::%s") )
 ;   ("notes" . "(concat git-to "notes.org") ::%s")
 ;  (invalid-read-syntax ". in wrong context")
 ;    ("notes" . (concat git-to "notes.org::%s")
    ("figs" . "D:/figure1411/%s.png")
-   ("papers" . "D:/bib1410/paper1410/%s.pdf")))
+;   ("papers" . "D:/bib1410/paper1410/%s.pdf")
+   ("papers" . "D:/bitlib/orglib/paper1512/%s.pdf")))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

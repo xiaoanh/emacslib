@@ -45,7 +45,7 @@
     (message "Linux"))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
-** @basic: @custom
+** @basic: @custom: 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+BEGIN_SRC emacs-lisp
  ;; font. m-x just once, support CHN, /141104
@@ -76,13 +76,14 @@
  '(elfeed-db-directory (concat path-to "elfeed_db"))
  '(elfeed-feeds (quote ("youtube.com" "http://nullprogram.com/feed/" "http://www.terminally-incoherent.com/blog/feed/")))
   '(org-agenda-files (quote ("d:/bitlib/orglib/paper.org" "d:/bitlib/orglib/study.org" "d:/bitlib/orglib/journal.org" "d:/bitlib/orglib/project.org" "d:/bitlib/orglib/task.org" "d:/bitlib/orglib/note.org")))
- '(session-use-package t nil (session))
+; '(session-use-package t nil (session))
  '(show-paren-mode t)
  '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
  '(truncate-partial-width-windows nil)
  '(user-full-name "xiaoanh"))
 
 #+END_SRC
+
 ** [#C] @basic: @init
    1. init.el must be separate [2015-12-25]
 #+BEGIN_SRC emacs-lisp
@@ -98,17 +99,7 @@
   (setq dotfiles-dir path-to)
   (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
   (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
-  
-  ;; # (let* ((org-dir (expand-file-name
-  ;; #                  "lisp" (expand-file-name
-  ;; #                          "org" (expand-file-name
-  ;; #                                 "src" dotfiles-dir))))
-  ;; #        (org-contrib-dir (expand-file-name
-  ;; #                          "lisp" (expand-file-name
-  ;; #                                  "contrib" (expand-file-name
-  ;; #                                             ".." org-dir))))
-  ;; #        (load-path (append (list org-dir org-contrib-dir)
-  ;; #                           (or load-path nil))))
+
     ;; load up Org-mode and Org-babel
   (require 'org-install)
   (require 'ob-tangle)
@@ -236,44 +227,49 @@
 #+END_SRC
 ** @helm-bibtex-master, dash first
 #+BEGIN_SRC emacs-lisp
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;  @helm, helm-bibtex
-  ; @err, can not load parsebib
-  ; @success, Cannot open load file -> (add-to-list ‘load-path “/Users/user_name/bin/”)
-  ; ;; Requirements are parsebib, helm, s, dash, and f.  The easiest way
-  ; *** @parsebib @google, https://github.com/joostkremers/parsebib, @Preamble, @String, or @Comment
-  ; https://github.com/tmalsburg/helm-bibtex
-  ; *** @dash can not load parsebib
-  ; https://github.com/magnars/dash.el
-  ; *** @s can not load s and f
-  ; https://github.com/magnars/s.el
-  ; https://github.com/rejeep/f.el
-  ; *** @success, parsebib, dash, s and f finally
-  (add-to-list 'load-path (concat path-to "dash.el-master/"))
-  (require 'dash) 
-  (add-to-list 'load-path (concat path-to "s.el-master/"))
-  (require 's)
-  (add-to-list 'load-path (concat path-to "f.el-master/"))
-  (require 'f)
-  ; A modern list library for Emacs 
-  ; All functions and constructs in the library are prefixed with a dash (-).
-  
-  (add-to-list 'load-path (concat path-to "parsebib-master/"))
-  (require 'parsebib)
-  (add-to-list 'load-path (concat path-to "helm-bibtex-master/"))
-  (autoload 'helm-bibtex "helm-bibtex" "" t)
-  ; (setq helm-bibtex-bibliography '("/path/to/bibtex-file-1.bib" "/path/to/bibtex-file-2.bib"))
-  ; helm-bibtex, bitlib->gitlib [2015-12-28]
-  (setq helm-bibtex-bibliography '("D:/gitlib/orglib/bib1410.bib" "D:/gitlib/orglib/bib1505.bib" "D:/gitlib/orglib/bib1506.bib" ))
-  ; (setq helm-bibtex-bibliography '("D:/bitlib/orglib/bib1410.bib" "D:/bitlib/orglib/bib1505.bib" "D:/bitlib/orglib/bib1506.bib" ))
-   
-  (setq helm-bibtex-library-path "D:/bitlib/orglib/paper1512/" )
-  ; (setq helm-bibtex-library-path '("/path1/to/pdfs" "/path2/to/pdfs"))
-  ; (setq helm-bibtex-notes-path "/path/to/notes.org")
-  (setq helm-bibtex-notes-path "D:/gitlib/orglib/bib_notes.org")
-  (setq helm-bibtex-pdf-symbol "⌘")
-  (setq helm-bibtex-notes-symbol "✎")
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;;  @helm, helm-bibtex
+    ; @err, can not load parsebib
+    ; @success, Cannot open load file -> (add-to-list ‘load-path “/Users/user_name/bin/”)
+    ; ;; Requirements are parsebib, helm, s, dash, and f.  The easiest way
+    ; *** @parsebib @google, https://github.com/joostkremers/parsebib, @Preamble, @String, or @Comment
+    ; https://github.com/tmalsburg/helm-bibtex
+    ; *** @dash can not load parsebib
+    ; https://github.com/magnars/dash.el
+    ; *** @s can not load s and f
+    ; https://github.com/magnars/s.el
+    ; https://github.com/rejeep/f.el
+    ; *** @success, parsebib, dash, s and f finally
+    (add-to-list 'load-path (concat path-to "dash.el-master/"))
+    (require 'dash) 
+    (add-to-list 'load-path (concat path-to "s.el-master/"))
+    (require 's)
+    (add-to-list 'load-path (concat path-to "f.el-master/"))
+    (require 'f)
+    ; A modern list library for Emacs 
+    ; All functions and constructs in the library are prefixed with a dash (-).
+    
+    (add-to-list 'load-path (concat path-to "parsebib-master/"))
+    (require 'parsebib)
+    (add-to-list 'load-path (concat path-to "helm-bibtex-master/"))
+    (autoload 'helm-bibtex "helm-bibtex" "" t)
+    ; (setq helm-bibtex-bibliography '("/path/to/bibtex-file-1.bib" "/path/to/bibtex-file-2.bib"))
+    ; helm-bibtex, bitlib->gitlib [2015-12-28]
+    (setq helm-bibtex-bibliography (list (concat path-to "bib1410.bib") (concat path-to "bib1505.bib") (concat path-to "bib1506.bib") ))
+;    (setq helm-bibtex-bibliography '( (concat path-to "bib1410.bib") (concat path-to "bib1505.bib") (concat path-to "bib1506.bib") ))
+  ;  (setq helm-bibtex-bibliography '("D:/gitlib/bib1410.bib" "D:/gitlib/bib1505.bib" "D:/gitlib/bib1506.bib" ))
+  ;  (setq helm-bibtex-bibliography '("D:/gitlib/orglib/bib1410.bib" "D:/gitlib/orglib/bib1505.bib" "D:/gitlib/orglib/bib1506.bib" ))
+    ; (setq helm-bibtex-bibliography '("D:/bitlib/orglib/bib1410.bib" "D:/bitlib/orglib/bib1505.bib" "D:/bitlib/orglib/bib1506.bib" ))
+ 
+    (setq helm-bibtex-library-path (list (concat git-to "paper1512/") ))    
+;    (setq helm-bibtex-library-path (concat git-to "paper1512/") )    
+;    (setq helm-bibtex-library-path "D:/bitlib/orglib/paper1512/" )
+    ; (setq helm-bibtex-library-path '("/path1/to/pdfs" "/path2/to/pdfs"))
+    ; (setq helm-bibtex-notes-path "/path/to/notes.org")
+    (setq helm-bibtex-notes-path "D:/gitlib/bib_notes.org")
+    (setq helm-bibtex-pdf-symbol "⌘")
+    (setq helm-bibtex-notes-symbol "✎")
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 ** @linum forcefully, [2013-11-13]
 #+BEGIN_SRC emacs-lisp
@@ -311,7 +307,7 @@
 #+END_SRC
 
 ** @ac
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 #+BEGIN_SRC emacs-lisp
 ;; auto-complete, [2014-11-06]
 (add-to-list 'load-path (concat path-to "auto-complete-master/"))
@@ -326,20 +322,10 @@
 ;; (add-to-list 'load-path "D:/dotemacsw/")
 ;; (require 'popup)
 ; 2.6 设置auto-complete的触发键, [[http://blog.csdn.net/winterttr/article/details/7524336]]
-(add-to-list 'load-path (concat path-to "auto-complete-master/"))
-; (add-to-list 'load-path "D:/dotemacsw/auto-complete-master/")
-(require 'ac-ispell)
-(eval-after-load "auto-complete" '(progn (ac-ispell-setup)))
-(add-hook 'git-commit-mode-hook 'ac-ispell-ac-setup)
-(add-hook 'mail-mode-hook 'ac-ispell-ac-setup)
-
-; error enabling flyspell mode, ispell-set-spellcheker, /141106
-(setq flyspell-issue-welcome-flag nil)
-;; fix flyspell problem
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 *** @ac, ac-ispell
 #+BEGIN_SRC emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; must require ac-ispell, error, /141104
 ;(add-to-list 'load-path "D:/Emacs14/auto-complete-master")
 ;(require 'ac-ispell)
@@ -371,6 +357,21 @@
 (ispell-minor-mode) 
 ; (ispell-set-spellchecker-params)
  ; Initialize variables and dicts alists
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
+*** @ac, first ispell, then ac-ispell [2015-12-28]
+#+BEGIN_SRC emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'load-path (concat path-to "auto-complete-master/"))
+; (add-to-list 'load-path "D:/dotemacsw/auto-complete-master/")
+(require 'ac-ispell)
+(eval-after-load "auto-complete" '(progn (ac-ispell-setup)))
+(add-hook 'git-commit-mode-hook 'ac-ispell-ac-setup)
+(add-hook 'mail-mode-hook 'ac-ispell-ac-setup)
+
+; error enabling flyspell mode, ispell-set-spellcheker, /141106
+(setq flyspell-issue-welcome-flag nil)
+;; fix flyspell problem
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 ** @auctex, no use [2015-12-24]
@@ -490,6 +491,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 
+
+** @session, [2015-12-28]
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path path-to)
+  (require 'session)
+#+END_SRC
 
 ** @org all left is org
 
@@ -716,6 +723,9 @@
     1. (setq org-mobile-files (quote ( (concat git-to "HXA.OFDM.PON.org")  (concat git-to "journal.org")  (concat git-to "project.org")  (concat git-to "task.org")  (concat git-to "note.org") )))
 
 ** @helm-bibtex
+*** @ac, first ispell, then ac-ispell [2015-12-28]
+*** (setq helm-bibtex-bibliography (list (concat path-to "bib1410.bib") (concat path-to "bib1505.bib") (concat path-to "bib1506.bib") ))
+;    (setq helm-bibtex-bibliography '( (concat path-to "bib1410.bib") (concat path-to "bib1505.bib") (concat path-to "bib1506.bib") ))
 *** can't find dash, dash should be first before s [2015-12-28]
 *** bib1410->gitlib/orglib [2015-12-28]
     1. ; helm-bibtex, bitlib->gitlib [2015-12-28]
