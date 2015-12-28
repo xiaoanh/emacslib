@@ -62,7 +62,8 @@
  ;; If there is more than one, they won't work right.
  '(elfeed-db-directory (concat path-to "elfeed_db"))
  '(elfeed-feeds (quote ("youtube.com" "http://nullprogram.com/feed/" "http://www.terminally-incoherent.com/blog/feed/")))
-  '(org-agenda-files (quote ("d:/bitlib/orglib/paper.org" "d:/bitlib/orglib/study.org" "d:/bitlib/orglib/journal.org" "d:/bitlib/orglib/project.org" "d:/bitlib/orglib/task.org" "d:/bitlib/orglib/note.org")))
+  '(org-agenda-files (list (concat git-to "paper.org") (concat git-to "study.org") (concat git-to "journal.org") (concat git-to "project.org") (concat git-to "task.org") (concat git-to  "note.org")))
+;  '(org-agenda-files (quote ("d:/bitlib/orglib/paper.org" "d:/bitlib/orglib/study.org" "d:/bitlib/orglib/journal.org" "d:/bitlib/orglib/project.org" "d:/bitlib/orglib/task.org" "d:/bitlib/orglib/note.org")))
 ; '(session-use-package t nil (session))
  '(show-paren-mode t)
  '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
@@ -295,11 +296,19 @@
 (if (string-equal system-type "windows-nt")
 (progn (setq ispell-personal-dictionary "C:/Program Files (x86)/Aspell/dict")))
 ; (setq ispell-personal-dictionary "C:/Program Files (x86)/Aspell/dict")
-(setq-default ispell-program-name "aspell")
+(if (string-equal system-type "windows-nt")
+(setq-default ispell-program-name "aspell"))
 ; /141110
 ; d:/Emacs14 $ which aspell
 ; c:/Program Files (x86)/Aspell/bin/aspell.exe
 ;(setq ispell-program-name "aspell")
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; @mac, [2015-12-28]
+(if (string-equal system-type "darwin")
+(setq ispell-program-name "/usr/local/bin/ispell"))
+(if (string-equal system-type "darwin")
+(setq-default ispell-program-name "/usr/local/bin/aspell"))
+
 (require 'ispell)
 (setq text-mode-hook '(lambda()  (flyspell-mode t)  ) )
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)

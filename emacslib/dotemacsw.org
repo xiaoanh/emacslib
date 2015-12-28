@@ -75,7 +75,8 @@
  ;; If there is more than one, they won't work right.
  '(elfeed-db-directory (concat path-to "elfeed_db"))
  '(elfeed-feeds (quote ("youtube.com" "http://nullprogram.com/feed/" "http://www.terminally-incoherent.com/blog/feed/")))
-  '(org-agenda-files (quote ("d:/bitlib/orglib/paper.org" "d:/bitlib/orglib/study.org" "d:/bitlib/orglib/journal.org" "d:/bitlib/orglib/project.org" "d:/bitlib/orglib/task.org" "d:/bitlib/orglib/note.org")))
+  '(org-agenda-files (list (concat git-to "paper.org") (concat git-to "study.org") (concat git-to "journal.org") (concat git-to "project.org") (concat git-to "task.org") (concat git-to  "note.org")))
+;  '(org-agenda-files (quote ("d:/bitlib/orglib/paper.org" "d:/bitlib/orglib/study.org" "d:/bitlib/orglib/journal.org" "d:/bitlib/orglib/project.org" "d:/bitlib/orglib/task.org" "d:/bitlib/orglib/note.org")))
 ; '(session-use-package t nil (session))
  '(show-paren-mode t)
  '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
@@ -325,39 +326,47 @@
 #+END_SRC
 *** @ac, ac-ispell
 #+BEGIN_SRC emacs-lisp
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; must require ac-ispell, error, /141104
-;(add-to-list 'load-path "D:/Emacs14/auto-complete-master")
-;(require 'ac-ispell)
-;(eval-after-load "auto-complete" '(progn (ac-ispell-setup)))
-;(add-hook 'git-commit-mode-hook 'ac-ispell-ac-setup)
-;(add-hook 'mail-mode-hook 'ac-ispell-ac-setup)
-
-;; ispell must installed in disk C, otherwise permission denied, /141106
-;; ispell denied, must install aspell, error, 141105
-;(add-to-list 'exec-path "D:/Aspell/bin/")
-;(setq ispell-personal-dictionary "D:/Aspell/dict")
-(if (string-equal system-type "windows-nt")
-(progn (add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin")))
-; ** @emacs
-; (add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin")
-
-(if (string-equal system-type "windows-nt")
-(progn (setq ispell-personal-dictionary "C:/Program Files (x86)/Aspell/dict")))
-; (setq ispell-personal-dictionary "C:/Program Files (x86)/Aspell/dict")
-(setq-default ispell-program-name "aspell")
-; /141110
-; d:/Emacs14 $ which aspell
-; c:/Program Files (x86)/Aspell/bin/aspell.exe
-;(setq ispell-program-name "aspell")
-(require 'ispell)
-(setq text-mode-hook '(lambda()  (flyspell-mode t)  ) )
-(add-hook 'LaTeX-mode-hook 'flyspell-mode)
-; (flyspell-mode 1)  /141126, add then error
-(ispell-minor-mode) 
-; (ispell-set-spellchecker-params)
- ; Initialize variables and dicts alists
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; must require ac-ispell, error, /141104
+  ;(add-to-list 'load-path "D:/Emacs14/auto-complete-master")
+  ;(require 'ac-ispell)
+  ;(eval-after-load "auto-complete" '(progn (ac-ispell-setup)))
+  ;(add-hook 'git-commit-mode-hook 'ac-ispell-ac-setup)
+  ;(add-hook 'mail-mode-hook 'ac-ispell-ac-setup)
+  
+  ;; ispell must installed in disk C, otherwise permission denied, /141106
+  ;; ispell denied, must install aspell, error, 141105
+  ;(add-to-list 'exec-path "D:/Aspell/bin/")
+  ;(setq ispell-personal-dictionary "D:/Aspell/dict")
+  (if (string-equal system-type "windows-nt")
+  (progn (add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin")))
+  ; ** @emacs
+  ; (add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin")
+  
+  (if (string-equal system-type "windows-nt")
+  (progn (setq ispell-personal-dictionary "C:/Program Files (x86)/Aspell/dict")))
+  ; (setq ispell-personal-dictionary "C:/Program Files (x86)/Aspell/dict")
+  (if (string-equal system-type "windows-nt")
+  (setq-default ispell-program-name "aspell"))
+  ; /141110
+  ; d:/Emacs14 $ which aspell
+  ; c:/Program Files (x86)/Aspell/bin/aspell.exe
+  ;(setq ispell-program-name "aspell")
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; @mac, [2015-12-28]
+  (if (string-equal system-type "darwin")
+  (setq ispell-program-name "/usr/local/bin/ispell"))
+  (if (string-equal system-type "darwin")
+  (setq-default ispell-program-name "/usr/local/bin/aspell"))
+  
+  (require 'ispell)
+  (setq text-mode-hook '(lambda()  (flyspell-mode t)  ) )
+  (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+  ; (flyspell-mode 1)  /141126, add then error
+  (ispell-minor-mode) 
+  ; (ispell-set-spellchecker-params)
+   ; Initialize variables and dicts alists
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 *** @ac, first ispell, then ac-ispell [2015-12-28]
 #+BEGIN_SRC emacs-lisp
@@ -716,6 +725,10 @@
 ** custom-set-variables
    1. org-agenda-files
 ** @org
+*** '(org-agenda-files (list (concat git-to "paper.org") [2015-12-28]
+    1. '(org-agenda-files (list (concat git-to "paper.org") (concat git-to "study.org") (concat git-to "journal.org") (concat git-to "project.org") (concat git-to "task.org") (concat git-to  "note.org")))
+
+
 *** setq org-remember-templates
 *** setq org-capture-templates 
 *** concat git-to "task.org" [2015-12-28]
@@ -724,6 +737,11 @@
 
 ** @helm-bibtex
 *** @ac, first ispell, then ac-ispell [2015-12-28]
+*** @ac, ;; @mac, [2015-12-28]
+(if (string-equal system-type "darwin")
+(setq ispell-program-name "/usr/local/bin/ispell"))
+(if (string-equal system-type "darwin")
+(setq-default ispell-program-name "/usr/local/bin/aspell"))
 *** (setq helm-bibtex-bibliography (list (concat path-to "bib1410.bib") (concat path-to "bib1505.bib") (concat path-to "bib1506.bib") ))
 ;    (setq helm-bibtex-bibliography '( (concat path-to "bib1410.bib") (concat path-to "bib1505.bib") (concat path-to "bib1506.bib") ))
 *** can't find dash, dash should be first before s [2015-12-28]
