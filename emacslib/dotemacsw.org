@@ -1,4 +1,5 @@
 
+
 * @basic
 ** @basic: @gitlib: path-to  [2015-12-24]
 
@@ -66,6 +67,22 @@
   (put 'downcase-region 'disabled nil)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
 #+END_SRC
+#+BEGIN_SRC emacs-lisp
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(elfeed-db-directory (concat path-to "elfeed_db"))
+ '(elfeed-feeds (quote ("youtube.com" "http://nullprogram.com/feed/" "http://www.terminally-incoherent.com/blog/feed/")))
+  '(org-agenda-files (quote ("d:/bitlib/orglib/paper.org" "d:/bitlib/orglib/study.org" "d:/bitlib/orglib/journal.org" "d:/bitlib/orglib/project.org" "d:/bitlib/orglib/task.org" "d:/bitlib/orglib/note.org")))
+ '(session-use-package t nil (session))
+ '(show-paren-mode t)
+ '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
+ '(truncate-partial-width-windows nil)
+ '(user-full-name "xiaoanh"))
+
+#+END_SRC
 ** [#C] @basic: @init
    1. init.el must be separate [2015-12-25]
 #+BEGIN_SRC emacs-lisp
@@ -98,7 +115,7 @@
   (setq initial-user-file (concat dotfiles-dir "dotemacsw.el"))
   ;; load up all literate org-mode files in this directory
   ; (mapc #'org-babel-load-file (directory-files dotfiles-dir t "\\.org$"))
-   ; (org-babel-load-file (concat dotfiles-dir "dotemacsw.org"))
+;  (org-babel-load-file (concat dotfiles-dir "dotemacsw.org"))
   ;;; init.el ends here
   
 #+END_SRC
@@ -217,44 +234,46 @@
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
-** @helm-bibtex-master
+** @helm-bibtex-master, dash first
 #+BEGIN_SRC emacs-lisp
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;  @helm, helm-bibtex
-; @err, can not load parsebib
-; @success, Cannot open load file -> (add-to-list ‘load-path “/Users/user_name/bin/”)
-; ;; Requirements are parsebib, helm, s, dash, and f.  The easiest way
-; *** @parsebib @google, https://github.com/joostkremers/parsebib, @Preamble, @String, or @Comment
-; https://github.com/tmalsburg/helm-bibtex
-; *** @dash can not load parsebib
-; https://github.com/magnars/dash.el
-; *** @s can not load s and f
-; https://github.com/magnars/s.el
-; https://github.com/rejeep/f.el
-; *** @success, parsebib, dash, s and f finally
-(add-to-list 'load-path (concat path-to "s.el-master/"))
-(require 's)
-(add-to-list 'load-path (concat path-to "f.el-master/"))
-(require 'f)
-(add-to-list 'load-path (concat path-to "dash.el-master/"))
-(require 'dash) 
-; A modern list library for Emacs 
-; All functions and constructs in the library are prefixed with a dash (-).
-
-(add-to-list 'load-path (concat path-to "parsebib-master/"))
-(require 'parsebib)
-(add-to-list 'load-path (concat path-to "helm-bibtex-master/"))
-(autoload 'helm-bibtex "helm-bibtex" "" t)
-; (setq helm-bibtex-bibliography '("/path/to/bibtex-file-1.bib" "/path/to/bibtex-file-2.bib"))
-(setq helm-bibtex-bibliography '("D:/bib1410/bib1410.bib" "D:/bib1410/bib1505.bib" "D:/bib1410/bib1506.bib" ))
- 
-(setq helm-bibtex-library-path "D:/bib1410/paper1410/" )
-; (setq helm-bibtex-library-path '("/path1/to/pdfs" "/path2/to/pdfs"))
-; (setq helm-bibtex-notes-path "/path/to/notes.org")
-(setq helm-bibtex-notes-path "D:/GTD18/bib_notes.org")
-(setq helm-bibtex-pdf-symbol "⌘")
-(setq helm-bibtex-notes-symbol "✎")
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;  @helm, helm-bibtex
+  ; @err, can not load parsebib
+  ; @success, Cannot open load file -> (add-to-list ‘load-path “/Users/user_name/bin/”)
+  ; ;; Requirements are parsebib, helm, s, dash, and f.  The easiest way
+  ; *** @parsebib @google, https://github.com/joostkremers/parsebib, @Preamble, @String, or @Comment
+  ; https://github.com/tmalsburg/helm-bibtex
+  ; *** @dash can not load parsebib
+  ; https://github.com/magnars/dash.el
+  ; *** @s can not load s and f
+  ; https://github.com/magnars/s.el
+  ; https://github.com/rejeep/f.el
+  ; *** @success, parsebib, dash, s and f finally
+  (add-to-list 'load-path (concat path-to "dash.el-master/"))
+  (require 'dash) 
+  (add-to-list 'load-path (concat path-to "s.el-master/"))
+  (require 's)
+  (add-to-list 'load-path (concat path-to "f.el-master/"))
+  (require 'f)
+  ; A modern list library for Emacs 
+  ; All functions and constructs in the library are prefixed with a dash (-).
+  
+  (add-to-list 'load-path (concat path-to "parsebib-master/"))
+  (require 'parsebib)
+  (add-to-list 'load-path (concat path-to "helm-bibtex-master/"))
+  (autoload 'helm-bibtex "helm-bibtex" "" t)
+  ; (setq helm-bibtex-bibliography '("/path/to/bibtex-file-1.bib" "/path/to/bibtex-file-2.bib"))
+  ; helm-bibtex, bitlib->gitlib [2015-12-28]
+  (setq helm-bibtex-bibliography '("D:/gitlib/orglib/bib1410.bib" "D:/gitlib/orglib/bib1505.bib" "D:/gitlib/orglib/bib1506.bib" ))
+  ; (setq helm-bibtex-bibliography '("D:/bitlib/orglib/bib1410.bib" "D:/bitlib/orglib/bib1505.bib" "D:/bitlib/orglib/bib1506.bib" ))
+   
+  (setq helm-bibtex-library-path "D:/bitlib/orglib/paper1512/" )
+  ; (setq helm-bibtex-library-path '("/path1/to/pdfs" "/path2/to/pdfs"))
+  ; (setq helm-bibtex-notes-path "/path/to/notes.org")
+  (setq helm-bibtex-notes-path "D:/gitlib/orglib/bib_notes.org")
+  (setq helm-bibtex-pdf-symbol "⌘")
+  (setq helm-bibtex-notes-symbol "✎")
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 ** @linum forcefully, [2013-11-13]
 #+BEGIN_SRC emacs-lisp
@@ -475,265 +494,230 @@
 ** @org all left is org
 
 #+BEGIN_SRC emacs-lisp
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; mobile-org, [2014-12-16]
-; (setq org-mobile-directory "D:/GTD18/mobile-org/")
-(setq org-mobile-files (quote ( (concat git-to "HXA.OFDM.PON.org")  (concat git-to "journal.org")  (concat git-to "project.org")  (concat git-to "task.org")  (concat git-to "note.org") )))
-; (setq org-mobile-index-file "D:/GTD18/inbox.org")
-; (setq org-mobile-index-file "inbox.org")
-; (setq org-mobile-inbox-for-pull "D:/GTD18/fromMobile.org")
-; (setq org-mobile-inbox-for-pull "D:/GTD18/inbox.org")
-; no executable found to compute checksums
-;; (defcustom org-mobile-checksum-binary (or (executable-find "shasum")
-;;                                          (executable-find "sha1sum")
-;;                                          (executable-find "md5sum")
-;;                                          (executable-find "md5"))
-;;  "Executable used for computing checksums of agenda files."
-;;  :group 'org-mobile
-;;  :type 'string)
-; org-mobile-checksum-binary: nil
-;  Basically the checksums.dat file only contains the checksums for index.org, mobileorg.org and agendas.org.
-; mobileorg - "No executable found to compute checksums": -http://comments.gmane.org/gmane.emacs.orgmode/26838
-
-; org-capture, / [2014-11-27]
-(setq org-capture-templates '(
-("t" "Task" entry (file+headline (concat git-to "task.org") "Tasks") "* TODO %?\n %i\n %a")
-("j" "Journal" entry (file+datetree (concat git-to "journal.org")) "* %?\nEntered on %U\n %i\n %a")
-("n" "Note" entry (file+datetree (concat git-to "note.org") ) "* %?\nEntered on %U\n %i\n %a")
-("p" "Project" entry (file+datetree (concat git-to "project.org") ) "* %?\nEntered on %U\n %i\n %a")
-))
-
-; set org-remember, /141119
-(define-key global-map "\C-cr" 'org-remember)
-
-; (org-remember-insinuate)
-; must add remember-mode-hook, /141119
-  (setq remember-annotation-functions '(org-remember-annotation))
-  (setq remember-handler-functions '(org-remember-handler))
-  (add-hook 'remember-mode-hook 'org-remember-apply-template)
-
-(setq org-directory git-to) 
-; (setq org-directory (concat git-to "/") 
-(setq org-remember-templates '(("New" ?n "* %? %t \n %i\n %a" (concat git-to "inbox.org") ) ("Task" ?t "** TODO %?\n %i\n %a" (concat git-to "task.org") "Tasks") ("Calendar" ?c "** TODO %?\n %i\n %a" (concat git-to "task.org") "Tasks") ("Idea" ?i "** %?\n %i\n %a" (concat git-to "task.org") "Ideas") ("Note" ?r "* %?\n %i\n %a" (concat git-to "note.org") ) ("Project" ?p "** %?\n %i\n %a" (concat git-to "project.org") %g)  ("Journal" ?j "* %?\n %i\n %a" (concat git-to "journal.org") )  )) 
-(setq org-default-notes-file (concat org-directory "inbox.org"))
-; set org-remember, /141118
-; (org-remember-insinuate)
-; (setq org-directory "D:/GTD18/") 
-; (setq org-default-notes-file (concat org-directory "inbox.org"))
-; (setq org-default-notes-file "D:/GTD18/.notes")
-;  (setq org-directory "D:/GTD18/inbox.org")
-
-;; (autoload 'remember "remember" nil t)
-;; (autoload 'remember-region "remember" nil t)
-;; (setq org-reverse-note-order t)
-;; (when (file-exists-p "D:/GTD18/")
-;;   (define-key global-map [(f9)] 'org-remember)
-;;   (setq remember-annotation-functions '(org-remember-annotation))
-;;   (setq remember-handler-functions '(org-remember-handler))
-;;   (add-hook 'remember-mode-hook 'org-remember-apply-template)
-;;  (setq org-directory "D:/GTD18/inbox.org")
-;; ; '(org-agenda-files (quote ("d:/Chapters1411/JOB141110.org" "d:/Chapters1411/DOCSIS.org" "d:/Chapters1411/EMACS141110.org")))
-;;  '(org-agenda-files nil)
-;;   (setq org-remember-templates
-;;         '((?t "* TODO %?\n  %i", (expand-file-name "todo.org" org-directory) "Tasks")
-;;           (?m "* %U\n\n  %?%i\n  %a", (expand-file-name "notes.org" org-directory) "Notes")))
-;;   (let ((todo (expand-file-name "todo.org" org-directory)))
-;;     (when (file-exists-p todo)
-;;       (add-to-list 'org-agenda-files todo)))
-
-;; org-mode 导出Beamer的设置, /141114
-;; beamer class, for presentations
-;; (setq org-export-latex-classes nil)
-;; (add-to-list 'org-export-latex-classes 
-;; 	     '("beamer"
-;; 	       \documentclass{beamer}
-;; 	       \mode
-;; 	       \usetheme{{{{Warsaw}}}}
-;; 	       \beamertemplateballitem
-;; 	       \setbeameroption{show notes}
-;; 	       \usepackage{graphicx}
-;; 	       \usepackage{lmodern}
-;; 	       \hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
-;; 	       ;\mode<beamer>{\usetheme{Boadilla}}
-;; 	       ;\AtBeginSection[]{\begin{frame}<beamer>\frametitle{Topic}\tableofcontents[currentsection]\end{frame}}  
-;; ) )
-
-; todo, tag, pre-setting
-; org-mode 使用: URL: http://blog.sina.com.cn/s/blog_818b48820101pmmu.html
-; 关键词后括号内的字母为快捷选择键，当使用 C-c C-t 设置或改变当前标题的TODO状态或类型时将出现选项菜单，此时可以用快捷键进行选择。
-;  "Study(s!)" "Fun(f!)" delete, <2015-01-16>
-(setq org-todo-keywords
-  '((type "Work(w!)" "Huang(h!)" "|")
-;    (type "Work(w!)" "Huang(h!)" "Study(s!)" "|")
-    (sequence "PENDING(p!)" "TODO(t!)"  "|" "DONE(d!)" "ABORT(a@/!)")
-))
-(setq org-todo-keyword-faces
-  '(("Work" .      (:background "red" :foreground "white" :weight bold))
-;    ("Study" .      (:background "white" :foreground "red" :weight bold))
-; <x-bg-color>, background can not be White, <2014-12-23>
-;    ("Study" .      (:background "gray" :foreground "red" :weight bold))
-;    ("Fun" .      (:foreground "MediumBlue" :weight bold)) 
-    
-    ("Huang" .      (:background "red" :foreground "orange" :weight bold)) 
-    ("PENDING" .   (:background "LightGreen" :foreground "gray" :weight bold))
-    ("TODO" .      (:background "DarkOrange" :foreground "black" :weight bold))
-    ("DONE" .      (:background "azure" :foreground "Darkgreen" :weight bold)) 
-    ("ABORT" .     (:background "gray" :foreground "black"))
-))
-
-(setq org-tag-alist '(("@Fit" . ?f) ("@huang" . ?h) ("@home" . ?m) ("@Lang" . ?l) ("@Basic" . ?b) ("@Emacs" . ?e) ("@paper" . ?p) ("@work" . ?w)   ("@DOCSIS" . ?d) ("@Meeting" . ?M) ("@Famous" .?F)))
-
-;; priority setting, /141119 优先级范围和默认任务的优先级
-; lowest can not be D, must E, /141119
-(setq org-highest-priority ?A)
-(setq org-lowest-priority  ?E)
-(setq org-default-priority ?E)
-;; 优先级醒目外观
-(setq org-priority-faces
-  '((?A . (:background "red" :foreground "white" :weight bold))
-    (?B . (:background "DarkOrange" :foreground "white" :weight bold))
-    (?C . (:background "yellow" :foreground "DarkGreen" :weight bold))
-    (?D . (:background "DodgerBlue" :foreground "black" :weight bold))
-    (?E . (:background "SkyBlue" :foreground "black" :weight bold))
-))
-
-; ORG-capture, /141126
-; M-x org-capture-import-remember-templates RET
-; (setq org-directory "D:/GTD18/") 
-(setq org-default-notes-file (concat org-directory "inbox.org"))
-; (define-key global-map "\C-cc" ’org-capture)
-
-
-; yas for beamer, http://alpha-blog.wanglianghome.org/2012/06/13/org-beamer-tricks/
-
-
-; Epresent <2014-12-10>
-; Debugger entered--Lisp error: (file-error "Cannot open load file" "ox")  require(ox)
-; (add-to-list 'load-path (concat path-to "epresent-master"))
-; (require 'epresent)
-; epresent and reveal fail, due to ox missing and latest org-mode 8.0, [2015-07-07]
-
-;; *** org-present no use
-; replace epresent with org-present, [2015-07-06]
-;; (autoload 'org-present "org-present" nil t)
-;; (eval-after-load "org-present"
-;;   '(progn
-;;      (add-hook 'org-present-mode-hook
-;;                (lambda ()
-;;                  (org-present-big)
-;;                  (org-display-inline-images)
-;;                  (org-present-hide-cursor)
-;;                  (org-present-read-only)))
-;;      (add-hook 'org-present-mode-quit-hook
-;;                (lambda ()
-;;                  (org-present-small)
-;;                  (org-remove-inline-images)
-;;                  (org-present-show-cursor)
-;;                  (org-present-read-write)))))
-
-; org-presie, https://github.com/nicferrier/org-presie
-; (require 'org-presie)
-; can not load file eimp
-; fail: permission denied: mogrify
-
-
-
-; org-mode reveal, [2015-07-07]
-; (add-to-list 'load-path "D:/dotemacsw/org-reveal-master")
-; (require 'ox-reveal)
-
-; can not open ox-html
-; https://github.com/yyr/org-mode/tree/master/lisp
-
-(put 'erase-buffer 'disabled nil)
-
-(org-babel-do-load-languages
-    'org-babel-load-languages '((python . t) (R . t)))
-
-; ditaa, [2015-07-02]
-; (setq org-ditaa-jar-path “~/.emacs.d/plugins/ditaa/ditaa0_9.jar”) 
-;(setq org-plantuml-jar-path “~/java/plantuml.jar”)
-; (add-hook ‘org-babel-after-execute-hook ‘org-display-inline-images ‘append)
-; (org-babel-do-load-languages 'org-babel-load-languages '((ditaa . t))) 
-; this line activates ditaa
-; can not find ditaa.jar can be found in contrib/scripts
-; C:\Users\xiaoanh\Downloads\Emacs24.3\lisp
-
-;; *** @ido and tabbar, no use
-; ido, anything, <2014-12-24>
-;; (require 'ido)
-;; (ido-mode t)
-
- 
-;; ; tabbar, speedbar, <2014-12-24>
-;; ; http://blog.csdn.net/CherylNatsu/article/details/6204737
-;; ; http://laokaddk.blog.51cto.com/368606/593613/
-;; (add-to-list 'load-path  path-to)  
-;; (require 'tabbar)
-;; (tabbar-mode 1)
-;; (global-set-key [(meta j)] 'tabbar-backward)  
-;; (global-set-key [(meta k)] 'tabbar-forward)  
-;; (global-set-key  [(meta g)]  'tabbar-backward-group)
-;; (global-set-key  [(meta h)]  'tabbar-forward-group)
-;(global-set-key (kbd "<M-left>") 'tabbar-backward)
-;(global-set-key (kbd "<M-right>") 'tabbar-forward)
-
-; https://github.com/alloy-d/color-theme-molokai
-; I prefer Monokai from sublime text 2. 
-; Debugger entered--Lisp error: (file-error "Cannot open load file" "color-theme")  
-; then download color-theme.el, 
-; symbol's function definition is void: plist-to-alist, 
-; toggle-debug-on-error, <2015-01-26>
-
-
-; define color theme 
-;(load "D:/dotemacsw/color-theme-molokai.el")
-
-; (add-to-list 'load-path (concat path-to "themes"))
-; (require 'color-theme)
-; (setq color-theme-is-global t)
-; (color-theme-initialize)
-; (color-theme-matrix)
-; (color-theme-molokai)
-; (color-theme-gnome2)
-
-;; 语法高亮 <2015-01-26>
-; (setq color-theme-is-global t)
-
-; redo,<2015-01-16>
-; http://www.wonderworks.com/download/redo.el
-;; (add-to-list 'load-path  path-to)  
-;; (require 'redo) 
-;; (global-set-key ( kbd "C-.") 'redo)
-
-; 进度记录 <2015-01-16>
-(setq org-log-done 'time)
-(setq org-log-done 'note)
-
-;; ** @bib
-; http://blog.waterlin.org/articles/bind-emacs-org-mode-with-bibtex.html
-(setq reftex-default-bibliography
-      (quote
-       ("D:/bib1410/bib1307.bib" "D:/bib1410/bib1410.bib"  "D:/bib1410/bib1506.bib" "D:/bib1410/bib1505.bib" ))) 
-; (define-key org-mode-map (kbd "C-c )") 'reftex-citation)
-; repeat, [2015-01-30]
-
-;; ** @bib
-;; 利用 Emacs 的 org-mode 管理文献, <2015-01-27>
-;; https://wiki.freebsdchina.org/doc/r/reference
-;; 定义 org-mode-reftex-search
-(defun org-mode-reftex-search ()
- ;; jump to the notes for the paper pointed to at from reftex search
- (interactive)
- (org-open-link-from-string (format "[[notes:%s]]" (reftex-citation t))))
-
-(setq org-link-abbrev-alist
- '(("bib" . "D:/bib1410/bib1410.bib::%s, D:/bib1410/bib1505.bib::%s, D:/bib1410/bib1506.bib::%s")
-   ("notes" . (concat git-to "notes.org::%s") )
-;   ("notes" . "(concat git-to "notes.org") ::%s")
-;  (invalid-read-syntax ". in wrong context")
-;    ("notes" . (concat git-to "notes.org::%s")
-   ("figs" . "D:/figure1411/%s.png")
-   ("papers" . "D:/bib1410/paper1410/%s.pdf")))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; mobile-org, [2014-12-16]
+  ; comment org-mobile-files [2015-12-28]
+  ; (setq org-mobile-files (quote ( (concat git-to "HXA.OFDM.PON.org")  (concat git-to "journal.org")  (concat git-to "project.org")  (concat git-to "task.org")  (concat git-to "note.org") )))
+  ; (setq org-mobile-index-file "D:/GTD18/inbox.org")
+  ; (setq org-mobile-index-file "inbox.org")
+  ; (setq org-mobile-inbox-for-pull "D:/GTD18/fromMobile.org")
+  ; (setq org-mobile-inbox-for-pull "D:/GTD18/inbox.org")
+  
+  
+  ; org-capture, / [2014-11-27]
+  (setq org-capture-templates '(
+  ("t" "Task" entry (file+headline (concat git-to "task.org") "Tasks") "* TODO %?\n %i\n %a")
+  ("j" "Journal" entry (file+datetree (concat git-to "journal.org")) "* %?\nEntered on %U\n %i\n %a")
+  ("n" "Note" entry (file+datetree (concat git-to "note.org") ) "* %?\nEntered on %U\n %i\n %a")
+  ("p" "Project" entry (file+datetree (concat git-to "project.org") ) "* %?\nEntered on %U\n %i\n %a")
+  ))
+  
+  ; set org-remember, /141119
+  (define-key global-map "\C-cr" 'org-remember)
+  
+  ; (org-remember-insinuate)
+  ; must add remember-mode-hook, /141119
+    (setq remember-annotation-functions '(org-remember-annotation))
+    (setq remember-handler-functions '(org-remember-handler))
+    (add-hook 'remember-mode-hook 'org-remember-apply-template)
+  
+  (setq org-directory git-to) 
+  ; (setq org-directory (concat git-to "/") 
+  (setq org-remember-templates '(("New" ?n "* %? %t \n %i\n %a" (concat git-to "inbox.org") ) ("Task" ?t "** TODO %?\n %i\n %a" (concat git-to "task.org") "Tasks") ("Calendar" ?c "** TODO %?\n %i\n %a" (concat git-to "task.org") "Tasks") ("Idea" ?i "** %?\n %i\n %a" (concat git-to "task.org") "Ideas") ("Note" ?r "* %?\n %i\n %a" (concat git-to "note.org") ) ("Project" ?p "** %?\n %i\n %a" (concat git-to "project.org") %g)  ("Journal" ?j "* %?\n %i\n %a" (concat git-to "journal.org") )  )) 
+  (setq org-default-notes-file (concat org-directory "inbox.org"))
+  
+  (setq org-todo-keywords
+    '((type "Work(w!)" "Huang(h!)" "|")
+  ;    (type "Work(w!)" "Huang(h!)" "Study(s!)" "|")
+      (sequence "PENDING(p!)" "TODO(t!)"  "|" "DONE(d!)" "ABORT(a@/!)")
+  ))
+  (setq org-todo-keyword-faces
+    '(("Work" .      (:background "red" :foreground "white" :weight bold))
+  ;    ("Study" .      (:background "white" :foreground "red" :weight bold))
+  ; <x-bg-color>, background can not be White, <2014-12-23>
+  ;    ("Study" .      (:background "gray" :foreground "red" :weight bold))
+  ;    ("Fun" .      (:foreground "MediumBlue" :weight bold)) 
+      
+      ("Huang" .      (:background "red" :foreground "orange" :weight bold)) 
+      ("PENDING" .   (:background "LightGreen" :foreground "gray" :weight bold))
+      ("TODO" .      (:background "DarkOrange" :foreground "black" :weight bold))
+      ("DONE" .      (:background "azure" :foreground "Darkgreen" :weight bold)) 
+      ("ABORT" .     (:background "gray" :foreground "black"))
+  ))
+  
+  (setq org-tag-alist '(("@Fit" . ?f) ("@huang" . ?h) ("@home" . ?m) ("@Lang" . ?l) ("@Basic" . ?b) ("@Emacs" . ?e) ("@paper" . ?p) ("@work" . ?w)   ("@DOCSIS" . ?d) ("@Meeting" . ?M) ("@Famous" .?F)))
+  
+  ;; priority setting, /141119 优先级范围和默认任务的优先级
+  ; lowest can not be D, must E, /141119
+  (setq org-highest-priority ?A)
+  (setq org-lowest-priority  ?E)
+  (setq org-default-priority ?E)
+  ;; 优先级醒目外观
+  (setq org-priority-faces
+    '((?A . (:background "red" :foreground "white" :weight bold))
+      (?B . (:background "DarkOrange" :foreground "white" :weight bold))
+      (?C . (:background "yellow" :foreground "DarkGreen" :weight bold))
+      (?D . (:background "DodgerBlue" :foreground "black" :weight bold))
+      (?E . (:background "SkyBlue" :foreground "black" :weight bold))
+  ))
+  
+  ; ORG-capture, /141126
+  ; M-x org-capture-import-remember-templates RET
+  ; (setq org-directory "D:/GTD18/") 
+  (setq org-default-notes-file (concat org-directory "inbox.org"))
+  ; (define-key global-map "\C-cc" ’org-capture)
+  
+  
+  ; yas for beamer, http://alpha-blog.wanglianghome.org/2012/06/13/org-beamer-tricks/
+  
+  
+  ; Epresent <2014-12-10>
+  ; Debugger entered--Lisp error: (file-error "Cannot open load file" "ox")  require(ox)
+  ; (add-to-list 'load-path (concat path-to "epresent-master"))
+  ; (require 'epresent)
+  ; epresent and reveal fail, due to ox missing and latest org-mode 8.0, [2015-07-07]
+  
+  ;; *** org-present no use
+  ; replace epresent with org-present, [2015-07-06]
+  ;; (autoload 'org-present "org-present" nil t)
+  ;; (eval-after-load "org-present"
+  ;;   '(progn
+  ;;      (add-hook 'org-present-mode-hook
+  ;;                (lambda ()
+  ;;                  (org-present-big)
+  ;;                  (org-display-inline-images)
+  ;;                  (org-present-hide-cursor)
+  ;;                  (org-present-read-only)))
+  ;;      (add-hook 'org-present-mode-quit-hook
+  ;;                (lambda ()
+  ;;                  (org-present-small)
+  ;;                  (org-remove-inline-images)
+  ;;                  (org-present-show-cursor)
+  ;;                  (org-present-read-write)))))
+  
+  ; org-presie, https://github.com/nicferrier/org-presie
+  ; (require 'org-presie)
+  ; can not load file eimp
+  ; fail: permission denied: mogrify
+  
+  
+  
+  ; org-mode reveal, [2015-07-07]
+  ; (add-to-list 'load-path "D:/dotemacsw/org-reveal-master")
+  ; (require 'ox-reveal)
+  
+  ; can not open ox-html
+  ; https://github.com/yyr/org-mode/tree/master/lisp
+  
+  (put 'erase-buffer 'disabled nil)
+  
+  (org-babel-do-load-languages
+      'org-babel-load-languages '((python . t) (R . t)))
+  
+  ; ditaa, [2015-07-02]
+  ; (setq org-ditaa-jar-path “~/.emacs.d/plugins/ditaa/ditaa0_9.jar”) 
+  ;(setq org-plantuml-jar-path “~/java/plantuml.jar”)
+  ; (add-hook ‘org-babel-after-execute-hook ‘org-display-inline-images ‘append)
+  ; (org-babel-do-load-languages 'org-babel-load-languages '((ditaa . t))) 
+  ; this line activates ditaa
+  ; can not find ditaa.jar can be found in contrib/scripts
+  ; C:\Users\xiaoanh\Downloads\Emacs24.3\lisp
+  
+  ;; *** @ido and tabbar, no use
+  ; ido, anything, <2014-12-24>
+  ;; (require 'ido)
+  ;; (ido-mode t)
+  
+   
+  ;; ; tabbar, speedbar, <2014-12-24>
+  ;; ; http://blog.csdn.net/CherylNatsu/article/details/6204737
+  ;; ; http://laokaddk.blog.51cto.com/368606/593613/
+  ;; (add-to-list 'load-path  path-to)  
+  ;; (require 'tabbar)
+  ;; (tabbar-mode 1)
+  ;; (global-set-key [(meta j)] 'tabbar-backward)  
+  ;; (global-set-key [(meta k)] 'tabbar-forward)  
+  ;; (global-set-key  [(meta g)]  'tabbar-backward-group)
+  ;; (global-set-key  [(meta h)]  'tabbar-forward-group)
+  ;(global-set-key (kbd "<M-left>") 'tabbar-backward)
+  ;(global-set-key (kbd "<M-right>") 'tabbar-forward)
+  
+  ; https://github.com/alloy-d/color-theme-molokai
+  ; I prefer Monokai from sublime text 2. 
+  ; Debugger entered--Lisp error: (file-error "Cannot open load file" "color-theme")  
+  ; then download color-theme.el, 
+  ; symbol's function definition is void: plist-to-alist, 
+  ; toggle-debug-on-error, <2015-01-26>
+  
+  
+  ; define color theme 
+  ;(load "D:/dotemacsw/color-theme-molokai.el")
+  
+  ; (add-to-list 'load-path (concat path-to "themes"))
+  ; (require 'color-theme)
+  ; (setq color-theme-is-global t)
+  ; (color-theme-initialize)
+  ; (color-theme-matrix)
+  ; (color-theme-molokai)
+  ; (color-theme-gnome2)
+  
+  ;; 语法高亮 <2015-01-26>
+  ; (setq color-theme-is-global t)
+  
+  ; redo,<2015-01-16>
+  ; http://www.wonderworks.com/download/redo.el
+  ;; (add-to-list 'load-path  path-to)  
+  ;; (require 'redo) 
+  ;; (global-set-key ( kbd "C-.") 'redo)
+  
+  ; 进度记录 <2015-01-16>
+  (setq org-log-done 'time)
+  (setq org-log-done 'note)
+  
+  ;; ** @bib
+  ; http://blog.waterlin.org/articles/bind-emacs-org-mode-with-bibtex.html
+  (setq reftex-default-bibliography
+        (quote
+         ("D:/bitlib/orglib/bib1307.bib" "D:/bitlib/orglib/bib1410.bib"  "D:/bitlib/orglib/bib1506.bib" "D:/bitlib/orglib/bib1505.bib" ))) 
+  ; (define-key org-mode-map (kbd "C-c )") 'reftex-citation)
+  ; repeat, [2015-01-30]
+  
+  ;; ** @bib
+  ;; 利用 Emacs 的 org-mode 管理文献, <2015-01-27>
+  ;; https://wiki.freebsdchina.org/doc/r/reference
+  ;; 定义 org-mode-reftex-search
+  (defun org-mode-reftex-search ()
+   ;; jump to the notes for the paper pointed to at from reftex search
+   (interactive)
+   (org-open-link-from-string (format "[[notes:%s]]" (reftex-citation t))))
+  
+  (setq org-link-abbrev-alist
+   '(("bib" . "D:/bitlib/orglib/bitlib/orglib.bib::%s, D:/bitlib/orglib/bib1505.bib::%s, D:/bitlib/orglib/bib1506.bib::%s")
+     ("notes" . (concat git-to "notes.org::%s") )
+  ;   ("notes" . "(concat git-to "notes.org") ::%s")
+  ;  (invalid-read-syntax ". in wrong context")
+  ;    ("notes" . (concat git-to "notes.org::%s")
+     ("figs" . "D:/figure1411/%s.png")
+  ;   ("papers" . "D:/bib1410/paper1410/%s.pdf")
+     ("papers" . "D:/bitlib/orglib/paper1512/%s.pdf")))
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
+
+* @debug [2015-12-28]
+** add session [2015-12-28]
+   1. http://emacs-session.sourceforge.net
+** custom-set-variables
+   1. org-agenda-files
+** @org
+*** setq org-remember-templates
+*** setq org-capture-templates 
+*** concat git-to "task.org" [2015-12-28]
+*** comment org-mobile-files [2015-12-28]
+    1. (setq org-mobile-files (quote ( (concat git-to "HXA.OFDM.PON.org")  (concat git-to "journal.org")  (concat git-to "project.org")  (concat git-to "task.org")  (concat git-to "note.org") )))
+
+** @helm-bibtex
+*** can't find dash, dash should be first before s [2015-12-28]
+*** bib1410->gitlib/orglib [2015-12-28]
+    1. ; helm-bibtex, bitlib->gitlib [2015-12-28]
+    2. bitlib->gitlib
+    3. (setq helm-bibtex-library-path "D:/bitlib/orglib/paper1512/" )
