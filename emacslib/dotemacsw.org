@@ -93,57 +93,39 @@
     
 #+END_SRC
 ** @basic: @kbd
+*** @kbd
 #+BEGIN_SRC emacs-lisp
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; @mac, ctrl [2015-12-25]
-(setq mac-command-modifier 'ctrl)
-(define-key global-map [?\M-¥] "\\")
-
-; emacs 自带的 bs.el 更好用, cool, /141107
-; http://blog.csdn.net/ruglcc/article/details/7826604
-(global-set-key "\C-x\C-b" 'bs-show) 
-   ;; or another key
-(global-set-key "\M-p"  'bs-cycle-previous)
-(global-set-key "\M-n"  'bs-cycle-next)
-
-; session to recover last  butter. /141107
-; (require 'session) 
-;;加载session
-; (add-hook 'after-init-hook 'session-initialize) 
-; (desktop-save-mode 1)
-; Java有生成文档的javadoc，C++的话，就要用Doxygen了。
-;; 语法高亮, [2014-11-07]
-; (global-font-lock-mode t)
-
-; :Enabling Flyspell mode gave an error  (ispell-set-spellchecker-params)
-; /141110
-
-; /141113,  emacs中如何设置自动换行的功能, 1、M－x：customize-option；2、输入truncate-partial-width-windows，使用过程中为防止命令拼写错误，可以用Tab键补齐；3、将设置页面中的参数改为off，然后点击保存按钮（save for furture sessions），再点击finish按钮。
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; @mac, ctrl [2015-12-25]
+    (setq mac-command-modifier 'ctrl)
+    (define-key global-map [?\M-¥] "\\")
+    
+    (global-set-key "\C-x\C-b" 'bs-show) 
+       ;; or another key
+    (global-set-key "\M-p"  'bs-cycle-previous)
+    (global-set-key "\M-n"  'bs-cycle-next)
+    '
+  ; comment-region, nice /141117.
+  (global-set-key (kbd "C-c C-/") 'comment-region)
+  (global-set-key (kbd "C-c C-/") 'uncomment-region)
+  (global-set-key [?\C-c ?\C-/] 'comment-or-uncomment-region)
+  
+  (global-set-key "\C-cl" 'org-store-link)
+  (global-set-key "\C-cc" 'org-capture)
+  (global-set-key "\C-ca" 'org-agenda)
+  (global-set-key "\C-cb" 'org-iswitchb)
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 
-** @basic: @kbd
-
+*** @basic: time-stamp, [2014-11-06]
 #+BEGIN_SRC emacs-lisp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; (require 'tramp)
-; (setq tramp-default-method "plink")
-
-; comment-region, nice /141117.
-(global-set-key (kbd "C-c C-/") 'comment-region)
-(global-set-key (kbd "C-c C-/") 'uncomment-region)
-(global-set-key [?\C-c ?\C-/] 'comment-or-uncomment-region)
-
-; (setq org-completion-use-iswitchb t)
-;  c-h v iswitchb-mode，然后点 customize 就行了。
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-cc" 'org-capture)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cb" 'org-iswitchb)
+; @basic: time-stamp, [2014-11-06]
+(add-hook 'write-file-hooks 'time-stamp)
+(setq time-stamp-format "%:u %04y/%02m/%02d %02H:%02M:%02S")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
-
-*** @defun
+*** @defun:  insert-date
 #+BEGIN_SRC emacs-lisp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; @defun insert-date
@@ -159,13 +141,6 @@
           (system-time-locale "de_DE"))
       (insert (format-time-string format))))
 (global-set-key (kbd "C-c d") 'insert-date)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-#+END_SRC
-** @basic: time-stamp, [2014-11-06]
-#+BEGIN_SRC emacs-lisp
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-hook 'write-file-hooks 'time-stamp)
-(setq time-stamp-format "%:u %04y/%02m/%02d %02H:%02M:%02S")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 
@@ -719,7 +694,7 @@
 #+END_SRC
 
 * @debug [2015-12-28]
-** open pdf in helm-bibtex
+** TODO open pdf in helm-bibtex
 *** helm-bibtex-pdf-open-function
 #+BEGIN_SRC emacs-lisp
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -760,29 +735,11 @@
 (if (string-equal system-type "windows-nt")
 (setq-default ispell-program-name "aspell"))
 
-** @err
-*** @anything, @helm [2015-12-29]
-    1. can not load anything-config,
-    2. can not load helm-autoloads, @win
-*** (number-or-marker-p OBJECT) 
-    1. Return t if OBJECT is a number or a marker.
-** add @session [2015-12-28]
-   1. http://emacs-session.sourceforge.net
-   2. load session error
-** custom-set-variables
-   1. org-agenda-files
-** @org
-*** [#C] quote to list '(org-agenda-files (list (concat git-to "paper.org") [2015-12-28]
-    1. '(org-agenda-files (list (concat git-to "paper.org") (concat git-to "study.org") (concat git-to "journal.org") (concat git-to "project.org") (concat git-to "task.org") (concat git-to  "note.org")))
-    2. '(org-agenda-files (quote (concat git-to, is wrong
+** TODO @anything, @helm [2015-12-29]
+   1. can not load anything-config,
+   2. can not load helm-autoloads, @win
 
-*** DONE setq org-remember-templates
-*** DONE setq org-capture-templates 
-*** concat git-to "task.org" [2015-12-28]
-*** @comment org-mobile-files [2015-12-28]
-    1. (setq org-mobile-files (quote ( (concat git-to "HXA.OFDM.PON.org")  (concat git-to "journal.org")  (concat git-to "project.org")  (concat git-to "task.org")  (concat git-to "note.org") )))
-
-** @helm-bibtex
+** TODO @helm-bibtex
 *** @ac, first ispell, then ac-ispell [2015-12-28]
 *** @ac, @lisp: and ;; @mac, [2015-12-28]
 (if (string-equal system-type "darwin")
@@ -794,6 +751,24 @@
     1. ; helm-bibtex, bitlib->gitlib [2015-12-28]
     2. bitlib->gitlib
     3. (setq helm-bibtex-library-path "D:/bitlib/orglib/paper1512/" )
+** @org
+*** [#C] quote to list '(org-agenda-files (list (concat git-to "paper.org") [2015-12-28]
+    1. '(org-agenda-files (list (concat git-to "paper.org") (concat git-to "study.org") (concat git-to "journal.org") (concat git-to "project.org") (concat git-to "task.org") (concat git-to  "note.org")))
+    2. '(org-agenda-files (quote (concat git-to, is wrong
+
+*** DONE setq org-remember-templates
+*** DONE setq org-capture-templates 
+*** concat git-to "task.org" [2015-12-28]
+*** @comment org-mobile-files [2015-12-28]
+    1. (setq org-mobile-files (quote ( (concat git-to "HXA.OFDM.PON.org")  (concat git-to "journal.org")  (concat git-to "project.org")  (concat git-to "task.org")  (concat git-to "note.org") )))
+** @other
+*** (number-or-marker-p OBJECT) 
+    1. Return t if OBJECT is a number or a marker.
+*** add @session [2015-12-28]
+    1. http://emacs-session.sourceforge.net
+    2. load session error
+*** DONE custom-set-variables
+    1. org-agenda-files
 
 * @study: @dotemacs
 ** @ln, [2015-12-29]
