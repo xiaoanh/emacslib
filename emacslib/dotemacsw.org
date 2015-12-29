@@ -1,7 +1,7 @@
 
 
 * @basic
-** @basic: @gitlib: path-to  [2015-12-24]
+** @basic: @gitlib: path-to, @bitlib: git-to, is for org files,  [2015-12-24]
 
 #+BEGIN_SRC emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -9,45 +9,26 @@
     ;; check OS type
     (cond
      ((string-equal system-type "windows-nt") ; Microsoft Windows
-      (progn
-    ;    (message "Microsoft Windows") ))
-        (concat (message "Microsoft Windows: ") (setq path-to "D:/gitlib/orglib/emacslib/")) ) )
-    ;    (message "Microsoft Windows") (setq path-to "D:/dotemacsw/")))
+      (and (progn
+        (concat (message "Microsoft Windows: ") (setq path-to "D:/gitlib/orglib/emacslib/")) ) 
+            (progn  
+            (concat (message "Microsoft Windows: ") (setq git-to "D:/bitlib/orglib/")) )))
+
      ((string-equal system-type "darwin") ; Mac OS X
-      (progn
-        (concat (message "Mac OS X") (setq path-to "/Volumes/xiaoanh/gitlib/emacslib/"))) )
-    ;    (message "Mac OS X") (setq path-to "~/Dropbox/emacslib/"))) 
+      (and (progn   
+          (concat (message "Mac OS X") (setq path-to "/Volumes/xiaoanh/gitlib/emacslib/")))
+     (progn
+    (concat (message "Mac OS X") (setq git-to "/Volumes/xiaoanh/bitlib/orglib/")))) )
+
      ((string-equal system-type "gnu/linux") ; linux
       (progn
         (message "Linux"))))
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 
-** @basic: @bitlib: git-to, is for org files, [2015-12-24]
-
-#+BEGIN_SRC emacs-lisp
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; @biblib: git-to
-(cond
- ((string-equal system-type "windows-nt") ; Microsoft Windows
-  (progn
-;    (message "Microsoft Windows") ))
-    (concat (message "Microsoft Windows: ") (setq git-to "D:/bitlib/orglib/")) ) )
-;    (message "Microsoft Windows") (setq path-to "D:/dotemacsw/")))
- ((string-equal system-type "darwin") ; Mac OS X
-  (progn
-    (concat (message "Mac OS X") (setq git-to "/Volumes/xiaoanh/bitlib/orglib/"))) )
-; 
-;    (concat (message "Mac OS X") (setq git-to "/Volumes/xiaoanh/gitlib/orglib/"))) )
-;    (message "Mac OS X") (setq path-to "~/Dropbox/emacslib/"))) 
- ((string-equal system-type "gnu/linux") ; linux
-  (progn
-    (message "Linux"))))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-#+END_SRC
 ** @basic: @custom: 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+BEGIN_SRC emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
  ;; font. m-x just once, support CHN, /141104
   (set-locale-environment "English")
   ; @key, DONE [2015-08-07]
@@ -88,28 +69,28 @@
 ** [#C] @basic: @init
    1. init.el must be separate [2015-12-25]
 #+BEGIN_SRC emacs-lisp
-  ;;; init.el --- Where all the magic begins
-  ;;
-  ;; This file loads Org-mode and then loads the rest of our Emacs initialization from Emacs lisp
-  ;; embedded in literate Org-mode files.
+    ;;; init.el --- Where all the magic begins
+    ;;
+    ;; This file loads Org-mode and then loads the rest of our Emacs initialization from Emacs lisp
+    ;; embedded in literate Org-mode files.
+    
+    ;; Load up Org Mode and (now included) Org Babel for elisp embedded in Org Mode files
+    ; (setq dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name)))
+    ; (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
+    ; (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
+    (setq dotfiles-dir path-to)
+    (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
+    (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
   
-  ;; Load up Org Mode and (now included) Org Babel for elisp embedded in Org Mode files
-  ; (setq dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name)))
-  ; (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
-  ; (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
-  (setq dotfiles-dir path-to)
-  (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
-  (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
-
-    ;; load up Org-mode and Org-babel
-  (require 'org-install)
-  (require 'ob-tangle)
-  (setq initial-user-file (concat dotfiles-dir "dotemacsw.el"))
-  ;; load up all literate org-mode files in this directory
-  ; (mapc #'org-babel-load-file (directory-files dotfiles-dir t "\\.org$"))
-;  (org-babel-load-file (concat dotfiles-dir "dotemacsw.org"))
-  ;;; init.el ends here
-  
+      ;; load up Org-mode and Org-babel
+    (require 'org-install)
+    (require 'ob-tangle)
+    (setq initial-user-file (concat dotfiles-dir "dotemacsw.el"))
+    ;; load up all literate org-mode files in this directory
+    ; (mapc #'org-babel-load-file (directory-files dotfiles-dir t "\\.org$"))
+  ; (org-babel-load-file (concat dotfiles-dir "dotemacsw.org"))
+    ;;; init.el ends here
+    
 #+END_SRC
 ** @basic: @kbd
 #+BEGIN_SRC emacs-lisp
@@ -189,6 +170,24 @@
 #+END_SRC
 
 * @other
+** @anything, @err [2015-12-29]
+#+BEGIN_SRC emacs-lisp
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; @anything, why not working
+  ; @err, can  not open load file anything-config
+    ;; (add-to-list 'load-path (concat path-to "anything/")
+    ;; (require 'anything-config)
+    ;; (setq anything-sources
+    ;;       (list anything-c-source-buffers
+    ;;         anything-c-source-locate
+    ;;             anything-c-source-file-name-history
+    ;;             anything-c-source-info-pages
+    ;;             anything-c-source-man-pages
+    ;;             anything-c-source-file-cache
+    ;;             anything-c-source-emacs-commands))
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
+
 ** @async emacs-async-master for helm
 #+BEGIN_SRC emacs-lisp
 ; https://github.com/jwiegley/emacs-async
@@ -206,7 +205,7 @@
   ;  (package-install 'helm)
   ; "Cannot open load file" "helm-autoloads [2015-12-25]
   ; @success, @mac after make [2015-12-25] 
-    ; (require 'helm-config)
+;    (require 'helm-config)
     (global-set-key (kbd "C-c h") 'helm-mini)
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
@@ -720,28 +719,74 @@
 #+END_SRC
 
 * @debug [2015-12-28]
-** add session [2015-12-28]
+** open pdf in helm-bibtex
+*** helm-bibtex-pdf-open-function
+#+BEGIN_SRC emacs-lisp
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ; https://github.com/tmalsburg/helm-bibtex
+    ; @mac, helm-bibtex-pdf-open-function
+    ; m-x getenv | setenv | eval-expression 
+    ; (defun helm-open-file-with-default-tool) in helm-utils.el
+    (cond 
+    ((string-equal system-type "darwin") ; @mac
+    (setq helm-bibtex-pdf-open-function
+      (lambda (fpath)
+        (start-process "skim" "*skim*" "open" (concat "-a /Applications/Skim.app " fpath))))))
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ; https://github.com/tmalsburg/helm-bibtex
+    ; @win
+    ; emacs  AcroRd32.exe
+    ; permission denied open
+    ; C:\Program Files (x86)\Adobe\Acrobat Reader DC\Reader\AcroRd32.exe 
+  ;;   (setq local-pdf-viewer
+  ;;         (cond
+  ;;          ((eq 'windows-nt system-type)
+  ;;           "/c/Program\\ Files\\ \\(x86\\)/Adobe/Acrobat \\ Reader \\ DC /Reader/AcroRd32.exe")
+  ;; ;          "/cygdrive/c/Program\\ Files\\ \\(x86\\)/Adobe/Reader\\ 10.0/Reader/AcroRd32.exe")
+  ;;          ((eq 'gnu/linux system-type) "okular")
+  ;;          ((eq 'darwin system-type) "open")))
+    
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
+
+*** Permission denied (open)
+*** exec-path
+    1. (add-to-list 'exec-path "C:/Program Files (x86)/Adobe/Acrobat Reader DC/Reader/")
+*** setq local-pdf-viewer
+    1. not work
+*** @success, aspell
+(if (string-equal system-type "windows-nt")
+(setq-default ispell-program-name "aspell"))
+
+** @err
+*** @anything, @helm [2015-12-29]
+    1. can not load anything-config,
+    2. can not load helm-autoloads, @win
+*** (number-or-marker-p OBJECT) 
+    1. Return t if OBJECT is a number or a marker.
+** add @session [2015-12-28]
    1. http://emacs-session.sourceforge.net
+   2. load session error
 ** custom-set-variables
    1. org-agenda-files
 ** @org
-*** '(org-agenda-files (list (concat git-to "paper.org") [2015-12-28]
+*** [#C] quote to list '(org-agenda-files (list (concat git-to "paper.org") [2015-12-28]
     1. '(org-agenda-files (list (concat git-to "paper.org") (concat git-to "study.org") (concat git-to "journal.org") (concat git-to "project.org") (concat git-to "task.org") (concat git-to  "note.org")))
+    2. '(org-agenda-files (quote (concat git-to, is wrong
 
-
-*** setq org-remember-templates
-*** setq org-capture-templates 
+*** DONE setq org-remember-templates
+*** DONE setq org-capture-templates 
 *** concat git-to "task.org" [2015-12-28]
-*** comment org-mobile-files [2015-12-28]
+*** @comment org-mobile-files [2015-12-28]
     1. (setq org-mobile-files (quote ( (concat git-to "HXA.OFDM.PON.org")  (concat git-to "journal.org")  (concat git-to "project.org")  (concat git-to "task.org")  (concat git-to "note.org") )))
 
 ** @helm-bibtex
 *** @ac, first ispell, then ac-ispell [2015-12-28]
-*** @ac, ;; @mac, [2015-12-28]
+*** @ac, @lisp: and ;; @mac, [2015-12-28]
 (if (string-equal system-type "darwin")
-(setq ispell-program-name "/usr/local/bin/ispell"))
-(if (string-equal system-type "darwin")
-(setq-default ispell-program-name "/usr/local/bin/aspell"))
+(and (setq ispell-program-name "/usr/local/bin/ispell") (setq-default ispell-program-name "/usr/local/bin/aspell")))
 *** (setq helm-bibtex-bibliography (list (concat path-to "bib1410.bib") (concat path-to "bib1505.bib") (concat path-to "bib1506.bib") ))
 ;    (setq helm-bibtex-bibliography '( (concat path-to "bib1410.bib") (concat path-to "bib1505.bib") (concat path-to "bib1506.bib") ))
 *** can't find dash, dash should be first before s [2015-12-28]
@@ -749,3 +794,53 @@
     1. ; helm-bibtex, bitlib->gitlib [2015-12-28]
     2. bitlib->gitlib
     3. (setq helm-bibtex-library-path "D:/bitlib/orglib/paper1512/" )
+
+* @study: @dotemacs
+** @ln, [2015-12-29]
+*** @sachac: http://sachac.com/
+*** @sachac: https://github.com/sachac/, http://sachachua.com/blog/
+
+** @eng, [2015-12-29]
+   1. predicate | indicate, lexical-word, tweak
+   2. pimp: a man who controls prostitutes 
+** org-babel-load-file, @study: #time-less-p, nth and file-attributes#  [2015-12-29]
+
+#+BEGIN_SRC emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; @ln: http://endlessparentheses.com/init-org-Without-org-mode.html
+  ; nth, file-attributes, time-less-p
+  ; number-or-marker-p nil
+  ; p is predicate, | indicate
+
+  ; DEFVAR and DEFPARAMETER introduce global dynamic variables. 
+  ;; (setq user-emacs-directory path-to)
+  ;; ; (defvar user-emacs-directory path-to)
+  ;; (expand-file-name "dotemacsw.org" user-emacs-directory)
+  ;; (expand-file-name "dotemacsw.el" path-to)
+  ;; (nth 5 (file-attributes init-source-org-file))
+  ;; (nth 5 (file-attributes init-source-el-file))
+  ;; (time-less-p (nth 5 (file-attributes init-source-org-file)) (nth 5 (file-attributes init-source-el-file)))
+  ;; (fboundp 'org-babel-load-file)    
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
+*** org-babel-load-file, time-less-p,  [2015-12-29]
+#+BEGIN_SRC emacs-lisp  
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; (defvar init-source-org-file (expand-file-name "dotemacsw.org" path-to)
+    ;;   "The file that our emacs initialization comes form") 
+    ;; (defvar init-source-el-file (expand-file-name "dotemacsw.el" path-to)
+    ;;   "The file that our emacs initialization is generated into")
+    
+    ;; (if (file-exists-p init-source-org-file)
+    ;;   (if (and (file-exists-p init-source-el-file)
+    ;;            (time-less-p (nth 5 (file-attributes init-source-org-file)) (nth 5 (file-attributes init-source-el-file))))
+    ;;       (load-file init-source-el-file)
+    ;;     (if (fboundp 'org-babel-load-file) 
+    ;; ; ' disqus syntax highlighting is lame
+    ;;         (org-babel-load-file init-source-org-file)
+    ;;       (message "Function not found: org-babel-load-file")
+    ;;       (load-file init-source-el-file)))
+    ;;   (error "Init org file '%s' missing." init-source-org-file))
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+#+END_SRC
+
