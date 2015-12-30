@@ -68,28 +68,28 @@
 ** [#C] @basic: @init
    1. init.el must be separate [2015-12-25]
 #+BEGIN_SRC emacs-lisp
-      ;;; init.el --- Where all the magic begins
-      ;;
-      ;; This file loads Org-mode and then loads the rest of our Emacs initialization from Emacs lisp
-      ;; embedded in literate Org-mode files.
-      
-      ;; Load up Org Mode and (now included) Org Babel for elisp embedded in Org Mode files
-      ; (setq dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name)))
-      ; (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
-      ; (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
-      (setq dotfiles-dir path-to)
-      (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
-      (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
+    ;;; init.el --- Where all the magic begins
+    ;;
+    ;; This file loads Org-mode and then loads the rest of our Emacs initialization from Emacs lisp
+    ;; embedded in literate Org-mode files.
     
-        ;; load up Org-mode and Org-babel
-      (require 'org-install)
-      (require 'ob-tangle)
-      (setq initial-user-file (concat dotfiles-dir "dotemacsw.el"))
-      ;; load up all literate org-mode files in this directory
-      ; (mapc #'org-babel-load-file (directory-files dotfiles-dir t "\\.org$"))
-;    (org-babel-load-file (concat dotfiles-dir "dotemacsw.org"))
-      ;;; init.el ends here
-      
+    ;; Load up Org Mode and (now included) Org Babel for elisp embedded in Org Mode files
+    ; (setq dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name)))
+    ; (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
+    ; (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
+    (setq dotfiles-dir path-to)
+    (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
+    (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
+  
+      ;; load up Org-mode and Org-babel
+    (require 'org-install)
+    (require 'ob-tangle)
+    (setq initial-user-file (concat path-to "dotemacsw.el"))
+    ;; load up all literate org-mode files in this directory
+    ; (mapc #'org-babel-load-file (directory-files dotfiles-dir t "\\.org$"))
+  (org-babel-load-file (concat path-to "dotemacsw.org"))
+    ;;; init.el ends here
+    
 #+END_SRC
 ** @basic: @kbd
 *** @kbd
@@ -145,6 +145,20 @@
 #+END_SRC
 
 * @other
+** @magit [2015-12-30]
+#+BEGIN_SRC emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; @magit, [2015-12-30]
+  ; http://magit.vc/manual/magit/
+  ; @make @err: *** At least version 24.4 of Emacs is required.  Stop.
+  ;; (add-to-list 'load-path (concat path-to "magit-master/lisp/"))
+  ;; (require 'magit)
+  ;; (with-eval-after-load 'info
+  ;;   (info-initialize)
+  ;;   (add-to-list 'Info-directory-list
+  ;;                (concat path-to "/Documentation/")))
+  
+#+END_SRC
 ** @eldoc [2015-12-30]
 #+BEGIN_SRC emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -580,6 +594,17 @@
    (interactive)
    (org-open-link-from-string (format "[[notes:%s]]" (reftex-citation t))))
   
+  ; @org-link, [2015-12-30]
+  ; replace D: to /Volumes/xiaoanh
+  (cond 
+  ((string-equal system-type "darwin")
+  (setq org-link-abbrev-alist
+   '(("bib" . "/Volumes/xiaoanh/gitlib/orglib/emacslib/bib1410.bib::%s, /Volumes/xiaoanh/gitlib/orglib/emacslib/bib1505.bib::%s, /Volumes/xiaoanh/gitlib/orglib/emacslib/bib1506.bib::%s")
+     ("notes" .  "/Volumes/xiaoanh/gitlib/orglib/emacslib/bib_notes.org::%s")
+     ("figs" . "/Volumes/xiaoanh/figure1411/%s.png")
+  ;   ("papers" . "D:/bib1410/paper1410/%s.pdf")
+     ("papers" . "/Volumes/xiaoanh/bitlib/orglib/paper1512/%s.pdf"))))
+  ((string-equal system-type "windows-nt")
   (setq org-link-abbrev-alist
    '(("bib" . "D:/gitlib/orglib/emacslib/bib1410.bib::%s, D:/gitlib/orglib/emacslib/bib1505.bib::%s, D:/gitlib/orglib/emacslib/bib1506.bib::%s")
      ("notes" .  "D:/gitlib/orglib/emacslib/bib_notes.org::%s")
@@ -588,7 +613,7 @@
   ;    ("notes" . (concat git-to "notes.org::%s")
      ("figs" . "D:/figure1411/%s.png")
   ;   ("papers" . "D:/bib1410/paper1410/%s.pdf")
-     ("papers" . "D:/bitlib/orglib/paper1512/%s.pdf"))))
+     ("papers" . "D:/bitlib/orglib/paper1512/%s.pdf")))))
   
   (defun org-mode-reftex-setup ()
     (load-library "reftex")

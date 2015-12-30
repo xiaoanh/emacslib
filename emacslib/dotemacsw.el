@@ -4,39 +4,24 @@
   ;; check OS type
   (cond
    ((string-equal system-type "windows-nt") ; Microsoft Windows
-    (progn
-  ;    (message "Microsoft Windows") ))
-      (concat (message "Microsoft Windows: ") (setq path-to "D:/gitlib/orglib/emacslib/")) ) )
-  ;    (message "Microsoft Windows") (setq path-to "D:/dotemacsw/")))
+    (and (progn
+      (concat (message "Microsoft Windows: ") (setq path-to "D:/gitlib/orglib/emacslib/")) ) 
+          (progn  
+          (concat (message "Microsoft Windows: ") (setq git-to "D:/bitlib/orglib/")) )))
+
    ((string-equal system-type "darwin") ; Mac OS X
-    (progn
-      (concat (message "Mac OS X") (setq path-to "/Volumes/xiaoanh/gitlib/emacslib/"))) )
-  ;    (message "Mac OS X") (setq path-to "~/Dropbox/emacslib/"))) 
+    (and (progn   
+        (concat (message "Mac OS X") (setq path-to "/Volumes/xiaoanh/gitlib/emacslib/")))
+   (progn
+  (concat (message "Mac OS X") (setq git-to "/Volumes/xiaoanh/bitlib/orglib/")))) )
+
    ((string-equal system-type "gnu/linux") ; linux
     (progn
       (message "Linux"))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; @biblib: git-to
-(cond
- ((string-equal system-type "windows-nt") ; Microsoft Windows
-  (progn
-;    (message "Microsoft Windows") ))
-    (concat (message "Microsoft Windows: ") (setq git-to "D:/bitlib/orglib/")) ) )
-;    (message "Microsoft Windows") (setq path-to "D:/dotemacsw/")))
- ((string-equal system-type "darwin") ; Mac OS X
-  (progn
-    (concat (message "Mac OS X") (setq git-to "/Volumes/xiaoanh/bitlib/orglib/"))) )
-; 
-;    (concat (message "Mac OS X") (setq git-to "/Volumes/xiaoanh/gitlib/orglib/"))) )
-;    (message "Mac OS X") (setq path-to "~/Dropbox/emacslib/"))) 
- ((string-equal system-type "gnu/linux") ; linux
-  (progn
-    (message "Linux"))))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; font. m-x just once, support CHN, /141104
+ ;; font. m-x just once, support CHN, /141104
   (set-locale-environment "English")
   ; @key, DONE [2015-08-07]
   (set-language-environment "utf-8")
@@ -86,54 +71,38 @@
     ;; load up Org-mode and Org-babel
   (require 'org-install)
   (require 'ob-tangle)
-  (setq initial-user-file (concat dotfiles-dir "dotemacsw.el"))
+  (setq initial-user-file (concat path-to "dotemacsw.el"))
   ;; load up all literate org-mode files in this directory
   ; (mapc #'org-babel-load-file (directory-files dotfiles-dir t "\\.org$"))
-;  (org-babel-load-file (concat dotfiles-dir "dotemacsw.org"))
+; (org-babel-load-file (concat path-to "dotemacsw.org"))
   ;;; init.el ends here
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; @mac, ctrl [2015-12-25]
-(setq mac-command-modifier 'ctrl)
-(define-key global-map [?\M-¥] "\\")
-
-; emacs 自带的 bs.el 更好用, cool, /141107
-; http://blog.csdn.net/ruglcc/article/details/7826604
-(global-set-key "\C-x\C-b" 'bs-show) 
-   ;; or another key
-(global-set-key "\M-p"  'bs-cycle-previous)
-(global-set-key "\M-n"  'bs-cycle-next)
-
-; session to recover last  butter. /141107
-; (require 'session) 
-;;加载session
-; (add-hook 'after-init-hook 'session-initialize) 
-; (desktop-save-mode 1)
-; Java有生成文档的javadoc，C++的话，就要用Doxygen了。
-;; 语法高亮, [2014-11-07]
-; (global-font-lock-mode t)
-
-; :Enabling Flyspell mode gave an error  (ispell-set-spellchecker-params)
-; /141110
-
-; /141113,  emacs中如何设置自动换行的功能, 1、M－x：customize-option；2、输入truncate-partial-width-windows，使用过程中为防止命令拼写错误，可以用Tab键补齐；3、将设置页面中的参数改为off，然后点击保存按钮（save for furture sessions），再点击finish按钮。
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; (require 'tramp)
-; (setq tramp-default-method "plink")
-
+  ;; @mac, ctrl [2015-12-25]
+  (setq mac-command-modifier 'ctrl)
+  (define-key global-map [?\M-¥] "\\")
+  
+  (global-set-key "\C-x\C-b" 'helm-buffers-list) 
+  ; cancel bs [2015-12-30]
+  ; (global-set-key "\C-x\C-b" 'bs-show) 
+     ;; or another key
+  ; (global-set-key "\M-p"  'bs-cycle-previous)
+  ; (global-set-key "\M-n"  'bs-cycle-next)
 ; comment-region, nice /141117.
 (global-set-key (kbd "C-c C-/") 'comment-region)
 (global-set-key (kbd "C-c C-/") 'uncomment-region)
 (global-set-key [?\C-c ?\C-/] 'comment-or-uncomment-region)
 
-; (setq org-completion-use-iswitchb t)
-;  c-h v iswitchb-mode，然后点 customize 就行了。
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; @basic: time-stamp, [2014-11-06]
+(add-hook 'write-file-hooks 'time-stamp)
+(setq time-stamp-format "%:u %04y/%02m/%02d %02H:%02M:%02S")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -153,9 +122,34 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-hook 'write-file-hooks 'time-stamp)
-(setq time-stamp-format "%:u %04y/%02m/%02d %02H:%02M:%02S")
+; @eldoc [2015-12-30]
+(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+; org-eldoc, @ln: https://bitbucket.org/ukaszg/org-eldoc
+; org-eldoc is part of org-mode contrib repository
+; \gitlib\orglib\emacslib\org-mode-master\contrib\lisp
+; (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
+; (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
+(add-to-list 'load-path org-contrib-dir)
+; (require 'org-eldoc)
+; (org-eldoc-hook-setup)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; @anything, why not working
+; @err, can  not open load file anything-config
+  ;; (add-to-list 'load-path (concat path-to "anything/")
+  ;; (require 'anything-config)
+  ;; (setq anything-sources
+  ;;       (list anything-c-source-buffers
+  ;;         anything-c-source-locate
+  ;;             anything-c-source-file-name-history
+  ;;             anything-c-source-info-pages
+  ;;             anything-c-source-man-pages
+  ;;             anything-c-source-file-cache
+  ;;             anything-c-source-emacs-commands))
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; https://github.com/jwiegley/emacs-async
 (add-to-list 'load-path (concat path-to "emacs-async-master/"))
@@ -170,8 +164,9 @@
 ;  (package-install 'helm)
 ; "Cannot open load file" "helm-autoloads [2015-12-25]
 ; @success, @mac after make [2015-12-25] 
-  ; (require 'helm-config)
+  (require 'helm-config)
   (global-set-key (kbd "C-c h") 'helm-mini)
+  (helm-mode 1)
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -257,11 +252,12 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; 高亮当前行：hi-line.el,emacs自己带的, /[2014-11-06]
+;; highlight：hi-line.el,emacs inside, /[2014-11-06]
 ; (require 'hl-line)  
 ; (global-hl-line-mode t) 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; auto-complete, [2014-11-06]
 (add-to-list 'load-path (concat path-to "auto-complete-master/"))
 ; (add-to-list 'load-path (concat path-to "auto-complete-master"))
@@ -271,51 +267,28 @@
 (ac-config-default)
 (add-to-list 'ac-dictionary-directories (concat path-to "auto-complete-master/ac-dict"))
 (auto-complete-mode 1) 
-; add, /141126
-;; (add-to-list 'load-path "D:/dotemacsw/")
-;; (require 'popup)
-; 2.6 设置auto-complete的触发键, [[http://blog.csdn.net/winterttr/article/details/7524336]]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; must require ac-ispell, error, /141104
-;(add-to-list 'load-path "D:/Emacs14/auto-complete-master")
-;(require 'ac-ispell)
-;(eval-after-load "auto-complete" '(progn (ac-ispell-setup)))
-;(add-hook 'git-commit-mode-hook 'ac-ispell-ac-setup)
-;(add-hook 'mail-mode-hook 'ac-ispell-ac-setup)
 
-;; ispell must installed in disk C, otherwise permission denied, /141106
-;; ispell denied, must install aspell, error, 141105
-;(add-to-list 'exec-path "D:/Aspell/bin/")
-;(setq ispell-personal-dictionary "D:/Aspell/dict")
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; @win
 (if (string-equal system-type "windows-nt")
-(progn (add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin")))
-; ** @emacs
-; (add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin")
+(and (progn (add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin"))
+(setq-default ispell-program-name "aspell")
+(progn (setq ispell-personal-dictionary "C:/Program Files (x86)/Aspell/dict"))))
 
-(if (string-equal system-type "windows-nt")
-(progn (setq ispell-personal-dictionary "C:/Program Files (x86)/Aspell/dict")))
-; (setq ispell-personal-dictionary "C:/Program Files (x86)/Aspell/dict")
-(if (string-equal system-type "windows-nt")
-(setq-default ispell-program-name "aspell"))
-; /141110
-; d:/Emacs14 $ which aspell
-; c:/Program Files (x86)/Aspell/bin/aspell.exe
-;(setq ispell-program-name "aspell")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; @mac, [2015-12-28]
 (if (string-equal system-type "darwin")
-(setq ispell-program-name "/usr/local/bin/ispell"))
-(if (string-equal system-type "darwin")
-(setq-default ispell-program-name "/usr/local/bin/aspell"))
+(and (setq ispell-program-name "/usr/local/bin/ispell")
+(setq-default ispell-program-name "/usr/local/bin/aspell")))
 
+; @seamless, for both 
 (require 'ispell)
 (setq text-mode-hook '(lambda()  (flyspell-mode t)  ) )
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
-; (flyspell-mode 1)  /141126, add then error
 (ispell-minor-mode) 
-; (ispell-set-spellchecker-params)
- ; Initialize variables and dicts alists
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -373,7 +346,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; @mew, email, @success, work [2015-12-21]
-    ;;装载Mew, [2014-11-07]
+    ;; load Mew, [2014-11-07]
     ;; (add-to-list 'load-path (concat path-to "mew-lisp"))
     ;; (autoload 'mew "mew" nil t)
     ;; (autoload 'mew-send "mew" nil t)
@@ -439,7 +412,7 @@
 (require 'session)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; mobile-org, [2014-12-16]
+; *** @org-mobile, [2014-12-16]
 ; comment org-mobile-files [2015-12-28]
 ; (setq org-mobile-files (quote ( (concat git-to "HXA.OFDM.PON.org")  (concat git-to "journal.org")  (concat git-to "project.org")  (concat git-to "task.org")  (concat git-to "note.org") )))
 ; (setq org-mobile-index-file "D:/GTD18/inbox.org")
@@ -447,16 +420,19 @@
 ; (setq org-mobile-inbox-for-pull "D:/GTD18/fromMobile.org")
 ; (setq org-mobile-inbox-for-pull "D:/GTD18/inbox.org")
 
-
-; org-capture, / [2014-11-27]
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; *** @org-capture, / [2014-11-27]
 (setq org-capture-templates '(
 ("t" "Task" entry (file+headline (concat git-to "task.org") "Tasks") "* TODO %?\n %i\n %a")
 ("j" "Journal" entry (file+datetree (concat git-to "journal.org")) "* %?\nEntered on %U\n %i\n %a")
 ("n" "Note" entry (file+datetree (concat git-to "note.org") ) "* %?\nEntered on %U\n %i\n %a")
 ("p" "Project" entry (file+datetree (concat git-to "project.org") ) "* %?\nEntered on %U\n %i\n %a")
 ))
+; M-x org-capture-import-remember-templates RET
 
-; set org-remember, /141119
+; (define-key global-map "\C-cc" ’org-capture)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; *** @org-remember, [2014-11-19]
 (define-key global-map "\C-cr" 'org-remember)
 
 ; (org-remember-insinuate)
@@ -465,11 +441,15 @@
   (setq remember-handler-functions '(org-remember-handler))
   (add-hook 'remember-mode-hook 'org-remember-apply-template)
 
-(setq org-directory git-to) 
 ; (setq org-directory (concat git-to "/") 
 (setq org-remember-templates '(("New" ?n "* %? %t \n %i\n %a" (concat git-to "inbox.org") ) ("Task" ?t "** TODO %?\n %i\n %a" (concat git-to "task.org") "Tasks") ("Calendar" ?c "** TODO %?\n %i\n %a" (concat git-to "task.org") "Tasks") ("Idea" ?i "** %?\n %i\n %a" (concat git-to "task.org") "Ideas") ("Note" ?r "* %?\n %i\n %a" (concat git-to "note.org") ) ("Project" ?p "** %?\n %i\n %a" (concat git-to "project.org") %g)  ("Journal" ?j "* %?\n %i\n %a" (concat git-to "journal.org") )  )) 
-(setq org-default-notes-file (concat org-directory "inbox.org"))
 
+; (setq org-directory git-to) 
+; (setq org-directory "D:/GTD18/") 
+(setq org-default-notes-file (concat git-to "inbox.org"))  ; [2015-12-30]
+; (setq org-default-notes-file (concat org-directory "inbox.org"))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; *** @org-todo, [2014-11-19]
 (setq org-todo-keywords
   '((type "Work(w!)" "Huang(h!)" "|")
 ;    (type "Work(w!)" "Huang(h!)" "Study(s!)" "|")
@@ -489,14 +469,17 @@
     ("ABORT" .     (:background "gray" :foreground "black"))
 ))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; *** @org-setting, [2014-11-19]
 (setq org-tag-alist '(("@Fit" . ?f) ("@huang" . ?h) ("@home" . ?m) ("@Lang" . ?l) ("@Basic" . ?b) ("@Emacs" . ?e) ("@paper" . ?p) ("@work" . ?w)   ("@DOCSIS" . ?d) ("@Meeting" . ?M) ("@Famous" .?F)))
 
-;; priority setting, /141119 优先级范围和默认任务的优先级
+;; priority setting, [2014-11-19] 
 ; lowest can not be D, must E, /141119
 (setq org-highest-priority ?A)
 (setq org-lowest-priority  ?E)
 (setq org-default-priority ?E)
-;; 优先级醒目外观
+
+;; org face 
 (setq org-priority-faces
   '((?A . (:background "red" :foreground "white" :weight bold))
     (?B . (:background "DarkOrange" :foreground "white" :weight bold))
@@ -504,61 +487,81 @@
     (?D . (:background "DodgerBlue" :foreground "black" :weight bold))
     (?E . (:background "SkyBlue" :foreground "black" :weight bold))
 ))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ** DONE @bib
+; http://blog.waterlin.org/articles/bind-emacs-org-mode-with-bibtex.html
+; (concat path-to "bib1307.bib")
+(setq reftex-default-bibliography
+      (list
+       (concat path-to "bib1307.bib")  (concat path-to "bib1410.bib")   (concat path-to"bib1506.bib")  (concat path-to"bib1505.bib")  )) ; @success, list [2015-12-30]
 
-; ORG-capture, /141126
-; M-x org-capture-import-remember-templates RET
-; (setq org-directory "D:/GTD18/") 
-(setq org-default-notes-file (concat org-directory "inbox.org"))
-; (define-key global-map "\C-cc" ’org-capture)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   
+;; *** @bib: @auto: @org-mode-reftex-setup, "C-c (",  RefTeX, [2015-12-30]
+; @key, @redo, first setq org-link-abbrev-alist [2015-12-30]
+; @key: missing ), @org-mode-reftex-setup, [2015-12-30]
 
+; (concat git-to "notes.org")
+; D:/gitlib/orglib/emacslib
+;;  org-mode reftex, [2015-01-27]
+;; @ln: https://wiki.freebsdchina.org/doc/r/reference
+;; define org-mode-reftex-search
 
-; yas for beamer, http://alpha-blog.wanglianghome.org/2012/06/13/org-beamer-tricks/
+(defun org-mode-reftex-search ()
+ ;; jump to the notes for the paper pointed to at from reftex search
+ (interactive)
+ (org-open-link-from-string (format "[[notes:%s]]" (reftex-citation t))))
 
+; @org-link, [2015-12-30]
+; replace D: to /Volumes/xiaoanh
+(cond 
+((string-equal system-type "darwin")
+(setq org-link-abbrev-alist
+ '(("bib" . "/Volumes/xiaoanh/gitlib/orglib/emacslib/bib1410.bib::%s, /Volumes/xiaoanh/gitlib/orglib/emacslib/bib1505.bib::%s, /Volumes/xiaoanh/gitlib/orglib/emacslib/bib1506.bib::%s")
+   ("notes" .  "/Volumes/xiaoanh/gitlib/orglib/emacslib/bib_notes.org::%s")
+   ("figs" . "/Volumes/xiaoanh/figure1411/%s.png")
+;   ("papers" . "D:/bib1410/paper1410/%s.pdf")
+   ("papers" . "/Volumes/xiaoanh/bitlib/orglib/paper1512/%s.pdf"))))
+((string-equal system-type "windows-nt")
+(setq org-link-abbrev-alist
+ '(("bib" . "D:/gitlib/orglib/emacslib/bib1410.bib::%s, D:/gitlib/orglib/emacslib/bib1505.bib::%s, D:/gitlib/orglib/emacslib/bib1506.bib::%s")
+   ("notes" .  "D:/gitlib/orglib/emacslib/bib_notes.org::%s")
+;   ("notes" . "(concat git-to "notes.org") ::%s")
+;  (invalid-read-syntax ". in wrong context")
+;    ("notes" . (concat git-to "notes.org::%s")
+   ("figs" . "D:/figure1411/%s.png")
+;   ("papers" . "D:/bib1410/paper1410/%s.pdf")
+   ("papers" . "D:/bitlib/orglib/paper1512/%s.pdf")))))
 
-; Epresent <2014-12-10>
+(defun org-mode-reftex-setup ()
+  (load-library "reftex")
+  (and (buffer-file-name) (file-exists-p (buffer-file-name))
+       (progn
+    ;; enable auto-revert-mode to update reftex when bibtex file changes on disk
+    (global-auto-revert-mode t)
+    (reftex-parse-all)
+    ;; add a custom reftex cite format to insert links
+    (reftex-set-cite-format
+      '((?b . "[[bib:%l][%l-bib]]")
+        (?c . "\\cite{%l}")
+        (?n . "[[notes:%l][%l-notes]]")
+        (?p . "[[papers:%l][%l-paper]]")
+        (?t . "%t")
+        (?h . "** %t\n:PROPERTIES:\n:Custom_ID: %l\n:END:\n[[papers:%l][%l-paper]]"))))))
+
+(define-key org-mode-map (kbd "C-c )") 'reftex-citation) ; @success, list [2015-12-30]
+  ;; binding of  ”C-c (” to org-mode-reftex-search
+(define-key org-mode-map (kbd "C-c (") 'org-mode-reftex-search)
+(add-hook 'org-mode-hook 'org-mode-reftex-setup)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; *** Epresent [2014-12-10]
 ; Debugger entered--Lisp error: (file-error "Cannot open load file" "ox")  require(ox)
 ; (add-to-list 'load-path (concat path-to "epresent-master"))
 ; (require 'epresent)
 ; epresent and reveal fail, due to ox missing and latest org-mode 8.0, [2015-07-07]
 
-;; *** org-present no use
-; replace epresent with org-present, [2015-07-06]
-;; (autoload 'org-present "org-present" nil t)
-;; (eval-after-load "org-present"
-;;   '(progn
-;;      (add-hook 'org-present-mode-hook
-;;                (lambda ()
-;;                  (org-present-big)
-;;                  (org-display-inline-images)
-;;                  (org-present-hide-cursor)
-;;                  (org-present-read-only)))
-;;      (add-hook 'org-present-mode-quit-hook
-;;                (lambda ()
-;;                  (org-present-small)
-;;                  (org-remove-inline-images)
-;;                  (org-present-show-cursor)
-;;                  (org-present-read-write)))))
-
-; org-presie, https://github.com/nicferrier/org-presie
-; (require 'org-presie)
-; can not load file eimp
-; fail: permission denied: mogrify
-
-
-
-; org-mode reveal, [2015-07-07]
-; (add-to-list 'load-path "D:/dotemacsw/org-reveal-master")
-; (require 'ox-reveal)
-
-; can not open ox-html
-; https://github.com/yyr/org-mode/tree/master/lisp
-
-(put 'erase-buffer 'disabled nil)
-
-(org-babel-do-load-languages
-    'org-babel-load-languages '((python . t) (R . t)))
-
-; ditaa, [2015-07-02]
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; *** @ditaa, [2015-07-02]
 ; (setq org-ditaa-jar-path “~/.emacs.d/plugins/ditaa/ditaa0_9.jar”) 
 ;(setq org-plantuml-jar-path “~/java/plantuml.jar”)
 ; (add-hook ‘org-babel-after-execute-hook ‘org-display-inline-images ‘append)
@@ -566,82 +569,67 @@
 ; this line activates ditaa
 ; can not find ditaa.jar can be found in contrib/scripts
 ; C:\Users\xiaoanh\Downloads\Emacs24.3\lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; *** @ido and tabbar, no use
-; ido, anything, <2014-12-24>
-;; (require 'ido)
-;; (ido-mode t)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; https://github.com/tmalsburg/helm-bibtex
+  ; @mac, helm-bibtex-pdf-open-function
+  ; m-x getenv | setenv | eval-expression 
+  ; (defun helm-open-file-with-default-tool) in helm-utils.el
+  (cond 
+  ((string-equal system-type "darwin") ; @mac
+  (setq helm-bibtex-pdf-open-function
+    (lambda (fpath)
+      (start-process "skim" "*skim*" "open" (concat "-a /Applications/Skim.app " fpath))))))
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; https://github.com/tmalsburg/helm-bibtex
+  ; @win
+  ; emacs  AcroRd32.exe
+  ; permission denied open
+  ; C:\Program Files (x86)\Adobe\Acrobat Reader DC\Reader\AcroRd32.exe 
+;;   (setq local-pdf-viewer
+;;         (cond
+;;          ((eq 'windows-nt system-type)
+;;           "/c/Program\\ Files\\ \\(x86\\)/Adobe/Acrobat \\ Reader \\ DC /Reader/AcroRd32.exe")
+;; ;          "/cygdrive/c/Program\\ Files\\ \\(x86\\)/Adobe/Reader\\ 10.0/Reader/AcroRd32.exe")
+;;          ((eq 'gnu/linux system-type) "okular")
+;;          ((eq 'darwin system-type) "open")))
+  
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
- 
-;; ; tabbar, speedbar, <2014-12-24>
-;; ; http://blog.csdn.net/CherylNatsu/article/details/6204737
-;; ; http://laokaddk.blog.51cto.com/368606/593613/
-;; (add-to-list 'load-path  path-to)  
-;; (require 'tabbar)
-;; (tabbar-mode 1)
-;; (global-set-key [(meta j)] 'tabbar-backward)  
-;; (global-set-key [(meta k)] 'tabbar-forward)  
-;; (global-set-key  [(meta g)]  'tabbar-backward-group)
-;; (global-set-key  [(meta h)]  'tabbar-forward-group)
-;(global-set-key (kbd "<M-left>") 'tabbar-backward)
-;(global-set-key (kbd "<M-right>") 'tabbar-forward)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; @ln: http://endlessparentheses.com/init-org-Without-org-mode.html
+  ; nth, file-attributes, time-less-p
+  ; number-or-marker-p nil
+  ; p is predicate, | indicate
 
-; https://github.com/alloy-d/color-theme-molokai
-; I prefer Monokai from sublime text 2. 
-; Debugger entered--Lisp error: (file-error "Cannot open load file" "color-theme")  
-; then download color-theme.el, 
-; symbol's function definition is void: plist-to-alist, 
-; toggle-debug-on-error, <2015-01-26>
+  ; DEFVAR and DEFPARAMETER introduce global dynamic variables. 
+  ;; (setq user-emacs-directory path-to)
+  ;; ; (defvar user-emacs-directory path-to)
+  ;; (expand-file-name "dotemacsw.org" user-emacs-directory)
+  ;; (expand-file-name "dotemacsw.el" path-to)
+  ;; (nth 5 (file-attributes init-source-org-file))
+  ;; (nth 5 (file-attributes init-source-el-file))
+  ;; (time-less-p (nth 5 (file-attributes init-source-org-file)) (nth 5 (file-attributes init-source-el-file)))
+  ;; (fboundp 'org-babel-load-file)    
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
-; define color theme 
-;(load "D:/dotemacsw/color-theme-molokai.el")
-
-; (add-to-list 'load-path (concat path-to "themes"))
-; (require 'color-theme)
-; (setq color-theme-is-global t)
-; (color-theme-initialize)
-; (color-theme-matrix)
-; (color-theme-molokai)
-; (color-theme-gnome2)
-
-;; 语法高亮 <2015-01-26>
-; (setq color-theme-is-global t)
-
-; redo,<2015-01-16>
-; http://www.wonderworks.com/download/redo.el
-;; (add-to-list 'load-path  path-to)  
-;; (require 'redo) 
-;; (global-set-key ( kbd "C-.") 'redo)
-
-; 进度记录 <2015-01-16>
-(setq org-log-done 'time)
-(setq org-log-done 'note)
-
-;; ** @bib
-; http://blog.waterlin.org/articles/bind-emacs-org-mode-with-bibtex.html
-(setq reftex-default-bibliography
-      (quote
-       ("D:/bitlib/orglib/bib1307.bib" "D:/bitlib/orglib/bib1410.bib"  "D:/bitlib/orglib/bib1506.bib" "D:/bitlib/orglib/bib1505.bib" ))) 
-; (define-key org-mode-map (kbd "C-c )") 'reftex-citation)
-; repeat, [2015-01-30]
-
-;; ** @bib
-;; 利用 Emacs 的 org-mode 管理文献, <2015-01-27>
-;; https://wiki.freebsdchina.org/doc/r/reference
-;; 定义 org-mode-reftex-search
-(defun org-mode-reftex-search ()
- ;; jump to the notes for the paper pointed to at from reftex search
- (interactive)
- (org-open-link-from-string (format "[[notes:%s]]" (reftex-citation t))))
-
-(setq org-link-abbrev-alist
- '(("bib" . "D:/bitlib/orglib/bitlib/orglib.bib::%s, D:/bitlib/orglib/bib1505.bib::%s, D:/bitlib/orglib/bib1506.bib::%s")
-   ("notes" . (concat git-to "notes.org::%s") )
-;   ("notes" . "(concat git-to "notes.org") ::%s")
-;  (invalid-read-syntax ". in wrong context")
-;    ("notes" . (concat git-to "notes.org::%s")
-   ("figs" . "D:/figure1411/%s.png")
-;   ("papers" . "D:/bib1410/paper1410/%s.pdf")
-   ("papers" . "D:/bitlib/orglib/paper1512/%s.pdf")))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; (defvar init-source-org-file (expand-file-name "dotemacsw.org" path-to)
+  ;;   "The file that our emacs initialization comes form") 
+  ;; (defvar init-source-el-file (expand-file-name "dotemacsw.el" path-to)
+  ;;   "The file that our emacs initialization is generated into")
+  
+  ;; (if (file-exists-p init-source-org-file)
+  ;;   (if (and (file-exists-p init-source-el-file)
+  ;;            (time-less-p (nth 5 (file-attributes init-source-org-file)) (nth 5 (file-attributes init-source-el-file))))
+  ;;       (load-file init-source-el-file)
+  ;;     (if (fboundp 'org-babel-load-file) 
+  ;; ; ' disqus syntax highlighting is lame
+  ;;         (org-babel-load-file init-source-org-file)
+  ;;       (message "Function not found: org-babel-load-file")
+  ;;       (load-file init-source-el-file)))
+  ;;   (error "Init org file '%s' missing." init-source-org-file))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
