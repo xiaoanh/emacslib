@@ -1,5 +1,4 @@
 
-
 * @basic
 ** @basic: @gitlib: path-to, @bitlib: git-to, is for org files,  [2015-12-24]
 
@@ -69,28 +68,28 @@
 ** [#C] @basic: @init
    1. init.el must be separate [2015-12-25]
 #+BEGIN_SRC emacs-lisp
-    ;;; init.el --- Where all the magic begins
-    ;;
-    ;; This file loads Org-mode and then loads the rest of our Emacs initialization from Emacs lisp
-    ;; embedded in literate Org-mode files.
+      ;;; init.el --- Where all the magic begins
+      ;;
+      ;; This file loads Org-mode and then loads the rest of our Emacs initialization from Emacs lisp
+      ;; embedded in literate Org-mode files.
+      
+      ;; Load up Org Mode and (now included) Org Babel for elisp embedded in Org Mode files
+      ; (setq dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name)))
+      ; (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
+      ; (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
+      (setq dotfiles-dir path-to)
+      (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
+      (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
     
-    ;; Load up Org Mode and (now included) Org Babel for elisp embedded in Org Mode files
-    ; (setq dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name)))
-    ; (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
-    ; (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
-    (setq dotfiles-dir path-to)
-    (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
-    (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
-  
-      ;; load up Org-mode and Org-babel
-    (require 'org-install)
-    (require 'ob-tangle)
-    (setq initial-user-file (concat dotfiles-dir "dotemacsw.el"))
-    ;; load up all literate org-mode files in this directory
-    ; (mapc #'org-babel-load-file (directory-files dotfiles-dir t "\\.org$"))
-  ; (org-babel-load-file (concat dotfiles-dir "dotemacsw.org"))
-    ;;; init.el ends here
-    
+        ;; load up Org-mode and Org-babel
+      (require 'org-install)
+      (require 'ob-tangle)
+      (setq initial-user-file (concat dotfiles-dir "dotemacsw.el"))
+      ;; load up all literate org-mode files in this directory
+      ; (mapc #'org-babel-load-file (directory-files dotfiles-dir t "\\.org$"))
+;    (org-babel-load-file (concat dotfiles-dir "dotemacsw.org"))
+      ;;; init.el ends here
+      
 #+END_SRC
 ** @basic: @kbd
 *** @kbd
@@ -100,11 +99,12 @@
     (setq mac-command-modifier 'ctrl)
     (define-key global-map [?\M-¥] "\\")
     
-    (global-set-key "\C-x\C-b" 'bs-show) 
+    (global-set-key "\C-x\C-b" 'helm-buffers-list) 
+    ; cancel bs [2015-12-30]
+    ; (global-set-key "\C-x\C-b" 'bs-show) 
        ;; or another key
-    (global-set-key "\M-p"  'bs-cycle-previous)
-    (global-set-key "\M-n"  'bs-cycle-next)
-    '
+    ; (global-set-key "\M-p"  'bs-cycle-previous)
+    ; (global-set-key "\M-n"  'bs-cycle-next)
   ; comment-region, nice /141117.
   (global-set-key (kbd "C-c C-/") 'comment-region)
   (global-set-key (kbd "C-c C-/") 'uncomment-region)
@@ -145,6 +145,23 @@
 #+END_SRC
 
 * @other
+** @eldoc [2015-12-30]
+#+BEGIN_SRC emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; @eldoc [2015-12-30]
+  (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+  ; org-eldoc, @ln: https://bitbucket.org/ukaszg/org-eldoc
+  ; org-eldoc is part of org-mode contrib repository
+  ; \gitlib\orglib\emacslib\org-mode-master\contrib\lisp
+  ; (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
+  ; (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
+  (add-to-list 'load-path org-contrib-dir)
+  ; (require 'org-eldoc)
+  ; (org-eldoc-hook-setup)
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
 ** @anything, @err [2015-12-29]
 #+BEGIN_SRC emacs-lisp
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -164,25 +181,26 @@
 #+END_SRC
 
 ** @async emacs-async-master for helm
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp 
 ; https://github.com/jwiegley/emacs-async
 (add-to-list 'load-path (concat path-to "emacs-async-master/"))
 (autoload 'dired-async-mode "dired-async.el" nil t)
 (dired-async-mode 1)
 #+END_SRC
-** @helm, should make @mac, fail, delete @anything [2015-12-25]
+** @helm, (helm-mode 1), should make @mac, fail, delete @anything [2015-12-25]
 #+BEGIN_SRC emacs-lisp
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ; @anything to @helm [2015-12-25]
-    ; https://github.com/emacs-helm/helm
-  ;; [Facultative] Only if you have installed async.
-    (add-to-list 'load-path (concat path-to "helm-master/"))
-  ;  (package-install 'helm)
-  ; "Cannot open load file" "helm-autoloads [2015-12-25]
-  ; @success, @mac after make [2015-12-25] 
-;    (require 'helm-config)
-    (global-set-key (kbd "C-c h") 'helm-mini)
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+      ; @anything to @helm [2015-12-25]
+      ; https://github.com/emacs-helm/helm
+    ;; [Facultative] Only if you have installed async.
+      (add-to-list 'load-path (concat path-to "helm-master/"))
+    ;  (package-install 'helm)
+    ; "Cannot open load file" "helm-autoloads [2015-12-25]
+    ; @success, @mac after make [2015-12-25] 
+      (require 'helm-config)
+      (global-set-key (kbd "C-c h") 'helm-mini)
+      (helm-mode 1)
+      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 ** @smex [2015-12-25]
 #+BEGIN_SRC emacs-lisp
@@ -275,7 +293,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; 高亮当前行：hi-line.el,emacs自己带的, /[2014-11-06]
+;; highlight：hi-line.el,emacs inside, /[2014-11-06]
 ; (require 'hl-line)  
 ; (global-hl-line-mode t) 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -284,6 +302,7 @@
 ** @ac
 
 #+BEGIN_SRC emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; auto-complete, [2014-11-06]
 (add-to-list 'load-path (concat path-to "auto-complete-master/"))
 ; (add-to-list 'load-path (concat path-to "auto-complete-master"))
@@ -293,53 +312,30 @@
 (ac-config-default)
 (add-to-list 'ac-dictionary-directories (concat path-to "auto-complete-master/ac-dict"))
 (auto-complete-mode 1) 
-; add, /141126
-;; (add-to-list 'load-path "D:/dotemacsw/")
-;; (require 'popup)
-; 2.6 设置auto-complete的触发键, [[http://blog.csdn.net/winterttr/article/details/7524336]]
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 *** @ac, ac-ispell
 #+BEGIN_SRC emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; must require ac-ispell, error, /141104
-  ;(add-to-list 'load-path "D:/Emacs14/auto-complete-master")
-  ;(require 'ac-ispell)
-  ;(eval-after-load "auto-complete" '(progn (ac-ispell-setup)))
-  ;(add-hook 'git-commit-mode-hook 'ac-ispell-ac-setup)
-  ;(add-hook 'mail-mode-hook 'ac-ispell-ac-setup)
+  ;; @win
+  (if (string-equal system-type "windows-nt")
+  (and (progn (add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin"))
+  (setq-default ispell-program-name "aspell")
+  (progn (setq ispell-personal-dictionary "C:/Program Files (x86)/Aspell/dict"))))
   
-  ;; ispell must installed in disk C, otherwise permission denied, /141106
-  ;; ispell denied, must install aspell, error, 141105
-  ;(add-to-list 'exec-path "D:/Aspell/bin/")
-  ;(setq ispell-personal-dictionary "D:/Aspell/dict")
-  (if (string-equal system-type "windows-nt")
-  (progn (add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin")))
-  ; ** @emacs
-  ; (add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin")
-  
-  (if (string-equal system-type "windows-nt")
-  (progn (setq ispell-personal-dictionary "C:/Program Files (x86)/Aspell/dict")))
-  ; (setq ispell-personal-dictionary "C:/Program Files (x86)/Aspell/dict")
-  (if (string-equal system-type "windows-nt")
-  (setq-default ispell-program-name "aspell"))
-  ; /141110
-  ; d:/Emacs14 $ which aspell
-  ; c:/Program Files (x86)/Aspell/bin/aspell.exe
-  ;(setq ispell-program-name "aspell")
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; @mac, [2015-12-28]
   (if (string-equal system-type "darwin")
-  (setq ispell-program-name "/usr/local/bin/ispell"))
-  (if (string-equal system-type "darwin")
-  (setq-default ispell-program-name "/usr/local/bin/aspell"))
+  (and (setq ispell-program-name "/usr/local/bin/ispell")
+  (setq-default ispell-program-name "/usr/local/bin/aspell")))
   
+  ; @seamless, for both 
   (require 'ispell)
   (setq text-mode-hook '(lambda()  (flyspell-mode t)  ) )
   (add-hook 'LaTeX-mode-hook 'flyspell-mode)
-  ; (flyspell-mode 1)  /141126, add then error
   (ispell-minor-mode) 
-  ; (ispell-set-spellchecker-params)
-   ; Initialize variables and dicts alists
+  
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 *** @ac, first ispell, then ac-ispell [2015-12-28]
@@ -396,7 +392,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 
-** @auto-save, /141121
+** @auto-save, [2014-11-21]
 
 #+BEGIN_SRC emacs-lisp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -408,7 +404,7 @@
 #+BEGIN_SRC emacs-lisp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; @mew, email, @success, work [2015-12-21]
-    ;;装载Mew, [2014-11-07]
+    ;; load Mew, [2014-11-07]
     ;; (add-to-list 'load-path (concat path-to "mew-lisp"))
     ;; (autoload 'mew "mew" nil t)
     ;; (autoload 'mew-send "mew" nil t)
@@ -485,7 +481,7 @@
 
 #+BEGIN_SRC emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ; mobile-org, [2014-12-16]
+  ; *** @org-mobile, [2014-12-16]
   ; comment org-mobile-files [2015-12-28]
   ; (setq org-mobile-files (quote ( (concat git-to "HXA.OFDM.PON.org")  (concat git-to "journal.org")  (concat git-to "project.org")  (concat git-to "task.org")  (concat git-to "note.org") )))
   ; (setq org-mobile-index-file "D:/GTD18/inbox.org")
@@ -493,16 +489,19 @@
   ; (setq org-mobile-inbox-for-pull "D:/GTD18/fromMobile.org")
   ; (setq org-mobile-inbox-for-pull "D:/GTD18/inbox.org")
   
-  
-  ; org-capture, / [2014-11-27]
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; *** @org-capture, / [2014-11-27]
   (setq org-capture-templates '(
   ("t" "Task" entry (file+headline (concat git-to "task.org") "Tasks") "* TODO %?\n %i\n %a")
   ("j" "Journal" entry (file+datetree (concat git-to "journal.org")) "* %?\nEntered on %U\n %i\n %a")
   ("n" "Note" entry (file+datetree (concat git-to "note.org") ) "* %?\nEntered on %U\n %i\n %a")
   ("p" "Project" entry (file+datetree (concat git-to "project.org") ) "* %?\nEntered on %U\n %i\n %a")
   ))
+  ; M-x org-capture-import-remember-templates RET
   
-  ; set org-remember, /141119
+  ; (define-key global-map "\C-cc" ’org-capture)
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; *** @org-remember, [2014-11-19]
   (define-key global-map "\C-cr" 'org-remember)
   
   ; (org-remember-insinuate)
@@ -511,11 +510,15 @@
     (setq remember-handler-functions '(org-remember-handler))
     (add-hook 'remember-mode-hook 'org-remember-apply-template)
   
-  (setq org-directory git-to) 
   ; (setq org-directory (concat git-to "/") 
   (setq org-remember-templates '(("New" ?n "* %? %t \n %i\n %a" (concat git-to "inbox.org") ) ("Task" ?t "** TODO %?\n %i\n %a" (concat git-to "task.org") "Tasks") ("Calendar" ?c "** TODO %?\n %i\n %a" (concat git-to "task.org") "Tasks") ("Idea" ?i "** %?\n %i\n %a" (concat git-to "task.org") "Ideas") ("Note" ?r "* %?\n %i\n %a" (concat git-to "note.org") ) ("Project" ?p "** %?\n %i\n %a" (concat git-to "project.org") %g)  ("Journal" ?j "* %?\n %i\n %a" (concat git-to "journal.org") )  )) 
-  (setq org-default-notes-file (concat org-directory "inbox.org"))
   
+  ; (setq org-directory git-to) 
+  ; (setq org-directory "D:/GTD18/") 
+  (setq org-default-notes-file (concat git-to "inbox.org"))  ; [2015-12-30]
+  ; (setq org-default-notes-file (concat org-directory "inbox.org"))
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; *** @org-todo, [2014-11-19]
   (setq org-todo-keywords
     '((type "Work(w!)" "Huang(h!)" "|")
   ;    (type "Work(w!)" "Huang(h!)" "Study(s!)" "|")
@@ -535,14 +538,17 @@
       ("ABORT" .     (:background "gray" :foreground "black"))
   ))
   
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; *** @org-setting, [2014-11-19]
   (setq org-tag-alist '(("@Fit" . ?f) ("@huang" . ?h) ("@home" . ?m) ("@Lang" . ?l) ("@Basic" . ?b) ("@Emacs" . ?e) ("@paper" . ?p) ("@work" . ?w)   ("@DOCSIS" . ?d) ("@Meeting" . ?M) ("@Famous" .?F)))
   
-  ;; priority setting, /141119 优先级范围和默认任务的优先级
+  ;; priority setting, [2014-11-19] 
   ; lowest can not be D, must E, /141119
   (setq org-highest-priority ?A)
   (setq org-lowest-priority  ?E)
   (setq org-default-priority ?E)
-  ;; 优先级醒目外观
+  
+  ;; org face 
   (setq org-priority-faces
     '((?A . (:background "red" :foreground "white" :weight bold))
       (?B . (:background "DarkOrange" :foreground "white" :weight bold))
@@ -550,61 +556,70 @@
       (?D . (:background "DodgerBlue" :foreground "black" :weight bold))
       (?E . (:background "SkyBlue" :foreground "black" :weight bold))
   ))
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; ** DONE @bib
+  ; http://blog.waterlin.org/articles/bind-emacs-org-mode-with-bibtex.html
+  ; (concat path-to "bib1307.bib")
+  (setq reftex-default-bibliography
+        (list
+         (concat path-to "bib1307.bib")  (concat path-to "bib1410.bib")   (concat path-to"bib1506.bib")  (concat path-to"bib1505.bib")  )) ; @success, list [2015-12-30]
   
-  ; ORG-capture, /141126
-  ; M-x org-capture-import-remember-templates RET
-  ; (setq org-directory "D:/GTD18/") 
-  (setq org-default-notes-file (concat org-directory "inbox.org"))
-  ; (define-key global-map "\C-cc" ’org-capture)
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   
+  ;; *** @bib: @auto: @org-mode-reftex-setup, "C-c (",  RefTeX, [2015-12-30]
+  ; @key, @redo, first setq org-link-abbrev-alist [2015-12-30]
+  ; @key: missing ), @org-mode-reftex-setup, [2015-12-30]
   
+  ; (concat git-to "notes.org")
+  ; D:/gitlib/orglib/emacslib
+  ;;  org-mode reftex, [2015-01-27]
+  ;; @ln: https://wiki.freebsdchina.org/doc/r/reference
+  ;; define org-mode-reftex-search
   
-  ; yas for beamer, http://alpha-blog.wanglianghome.org/2012/06/13/org-beamer-tricks/
+  (defun org-mode-reftex-search ()
+   ;; jump to the notes for the paper pointed to at from reftex search
+   (interactive)
+   (org-open-link-from-string (format "[[notes:%s]]" (reftex-citation t))))
   
+  (setq org-link-abbrev-alist
+   '(("bib" . "D:/gitlib/orglib/emacslib/bib1410.bib::%s, D:/gitlib/orglib/emacslib/bib1505.bib::%s, D:/gitlib/orglib/emacslib/bib1506.bib::%s")
+     ("notes" .  "D:/gitlib/orglib/emacslib/bib_notes.org::%s")
+  ;   ("notes" . "(concat git-to "notes.org") ::%s")
+  ;  (invalid-read-syntax ". in wrong context")
+  ;    ("notes" . (concat git-to "notes.org::%s")
+     ("figs" . "D:/figure1411/%s.png")
+  ;   ("papers" . "D:/bib1410/paper1410/%s.pdf")
+     ("papers" . "D:/bitlib/orglib/paper1512/%s.pdf"))))
   
-  ; Epresent <2014-12-10>
+  (defun org-mode-reftex-setup ()
+    (load-library "reftex")
+    (and (buffer-file-name) (file-exists-p (buffer-file-name))
+         (progn
+      ;; enable auto-revert-mode to update reftex when bibtex file changes on disk
+      (global-auto-revert-mode t)
+      (reftex-parse-all)
+      ;; add a custom reftex cite format to insert links
+      (reftex-set-cite-format
+        '((?b . "[[bib:%l][%l-bib]]")
+          (?c . "\\cite{%l}")
+          (?n . "[[notes:%l][%l-notes]]")
+          (?p . "[[papers:%l][%l-paper]]")
+          (?t . "%t")
+          (?h . "** %t\n:PROPERTIES:\n:Custom_ID: %l\n:END:\n[[papers:%l][%l-paper]]"))))))
+  
+  (define-key org-mode-map (kbd "C-c )") 'reftex-citation) ; @success, list [2015-12-30]
+    ;; binding of  ”C-c (” to org-mode-reftex-search
+  (define-key org-mode-map (kbd "C-c (") 'org-mode-reftex-search)
+  (add-hook 'org-mode-hook 'org-mode-reftex-setup)
+  
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; *** Epresent [2014-12-10]
   ; Debugger entered--Lisp error: (file-error "Cannot open load file" "ox")  require(ox)
   ; (add-to-list 'load-path (concat path-to "epresent-master"))
   ; (require 'epresent)
   ; epresent and reveal fail, due to ox missing and latest org-mode 8.0, [2015-07-07]
   
-  ;; *** org-present no use
-  ; replace epresent with org-present, [2015-07-06]
-  ;; (autoload 'org-present "org-present" nil t)
-  ;; (eval-after-load "org-present"
-  ;;   '(progn
-  ;;      (add-hook 'org-present-mode-hook
-  ;;                (lambda ()
-  ;;                  (org-present-big)
-  ;;                  (org-display-inline-images)
-  ;;                  (org-present-hide-cursor)
-  ;;                  (org-present-read-only)))
-  ;;      (add-hook 'org-present-mode-quit-hook
-  ;;                (lambda ()
-  ;;                  (org-present-small)
-  ;;                  (org-remove-inline-images)
-  ;;                  (org-present-show-cursor)
-  ;;                  (org-present-read-write)))))
-  
-  ; org-presie, https://github.com/nicferrier/org-presie
-  ; (require 'org-presie)
-  ; can not load file eimp
-  ; fail: permission denied: mogrify
-  
-  
-  
-  ; org-mode reveal, [2015-07-07]
-  ; (add-to-list 'load-path "D:/dotemacsw/org-reveal-master")
-  ; (require 'ox-reveal)
-  
-  ; can not open ox-html
-  ; https://github.com/yyr/org-mode/tree/master/lisp
-  
-  (put 'erase-buffer 'disabled nil)
-  
-  (org-babel-do-load-languages
-      'org-babel-load-languages '((python . t) (R . t)))
-  
-  ; ditaa, [2015-07-02]
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; *** @ditaa, [2015-07-02]
   ; (setq org-ditaa-jar-path “~/.emacs.d/plugins/ditaa/ditaa0_9.jar”) 
   ;(setq org-plantuml-jar-path “~/java/plantuml.jar”)
   ; (add-hook ‘org-babel-after-execute-hook ‘org-display-inline-images ‘append)
@@ -612,85 +627,7 @@
   ; this line activates ditaa
   ; can not find ditaa.jar can be found in contrib/scripts
   ; C:\Users\xiaoanh\Downloads\Emacs24.3\lisp
-  
-  ;; *** @ido and tabbar, no use
-  ; ido, anything, <2014-12-24>
-  ;; (require 'ido)
-  ;; (ido-mode t)
-  
-   
-  ;; ; tabbar, speedbar, <2014-12-24>
-  ;; ; http://blog.csdn.net/CherylNatsu/article/details/6204737
-  ;; ; http://laokaddk.blog.51cto.com/368606/593613/
-  ;; (add-to-list 'load-path  path-to)  
-  ;; (require 'tabbar)
-  ;; (tabbar-mode 1)
-  ;; (global-set-key [(meta j)] 'tabbar-backward)  
-  ;; (global-set-key [(meta k)] 'tabbar-forward)  
-  ;; (global-set-key  [(meta g)]  'tabbar-backward-group)
-  ;; (global-set-key  [(meta h)]  'tabbar-forward-group)
-  ;(global-set-key (kbd "<M-left>") 'tabbar-backward)
-  ;(global-set-key (kbd "<M-right>") 'tabbar-forward)
-  
-  ; https://github.com/alloy-d/color-theme-molokai
-  ; I prefer Monokai from sublime text 2. 
-  ; Debugger entered--Lisp error: (file-error "Cannot open load file" "color-theme")  
-  ; then download color-theme.el, 
-  ; symbol's function definition is void: plist-to-alist, 
-  ; toggle-debug-on-error, <2015-01-26>
-  
-  
-  ; define color theme 
-  ;(load "D:/dotemacsw/color-theme-molokai.el")
-  
-  ; (add-to-list 'load-path (concat path-to "themes"))
-  ; (require 'color-theme)
-  ; (setq color-theme-is-global t)
-  ; (color-theme-initialize)
-  ; (color-theme-matrix)
-  ; (color-theme-molokai)
-  ; (color-theme-gnome2)
-  
-  ;; 语法高亮 <2015-01-26>
-  ; (setq color-theme-is-global t)
-  
-  ; redo,<2015-01-16>
-  ; http://www.wonderworks.com/download/redo.el
-  ;; (add-to-list 'load-path  path-to)  
-  ;; (require 'redo) 
-  ;; (global-set-key ( kbd "C-.") 'redo)
-  
-  ; 进度记录 <2015-01-16>
-  (setq org-log-done 'time)
-  (setq org-log-done 'note)
-  
-  ;; ** @bib
-  ; http://blog.waterlin.org/articles/bind-emacs-org-mode-with-bibtex.html
-  (setq reftex-default-bibliography
-        (quote
-         ("D:/bitlib/orglib/bib1307.bib" "D:/bitlib/orglib/bib1410.bib"  "D:/bitlib/orglib/bib1506.bib" "D:/bitlib/orglib/bib1505.bib" ))) 
-  ; (define-key org-mode-map (kbd "C-c )") 'reftex-citation)
-  ; repeat, [2015-01-30]
-  
-  ;; ** @bib
-  ;; 利用 Emacs 的 org-mode 管理文献, <2015-01-27>
-  ;; https://wiki.freebsdchina.org/doc/r/reference
-  ;; 定义 org-mode-reftex-search
-  (defun org-mode-reftex-search ()
-   ;; jump to the notes for the paper pointed to at from reftex search
-   (interactive)
-   (org-open-link-from-string (format "[[notes:%s]]" (reftex-citation t))))
-  
-  (setq org-link-abbrev-alist
-   '(("bib" . "D:/bitlib/orglib/bitlib/orglib.bib::%s, D:/bitlib/orglib/bib1505.bib::%s, D:/bitlib/orglib/bib1506.bib::%s")
-     ("notes" . (concat git-to "notes.org::%s") )
-  ;   ("notes" . "(concat git-to "notes.org") ::%s")
-  ;  (invalid-read-syntax ". in wrong context")
-  ;    ("notes" . (concat git-to "notes.org::%s")
-     ("figs" . "D:/figure1411/%s.png")
-  ;   ("papers" . "D:/bib1410/paper1410/%s.pdf")
-     ("papers" . "D:/bitlib/orglib/paper1512/%s.pdf")))
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   
 #+END_SRC
 
 * @debug [2015-12-28]
@@ -735,9 +672,14 @@
 (if (string-equal system-type "windows-nt")
 (setq-default ispell-program-name "aspell"))
 
-** TODO @anything, @helm [2015-12-29]
-   1. can not load anything-config,
-   2. can not load helm-autoloads, @win
+** DONE @anything, @helm [2015-12-29]
+   CLOSED: [2015-12-30 Wed 09:50]
+   - State "DONE"       from "TODO"       [2015-12-30 Wed 09:50]
+
+*** [#C] @key, @helm can work in @win, just copy from @mac 
+    1. @success, run make @mac, then upload to github, download to @win, then work
+    2. can not load anything-config, [2015-12-30]
+    3. can not load helm-autoloads, @win
 
 ** TODO @helm-bibtex
 *** @ac, first ispell, then ac-ispell [2015-12-28]
@@ -752,6 +694,8 @@
     2. bitlib->gitlib
     3. (setq helm-bibtex-library-path "D:/bitlib/orglib/paper1512/" )
 ** @org
+*** TODO (setq org-link-abbrev-alist
+    1. concat
 *** [#C] quote to list '(org-agenda-files (list (concat git-to "paper.org") [2015-12-28]
     1. '(org-agenda-files (list (concat git-to "paper.org") (concat git-to "study.org") (concat git-to "journal.org") (concat git-to "project.org") (concat git-to "task.org") (concat git-to  "note.org")))
     2. '(org-agenda-files (quote (concat git-to, is wrong
@@ -771,12 +715,17 @@
     1. org-agenda-files
 
 * @study: @dotemacs
+** TODO eldoc
+   - State "TODO"       from ""           [2015-12-30 Wed 09:59]
+*** org-eldoc
+    1. https://bitbucket.org/ukaszg/org-eldoc
+
 ** @ln, [2015-12-29]
 *** @sachac: http://sachac.com/
 *** @sachac: https://github.com/sachac/, http://sachachua.com/blog/
 
 ** @eng, [2015-12-29]
-   1. predicate | indicate, lexical-word, tweak
+   1. predicate | indicate, lexical-word | tweak-twist
    2. pimp: a man who controls prostitutes 
 ** org-babel-load-file, @study: #time-less-p, nth and file-attributes#  [2015-12-29]
 
