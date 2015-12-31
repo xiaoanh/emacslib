@@ -87,7 +87,7 @@
     (setq initial-user-file (concat path-to "dotemacsw.el"))
     ;; load up all literate org-mode files in this directory
     ; (mapc #'org-babel-load-file (directory-files dotfiles-dir t "\\.org$"))
-  (org-babel-load-file (concat path-to "dotemacsw.org"))
+;  (org-babel-load-file (concat path-to "dotemacsw.org"))
     ;;; init.el ends here
     
 #+END_SRC
@@ -145,6 +145,33 @@
 #+END_SRC
 
 * @other
+** @guide-key
+#+BEGIN_SRC emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; https://github.com/kai2nenobu/guide-key
+  ; @guide-key begin here
+  
+  ; @guide-key end here
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
+** @company
+#+BEGIN_SRC emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; @company to replace ac,  begin here [2015-12-31]
+  
+  ; @company end here
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
+** @use-package [2015-12-31]
+#+BEGIN_SRC emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; @use-package begin here [2015-12-31]
+  ; https://github.com/jwiegley/use-package
+  (add-to-list 'load-path (concat path-to "use-package-master/"))
+  (require 'use-package)
+  ; @use-package end here
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
 ** @magit [2015-12-30]
 #+BEGIN_SRC emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -744,14 +771,17 @@
    - State "TODO"       from ""           [2015-12-30 Wed 09:59]
 *** org-eldoc
     1. https://bitbucket.org/ukaszg/org-eldoc
-
 ** @ln, [2015-12-29]
 *** @sachac: http://sachac.com/
 *** @sachac: https://github.com/sachac/, http://sachachua.com/blog/
 
 ** @eng, [2015-12-29]
    1. predicate | indicate, lexical-word | tweak-twist
-   2. pimp: a man who controls prostitutes 
+   2. pimp: a man who controls prostitutes
+   3. performance-oriented
+   4. with no loss of functionality
+   5. defer | diminish | backend
+   6. goldmine
 ** org-babel-load-file, @study: #time-less-p, nth and file-attributes#  [2015-12-29]
 
 #+BEGIN_SRC emacs-lisp
@@ -793,3 +823,247 @@
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
 #+END_SRC
 
+* @lisp, from eintr.pdf
+** @basic
+   1. - 用作“割断”字符用来分隔变量、函数等名称里的字（word），这是Lisp编程惯用法，类似C和Ada里的“_”
+** 1 List Processing
+*** 1.1 Lisp Lists
+**** 1.1.1 Lisp Atoms
+#+BEGIN_SRC emacs-lisp
+'(this list includes "text between quotation marks.")
+; => a list
+’(this is a quoted list)
+; => @err 
+'(this is a quoted list)
+(this is an unquoted list)
+; => this is not fun
+'(this is an unquoted list)
+(+ 2 2)
+; => 4
+'(+ 2 2)
+; => (+ 2 2)
+#+END_SRC
+*** 1.7 Variables
+#+BEGIN_SRC emacs-lisp
+fill-column
+; => 70 
+(fill-column)
+; => @err, not a fun
+(set 'flowers '(rose violet daisy buttercup))
+flowers
+'flowers
+(set flowers '(rose violet daisy buttercup))
+(setq flowers '(rose violet daisy buttercup))
+; *Backtrace* 
+; eval-last-sexp.
+; The command means ‘evaluate last symbolic expression’, which is the expression just before your cursor.
+#+END_SRC
+*** 1.8 Arguments
+#+BEGIN_SRC emacs-lisp
+(+ 2 fill-column)
+; => 72
+(concat "The " (number-to-string (+ 2 fill-column)) " red foxes.")
+(+ 2 hello)
+(+ 2 ’hello)
+; (wrong-type-argument number-or-marker-p hello)
+; The ‘p’ stands for ‘predicate’.
+
+#+END_SRC
+*** point [2015-12-31]
+#+BEGIN_SRC emacs-lisp
+(point-min)
+(buffer-name)
+(goto-char (/ (point-max) 2))
+#+END_SRC
+
+** 3 How To Write Function Definitions
+*** 3.1 The defun Macro
+#+BEGIN_SRC emacs-lisp
+(defun multiply-by-seven (number) ; Interactive version.
+"Multiply NUMBER by seven.")
+#+END_SRC
+*** 3.3 Make a Function Interactive, m-x
+#+BEGIN_SRC emacs-lisp
+  (defun multiply-by-seven (number) ; Interactive version.
+  "Multiply NUMBER by seven."
+  (interactive "p")
+  (message "The result is %d" (* 7 number)))
+  ; p: a ‘prefix’, as a number to be passed to the function.
+#+END_SRC
+
+*** 3.6 let
+#+BEGIN_SRC emacs-lisp
+;(let varlist body...)
+(let ((birch 3)
+pine
+fir
+(oak 'some))
+(message
+"Here are %d variables with %s, %s, and %s value."
+birch pine fir oak))
+; => "Here are 3 variables with nil, nil, and some value."
+; Here, the varlist is ((birch 3) pine fir (oak ’some)).
+
+#+END_SRC
+*** 3.8 If–then–else Expressions
+#+BEGIN_SRC emacs-lisp
+(if (> 4 5) 
+; if-part
+(message "4 falsely greater than 5!") 
+; then-part
+(message "4 is not greater than 5!")) 
+; else-part
+(if nil
+'true
+'false)
+(if 1
+'right
+'false)
+#+END_SRC
+*** 3.10 save-excursion
+#+BEGIN_SRC emacs-lisp
+(message "The result is %d" (* 7 5))
+; => 35
+(point)
+(save-excursion (goto-char (point-min)) (point))
+(- (point)
+(save-excursion
+(goto-char (point-min)) (point)))
+
+(message "We are %d characters into this buffer."
+(- (point)
+(save-excursion
+(goto-char (point-min)) (point))))
+
+#+END_SRC
+** 4 A Few Buffer–Related Functions
+*** 4.1 Finding More Information, find-tag
+    1. M-x compile RET etags *.el RET
+    2. M-x compile RET etags.exe  *.el RET  ; @win
+*** 4.2 A Simplified beginning-of-buffer Definition, pp62
+#+BEGIN_SRC emacs-lisp
+(defun simplified-beginning-of-buffer ()
+"Move point to the beginning of the buffer; leave mark at previous position."
+(interactive)
+(push-mark)
+(goto-char (point-min)))
+#+END_SRC
+
+*** 4.3 The Definition of mark-whole-buffer
+#+BEGIN_SRC emacs-lisp
+  (push-mark (point))
+  (push-mark (point-max) nil t)
+#+END_SRC
+
+*** 4.4 The Definition of append-to-buffer in simple.el
+#+BEGIN_SRC emacs-lisp
+  (defun append-to-buffer (buffer start end)
+    "Append to specified buffer the text of the region.
+  It is inserted into that buffer before its point.
+  When calling from a program, give three arguments:
+  BUFFER (or buffer name), START and END.
+  START and END specify the portion of the current buffer to be copied."
+    (interactive
+     (list (read-buffer "Append to buffer: " (other-buffer (current-buffer) t))
+           (region-beginning) (region-end)))
+    (let* ((oldbuf (current-buffer))
+           (append-to (get-buffer-create buffer))
+           (windows (get-buffer-window-list append-to t t))
+           point)
+      (save-excursion
+        (with-current-buffer append-to
+          (setq point (point))
+          (barf-if-buffer-read-only)
+          (insert-buffer-substring oldbuf start end)
+          (dolist (window windows)
+            (when (= (window-point window) point)
+              (set-window-point window (point))))))))
+   (other-buffer)
+   (current-buffer)
+   (read-buffer "read" (other-buffer))
+  ; PROMP
+   (other-buffer (current-buffer) t)
+   (region-beginning) 
+   (list (read-buffer "Append to buffer: " (other-buffer (current-buffer) t))
+           (region-beginning) (region-end))
+   (interactive
+     (list (read-buffer "Append to buffer: " (other-buffer (current-buffer) t))
+           (region-beginning) (region-end)))
+#+END_SRC
+** 5 A Few More Complex Functions, pp72
+*** 5.4 Review
+    1. &optional
+
+** 7 car, cdr, cons: Fundamental Functions
+*** 7.1 car and cdr
+#+BEGIN_SRC emacs-lisp
+(car '(rose violet daisy buttercup))
+(cdr '(rose violet daisy buttercup))
+
+#+END_SRC
+
+*** 7.2 cons
+#+BEGIN_SRC emacs-lisp
+; The cons function constructs lists; it is the inverse of car and cdr.
+(cons 'buttercup ())
+; => (buttercup)
+(cons 'daisy '(buttercup))
+; => (daisy buttercup)
+#+END_SRC
+
+*** 7.4 nth
+#+BEGIN_SRC emacs-lisp
+(nth 1 '("one" "two" "three"))
+#+END_SRC
+
+** 12 Regular Expression Searches
+
+*** 12.4 forward-paragraph: a Goldmine of Functions, let*
+    1. The let* expression
+#+BEGIN_SRC emacs-lisp
+(let* ((foo 7)
+(bar (* 3 foo)))
+(message "‘bar’ is %d." bar))
+; => ‘bar’ is 21
+(let ((foo 7)
+(bar (* 3 foo)))
+(message "‘bar’ is %d." bar))
+; => void foo
+; make use of the values to which Emacs set variables in the earlier part of the varlist.
+#+END_SRC
+
+** 11 Loops and Recursion
+
+*** 11.1 while
+#+BEGIN_SRC emacs-lisp
+(setq animals '(gazelle giraffe lion tiger))
+(defun print-elements-of-list (list)
+"Print each element of LIST on a line of its own."
+(while list
+(print (car list))
+(setq list (cdr list))))
+(print-elements-of-list animals)
+#+END_SRC
+
+*** 11.2 Save your time: dolist and dotimes
+#+BEGIN_SRC emacs-lisp
+; In addition to while, both dolist and dotimes provide for looping.
+(setq animals '(gazelle giraffe lion tiger))
+(defun reverse-list-with-while (list)
+"Using while, reverse the order of LIST."
+(let (value) ; make sure list starts empty
+(while list
+(setq value (cons (car list) value))
+(setq list (cdr list)))
+value))
+(reverse-list-with-while animals)
+
+(setq animals '(gazelle giraffe lion tiger))
+(defun reverse-list-with-dolist (list)
+"Using dolist, reverse the order of LIST."
+(let (value) ; make sure list starts empty
+(dolist (element list value)
+(setq value (cons element value)))))
+(reverse-list-with-dolist animals)
+
+#+END_SRC
