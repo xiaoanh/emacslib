@@ -80,14 +80,14 @@
     (setq dotfiles-dir path-to)
     (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
     (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
-  
+
       ;; load up Org-mode and Org-babel
     (require 'org-install)
     (require 'ob-tangle)
     (setq initial-user-file (concat path-to "dotemacsw.el"))
     ;; load up all literate org-mode files in this directory
     ; (mapc #'org-babel-load-file (directory-files dotfiles-dir t "\\.org$"))
-;  (org-babel-load-file (concat path-to "dotemacsw.org"))
+;    (org-babel-load-file (concat path-to "dotemacsw.org"))
     ;;; init.el ends here
     
 #+END_SRC
@@ -96,6 +96,7 @@
 #+BEGIN_SRC emacs-lisp
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;; @mac, ctrl [2015-12-25]
+    (setq mac-command-modifier 'alt)
     (setq mac-command-modifier 'ctrl)
     (define-key global-map [?\M-¥] "\\")
     
@@ -145,6 +146,52 @@
 #+END_SRC
 
 * @other
+** @helm-bibtex-master, dash first
+#+BEGIN_SRC emacs-lisp
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;;  @helm, helm-bibtex
+    ; @err, can not load parsebib
+    ; @success, Cannot open load file -> (add-to-list ‘load-path “/Users/user_name/bin/”)
+    ; ;; Requirements are parsebib, helm, s, dash, and f.  The easiest way
+    ; *** @parsebib @google, https://github.com/joostkremers/parsebib, @Preamble, @String, or @Comment
+    ; https://github.com/tmalsburg/helm-bibtex
+    ; *** @dash can not load parsebib
+    ; https://github.com/magnars/dash.el
+    ; *** @s can not load s and f
+    ; https://github.com/magnars/s.el
+    ; https://github.com/rejeep/f.el
+    ; *** @success, parsebib, dash, s and f finally
+    (add-to-list 'load-path (concat path-to "dash.el-master/"))
+    (require 'dash) 
+    (add-to-list 'load-path (concat path-to "s.el-master/"))
+    (require 's)
+    (add-to-list 'load-path (concat path-to "f.el-master/"))
+    (require 'f)
+    ; A modern list library for Emacs 
+    ; All functions and constructs in the library are prefixed with a dash (-).
+    
+    (add-to-list 'load-path (concat path-to "parsebib-master/"))
+    (require 'parsebib)
+    (add-to-list 'load-path (concat path-to "helm-bibtex-master/"))
+    (autoload 'helm-bibtex "helm-bibtex" "" t)
+    ; (setq helm-bibtex-bibliography '("/path/to/bibtex-file-1.bib" "/path/to/bibtex-file-2.bib"))
+    ; helm-bibtex, bitlib->gitlib [2015-12-28]
+    (setq helm-bibtex-bibliography (list (concat path-to "bib1410.bib") (concat path-to "bib1505.bib") (concat path-to "bib1506.bib") ))
+;    (setq helm-bibtex-bibliography '( (concat path-to "bib1410.bib") (concat path-to "bib1505.bib") (concat path-to "bib1506.bib") ))
+  ;  (setq helm-bibtex-bibliography '("D:/gitlib/bib1410.bib" "D:/gitlib/bib1505.bib" "D:/gitlib/bib1506.bib" ))
+  ;  (setq helm-bibtex-bibliography '("D:/gitlib/orglib/bib1410.bib" "D:/gitlib/orglib/bib1505.bib" "D:/gitlib/orglib/bib1506.bib" ))
+    ; (setq helm-bibtex-bibliography '("D:/bitlib/orglib/bib1410.bib" "D:/bitlib/orglib/bib1505.bib" "D:/bitlib/orglib/bib1506.bib" ))
+ 
+    (setq helm-bibtex-library-path (list (concat git-to "paper1512/") ))    
+;    (setq helm-bibtex-library-path (concat git-to "paper1512/") )    
+;    (setq helm-bibtex-library-path "D:/bitlib/orglib/paper1512/" )
+    ; (setq helm-bibtex-library-path '("/path1/to/pdfs" "/path2/to/pdfs"))
+    ; (setq helm-bibtex-notes-path "/path/to/notes.org")
+    (setq helm-bibtex-notes-path "D:/gitlib/bib_notes.org")
+    (setq helm-bibtex-pdf-symbol "⌘")
+    (setq helm-bibtex-notes-symbol "✎")
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
 ** @guide-key
 #+BEGIN_SRC emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -178,8 +225,8 @@
   ; @magit, [2015-12-30]
   ; http://magit.vc/manual/magit/
   ; @make @err: *** At least version 24.4 of Emacs is required.  Stop.
-  ;; (add-to-list 'load-path (concat path-to "magit-master/lisp/"))
-  ;; (require 'magit)
+   (add-to-list 'load-path (concat path-to "magit-master/lisp/"))
+   (require 'magit)
   ;; (with-eval-after-load 'info
   ;;   (info-initialize)
   ;;   (add-to-list 'Info-directory-list
@@ -230,18 +277,21 @@
 #+END_SRC
 ** @helm, (helm-mode 1), should make @mac, fail, delete @anything [2015-12-25]
 #+BEGIN_SRC emacs-lisp
-      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-      ; @anything to @helm [2015-12-25]
-      ; https://github.com/emacs-helm/helm
-    ;; [Facultative] Only if you have installed async.
-      (add-to-list 'load-path (concat path-to "helm-master/"))
-    ;  (package-install 'helm)
-    ; "Cannot open load file" "helm-autoloads [2015-12-25]
-    ; @success, @mac after make [2015-12-25] 
-      (require 'helm-config)
-      (global-set-key (kbd "C-c h") 'helm-mini)
-      (helm-mode 1)
-      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ; @anything to @helm [2015-12-25]
+    ; https://github.com/emacs-helm/helm
+  ;; [Facultative] Only if you have installed async.
+    (add-to-list 'load-path (concat path-to "helm-master/"))
+  ;  (package-install 'helm)
+  ; "Cannot open load file" "helm-autoloads [2015-12-25]
+  ; @success, @mac after make [2015-12-25] 
+    (require 'helm-config)
+    (global-set-key (kbd "C-c h") 'helm-mini)
+  ; (helm-mode 1)
+  ; invalid function: add-function for (helm-mode 1), [2016-01-03]
+
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 ** @smex [2015-12-25]
 #+BEGIN_SRC emacs-lisp
@@ -258,52 +308,6 @@
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-#+END_SRC
-** @helm-bibtex-master, dash first
-#+BEGIN_SRC emacs-lisp
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;;  @helm, helm-bibtex
-    ; @err, can not load parsebib
-    ; @success, Cannot open load file -> (add-to-list ‘load-path “/Users/user_name/bin/”)
-    ; ;; Requirements are parsebib, helm, s, dash, and f.  The easiest way
-    ; *** @parsebib @google, https://github.com/joostkremers/parsebib, @Preamble, @String, or @Comment
-    ; https://github.com/tmalsburg/helm-bibtex
-    ; *** @dash can not load parsebib
-    ; https://github.com/magnars/dash.el
-    ; *** @s can not load s and f
-    ; https://github.com/magnars/s.el
-    ; https://github.com/rejeep/f.el
-    ; *** @success, parsebib, dash, s and f finally
-    (add-to-list 'load-path (concat path-to "dash.el-master/"))
-    (require 'dash) 
-    (add-to-list 'load-path (concat path-to "s.el-master/"))
-    (require 's)
-    (add-to-list 'load-path (concat path-to "f.el-master/"))
-    (require 'f)
-    ; A modern list library for Emacs 
-    ; All functions and constructs in the library are prefixed with a dash (-).
-    
-    (add-to-list 'load-path (concat path-to "parsebib-master/"))
-    (require 'parsebib)
-    (add-to-list 'load-path (concat path-to "helm-bibtex-master/"))
-    (autoload 'helm-bibtex "helm-bibtex" "" t)
-    ; (setq helm-bibtex-bibliography '("/path/to/bibtex-file-1.bib" "/path/to/bibtex-file-2.bib"))
-    ; helm-bibtex, bitlib->gitlib [2015-12-28]
-    (setq helm-bibtex-bibliography (list (concat path-to "bib1410.bib") (concat path-to "bib1505.bib") (concat path-to "bib1506.bib") ))
-;    (setq helm-bibtex-bibliography '( (concat path-to "bib1410.bib") (concat path-to "bib1505.bib") (concat path-to "bib1506.bib") ))
-  ;  (setq helm-bibtex-bibliography '("D:/gitlib/bib1410.bib" "D:/gitlib/bib1505.bib" "D:/gitlib/bib1506.bib" ))
-  ;  (setq helm-bibtex-bibliography '("D:/gitlib/orglib/bib1410.bib" "D:/gitlib/orglib/bib1505.bib" "D:/gitlib/orglib/bib1506.bib" ))
-    ; (setq helm-bibtex-bibliography '("D:/bitlib/orglib/bib1410.bib" "D:/bitlib/orglib/bib1505.bib" "D:/bitlib/orglib/bib1506.bib" ))
- 
-    (setq helm-bibtex-library-path (list (concat git-to "paper1512/") ))    
-;    (setq helm-bibtex-library-path (concat git-to "paper1512/") )    
-;    (setq helm-bibtex-library-path "D:/bitlib/orglib/paper1512/" )
-    ; (setq helm-bibtex-library-path '("/path1/to/pdfs" "/path2/to/pdfs"))
-    ; (setq helm-bibtex-notes-path "/path/to/notes.org")
-    (setq helm-bibtex-notes-path "D:/gitlib/bib_notes.org")
-    (setq helm-bibtex-pdf-symbol "⌘")
-    (setq helm-bibtex-notes-symbol "✎")
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 ** @linum forcefully, [2013-11-13]
 #+BEGIN_SRC emacs-lisp
@@ -683,6 +687,16 @@
 #+END_SRC
 
 * @debug [2015-12-28]
+** @mac, v25.1
+; invalid function: add-function for (helm-mode 1), [2016-01-03]
+#+BEGIN_SRC emacs-lisp
+  ; mac-control, mac-command, mac-option
+  ; mac-command-modifier is a variable defined in `C source code'.
+  ; Its value is alt
+  ; Original value was meta
+  (setq mac-option-modifier 'meta)
+  (setq mac-command-modifier 'ctrl)
+#+END_SRC
 ** TODO open pdf in helm-bibtex
 *** helm-bibtex-pdf-open-function
 #+BEGIN_SRC emacs-lisp
@@ -767,6 +781,48 @@
     1. org-agenda-files
 
 * @study: @dotemacs
+** @brew
+*** @cmd
+1. Xiaoan1986$ sudo chown -R $(whoami):admin /usr/local
+2. Xiaoan1986$ brew update
+3. brew install emacs
+4. brew unlink emacs
+
+*** insall emacs-24.5
+  1. http://ftp.gnu.org/gnu/emacs/
+  2. /usr/local/Cellar
+
+XIAOANs-MacBook-Pro:~ Xiaoan1986$ brew update
+Already up-to-date.
+XIAOANs-MacBook-Pro:~ Xiaoan1986$ brew doctor
+Your system is ready to brew.
+XIAOANs-MacBook-Pro:~ Xiaoan1986$ brew install emacs-mac
+
+.app bundles were installed.
+Run `brew linkapps emacs-mac` to symlink these to /Applications.
+==> Summary
+🍺  /usr/local/Cellar/emacs-mac/emacs-24.5-z-mac-5.15: 3,936 files, 107.4M, built in 5 minutes 20 seconds
+XIAOANs-MacBook-Pro:~ Xiaoan1986$ brew linkapps emacs-mac
+Linking /usr/local/opt/emacs-mac/Emacs.app to /Applications.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+To have launchd start emacs at login:
+  ln -sfv /usr/local/opt/emacs/*.plist ~/Library/LaunchAgents
+Then to load emacs now:
+  launchctl load ~/Library/LaunchAgents/homebrew.mxcl.emacs.plist
+==> Summary
+🍺  /usr/local/Cellar/emacs/24.5: 3,915 files, 99.5M
+
+=> /Users/Xiaoan1986/Library/LaunchAgents/homebrew.mxcl.emacs.plist -> /usr/local/opt/emacs/homebrew.mxcl.emacs.plist
+
+** @key: @flymake, @percol and @fasd [2015-12-31]
+   1. @percol works only in linux?
+*** @percol
+    1. https://github.com/mooz/percol
+    2. percol-master
+*** @flymake
+    1. https://github.com/illusori/emacs-flymake
+    2. emacs-flymake-master
 ** TODO eldoc
    - State "TODO"       from ""           [2015-12-30 Wed 09:59]
 *** org-eldoc
@@ -824,6 +880,9 @@
 #+END_SRC
 
 * @lisp, from eintr.pdf
+  1. An Introduction to Programming in Emacs Lisp
+     1. http://www.gnu.org/software/emacs/manual/eintr.html
+  2. @ln: http://www.gnu.org/software/emacs/manual/
 ** @basic
    1. - 用作“割断”字符用来分隔变量、函数等名称里的字（word），这是Lisp编程惯用法，类似C和Ada里的“_”
 ** 1 List Processing
