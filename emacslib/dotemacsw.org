@@ -67,33 +67,35 @@
 
 ** [#C] @basic: @init
    1. init.el must be separate [2015-12-25]
-#+BEGIN_SRC emacs-lisp
-      ;;; init.el --- Where all the magic begins
-      ;;
-      ;; This file loads Org-mode and then loads the rest of our Emacs initialization from Emacs lisp
-      ;; embedded in literate Org-mode files.
-      
-      ;; Load up Org Mode and (now included) Org Babel for elisp embedded in Org Mode files
-      ; (setq dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name)))
-      ; (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
-      ; (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
-      (setq dotfiles-dir path-to)
-      (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
-      (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
-  
-        ;; load up Org-mode and Org-babel
-      (require 'org-install)
-      (require 'ob-tangle)
-      (setq initial-user-file (concat path-to "dotemacsw.el"))
-      ;; load up all literate org-mode files in this directory
-      ; (mapc #'org-babel-load-file (directory-files dotfiles-dir t "\\.org$"))
-  ;    (org-babel-load-file (concat path-to "dotemacsw.org"))
-     (global-set-key (kbd "C-c i") 
-     (lambda() (interactive)(org-babel-load-file  (concat path-to "dotemacsw.org"))))
-      ;;; init.el ends here
-      
+#+BEGIN_SRC emacs-lisp 
+        ;;; init.el --- Where all the magic begins
+        ;;
+        ;; This file loads Org-mode and then loads the rest of our Emacs initialization from Emacs lisp
+        ;; embedded in literate Org-mode files.
+        
+        ;; Load up Org Mode and (now included) Org Babel for elisp embedded in Org Mode files
+        ; (setq dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name)))
+        ; (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
+        ; (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
+        (setq dotfiles-dir path-to)
+        (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" path-to)))
+        (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib"  (expand-file-name "org-mode-master" path-to)))) 
+       ; @key: contrib dir @err, [2016-01-04]
+       ; (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
+    
+          ;; load up Org-mode and Org-babel
+        (require 'org-install)
+        (require 'ob-tangle)
+        (setq initial-user-file (concat path-to "dotemacsw.el"))
+        ;; load up all literate org-mode files in this directory
+        ; (mapc #'org-babel-load-file (directory-files dotfiles-dir t "\\.org$"))
+    ;    (org-babel-load-file (concat path-to "dotemacsw.org"))
+  (global-set-key (kbd "C-c i")
+                  (lambda() (interactive) (org-babel-load-file (concat path-to "dotemacsw.org"))))
+        ;;; init.el ends here
+        
 #+END_SRC
-** @basic: @kbd
+** @basic: @kbd 
 *** @kbd
 #+BEGIN_SRC emacs-lisp
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -128,7 +130,7 @@
 (setq time-stamp-format "%:u %04y/%02m/%02d %02H:%02M:%02S")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
-*** @defun:  insert-date
+*** @defun: insert-date
 #+BEGIN_SRC emacs-lisp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; @defun insert-date
@@ -217,7 +219,7 @@
   ; @use-package begin here [2015-12-31]
   ; https://github.com/jwiegley/use-package
   (add-to-list 'load-path (concat path-to "use-package-master/"))
-  (require 'use-package)
+; (require 'use-package)
   ; @use-package end here
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
@@ -249,7 +251,7 @@
   ; (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
   ; (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
   (add-to-list 'load-path org-contrib-dir)
-  ; (require 'org-eldoc)
+  (require 'org-eldoc)
   ; (org-eldoc-hook-setup)
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
@@ -695,7 +697,7 @@
    1. Emacs init file written in org-mode
       1. http://mescal.imag.fr/membres/arnaud.legrand/misc/init.php
       2. Load emacs initialization file: 
-**  variable is void: org-mode-map
+** variable is void: org-mode-map
    1. Symbol's value as variable is void: org-mode-map [2016-01-04]
       1. to global-map
 ** @mac, v24.5.1[2016-01-03 Sun]
