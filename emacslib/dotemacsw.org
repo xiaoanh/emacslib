@@ -68,28 +68,30 @@
 ** [#C] @basic: @init
    1. init.el must be separate [2015-12-25]
 #+BEGIN_SRC emacs-lisp
-    ;;; init.el --- Where all the magic begins
-    ;;
-    ;; This file loads Org-mode and then loads the rest of our Emacs initialization from Emacs lisp
-    ;; embedded in literate Org-mode files.
-    
-    ;; Load up Org Mode and (now included) Org Babel for elisp embedded in Org Mode files
-    ; (setq dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name)))
-    ; (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
-    ; (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
-    (setq dotfiles-dir path-to)
-    (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
-    (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
-
-      ;; load up Org-mode and Org-babel
-    (require 'org-install)
-    (require 'ob-tangle)
-    (setq initial-user-file (concat path-to "dotemacsw.el"))
-    ;; load up all literate org-mode files in this directory
-    ; (mapc #'org-babel-load-file (directory-files dotfiles-dir t "\\.org$"))
-;    (org-babel-load-file (concat path-to "dotemacsw.org"))
-    ;;; init.el ends here
-    
+      ;;; init.el --- Where all the magic begins
+      ;;
+      ;; This file loads Org-mode and then loads the rest of our Emacs initialization from Emacs lisp
+      ;; embedded in literate Org-mode files.
+      
+      ;; Load up Org Mode and (now included) Org Babel for elisp embedded in Org Mode files
+      ; (setq dotfiles-dir (file-name-directory (or (buffer-file-name) load-file-name)))
+      ; (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
+      ; (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
+      (setq dotfiles-dir path-to)
+      (setq org-dir (expand-file-name "lisp" (expand-file-name "org-mode-master" dotfiles-dir)))
+      (setq org-contrib-dir (expand-file-name "lisp" (expand-file-name "contrib" org-dir)))
+  
+        ;; load up Org-mode and Org-babel
+      (require 'org-install)
+      (require 'ob-tangle)
+      (setq initial-user-file (concat path-to "dotemacsw.el"))
+      ;; load up all literate org-mode files in this directory
+      ; (mapc #'org-babel-load-file (directory-files dotfiles-dir t "\\.org$"))
+  ;    (org-babel-load-file (concat path-to "dotemacsw.org"))
+     (global-set-key (kbd "C-c i") 
+     (lambda() (interactive)(org-babel-load-file  (concat path-to "dotemacsw.org"))))
+      ;;; init.el ends here
+      
 #+END_SRC
 ** @basic: @kbd
 *** @kbd
@@ -219,14 +221,15 @@
   ; @use-package end here
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
-** @magit [2015-12-30]
+** TODO @magit, v24.5 [2015-12-30]
+   - State "TODO"       from ""           [2016-01-04 Mon 10:20]
 #+BEGIN_SRC emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ; @magit, [2015-12-30]
   ; http://magit.vc/manual/magit/
   ; @make @err: *** At least version 24.4 of Emacs is required.  Stop.
    (add-to-list 'load-path (concat path-to "magit-master/lisp/"))
-   (require 'magit)
+  ;  (require 'magit)
   ;; (with-eval-after-load 'info
   ;;   (info-initialize)
   ;;   (add-to-list 'Info-directory-list
@@ -446,55 +449,55 @@
 #+END_SRC
 
 ** @mew, no use
-#+BEGIN_SRC emacs-lisp
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; @mew, email, @success, work [2015-12-21]
-    ;; load Mew, [2014-11-07]
-    ;; (add-to-list 'load-path (concat path-to "mew-lisp"))
-    ;; (autoload 'mew "mew" nil t)
-    ;; (autoload 'mew-send "mew" nil t)
-    ;; (setq mew-icon-directory (concat path-to "mew-lisp/etc"))
-    ;; (setq mew-use-cached-passwd t)
-    ;; (if (boundp 'read-mail-command)
-    ;; (setq read-mail-command 'mew))
-    ;; (autoload 'mew-user-agent-compose "mew" nil t)
-    ;; (if (boundp 'mail-user-agent)
-    ;; (setq mail-user-agent 'mew-user-agent))
-    ;; (if (fboundp 'define-mail-user-agent)
-    ;; (define-mail-user-agent
-    ;; 'mew-user-agent
-    ;; 'mew-user-agent-compose
-    ;; 'mew-draft-send-message
-    ;; 'mew-draft-kill
-    ;; 'mew-send-hook))
-    ;; (setq mew-pop-size 0)
-    ;; (setq mew-smtp-auth-list nil)
-    ;; (setq toolbar-mail-reader 'Mew)
-    ;; (set-default 'mew-decode-quoted 't)
-    ;; (when (boundp 'utf-translate-cjk)
-    ;; (setq utf-translate-cjk t)
-    ;; (custom-set-variables
-    ;; '(utf-translate-cjk t)))
-    ;; (if (fboundp 'utf-translate-cjk-mode)
-    ;; (utf-translate-cjk-mode 1))
-    ;; (setq mew-config-alist '(
-    ;; ("default"
-    ;; ("name" . "xiaoanhuang")
-    ;; ("user" . "xiaoanhuang")
-    ;; ("smtp-server" . "smtp.163.com")
-    ;; ("smtp-port" . "25")
-    ;; ("pop-server" . "pop3.163.com")
-    ;; ("pop-port" . "110")
-    ;; ("smtp-user" . "xiaoanhuang")
-    ;; ("pop-user" . "xiaoanhuang")
-    ;; ("mail-domain" . "163.com")
-    ;; ("mailbox-type" . pop)
-    ;; ("pop-auth" . pass)
-    ;; ("smtp-auth-list" . ("PLAIN" "LOGIN" "CRAM-MD5"))
-    ;; )
-    ;; ))
-;     (setq mew-ssl-verify-level 0)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+BEGIN_SRC emacs-lisp :tangle no
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; @mew, email, @success, work [2015-12-21]
+      ;; load Mew, [2014-11-07]
+      (add-to-list 'load-path (concat path-to "mew-lisp"))
+      (autoload 'mew "mew" nil t)
+      (autoload 'mew-send "mew" nil t)
+      (setq mew-icon-directory (concat path-to "mew-lisp/etc"))
+      (setq mew-use-cached-passwd t)
+      (if (boundp 'read-mail-command)
+      (setq read-mail-command 'mew))
+      (autoload 'mew-user-agent-compose "mew" nil t)
+      (if (boundp 'mail-user-agent)
+      (setq mail-user-agent 'mew-user-agent))
+      (if (fboundp 'define-mail-user-agent)
+      (define-mail-user-agent
+      'mew-user-agent
+      'mew-user-agent-compose
+      'mew-draft-send-message
+      'mew-draft-kill
+      'mew-send-hook))
+      (setq mew-pop-size 0)
+      (setq mew-smtp-auth-list nil)
+      (setq toolbar-mail-reader 'Mew)
+      (set-default 'mew-decode-quoted 't)
+      (when (boundp 'utf-translate-cjk)
+      (setq utf-translate-cjk t)
+      (custom-set-variables
+      '(utf-translate-cjk t)))
+      (if (fboundp 'utf-translate-cjk-mode)
+      (utf-translate-cjk-mode 1))
+      (setq mew-config-alist '(
+      ("default"
+      ("name" . "xiaoanhuang")
+      ("user" . "xiaoanhuang")
+      ("smtp-server" . "smtp.163.com")
+      ("smtp-port" . "25")
+      ("pop-server" . "pop3.163.com")
+      ("pop-port" . "110")
+      ("smtp-user" . "xiaoanhuang")
+      ("pop-user" . "xiaoanhuang")
+      ("mail-domain" . "163.com")
+      ("mailbox-type" . pop)
+      ("pop-auth" . pass)
+      ("smtp-auth-list" . ("PLAIN" "LOGIN" "CRAM-MD5"))
+      )
+      ))
+      (setq mew-ssl-verify-level 0)
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 
 ** @predictive, [2014-11-04]
@@ -661,10 +664,11 @@
           (?p . "[[papers:%l][%l-paper]]")
           (?t . "%t")
           (?h . "** %t\n:PROPERTIES:\n:Custom_ID: %l\n:END:\n[[papers:%l][%l-paper]]"))))))
-  
-  (define-key org-mode-map (kbd "C-c )") 'reftex-citation) ; @success, list [2015-12-30]
+  (define-key global-map (kbd "C-c )") 'reftex-citation)
+  (define-key global-map (kbd "C-c (") 'org-mode-reftex-search)
+;  (define-key org-mode-map (kbd "C-c )") 'reftex-citation) ; @success, list [2015-12-30]
     ;; binding of  ”C-c (” to org-mode-reftex-search
-  (define-key org-mode-map (kbd "C-c (") 'org-mode-reftex-search)
+;  (define-key org-mode-map (kbd "C-c (") 'org-mode-reftex-search)
   (add-hook 'org-mode-hook 'org-mode-reftex-setup)
   
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -687,15 +691,26 @@
 #+END_SRC
 
 * @debug [2015-12-28]
-** @mac, v25.1
-; invalid function: add-function for (helm-mode 1), [2016-01-03]
+** org-babel-load-file kbd+lambda
+   1. Emacs init file written in org-mode
+      1. http://mescal.imag.fr/membres/arnaud.legrand/misc/init.php
+      2. Load emacs initialization file: 
+**  variable is void: org-mode-map
+   1. Symbol's value as variable is void: org-mode-map [2016-01-04]
+      1. to global-map
+** @mac, v24.5.1[2016-01-03 Sun]
 #+BEGIN_SRC emacs-lisp
+  ; @win, http://mirror.hust.edu.cn/gnu/emacs/
+  ; invalid function: add-function for (helm-mode 1), [2016-01-03]
   ; mac-control, mac-command, mac-option
   ; mac-command-modifier is a variable defined in `C source code'.
   ; Its value is alt
   ; Original value was meta
-  (setq mac-option-modifier 'meta)
-  (setq mac-command-modifier 'ctrl)
+ (cond 
+ ((string-equal system-type "darwin" )
+ (and (setq mac-option-modifier 'meta)
+ (setq mac-command-modifier 'ctrl))))
+
 #+END_SRC
 ** TODO open pdf in helm-bibtex
 *** helm-bibtex-pdf-open-function
@@ -706,7 +721,7 @@
     ; m-x getenv | setenv | eval-expression 
     ; (defun helm-open-file-with-default-tool) in helm-utils.el
     (cond 
-    ((string-equal system-type "darwin") ; @mac
+    ((string-equal system-type "darwin" ) ; @mac
     (setq helm-bibtex-pdf-open-function
       (lambda (fpath)
         (start-process "skim" "*skim*" "open" (concat "-a /Applications/Skim.app " fpath))))))
@@ -781,14 +796,22 @@
     1. org-agenda-files
 
 * @study: @dotemacs
-** @brew
+** @org, org_manual.pdf
+*** 14 Working with source code, pp192
+    1. #+BEGIN_SRC <language> <switches> <header arguments>
+    2. 14.8 Header arguments, pp198
+    3. :tangle
+    4. :exports
+    5. 14.8.2.3 :file
+    6. 14.8.2.5 :dir and remote execution
+** @brew [2015-12-31 Thu]
 *** @cmd
 1. Xiaoan1986$ sudo chown -R $(whoami):admin /usr/local
 2. Xiaoan1986$ brew update
 3. brew install emacs
 4. brew unlink emacs
 
-*** insall emacs-24.5
+*** DONE install emacs-24.5
   1. http://ftp.gnu.org/gnu/emacs/
   2. /usr/local/Cellar
 
@@ -805,7 +828,8 @@ Run `brew linkapps emacs-mac` to symlink these to /Applications.
 XIAOANs-MacBook-Pro:~ Xiaoan1986$ brew linkapps emacs-mac
 Linking /usr/local/opt/emacs-mac/Emacs.app to /Applications.
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+# ###########################################################
+# no update brew and xcode, so @err, 
 To have launchd start emacs at login:
   ln -sfv /usr/local/opt/emacs/*.plist ~/Library/LaunchAgents
 Then to load emacs now:
@@ -840,23 +864,23 @@ Then to load emacs now:
    6. goldmine
 ** org-babel-load-file, @study: #time-less-p, nth and file-attributes#  [2015-12-29]
 
-#+BEGIN_SRC emacs-lisp
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ; @ln: http://endlessparentheses.com/init-org-Without-org-mode.html
-  ; nth, file-attributes, time-less-p
-  ; number-or-marker-p nil
-  ; p is predicate, | indicate
-
-  ; DEFVAR and DEFPARAMETER introduce global dynamic variables. 
-  ;; (setq user-emacs-directory path-to)
-  ;; ; (defvar user-emacs-directory path-to)
-  ;; (expand-file-name "dotemacsw.org" user-emacs-directory)
-  ;; (expand-file-name "dotemacsw.el" path-to)
-  ;; (nth 5 (file-attributes init-source-org-file))
-  ;; (nth 5 (file-attributes init-source-el-file))
-  ;; (time-less-p (nth 5 (file-attributes init-source-org-file)) (nth 5 (file-attributes init-source-el-file)))
-  ;; (fboundp 'org-babel-load-file)    
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+BEGIN_SRC emacs-lisp :tangle no
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ; @ln: http://endlessparentheses.com/init-org-Without-org-mode.html
+    ; nth, file-attributes, time-less-p
+    ; number-or-marker-p nil
+    ; p is predicate, | indicate
+  
+    ; DEFVAR and DEFPARAMETER introduce global dynamic variables. 
+    ;; (setq user-emacs-directory path-to)
+    ;; ; (defvar user-emacs-directory path-to)
+    ;; (expand-file-name "dotemacsw.org" user-emacs-directory)
+    ;; (expand-file-name "dotemacsw.el" path-to)
+    ;; (nth 5 (file-attributes init-source-org-file))
+    ;; (nth 5 (file-attributes init-source-el-file))
+    ;; (time-less-p (nth 5 (file-attributes init-source-org-file)) (nth 5 (file-attributes init-source-el-file)))
+    ;; (fboundp 'org-babel-load-file)    
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 *** org-babel-load-file, time-less-p,  [2015-12-29]
 #+BEGIN_SRC emacs-lisp  
@@ -891,11 +915,12 @@ Then to load emacs now:
 #+BEGIN_SRC emacs-lisp
 '(this list includes "text between quotation marks.")
 ; => a list
-’(this is a quoted list)
-; => @err 
+; ’(this is a quoted list)
+; => @err, not ’
 '(this is a quoted list)
-(this is an unquoted list)
-; => this is not fun
+
+; (this is an unquoted list)
+; => this is not fun, @err
 '(this is an unquoted list)
 (+ 2 2)
 ; => 4
@@ -906,12 +931,12 @@ Then to load emacs now:
 #+BEGIN_SRC emacs-lisp
 fill-column
 ; => 70 
-(fill-column)
+; @err, (fill-column)
 ; => @err, not a fun
 (set 'flowers '(rose violet daisy buttercup))
 flowers
-'flowers
-(set flowers '(rose violet daisy buttercup))
+; 'flowers
+; @err, (set flowers '(rose violet daisy buttercup))
 (setq flowers '(rose violet daisy buttercup))
 ; *Backtrace* 
 ; eval-last-sexp.
@@ -922,8 +947,8 @@ flowers
 (+ 2 fill-column)
 ; => 72
 (concat "The " (number-to-string (+ 2 fill-column)) " red foxes.")
-(+ 2 hello)
-(+ 2 ’hello)
+; (+ 2 hello)
+; (+ 2 ’hello)
 ; (wrong-type-argument number-or-marker-p hello)
 ; The ‘p’ stands for ‘predicate’.
 
@@ -1015,7 +1040,7 @@ birch pine fir oak))
 #+END_SRC
 
 *** 4.4 The Definition of append-to-buffer in simple.el
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (defun append-to-buffer (buffer start end)
     "Append to specified buffer the text of the region.
   It is inserted into that buffer before its point.
@@ -1080,21 +1105,21 @@ birch pine fir oak))
 *** 12.4 forward-paragraph: a Goldmine of Functions, let*
     1. The let* expression
 #+BEGIN_SRC emacs-lisp
-(let* ((foo 7)
-(bar (* 3 foo)))
-(message "‘bar’ is %d." bar))
-; => ‘bar’ is 21
-(let ((foo 7)
-(bar (* 3 foo)))
-(message "‘bar’ is %d." bar))
-; => void foo
-; make use of the values to which Emacs set variables in the earlier part of the varlist.
+  (let* ((foo 7)
+  (bar (* 3 foo)))
+  (message "‘bar’ is %d." bar))
+  ; => ‘bar’ is 21
+  
+  ;; (let ((foo 7)
+  ;; (bar (* 3 foo)))
+  ;; (message "‘bar’ is %d." bar))
+  ; => void foo
+  ; make use of the values to which Emacs set variables in the earlier part of the varlist.
 #+END_SRC
 
 ** 11 Loops and Recursion
-
 *** 11.1 while
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no :exports none
 (setq animals '(gazelle giraffe lion tiger))
 (defun print-elements-of-list (list)
 "Print each element of LIST on a line of its own."
@@ -1104,8 +1129,11 @@ birch pine fir oak))
 (print-elements-of-list animals)
 #+END_SRC
 
-*** 11.2 Save your time: dolist and dotimes
-#+BEGIN_SRC emacs-lisp
+*** 11.2 Save your time: dolist and dotimes, pp132
+#+BEGIN_SRC emacs-lisp :tangle no :exports none
+; dolist automatically shortens the list each time it loops—takes the cdr of the list—and binds the car of each shorter version of the list to the first of its arguments.
+; The result is returned in value.
+; DONE put back in sequence [2016-01-04]
 ; In addition to while, both dolist and dotimes provide for looping.
 (setq animals '(gazelle giraffe lion tiger))
 (defun reverse-list-with-while (list)
@@ -1124,5 +1152,11 @@ value))
 (dolist (element list value)
 (setq value (cons element value)))))
 (reverse-list-with-dolist animals)
+
+
+(let (value) ; otherwise a value is a void variable
+(dotimes (number 3 value)
+(setq value (cons number value))))
+; => (2 1 0)
 
 #+END_SRC
