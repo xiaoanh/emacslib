@@ -1,0 +1,137 @@
+* @R [2016-01-05]
+** @markov
+   1. https://www.zhihu.com/question/20962240/answer/33561657
+** @R @update
+   1. http://mirror.bjtu.edu.cn/cran/
+*** @brew @gcc
+brew tap homebrew/science
+brew install gcc
+brew install Caskroom/cask/xquartz
+brew install r
+ 
+** R学习笔记
+   1. http://www.cnblogs.com/holbrook/archive/2013/05/03/3056211.html
+* [#C] @python and lua [2014-12-18 Thu]
+** @key: @Python
+*** naming
+1) const, CONST
+2) args, args
+   
+*** modules/packages. packages must include _init_
+
+*** python vs cpp
+   |                 | python | cpp     |
+   |-----------------+--------+---------|
+   |                 | option | argv    |
+   |                 | _name_ | main    |
+   |                 | import | include |
+   | domain-域操作符 | ::     | ::      |
+** Py study
+
+*** study web
+1) naming
+    所有其它的标识符（identifiers）都是使用小写，比如：
+   words_separated_like_this 。宏 - macros和常量 - constant values是采
+   用大写，比如：UPPER_CASE。
+   
+2) emacs
+http://www.johndcook.com/blog/2012/02/09/python-org-mode/
+#+begin_src R
+sqrt(42)
+#+end_src
+
+#+RESULTS:
+#+begin_src python
+from math import sqrt
+sqrt(42)
+#+end_src
+#+RESULTS:
+
+** Python tutorial
+
+*** @key: Python2.5Tutorial简体中文版, PDF [2015-01-15 Thu]
+ 1) http://pan.baidu.com/share/link?shareid=3447562520&uk=1478811291
+**** pp46, Ch5, modules
+1) module fibo
+2) import fibo
+3) fibo._name_
+4) sec5.3 dir(fibo)
+   1) dir(sys)
+**** pp91, Ch9, lib
+1) os.system
+2) os.getcwd
+3) os.chdir
+4) dir()
+5) hep()
+6) import shutil
+7) file wildcards
+   1) glob.glob(’*.py’)
+8) 9.3 Command Line Arguments
+   1) print sys.argv
+9) 9.5 regular expression tools
+10) 9.7 Internet Access
+    1) import urllib2
+    2) import smtplib
+**** Ch3 More Control Flow Tools
+1) The keyword ‘elif’ is short for ‘else if’,
+2) for x in a: ... print x, len(x)
+3) range
+4) pass
+**** Ch4, Data Structures, lists
+1) len
+2) index
+3) insert
+4) append
+5) set
+6) dict is {}, keys is []
+   1) tel = {’jack’: 4098, ’sape’: 4139}
+   2) tel.keys()
+   3) tel.has_key(’guido’)
+   4) tel[’guido’] = 4127
+7) tuple
+   1) t = 12345, 54321, ’hello!’
+   2) t[0]
+	   
+**** Ch8 class
+1) It is a mixture of the class mechanisms found in C++ and Modula-3. As
+2) 8.3.2 Class Objects
+   1) attribute references
+      1) class MyClass:, MyClass.i and MyClass.f
+   2) instance: x = MyClass()
+3) 8.5 Inheritance, derived继承派生
+   1) class DerivedClassName(BaseClassName):
+   2) c++ *class derived_class_name: public base_class_name;*
+4) 8.9 iterator, <2015-01-16 周五>
+   1) _iter_
+   2) next
+
+**** Ch1 whetting your appetite
+     1) Python is just the language for you.
+     2) Python is an interpreted language,
+     3) Python is extensible:
+*** Python学习手册(第3版)-附录
+*** tutorial web
+**** Python语言十分钟快速入门, <2015-01-13 Tue>
+     1) http://www.pythondoc.com/pythontutorial3/
+http://developer.51cto.com/art/201207/347006.htm
+1) [文件类型]
+   1) Python的文件类型分为3种，即源代码、字节代码和优化代码
+   2) .py, .pyc, .pyo.
+2) [对象和类]
+   1) python用class保留字来定义一个类，类名的首字符要大写
+   2) 一个对象被创建后，包含了三方面的特性，即对象的句柄、属性和方法
+      1) class Fruit:  def grow(self):  print “Fruit grow”
+3) 函数相关
+   1) 包必须含有一个__init__.py文件，它用于标识当前文件夹是一个包
+4) 运算符和表达式
+   1) python不支持自增运算符和自减运算符。例如i++/i–是错误的，但i+=1是可以的
+5) 控制语句
+   1) 7 python不支持类似c的for(i=0;i<5;i++)这样的循环语句，但可以借助range模拟：
+    for x in range(0,5,2): 
+
+**** Python模块学习——optparse
+1) 处理命令行参数
+   1) http://www.cnblogs.com/captain_jack/archive/2011/01/11/1933366.html
+
+
+
