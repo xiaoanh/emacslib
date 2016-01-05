@@ -1,0 +1,110 @@
+#!/bin/bash
+# Welcome to Git (version 1.9.4-preview20140929)
+# Run 'git help git' to display the help index
+# http://www.cygwin.com/
+# 最初由Cygnus Solutions开发
+
+** @date @sort, @cut [2015-12-07]
+  1. /no , and (), -> space and [] [2015-12-16]/
+  2. let a=1;
+
+*** @emacs, ctrl-u, history  [2015-12-16]
+#   在这里是 3 个单词，分别是 opt, IBM 和 ITM，现在输入 Ctrl-u 3 Ctrl-x a l 组合键
+#   Ctrl-u 在 Emacs 里面是一个非常有用的组合键，它代表一个通用前缀，通常在后面跟一个数字参数
+*** Ctrl-x a add-mode-abbrev
+*** history | grep  ' '
+# 这里增加的第一步操作实际上代替了通常情况下需要的拷贝粘贴操作
+
+*** @grep, \{5\}  '^[^48]'   [2015-12-21]]
+# http://www.cnblogs.com/end/archive/2012/02/21/2360965.html
+# linux grep命令
+*** grep pattern1 files | grep pattern2 
+#+BEGIN_SRC bash
+grep pattern1 | pattern2 files # ：显示匹配 pattern1 或 pattern2 的行，
+grep pattern1 files | grep pattern2 # ：显示既匹配 pattern1 又匹配 pattern2 的行。
+
+grep '\<the\>' size.txt
+# the test file 
+
+# Linux系统中grep命令是一种强大的文本搜索工具，它能使用正则表达式搜索文本
+# (1)正则表达式的应用 (注意：最好把正则表达式用单引号括起来)
+grep '[239].' data.doc      #输出所有含有以2,3或9开头的，并且是两个数字的行
+# (2)不匹配测试
+grep '^[^48]' data.doc      #不匹配行首是48的行
+
+$ grep ‘[a-z]\{5\}’ aa
+# 显示所有包含每个字符串至少有5个连续小写字符的字符串的行。
+
+alias itmm = 'D:\fpga_test\cmd'
+
+name="VBird's name"
+PATH="$PATH":/home/dmtsai/bin
+env
+# 用 env 观察环境变量与常见环境变量说明
+set
+# 用 set 观察所有变量 (含环境变量与自定义变量)
+# $：(关于本 shell 的 PID), 亦即是所谓的 PID (Process ID)
+for i in `cd`; do
+    $i
+done
+
+let a=1;
+while [ $a -lt 10 ]; do
+    
+done
+#+END_SRC
+
+** @pipe, 管线命令 (pipe)
+# 管线命令使用的是『 | 』这个界定符号
+# 例如 less, more, head, tail 
+** @grep, @cut # 撷取命令： cut, grep
+# 撷取信息通常是针对『一行一行』来分析的
+# grep [-acinv] [--color=auto] '搜寻字符串' filename
+# grep 是个很棒的命令喔
+
+# 参数代换： xargs
+** @sort, @cut
+
+#+BEGIN_SRC bash
+ls -l | cut -t ':' -k 3;
+sort -d ':'
+${MYVAR##*ppp}
+${1##*.} # withdraw tar
+#+END_SRC
+** @date @awk, @grep [2015-12-08]
+#+BEGIN_SRC bash
+# awk 主要是處理『每一行的欄位內的資料』
+# @ln: http://linux.vbird.org/linux_basic/0330regularex.php#awk
+# 11.4.2 awk：好用的資料處理工具
+# awk '條件類型1{動作1} 條件類型2{動作2} ...' filename
+last -n 5 | awk '{print $1 "\t" $3}'
+# 若我想要取出帳號與登入者的 IP ，且帳號與 IP 之間以 [tab] 隔開，則會變成這樣：
+# NR, NF, FS | row, field, field separate
+cat /etc/passwd | awk 'BEGIN {FS=":"} $3 < 10 {print $1 "\t " $3}'
+
+# 11.2.2 grep 的一些進階選項
+# 用 dmesg 列出核心訊息，再以 grep 找出內含 qxl 那行
+dmesg | grep 'qxl'
+# 範例二：承上題，要將捉到的關鍵字顯色，且加上行號來表示：
+dmesg | grep -n --color=auto 'qxl'
+# 那如果我不想要開頭是英文字母
+grep -n '^[^a-zA-Z]' regular_express.txt
+# 那個 ^ 符號，在字元集合符號(括號[])之內與之外是不同的！ 在 [] 內代表『反向選擇』，在 [] 之外則代表定位在行首的意義
+# 行尾結束為小數點 (.) 的那一行
+grep -n '\.$' regular_express.txt
+# 因為小數點具有其他意義(底下會介紹)，所以必須要使用跳脫字元(\)來加以解除其特殊意義！ 不過
+
+grep -v '\.$' regular_express.txt
+# 12.2.2 script 的執行方式差異 (source, sh script, ./script)
+#  source 或小數點 (.) 來執行
+sh showname.sh
+# 利用 source 來執行腳本：在父程序中執行
+# 需要使用『 source ~/.bashrc 』而不能使用『 bash ~/.bashrc 』是一樣的啊！
+#+END_SRC
+
+** [#D] @fdisk, @diskutil for mac 
+
+#+BEGIN_SRC bash
+fdisk -l;
+df -lh
+#+END_SRC

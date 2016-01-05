@@ -318,7 +318,7 @@
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 ** @smex [2015-12-25]
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; https://github.com/nonsequitur/smex
 ; A smart M-x enhancement for Emacs.  [2015-07-15]
@@ -586,7 +586,10 @@
   ; (setq org-directory "D:/GTD18/") 
   (setq org-default-notes-file (concat git-to "inbox.org"))  ; [2015-12-30]
   ; (setq org-default-notes-file (concat org-directory "inbox.org"))
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
 
+#+BEGIN_SRC emacs-lisp :tangle no
   ; *** @org-setting, [2014-11-19]
   (setq org-tag-alist '(("@Fit" . ?f) ("@huang" . ?h) ("@home" . ?m) ("@Lang" . ?l) ("@Basic" . ?b) ("@Emacs" . ?e) ("@paper" . ?p) ("@work" . ?w)   ("@DOCSIS" . ?d) ("@Meeting" . ?M) ("@Famous" .?F)))
   
@@ -603,6 +606,7 @@
       (sequence "PENDING(p!)" "TODO(t!)"  "|" "DONE(d!)" "ABORT(a@/!)")
   ))
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp :tangle no
@@ -692,6 +696,7 @@
           (?c . "\\cite{%l}")
           (?n . "[[notes:%l][%l-notes]]")
           (?p . "[[papers:%l][%l-paper]]")
+	  (?f . "[[figs:%l][%l-fig]]")
           (?t . "%t")
           (?h . "** %t\n:PROPERTIES:\n:Custom_ID: %l\n:END:\n[[papers:%l][%l-paper]]"))))))
   (define-key global-map (kbd "C-c )") 'reftex-citation)
@@ -811,6 +816,7 @@
     2. bitlib->gitlib
     3. (setq helm-bibtex-library-path "D:/bitlib/orglib/paper1512/" )
 ** @org
+*** org-mode-reftex, (?f . "[[figs:%l][%l-fig]]")
 *** TODO (setq org-link-abbrev-alist
     1. concat
 *** [#C] quote to list '(org-agenda-files (list (concat git-to "paper.org") [2015-12-28]
@@ -969,7 +975,7 @@ Then to load emacs now:
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
 #+END_SRC
 
-* @study: @lisp, from eintr.pdf
+* @study: @lisp, from eintr.pdf 
   1. An Introduction to Programming in Emacs Lisp
      1. http://www.gnu.org/software/emacs/manual/eintr.html
   2. @ln: http://www.gnu.org/software/emacs/manual/
