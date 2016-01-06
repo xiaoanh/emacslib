@@ -1,16 +1,57 @@
+
 * @R [2016-01-05]
 ** @markov
    1. https://www.zhihu.com/question/20962240/answer/33561657
+** @job
+   1. 上海宇义投资招聘量化研究员
+      1. http://www.yingjiesheng.com/job-002-197-205.html
 ** @R @update
    1. http://mirror.bjtu.edu.cn/cran/
+   2. Emacs Speaks Statistics (ESS)
 *** @brew @gcc
 brew tap homebrew/science
 brew install gcc
 brew install Caskroom/cask/xquartz
 brew install r
- 
-** R学习笔记
+** @book: R frequently asked questions or 153 分钟学会R
+   1. https://cran.r-project.org/doc/contrib/Liu-FAQ.pdf
+** @book: R for Beginners
+    1. http://www.biosino.org/R/R-doc/files/R4beg_cn_2.0.pdf
+    2. R语言可以看作是由AT&T贝尔实验室所创的S语言发展出的一种方言
+    3. R是一种解释型语言，而不是编译语言，也就意味着输入的命令能够直接
+       被执行
+#+BEGIN_SRC R  :tangle no
+name <- "Carmen"; n1 <- 10; n2 <- 100; m <- 0.5
+#+END_SRC
+** @book: R学习笔记
    1. http://www.cnblogs.com/holbrook/archive/2013/05/03/3056211.html
+* @fpga
+** @key, Phase-Locked Loop, SPI
+*** Interfacing an ADC to an FPGA through 3-wire SPI 
+    1. http://forum.allaboutcircuits.com/threads/interfacing-an-adc-to-an-fpga-through-3-wire-spi.33231/
+*** @note
+    1. spi(serial peripheral interface)，串行外围设备接口
+       1. 最后，SPI接口的一个缺点：没有指定的流控制，没有应答机制确认是否接收到数据
+*** axi_quad_spi v3.2, PG153
+    1. SCK, IO0(MOSI), and IO1(MISO) are shared for all slaves and
+       masters
+    2. SCLK : Serial Clock (output from master).
+    3. MOSI : Master Output, Slave Input (output from master).
+    4. MISO : Master Input, Slave Output (output from slave).
+    5. SS : Slave Select (active low, output from master).
+
+*** @vhdl
+    1. http://surf-vhdl.com/how-to-design-spi-controller-in-vhdl/
+** @book: 通用IP核详解和设计开发
+   1. http://www.yunpans.com/b/1132699864.html
+   2. Xilinx系列FPGA芯片IP核详解  [刘东华编著][电子工业出版社]
+* @emacs: @diary
+** @set, diary-file
+** @update
+   1. https://github.com/cacology/private-diary
+   2. Installing GPG
+   3. The GNU Privacy Guard
+      1. https://gnupg.org/
 * [#C] @python and lua [2014-12-18 Thu]
 ** @key: @Python
 *** naming
@@ -27,7 +68,6 @@ brew install r
    |                 | import | include |
    | domain-域操作符 | ::     | ::      |
 ** Py study
-
 *** study web
 1) naming
     所有其它的标识符（identifiers）都是使用小写，比如：
@@ -36,19 +76,16 @@ brew install r
    
 2) emacs
 http://www.johndcook.com/blog/2012/02/09/python-org-mode/
-#+begin_src R
+#+begin_src R :tangle no
 sqrt(42)
 #+end_src
-
-#+RESULTS:
-#+begin_src python
+#+begin_src python :tangle no
 from math import sqrt
 sqrt(42)
 #+end_src
 #+RESULTS:
 
 ** Python tutorial
-
 *** @key: Python2.5Tutorial简体中文版, PDF [2015-01-15 Thu]
  1) http://pan.baidu.com/share/link?shareid=3447562520&uk=1478811291
 **** pp46, Ch5, modules
