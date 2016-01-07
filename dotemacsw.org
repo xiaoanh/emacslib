@@ -3,7 +3,7 @@
 ** [#C] @basic: @gitlib: path-to, @bitlib: git-to, is for org files,  [2015-12-24]
    1. init.el must be separate [2015-12-25]
 #+BEGIN_SRC emacs-lisp :tangle yes :reports no
-  ; Time-stamp: "Xiaoan1986 2016/01/07 17:41:48"
+  ; Time-stamp: "Xiaoan1986 2016/01/07 18:17:47"
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;       
           ; @gitlib: path-to
             ;; check OS type
@@ -73,41 +73,50 @@
 
 ** @basic: @custom: 
 #+BEGIN_SRC emacs-lisp :tangle yes
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
- ;; font. m-x just once, support CHN, /141104
-  (set-locale-environment "English")
-  ; @key, DONE [2015-08-07]
-  (set-language-environment "utf-8")
-  (set-terminal-coding-system 'utf-8)
-  (set-keyboard-coding-system 'utf-8)
-  (prefer-coding-system 'utf-8)
-  
-  ;; Face set-faces, [2014-10-23]
-  (custom-set-faces
-   ;; custom-set-faces was added by Custom.
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                                          ; @mac, @setenv, [2016-01-07]
+  (cond
+   ((string-equal system-type "darwin") ; Mac OS X
+    (and (setq texlive-root "/usr/texbin:")
+    (setq path "/bin:/usr/bin:/usr/local/bin:/usr/bin:/usr/local/texlive/2013/bin/x86_64-darwin:/usr/local/cellar/ghostscript/9.07/bin:")
+    (setenv "PATH" path))))
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   ;; font. m-x just once, support CHN, /141104
+    (set-locale-environment "English")
+    ; @key, DONE [2015-08-07]
+    (set-language-environment "utf-8")
+    (set-terminal-coding-system 'utf-8)
+    (set-keyboard-coding-system 'utf-8)
+    (prefer-coding-system 'utf-8)
+    
+    ;; Face set-faces, [2014-10-23]
+    (custom-set-faces
+     ;; custom-set-faces was added by Custom.
+     ;; If you edit it by hand, you could mess it up, so be careful.
+     ;; Your init file should contain only one such instance.
+     ;; If there is more than one, they won't work right.
+     '(default ((t (:inherit nil :stipple nil :background "Black" :foreground "gray85" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "apple" :family "Menlo")))))
+    (put 'upcase-region 'disabled nil)
+  (put 'downcase-region 'disabled nil)
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
-   '(default ((t (:inherit nil :stipple nil :background "Black" :foreground "gray85" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "apple" :family "Menlo")))))
-  (put 'upcase-region 'disabled nil)
-  (put 'downcase-region 'disabled nil)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(elfeed-db-directory (concat path-to "elfeed_db"))
- '(elfeed-feeds (quote ("youtube.com" "http://nullprogram.com/feed/" "http://www.terminally-incoherent.com/blog/feed/")))
-  '(org-agenda-files (list (concat git-to "paper.org") (concat git-to "study.org") (concat git-to "journal.org") (concat git-to "project.org") (concat git-to "task.org") (concat git-to  "note.org")))
-;  '(org-agenda-files (quote ("d:/bitlib/orglib/paper.org" "d:/bitlib/orglib/study.org" "d:/bitlib/orglib/journal.org" "d:/bitlib/orglib/project.org" "d:/bitlib/orglib/task.org" "d:/bitlib/orglib/note.org")))
-; '(session-use-package t nil (session))
- '(show-paren-mode t)
- '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
- '(truncate-partial-width-windows nil)
- '(user-full-name "xiaoanh"))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+   '(elfeed-db-directory (concat path-to "elfeed_db"))
+   '(elfeed-feeds (quote ("youtube.com" "http://nullprogram.com/feed/" "http://www.terminally-incoherent.com/blog/feed/")))
+    '(org-agenda-files (list (concat git-to "paper.org") (concat git-to "study.org") (concat git-to "journal.org") (concat git-to "project.org") (concat git-to "task.org") (concat git-to  "note.org")))
+  ;  '(org-agenda-files (quote ("d:/bitlib/orglib/paper.org" "d:/bitlib/orglib/study.org" "d:/bitlib/orglib/journal.org" "d:/bitlib/orglib/project.org" "d:/bitlib/orglib/task.org" "d:/bitlib/orglib/note.org")))
+  ; '(session-use-package t nil (session))
+   '(show-paren-mode t)
+   '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
+   '(truncate-partial-width-windows nil)
+   '(user-full-name "xiaoanh"))
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
 #+END_SRC
 ** @basic: @kbd
 *** @kbd @mac, v24.5.1[2016-01-03 Sun]
