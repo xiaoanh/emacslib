@@ -1,10 +1,24 @@
 
-* @R [2016-01-05]
-** @markov
-   1. https://www.zhihu.com/question/20962240/answer/33561657
+* @QUANT
 ** @job
    1. 上海宇义投资招聘量化研究员
       1. http://www.yingjiesheng.com/job-002-197-205.html
+** @perceptron
+perceptron(hardlimitTF,perceptronLF)
+
+** @knn
+fitcknn(tbl,ResponseVarName) 
+
+** @markov
+hmmgenerate
+* @SQL
+** @basic
+*** @ln: 十步完全理解SQL [2016-01-07]
+    1. http://blog.jobbole.com/55086/
+* @R [2016-01-05]
+** @markov
+   1. https://www.zhihu.com/question/20962240/answer/33561657
+
 ** @R @update
    1. http://mirror.bjtu.edu.cn/cran/
    2. Emacs Speaks Statistics (ESS)
@@ -27,11 +41,13 @@ name <- "Carmen"; n1 <- 10; n2 <- 100; m <- 0.5
    1. http://www.cnblogs.com/holbrook/archive/2013/05/03/3056211.html
 * @fpga
 ** @key, Phase-Locked Loop, SPI
-*** Interfacing an ADC to an FPGA through 3-wire SPI 
-    1. http://forum.allaboutcircuits.com/threads/interfacing-an-adc-to-an-fpga-through-3-wire-spi.33231/
+*** @ln
+    1. [[https://eewiki.net/pages/viewpage.action?pageId=4096096][@ln:@eewiki]]
 *** @note
     1. spi(serial peripheral interface)，串行外围设备接口
        1. 最后，SPI接口的一个缺点：没有指定的流控制，没有应答机制确认是否接收到数据
+*** Interfacing an ADC to an FPGA through 3-wire SPI 
+    1. http://forum.allaboutcircuits.com/threads/interfacing-an-adc-to-an-fpga-through-3-wire-spi.33231/
 *** axi_quad_spi v3.2, PG153
     1. SCK, IO0(MOSI), and IO1(MISO) are shared for all slaves and
        masters
@@ -45,13 +61,18 @@ name <- "Carmen"; n1 <- 10; n2 <- 100; m <- 0.5
 ** @book: 通用IP核详解和设计开发
    1. http://www.yunpans.com/b/1132699864.html
    2. Xilinx系列FPGA芯片IP核详解  [刘东华编著][电子工业出版社]
-* @emacs: @diary
-** @set, diary-file
-** @update
-   1. https://github.com/cacology/private-diary
-   2. Installing GPG
-   3. The GNU Privacy Guard
-      1. https://gnupg.org/
+* @emacs
+** @kbd
+*** @hs, hide/show, ctrl-c @ ctrl-c [2016-01-07]
+    1. vhdl DONE
+    2. verilog TODO
+** @diary
+*** @set, diary-file
+*** @update
+    1. https://github.com/cacology/private-diary
+    2. Installing GPG
+    3. The GNU Privacy Guard
+       1. https://gnupg.org/
 * [#C] @python and lua [2014-12-18 Thu]
 ** @key: @Python
 *** naming
@@ -169,6 +190,3 @@ http://developer.51cto.com/art/201207/347006.htm
 **** Python模块学习——optparse
 1) 处理命令行参数
    1) http://www.cnblogs.com/captain_jack/archive/2011/01/11/1933366.html
-
-
-
