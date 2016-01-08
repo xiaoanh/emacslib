@@ -1,4 +1,6 @@
-
+#+BEGIN_SRC emacs-lisp :tangle yes :reports no
+  ; Time-stamp: "xiaoanh 2016/01/08 16:54:21"
+#+END_SRC
 * @QUANT
 ** @job
    1. 上海宇义投资招聘量化研究员
@@ -12,7 +14,21 @@ fitcknn(tbl,ResponseVarName)
 ** @markov
 hmmgenerate
 * @SQL
+** @study
+#+BEGIN_SRC sql
+  SELECT first_name, last_name FROM employees WHERE salary > 100000
+  CREATE TABLE CUSTOMERS(
+  ID INT NOT NULL,
+  NAME VARCHAR (20) NOT NULL,
+  AGE INT NOT NULL,
+  ADDRESS CHAR (25) ,
+  SALARY DECIMAL (18, 2),
+  PRIMARY KEY (ID)
+  );
+#+END_SRC
 ** @basic
+*** @ln: sql_tutorial.pdf
+    1. http://www.tutorialspoint.com/sql/sql_tutorial.pdf
 *** @ln: 十步完全理解SQL [2016-01-07]
     1. http://blog.jobbole.com/55086/
 * @R [2016-01-05]
@@ -62,7 +78,28 @@ name <- "Carmen"; n1 <- 10; n2 <- 100; m <- 0.5
    1. http://www.yunpans.com/b/1132699864.html
    2. Xilinx系列FPGA芯片IP核详解  [刘东华编著][电子工业出版社]
 * @emacs
-** @kbd
+** @org
+*** org-publish, [2016-01-08]
+    1. 什么用 org-mode 写 blog
+       1. http://dayigu.github.io/WhyUseOrgModeToWriteBlog.html
+    2. @worg: Publishing Org-mode files to HTML
+       1. http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html
+    3. org-publish-project-alist
+       1. (:property value :property value)
+** @git
+*** [#C] @note 
+**** @key first init [2016-01-08]
+       1. git init
+       2. git remote add origin https://xiaoanh@bitbucket.org//xiaoanh/
+** @markdown [2016-01-08]
+*** Ctrl-c ctrl-e m [2016-01-08]
+    1. C-c C-e void, should invoke
+    2. invoke by M-x org-md-export-as-markdown
+** @reST
+*** basic
+    1. 为了写论文，写科技报告，或者写书，推荐reST
+    2. reStructuredText 
+** [#C] @kbd
 *** @hs, hide/show, ctrl-c @ ctrl-c [2016-01-07]
     1. vhdl DONE
     2. verilog TODO
