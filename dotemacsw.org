@@ -3,7 +3,7 @@
 ** [#C] @basic: @gitlib: path-to, @bitlib: git-to, is for org files,  [2015-12-24]
    1. init.el must be separate [2015-12-25]
 #+BEGIN_SRC emacs-lisp :tangle yes :reports no
-  ; Time-stamp: "xiaoanh 2016/01/12 14:06:01"
+  ; Time-stamp: "Xiaoan1986 2016/01/12 22:04:25"
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;       
           ; @gitlib: path-to
             ;; check OS type
@@ -213,7 +213,8 @@
    1. markdown最主要的用途可能就是blog了
 #+BEGIN_SRC emacs-lisp :tangle yes
   ; MD, [2015-02-13]
-  (add-to-list 'load-path  path-to)  
+  (add-to-list 'load-path  (concat path-to "markdown-mode/"))  
+;  (add-to-list 'load-path  path-to)  
   (autoload 'markdown-mode "markdown-mode"   "Major mode for editing Markdown files" t)
   (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
@@ -878,9 +879,25 @@
 #+RESULTS:
 
 * @debug [2015-12-28]
-** hs,  =M-x hs-minor-mode=, [2016-01-08]
-   1. C-c @ C-c
-** @org-publish
+** TODO xiaoanh.github.io [2016-01-12]
+*** DONE, @auto, Launch automatic page generator
+    1. https://help.github.com/articles/creating-pages-with-the-automatic-generator/
+    2. cd xiaoanh.github.io
+    3. git init
+    4. git config --global user.name xiaoanh
+    5. git config --global user.email xiaoanhuang@163.com
+    6. git remote add origin https://github.com/xiaoanh/xiaoanh.github.io
+    7. git fetch origin
+    8. git checkout master
+    9. git pull origin master
+
+echo "# xiaoanh.github.io" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/xiaoanh/xiaoanh.github.io.git
+git push -u origin master
+
 *** @dir: orgblog and xiaoanh.github.io [2016-01-11]
     1. orgblog
        1. index.org
@@ -895,6 +912,12 @@
     2. https://github.com/xiaoanh/xiaoanh.github.io
     3. cd username.github.io
        1. echo "Hello World" > index.html
+** hs, =M-x hs-minor-mode=, [2016-01-08]
+   1. C-c @ C-c
+** @org-publish
+*** ssh: https://github.com/xiaoanh/xiaoanh.github.io.git [2016-01-12]
+    1. from https://github.com/xiaoanh/xiaoanh.github.io
+    2. git clone https://github.com/xiaoanh/xiaoanh.github.io
 *** @css: 另外直接偷懒用了 worg 的 css 
       1. ; http://dayigu.github.io/WhyUseOrgModeToWriteBlog.html
 *** DONE @err:  org-publish-org-to-html is void [2016-01-08]
