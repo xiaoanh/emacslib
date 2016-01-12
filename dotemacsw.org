@@ -3,7 +3,7 @@
 ** [#C] @basic: @gitlib: path-to, @bitlib: git-to, is for org files,  [2015-12-24]
    1. init.el must be separate [2015-12-25]
 #+BEGIN_SRC emacs-lisp :tangle yes :reports no
-  ; Time-stamp: "xiaoanh 2016/01/08 16:50:12"
+  ; Time-stamp: "xiaoanh 2016/01/12 14:06:01"
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;       
           ; @gitlib: path-to
             ;; check OS type
@@ -206,7 +206,11 @@
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
+** @pandoc
+*** 黑魔法利器pandoc, [2016-01-12]
+    1. 如果你需要把文件从一种标记语言格式转换到另一种格式，pandoc会是你的瑞士军刀
 ** @markdown [2016-01-08]
+   1. markdown最主要的用途可能就是blog了
 #+BEGIN_SRC emacs-lisp :tangle yes
   ; MD, [2015-02-13]
   (add-to-list 'load-path  path-to)  
@@ -214,6 +218,20 @@
   (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+#+END_SRC
+** @pomodoro, @org-timer
+#+BEGIN_SRC emacs-lisp :tangle yes
+                                          ; @ln : http://orgmode.org/worg/org-gtd-etc.html, [2016-01-12]
+                                          ; Activate the org-timer module :
+  (add-to-list 'org-modules 'org-timer)
+  ; Set a default value for the timer, for example :
+  (setq org-timer-default-timer 25)
+  ;; Modify the org-clock-in so that a timer is started with the default
+  ;; value except if a timer is already started :
+  (add-hook 'org-clock-in-hook (lambda ()
+        (if (not org-timer-current-timer) 
+        (org-timer-set-timer '(16)))))
+
 #+END_SRC
 ** @helm-bibtex-master, dash first
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -856,17 +874,29 @@
                                           ; M-x org-publish-project RET blog RET
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
+
+#+RESULTS:
+
 * @debug [2015-12-28]
 ** hs,  =M-x hs-minor-mode=, [2016-01-08]
    1. C-c @ C-c
 ** @org-publish
+*** @dir: orgblog and xiaoanh.github.io [2016-01-11]
+    1. orgblog
+       1. index.org
+       2. sitemap.org
+       3. css
+	  1. worg.css
+       4. img
+    2. xiaoanh.github.io
+       1. @auto
 *** [#C] @github.io: =git.io=, https://pages.github.com/, [2016-01-08]
     1. Head over to GitHub and create a new repository named username.github.io
     2. https://github.com/xiaoanh/xiaoanh.github.io
     3. cd username.github.io
        1. echo "Hello World" > index.html
-
 *** @css: 另外直接偷懒用了 worg 的 css 
+      1. ; http://dayigu.github.io/WhyUseOrgModeToWriteBlog.html
 *** DONE @err:  org-publish-org-to-html is void [2016-01-08]
     1. replace to =org-html-publish-to-html=
     2. replace to =(require 'ox-publish)=
@@ -892,7 +922,7 @@
        2. Load emacs initialization file:
     2. @err: Buffer does not seem to be associated with any file [2016-01-05]
     3. defun also fail
-** variable is void: org-mode-map
+** @err: variable is void: org-mode-map
    1. Symbol's value as variable is void: org-mode-map [2016-01-04]
       1. to global-map
 ** TODO open pdf in helm-bibtex
@@ -940,7 +970,9 @@
    CLOSED: [2015-12-30 Wed 09:50]
    - State "DONE"       from "TODO"       [2015-12-30 Wed 09:50]
 
-*** [#C] @key, @helm can work in @win, just copy from @mac 
+*** @kbd, =*org and /gitlib=  [2016-01-11]
+    1. in-depth usage
+*** DONE [#C] @key, @helm can work in @win, just copy from @mac 
     1. @success, run make @mac, then upload to github, download to @win, then work
     2. can not load anything-config, [2015-12-30]
     3. can not load helm-autoloads, @win
