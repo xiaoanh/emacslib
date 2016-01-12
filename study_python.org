@@ -1,10 +1,46 @@
 #+BEGIN_SRC emacs-lisp :tangle yes :reports no
-  ; Time-stamp: "xiaoanh 2016/01/08 16:54:21"
+  ; Time-stamp: "xiaoanh 2016/01/12 14:50:46"
 #+END_SRC
 * @QUANT
-** @job
-   1. 上海宇义投资招聘量化研究员
-      1. http://www.yingjiesheng.com/job-002-197-205.html
+** @quanter
+*** @CV 
+   1. 制作一份100%通过的简历
+      1. http://leihuang.org/2014/05/19/MakeResume/
+      2. =具体、量化、有说服力，是技术简历特别需要注重的地方=
+      3. （-6分）简历有三页以上。
+      4. （-2分）在简历中说自己懂Word/Excel。
+      5. （-3分）简历的字体太小。
+      6. （+12分）简历被LaTeX编译过。
+      7. （+2分）有一个个人主页。
+
+   2. 简历用什么工具好，最后大家的结论殊途同归 —— 用MarkDown写，用PDF
+      发。这是我难得的看到程序员们的统一啊。（PHP是最好的语言，阿门）
+   3. 有一种叫做"STAR法则"的方式，可以帮助我们更好的充实内容
+      1. http://www.kancloud.cn/kancloud/a-programmer-prepares/78240
+      2. =task | contribute | benifit=
+      3. 2006年，我参与了手机XX网发布系统WAPCMS的开发（这部分是大家都
+         会写的）。作为核心程序员，我不但完成了网站界面、调度队列的开
+         发工作，更提出了高效的组件级缓存系统，通过碎片化缓冲有效的提
+         升了系统的渲染效率。（这部分是很多同学忘掉的，要写出你在这个
+         项目中具体负责的部分，以及你贡献出来的价值。）在该系统上线后，
+         Web前端性能从10QPS提升到200QPS，服务器由10台减少到3台（通过量
+         化的数字来增强可信度）。2008年我升任WAPCMS项目负责人，带领一
+         个3人小组支持着每天超过2亿的PV（这就是Benefit。你能带给前雇主
+         的价值，也就是你能带给新雇主的价值。）。
+
+   4. @md, geekcompany, @deercv
+      1. V2EX = way to explore. V2EX 是一个关于分享和探索的地方
+	 1. http://www.v2ex.com/t/179299
+      2. https://github.com/geekcompany/DeerResume
+	 1. 技术博客：http://blog.github.io ( 使用GitHub Host的Big较高 )
+      3. https://github.com/geekcompany/ResumeSample
+	 1. 发在Github上后挺受欢迎，很快被star了过千次
+      4. http://easy.digitcv.com/#/resume
+
+*** Quant 实习申请总结 [2016-01-12]
+      1. https://zhaozhichen.wordpress.com/2011/03/20/quant-%E5%AE%9E%E4%B9%A0%E7%94%B3%E8%AF%B7%E6%80%BB%E7%BB%93/
+*** 上海宇义投资招聘量化研究员
+     1. http://www.yingjiesheng.com/job-002-197-205.html
 ** @perceptron
 perceptron(hardlimitTF,perceptronLF)
 
@@ -92,6 +128,10 @@ name <- "Carmen"; n1 <- 10; n2 <- 100; m <- 0.5
        1. git init
        2. git remote add origin https://xiaoanh@bitbucket.org//xiaoanh/
 ** @markdown [2016-01-08]
+*** 使用markdown写ppt
+    1. 使用时直接 slideshow test.md 即可将test.md解析成test.html，双击
+       打开就是一个ppt，方向键控制播放,F11全屏浏览，very simple.
+
 *** Ctrl-c ctrl-e m [2016-01-08]
     1. C-c C-e void, should invoke
     2. invoke by M-x org-md-export-as-markdown
@@ -227,3 +267,21 @@ http://developer.51cto.com/art/201207/347006.htm
 **** Python模块学习——optparse
 1) 处理命令行参数
    1) http://www.cnblogs.com/captain_jack/archive/2011/01/11/1933366.html
+* @other
+** @eng 
+*** @eng [2016-01-12]
+    1. Pomodoro: tomato
+    2. 宽客 (=Quant=)
+       1. quant, quantitation, quantity,
+    3. townhall
+    4. POLarity
+    5. =tangle=
+    6. =babel=
+    7. gist
+    8. =streak=
+    9. chunk
+    10. tweak
+    11. neatly organize
+    12. maternity/paternity
+    13. Stagnant wages
+
