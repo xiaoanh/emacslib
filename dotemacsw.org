@@ -3,7 +3,7 @@
 ** [#C] @basic: @gitlib: path-to, @bitlib: git-to, is for org files,  [2015-12-24]
    1. init.el must be separate [2015-12-25]
 #+BEGIN_SRC emacs-lisp :tangle yes :reports no
-  ; Time-stamp: "Xiaoan1986 2016/01/12 22:04:25"
+  ; Time-stamp: "xiaoanh 2016/01/15 16:27:12"
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;       
           ; @gitlib: path-to
             ;; check OS type
@@ -206,9 +206,113 @@
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
-** @pandoc
-*** 黑魔法利器pandoc, [2016-01-12]
-    1. 如果你需要把文件从一种标记语言格式转换到另一种格式，pandoc会是你的瑞士军刀
+
+** @org-publish, [2016-01-08]
+#+BEGIN_SRC emacs-lisp :tangle yes
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                                          ; @org-publish, [2016-01-08]
+          ; @err, org-publish-org-to-html is void
+                                          ; http://comments.gmane.org/gmane.emacs.orgmode/76412
+
+                                          ; http://dayigu.github.io/WhyUseOrgModeToWriteBlog.html
+                                          ; @github, [2016-01-08]
+                                          ; create orgblog and xiaoanh.github.com dir, [2016-01-08]
+  (setq path-orgblog  (concat (expand-file-name "../" path-to) "orgblog"))
+  (setq path-orgpublish  (concat (expand-file-name "../" path-to) "xiaoanh.github.io"))
+  (require 'org)
+  (require 'ox-publish)
+                                          ; (require 'org-publish)
+                                          ; (list path-orgblog)
+                                          ;  "org-publish", which belongs to the old framework.
+                                          ;  try requiring  "ox-publish" instead.
+                                          ; replacing "org-publish-org-to-html" by "org-html-publish-to-html" into my .emacs.
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                                          ;  MS
+  (cond
+   ((string-equal system-type "windows-nt")  ; MS
+  (setq org-publish-project-alist
+        '(
+          ("blog-notes"
+  ;         :base-directory "~/org/blog/"
+                                          ;         :base-directory  path-orgblog
+           :base-directory  "D:/gitlib/orglib/orgblog"     
+           :base-extension "org"
+  ;         :publishing-directory "~/org/dayigu.github.com/"
+           :publishing-directory "D:/gitlib/orglib/xiaoanh.github.io"
+  ;         :publishing-directory "/ssh:xiaoanh@github.com: D:/gitlib/orglib/xiaoanh.github.io"
+           :recursive t
+                                          ;         :publishing-function org-publish-org-to-html
+           :publishing-function org-html-publish-to-html   
+           :headline-levels 4
+           :section-numbers nil
+           :auto-preamble t
+           :auto-sitemap t                ; Generate sitemap.org automagically...
+           :sitemap-filename "sitemap.org"  ; ... call it sitemap.org (it's the default)...
+           :sitemap-title "Sitemap"         ; ... with title 'Sitemap'.
+           :author "xiaoanh"
+  ;         :email "dayigu at gmail dot com"
+                                          ;          :style    "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/worg.css\"/>"
+           :sitemap-sort-files anti-chronologically
+           :sitemap-file-entry-format "%d %t"
+           )
+          ("blog-static"
+  ;         :base-directory "~/org/blog/"
+           :base-directory "D:/gitlib/orglib/orgblog"
+           :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+                                          ;         :publishing-directory "~/org/dayigu.github.com/"
+  ;         :publishing-directory "/ssh:xiaoanh@github.com:  D:/gitlib/orglib/xiaoanh.github.io"
+           :publishing-directory "D:/gitlib/orglib/xiaoanh.github.io"        
+           :recursive t
+           :publishing-function org-publish-attachment
+           )
+          ("blog" :components ("blog-notes" "blog-static"))
+          ;;
+          ))))
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; Mac OS X
+  (cond
+   ((string-equal system-type "darwin")  ; Mac OS X
+  (setq org-publish-project-alist
+        '(
+          ("blog-notes"
+  ;         :base-directory "~/org/blog/"
+                                          ;         :base-directory  path-orgblog
+           :base-directory  "/Volumes/xiaoanh/gitlib/orglib/orgblog"     
+           :base-extension "org"
+           :publishing-directory "/ssh:xiaoanh@github.com: /Volumes/xiaoanh/gitlib/orglib/xiaoanh.github.io"
+  ;         :publishing-directory "/ssh:xiaoanh@github.com: D:/gitlib/orglib/orghtml"
+           :recursive t
+                                          ;         :publishing-function org-publish-org-to-html
+           :publishing-function org-html-publish-to-html   
+           :headline-levels 4
+           :section-numbers nil
+           :auto-preamble t
+           :auto-sitemap t                ; Generate sitemap.org automagically...
+           :sitemap-filename "sitemap.org"  ; ... call it sitemap.org (it's the default)...
+           :sitemap-title "Sitemap"         ; ... with title 'Sitemap'.
+           :author "xiaoanh"
+  ;         :email "dayigu at gmail dot com"
+           :style    "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/worg.css\"/>"
+           )
+          ("blog-static"
+  ;         :base-directory "~/org/blog/"
+           :base-directory "/gitlib/orglib/orgblog"
+           :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+                                          ;         :publishing-directory "~/org/dayigu.github.com/"
+           :publishing-directory "/ssh:xiaoanh@github.com:  /Volumes/xiaoanh/gitlib/orglib/xiaoanh.github.io"
+  ;         :publishing-directory "D:/gitlib/orglib/xiaoanh.github.io"        
+           :recursive t
+           :publishing-function org-publish-attachment
+           )
+          ("blog" :components ("blog-notes" "blog-static"))
+          ;;
+          ))))
+                                          ; M-x org-publish-project RET blog RET
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
+
+#+RESULTS:
 ** @markdown [2016-01-08]
    1. markdown最主要的用途可能就是blog了
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -220,6 +324,9 @@
   (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 #+END_SRC
+** @pandoc
+*** 黑魔法利器pandoc, [2016-01-12]
+    1. 如果你需要把文件从一种标记语言格式转换到另一种格式，pandoc会是你的瑞士军刀
 ** @pomodoro, @org-timer
 #+BEGIN_SRC emacs-lisp :tangle yes
                                           ; @ln : http://orgmode.org/worg/org-gtd-etc.html, [2016-01-12]
@@ -773,114 +880,32 @@
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   
 #+END_SRC
 
-** @org-publish, [2016-01-08]
-#+BEGIN_SRC emacs-lisp :tangle yes
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                                          ; @org-publish, [2016-01-08]
-          ; @err, org-publish-org-to-html is void
-                                          ; http://comments.gmane.org/gmane.emacs.orgmode/76412
-
-                                          ; http://dayigu.github.io/WhyUseOrgModeToWriteBlog.html
-                                          ; @github, [2016-01-08]
-                                          ; create orgblog and xiaoanh.github.com dir, [2016-01-08]
-  (setq path-orgblog  (concat (expand-file-name "../" path-to) "orgblog"))
-  (setq path-orgpublish  (concat (expand-file-name "../" path-to) "xiaoanh.github.io"))
-  (require 'org)
-  (require 'ox-publish)
-                                          ; (require 'org-publish)
-                                          ; (list path-orgblog)
-                                          ;  "org-publish", which belongs to the old framework.
-                                          ;  try requiring  "ox-publish" instead.
-                                          ; replacing "org-publish-org-to-html" by "org-html-publish-to-html" into my .emacs.
-
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                                          ;  MS
-  (cond
-   ((string-equal system-type "windows-nt")  ; MS
-  (setq org-publish-project-alist
-        '(
-          ("blog-notes"
-  ;         :base-directory "~/org/blog/"
-                                          ;         :base-directory  path-orgblog
-           :base-directory  "D:/gitlib/orglib/orgblog"     
-           :base-extension "org"
-  ;         :publishing-directory "~/org/dayigu.github.com/"
-           :publishing-directory "D:/gitlib/orglib/xiaoanh.github.io"
-  ;         :publishing-directory "/ssh:xiaoanh@github.com: D:/gitlib/orglib/xiaoanh.github.io"
-           :recursive t
-                                          ;         :publishing-function org-publish-org-to-html
-           :publishing-function org-html-publish-to-html   
-           :headline-levels 4
-           :section-numbers nil
-           :auto-preamble t
-           :auto-sitemap t                ; Generate sitemap.org automagically...
-           :sitemap-filename "sitemap.org"  ; ... call it sitemap.org (it's the default)...
-           :sitemap-title "Sitemap"         ; ... with title 'Sitemap'.
-           :author "xiaoanh"
-  ;         :email "dayigu at gmail dot com"
-           :style    "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/worg.css\"/>"
-           )
-          ("blog-static"
-  ;         :base-directory "~/org/blog/"
-           :base-directory "D:/gitlib/orglib/orgblog"
-           :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-                                          ;         :publishing-directory "~/org/dayigu.github.com/"
-  ;         :publishing-directory "/ssh:xiaoanh@github.com:  D:/gitlib/orglib/xiaoanh.github.io"
-           :publishing-directory "D:/gitlib/orglib/xiaoanh.github.io"        
-           :recursive t
-           :publishing-function org-publish-attachment
-           )
-          ("blog" :components ("blog-notes" "blog-static"))
-          ;;
-          ))))
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ; Mac OS X
-  (cond
-   ((string-equal system-type "darwin")  ; Mac OS X
-  (setq org-publish-project-alist
-        '(
-          ("blog-notes"
-  ;         :base-directory "~/org/blog/"
-                                          ;         :base-directory  path-orgblog
-           :base-directory  "/Volumes/xiaoanh/gitlib/orglib/orgblog"     
-           :base-extension "org"
-           :publishing-directory "/ssh:xiaoanh@github.com: /Volumes/xiaoanh/gitlib/orglib/xiaoanh.github.io"
-  ;         :publishing-directory "/ssh:xiaoanh@github.com: D:/gitlib/orglib/orghtml"
-           :recursive t
-                                          ;         :publishing-function org-publish-org-to-html
-           :publishing-function org-html-publish-to-html   
-           :headline-levels 4
-           :section-numbers nil
-           :auto-preamble t
-           :auto-sitemap t                ; Generate sitemap.org automagically...
-           :sitemap-filename "sitemap.org"  ; ... call it sitemap.org (it's the default)...
-           :sitemap-title "Sitemap"         ; ... with title 'Sitemap'.
-           :author "xiaoanh"
-  ;         :email "dayigu at gmail dot com"
-           :style    "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/worg.css\"/>"
-           )
-          ("blog-static"
-  ;         :base-directory "~/org/blog/"
-           :base-directory "/gitlib/orglib/orgblog"
-           :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-                                          ;         :publishing-directory "~/org/dayigu.github.com/"
-           :publishing-directory "/ssh:xiaoanh@github.com:  /Volumes/xiaoanh/gitlib/orglib/xiaoanh.github.io"
-  ;         :publishing-directory "D:/gitlib/orglib/xiaoanh.github.io"        
-           :recursive t
-           :publishing-function org-publish-attachment
-           )
-          ("blog" :components ("blog-notes" "blog-static"))
-          ;;
-          ))))
-                                          ; M-x org-publish-project RET blog RET
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-#+END_SRC
-
-#+RESULTS:
-
 * @debug [2015-12-28]
-** TODO xiaoanh.github.io [2016-01-12]
-*** DONE, @auto, Launch automatic page generator
+** @markdown, 
+*** DONE @win: markdownpad, =@PATH=, [2016-01-15]
+   1. @PATH: | name: markdown | value:  C:\Program Files
+      (x86)\MarkdownPad 2\ |
+      1. MarkdownPad2.exe
+	 1. properties -> start in 
+   2. http://markdownpad.com/download.html
+
+** TODO xiaoanh.github.io [2016-01-12] 
+*** @key:  =(org-publish "blog" t) or C-u M-x org-publish= , postamble [2016-01-15]
+    1. @err: _Skipping unmodified file d:/gitlib/orglib/orgblog/css/worg.css_
+       1. As you discovered yourself, a prefix argument will also force Org to publish all files:
+       2. force =(org-publish "blog" t)=
+    2. @err: clear version and validate
+       1. http://stackoverflow.com/questions/9742836/how-do-i-format-the-postamble-in-html-export-with-org-mode
+       2.  (setq org-export-html-postamble nil)
+**** [#C] 使用Emacs org-mode + GitHub Pages来写博客 [2016-01-15]
+       1. http://www.kuqin.com/shuoit/20150804/347399.html
+       2. :publishing-function org-html-publish-to-html
+       3. :publishing-function - 使用哪个函数来进行publish（注：org 7与8在这个地方有区别）
+       4. 托管到GitHub上
+	  1. 生成了HTML文件之后需要把public_html目录托管到GitHub上
+**** dirtysalt's homepage
+      1. http://dirlt.com/
+*** DONE, @auto, @git, Launch automatic page generator
     1. https://help.github.com/articles/creating-pages-with-the-automatic-generator/
     2. cd xiaoanh.github.io
     3. git init
@@ -1035,6 +1060,12 @@ git push -u origin master
     1. org-agenda-files
 
 * @study: @dotemacs
+** @ln [2016-01-15]
+*** internal links, [[target]], =FIRST TARGET, THEN CITE []=
+    1. #<<target>>
+       1. C-c C-o, C-c &
+    2. @key: first <<PUBS>>, then _[[PUBS][PUBLICATIONS]]_
+
 ** @orglib @update =../=
 *** @lisp:  (expand-file-name ".." path-to)
   ; (expand-file-name ".." path-to)
@@ -1051,7 +1082,7 @@ c:/Users/xiaoanh/AppData/Roaming/.emacs
     5. 14.8.2.3 :file
     6. 14.8.2.5 :dir and remote execution
 ** @cmd: @win
-*** @set
+*** @set, @PATH, =name: emacs | value: D:\emacs24.5\bin=
     1. 'emacs' is not recognized as an internal or external command, operable program or batch file.
     2. vivado C:\Xilinx\Vivado\2014.4\bin
     3. D:\emacs24.5\bin;
@@ -1178,7 +1209,6 @@ Then to load emacs now:
     ;;   (error "Init org file '%s' missing." init-source-org-file))
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
 #+END_SRC
-
 * @study: @lisp, from eintr.pdf 
   1. An Introduction to Programming in Emacs Lisp
      1. http://www.gnu.org/software/emacs/manual/eintr.html
@@ -1432,4 +1462,30 @@ value))
 (setq value (cons number value))))
 ; => (2 1 0)
 #+END_SRC
+
+* @study: @eng, @html @python
+** @python [2016-01-15]
+*** Python 面试问题
+    1. http://xiaocong.github.io/blog/2013/06/16/python-interview-question-and-answer/
+** @html, [2016-01-15]
+*** @basic , HTML Basic Tags
+    1. http://www.tutorialspoint.com/html/html_overview.htm
+    2. @css
+       1. http://www.tutorialspoint.com/html/html_style_sheet.htm
+#+BEGIN_SRC html
+<!DOCTYPE html>
+<html>
+<head>
+<title>This is document title</title>
+</head>
+<body>
+<h1>This is a heading</h1>
+<p>Document content goes here.....</p>
+</body>
+</html>
+#+END_SRC
+
+** @eng, [2016-01-15]
+   1. chrono
+   2. postamble
 
