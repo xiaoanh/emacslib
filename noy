@@ -1,0 +1,8 @@
+
+(+ 2 fill-column)
+; => 72
+(concat "The " (number-to-string (+ 2 fill-column)) " red foxes.")
+; (+ 2 hello)
+; (+ 2 ’hello)
+; (wrong-type-argument number-or-marker-p hello)
+; The ‘p’ stands for ‘predicate’.

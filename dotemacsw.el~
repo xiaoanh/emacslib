@@ -1,5 +1,5 @@
 
-; Time-stamp: "Xiaoan1986 2016/01/15 21:53:43"
+; Time-stamp: "xiaoanh 2016/01/07 16:43:42"
  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;       
         ; @gitlib: path-to
           ;; check OS type
@@ -51,10 +51,9 @@
               ;;           (lambda() (interactive) (org-babel-load-file (concat path-to "dotemacswrg.org"))))
                                         ; (expand-file-name ".." path-to)
                                         ; DONE [2016-01-07]
-                                        ; @mac, @key: ln -s /Volumes/xiaoanh/gitlib/dotemacsw.el ~/.emacs.el
 (setq initial-user-file (concat (expand-file-name "../" path-to) "dotemacsw.el"))
  (global-set-key (kbd "C-c i")
-                        (lambda() (interactive) (org-babel-load-file (concat  (expand-file-name "../" path-to)  "dotemacswrg.org"))))
+                        (lambda() (interactive) (org-babel-load-file (concat  (expand-file-name ".." path-to)  "dotemacswrg.org"))))
               ; @ln: http://uwabami.junkhub.org/log/?date=20111213
               ;; (defun my:load-org-file (file)
               ;;      "load org file"
@@ -64,14 +63,6 @@
                                         ;   (org-babel-load-file (concat path-to "dotemacsw.org"))
 
               ;;; init.el ends here
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                                        ; @mac, @setenv, [2016-01-07]
-(cond
- ((string-equal system-type "darwin") ; Mac OS X
-  (and (setq texlive-root "/usr/texbin:")
-  (setq path "/bin:/usr/bin:/usr/local/bin:/usr/bin:/usr/local/texlive/2013/bin/x86_64-darwin:/usr/local/cellar/ghostscript/9.07/bin:")
-  (setenv "PATH" path))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
  ;; font. m-x just once, support CHN, /141104
@@ -90,8 +81,7 @@
    ;; If there is more than one, they won't work right.
    '(default ((t (:inherit nil :stipple nil :background "Black" :foreground "gray85" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "apple" :family "Menlo")))))
   (put 'upcase-region 'disabled nil)
-(put 'downcase-region 'disabled nil)
-
+  (put 'downcase-region 'disabled nil)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
 
 (custom-set-variables
@@ -185,134 +175,6 @@
     ; (global-set-key "\M-n"  'bs-cycle-next)
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                                        ; @org-publish, [2016-01-08]
-        ; @err, org-publish-org-to-html is void
-                                        ; http://comments.gmane.org/gmane.emacs.orgmode/76412
-
-                                        ; http://dayigu.github.io/WhyUseOrgModeToWriteBlog.html
-                                        ; @github, [2016-01-08]
-                                        ; create orgblog and xiaoanh.github.com dir, [2016-01-08]
-;(setq path-orgblog  (concat (expand-file-name "../" path-to) "orgblog"))
-;(setq path-orgpublish  (concat (expand-file-name "../" path-to) "xiaoanh.github.io"))
-(require 'org)
-(require 'ox-publish)
-                                        ; (require 'org-publish)
-                                        ; (list path-orgblog)
-                                        ;  "org-publish", which belongs to the old framework.
-                                        ;  try requiring  "ox-publish" instead.
-                                        ; replacing "org-publish-org-to-html" by "org-html-publish-to-html" into my .emacs.
-
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                                        ;  MS
-(cond
- ((string-equal system-type "windows-nt")  ; MS
-(setq org-publish-project-alist
-      '(
-        ("blog-notes"
-;         :base-directory "~/org/blog/"
-                                        ;         :base-directory  path-orgblog
-         :base-directory  "D:/gitlib/orgblog"     
-;         :base-directory  "D:/gitlib/orglib/orgblog"     
-         :base-extension "org"
-;         :publishing-directory "~/org/dayigu.github.com/"
-         :publishing-directory "D:/weblib"
-;         :publishing-directory "/ssh:xiaoanh@github.com: D:/gitlib/orglib/xiaoanh.github.io"
-         :recursive t
-                                        ;         :publishing-function org-publish-org-to-html
-         :publishing-function org-html-publish-to-html   
-         :headline-levels 4
-         :section-numbers nil
-         :auto-preamble t
-         :auto-sitemap t                ; Generate sitemap.org automagically...
-         :sitemap-filename "sitemap.org"  ; ... call it sitemap.org (it's the default)...
-         :sitemap-title "Sitemap"         ; ... with title 'Sitemap'.
-         :author "xiaoanh"
-;         :email "dayigu at gmail dot com"
-                                        ;          :style    "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/worg.css\"/>"
-         :sitemap-sort-files anti-chronologically
-         :sitemap-file-entry-format "%d %t"
-         )
-        ("blog-static"
-;         :base-directory "~/org/blog/"
-         :base-directory "D:/gitlib/orgblog"
-         :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-                                        ;         :publishing-directory "~/org/dayigu.github.com/"
-;         :publishing-directory "/ssh:xiaoanh@github.com:  D:/gitlib/orglib/xiaoanh.github.io"
-         :publishing-directory "D:/weblib"
-         :recursive t
-         :publishing-function org-publish-attachment
-         )
-        ("blog" :components ("blog-notes" "blog-static"))
-        ;;
-        ))))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; Mac OS X
-(cond
- ((string-equal system-type "darwin")  ; Mac OS X
-(setq org-publish-project-alist
-      '(
-        ("blog-notes"
-;         :base-directory "~/org/blog/"
-                                        ;         :base-directory  path-orgblog
-         :base-directory  "/Volumes/xiaoanh/gitlib/orgblog"     
-;         :base-directory  "/Volumes/xiaoanh/gitlib/orglib/orgblog"     
-         :base-extension "org"
-;         :publishing-directory "/ssh:xiaoanh@github.com: /Volumes/xiaoanh/gitlib/orglib/xiaoanh.github.io"
-         :publishing-directory "/Volumes/xiaoanh/weblib"
-;         :publishing-directory "/Volumes/xiaoanh/gitlib/orglib/xiaoanh.github.io"        
-;         :publishing-directory "/ssh:xiaoanh@github.com: D:/gitlib/orglib/orghtml"
-         :recursive t
-                                        ;         :publishing-function org-publish-org-to-html
-         :publishing-function org-html-publish-to-html   
-         :headline-levels 4
-         :section-numbers nil
-         :auto-preamble t
-         :auto-sitemap t                ; Generate sitemap.org automagically...
-         :sitemap-filename "sitemap.org"  ; ... call it sitemap.org (it's the default)...
-         :sitemap-title "Sitemap"         ; ... with title 'Sitemap'.
-         :author "xiaoanh"
-;         :email "dayigu at gmail dot com"
-         :style    "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/worg.css\"/>"
-         )
-        ("blog-static"
-;         :base-directory "~/org/blog/"
-         :base-directory "/Volumes/xiaoanh/gitlib/orgblog"
-;         :base-directory "/Volumes/xiaoanh/gitlib/orglib/orgblog"
-         :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-                                        ;         :publishing-directory "~/org/dayigu.github.com/"
-;         :publishing-directory "/ssh:xiaoanh@github.com:  /Volumes/xiaoanh/gitlib/orglib/xiaoanh.github.io"
-         :publishing-directory "/Volumes/xiaoanh/weblib"
-;         :publishing-directory "/Volumes/xiaoanh/gitlib/orglib/xiaoanh.github.io"        
-;         :publishing-directory "D:/gitlib/orglib/xiaoanh.github.io"        
-         :recursive t
-         :publishing-function org-publish-attachment
-         )
-        ("blog" :components ("blog-notes" "blog-static"))
-        ;;
-        ))))
-                                        ; M-x org-publish-project RET blog RET
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-; MD, [2015-02-13]
-  (add-to-list 'load-path  (concat path-to "markdown-mode/"))  
-;  (add-to-list 'load-path  path-to)  
-  (autoload 'markdown-mode "markdown-mode"   "Major mode for editing Markdown files" t)
-  (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
-  (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-
-; @ln : http://orgmode.org/worg/org-gtd-etc.html, [2016-01-12]
-                                        ; Activate the org-timer module :
-(add-to-list 'org-modules 'org-timer)
-; Set a default value for the timer, for example :
-(setq org-timer-default-timer 25)
-;; Modify the org-clock-in so that a timer is started with the default
-;; value except if a timer is already started :
-(add-hook 'org-clock-in-hook (lambda ()
-      (if (not org-timer-current-timer) 
-      (org-timer-set-timer '(16)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;;  @helm, helm-bibtex
@@ -411,8 +273,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
 ;; Auctex, REDO [2016-01-07] DONE [2014-10-23]
-(add-to-list 'load-path (concat path-to "site-lisp/site-start.d"))
-                                        ; @key: very important, [2014-10-23]
+(add-to-list 'load-path (concat path-to "site-lisp/site-start.d"))  ; very important, /20141023
 (load "auctex.el" nil t t)
 (load "preview-latex.el" nil t t)
 (setq TeX-auto-save t)

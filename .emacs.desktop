@@ -1,0 +1,129 @@
+;; -*- mode: emacs-lisp; coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Tue Jan 12 22:03:37 2016
+;; Desktop file format version 206
+;; Emacs version 24.5.1
+
+;; Global section:
+(setq desktop-saved-frameset [frameset 1 (22165 1977 684824 0) (desktop . "206") "Xiaoan1986@XIAOANs-MacBook-Pro.local" nil nil ((((font-backend mac-ct) (font . "-*-Menlo-normal-normal-normal-*-12-*-*-*-m-0-iso10646-1") (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars . right) (foreground-color . "gray85") (background-color . "Black") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 10) (right-fringe . 11) (alpha) (tool-bar-lines . 1) (title) (fullscreen) (menu-bar-lines . 1) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (horizontal-scroll-bars . t) (display-type . color) (background-mode . dark) (cursor-color . "white") (environment) (frameset--id . "6495-CCEB-EA69-196D") (frameset--mini t . t) (height . 41) (width . 160) (modeline . t) (minibuffer . t) (unsplittable) (left . 139) (top . 23) (icon-name) (visibility . t) (display . "Mac") (explicit-name) (tool-bar-position . top)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 8) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 56) (min-pixel-width . 70) (min-pixel-height-ignore . 28) (min-pixel-width-ignore . 56) (min-pixel-height-safe . 14) (min-pixel-width-safe . 14)) leaf (pixel-width . 1156) (pixel-height . 560) (total-width . 165) (total-height . 40) (normal-height . 1.0) (normal-width . 1.0) (buffer "dotemacsw.org" (selected . t) (hscroll . 0) (fringes 10 11 nil) (margins nil) (scroll-bars 15 3 t nil) (vscroll . 0) (dedicated) (point . 44510) (start . 2))))])
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring '("git" "@git" "pages" "github.io" "ph. d @kohno labs in ynu " "personal skills" "top 1" "ph.d candidate, wireless communication," "*kohno laboratory*" "based inter-vehicle communication" "finnish distinguished professor " "present" "proficient in reading and writing" "markdown"))
+(setq regexp-search-ring nil)
+(setq register-alist nil)
+(setq file-name-history '("/Volumes/xiaoanh/gitlib/" "/Volumes/xiaoanh/bitlib/orglib/" "/Volumes/xiaoanh/gitlib/"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 206
+  "/Volumes/xiaoanh/gitlib/dotemacsw.org"
+  "dotemacsw.org"
+  'org-mode
+  '(auto-fill-mode global-auto-revert-mode TeX-PDF-mode)
+  44510
+  '(44931 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Volumes/xiaoanh/bitlib/orglib/HUANGXIAOAN_CV.org"
+  "HUANGXIAOAN_CV.org"
+  'org-mode
+  '(flyspell-mode global-auto-revert-mode TeX-PDF-mode)
+  2649
+  '(2029 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/Volumes/xiaoanh/gitlib/README.md"
+  "README.md"
+  'markdown-mode
+  '(flyspell-mode global-auto-revert-mode TeX-PDF-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  nil
+  "orglib"
+  'dired-mode
+  '(global-auto-revert-mode TeX-PDF-mode)
+  1005
+  '(nil nil)
+  t
+  '("/Volumes/xiaoanh/bitlib/orglib/")
+  nil)
+
+(desktop-create-buffer 206
+  "/Volumes/xiaoanh/bitlib/orglib/HUANGXIAOAN_CV.tex"
+  "HUANGXIAOAN_CV.tex"
+  'latex-mode
+  '(flyspell-mode global-auto-revert-mode TeX-PDF-mode)
+  968
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . utf-8-unix)))
+
+(desktop-create-buffer 206
+  "/Volumes/xiaoanh/bitlib/orglib/HUANGXIAOAN_CV.md"
+  "HUANGXIAOAN_CV.md"
+  'markdown-mode
+  '(markdown-live-preview-mode flyspell-mode global-auto-revert-mode TeX-PDF-mode)
+  1
+  '(4305 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  nil
+  "bitlib"
+  'dired-mode
+  '(global-auto-revert-mode TeX-PDF-mode)
+  366
+  '(nil nil)
+  t
+  '("/Volumes/xiaoanh/bitlib/")
+  nil)
+
+(desktop-create-buffer 206
+  nil
+  "xiaoanh"
+  'dired-mode
+  '(global-auto-revert-mode TeX-PDF-mode)
+  814
+  '(nil nil)
+  t
+  '("/Volumes/xiaoanh/")
+  nil)
+
+(desktop-create-buffer 206
+  nil
+  "gitlib"
+  'dired-mode
+  '(global-auto-revert-mode TeX-PDF-mode)
+  610
+  '(nil nil)
+  t
+  '("/Volumes/xiaoanh/gitlib/")
+  nil)
+
+(desktop-create-buffer 206
+  "/Volumes/xiaoanh/gitlib/dotemacsw.el"
+  "dotemacsw.el"
+  'emacs-lisp-mode
+  '(ispell-minor-mode global-auto-revert-mode TeX-PDF-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix)))
+
