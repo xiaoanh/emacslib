@@ -2,15 +2,16 @@
 * @basic
 ** [#C] @basic: @gitlib: path-to, @bitlib: git-to, is for org files,  [2015-12-24]
    1. init.el must be separate [2015-12-25]
-#+BEGIN_SRC emacs-lisp :tangle yes :reports no
-  ; Time-stamp: "Xiaoan1986 2016/01/15 22:00:32"
+#+BEGIN_SRC emacs-lisp :tangle yes :reports no 
+  ; Time-stamp: "xiaoanh 2016/01/18 16:22:51"
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;       
-          ; @gitlib: path-to
+  ; @dir,  "D:/gitlib/orglib/emacslib/" ->  "D:/gitlib/emacslib/" ;  be careful of org-link-abbrev-alist, [2016-01-18]
+                                          ; @gitlib: path-to
             ;; check OS type
             (cond
              ((string-equal system-type "windows-nt") ; Microsoft Windows
               (and (progn
-                (concat (message "Microsoft Windows: ") (setq path-to "D:/gitlib/orglib/emacslib/")) ) 
+                (concat (message "Microsoft Windows: ") (setq path-to "D:/gitlib/emacslib/")) ) 
                     (progn  
                     (concat (message "Microsoft Windows: ") (setq git-to "D:/bitlib/orglib/")) )))
           ; @bitlib: git-to, is for org files
@@ -70,7 +71,6 @@
                 ;;; init.el ends here
                 
 #+END_SRC
-
 ** @basic: @custom: 
 #+BEGIN_SRC emacs-lisp :tangle yes
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -179,7 +179,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 
-* TODO @other
+* @other
 ** @helm, (helm-mode 1), should make @mac, fail, delete @anything [2015-12-25]
 #+BEGIN_SRC emacs-lisp :tangle yes
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -206,7 +206,34 @@
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
+** [#C] @company, =(company-mode 1)=. 
+#+BEGIN_SRC emacs-lisp :tangle yes
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; DONE http://company-mode.github.io/, [2016-01-18]
+  ; @company to replace ac,  begin here [2015-12-31]
+  ; company-mode replace auto-complete. 
+  (add-to-list 'load-path (concat path-to "company-mode-master/"))
+  (require 'company)
+  (company-mode 1)
+  (add-hook 'after-init-hook 'global-company-mode)
+                                          ; @company end here
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
 
+** @helm-company, [2016-01-18]
+#+BEGIN_SRC emacs-lisp :tangle yes
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                                  
+; Requirements: Helm   and company-mode
+ ; https://github.com/yasuyk/helm-company
+  (add-to-list 'load-path  (concat path-to "helm-company-master/"))  
+  (autoload 'helm-company "helm-company")
+  ;; Not necessary if using ELPA package
+  (eval-after-load 'company
+    '(progn
+       (define-key company-mode-map (kbd "C-:") 'helm-company)
+       (define-key company-active-map (kbd "C-:") 'helm-company)))
+   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
 ** @org-publish, [2016-01-08]
 #+BEGIN_SRC emacs-lisp :tangle yes
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -316,6 +343,9 @@
           ;;
           ))))
                                           ; M-x org-publish-project RET blog RET
+
+                                          ; @key: postamble, [2016-01-18]
+  (setq org-export-html-postamble nil)
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 
@@ -324,7 +354,7 @@
    1. markdown最主要的用途可能就是blog了
 #+BEGIN_SRC emacs-lisp :tangle yes
   ; MD, [2015-02-13]
-  (add-to-list 'load-path  (concat path-to "markdown-mode/"))  
+  (add-to-list 'load-path (concat path-to "markdown-mode/"))  
 ;  (add-to-list 'load-path  path-to)  
   (autoload 'markdown-mode "markdown-mode"   "Major mode for editing Markdown files" t)
   (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
@@ -403,14 +433,6 @@
   ; @guide-key end here
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
-** @company
-#+BEGIN_SRC emacs-lisp
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ; @company to replace ac,  begin here [2015-12-31]
-  
-  ; @company end here
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-#+END_SRC
 ** @use-package [2015-12-31]
 #+BEGIN_SRC emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -455,7 +477,7 @@
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 ** @anything, @err [2015-12-29]
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ; @anything, why not working
   ; @err, can  not open load file anything-config
@@ -530,23 +552,22 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 
-** @ac
+** [#C] @ac
+#+BEGIN_SRC emacs-lisp :tangle yes
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; auto-complete, [2014-11-06]
+  (add-to-list 'load-path (concat path-to "auto-complete-master/"))
+  ; (add-to-list 'load-path (concat path-to "auto-complete-master"))
+  ; (add-to-list 'ac-dictionary-directories "D:/dotemacsw/auto-complete-master/ac-dict")
+  (require 'auto-complete)
+  (require 'auto-complete-config)
+  (ac-config-default)
+  (add-to-list 'ac-dictionary-directories (concat path-to "auto-complete-master/ac-dict"))
+  (auto-complete-mode 1) 
 
-#+BEGIN_SRC emacs-lisp
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; auto-complete, [2014-11-06]
-(add-to-list 'load-path (concat path-to "auto-complete-master/"))
-; (add-to-list 'load-path (concat path-to "auto-complete-master"))
-; (add-to-list 'ac-dictionary-directories "D:/dotemacsw/auto-complete-master/ac-dict")
-(require 'auto-complete)
-(require 'auto-complete-config)
-(ac-config-default)
-(add-to-list 'ac-dictionary-directories (concat path-to "auto-complete-master/ac-dict"))
-(auto-complete-mode 1) 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
-*** @ac, ac-ispell
+*** @ac, ac-ispell, =(flyspell-mode 1)= [2016-01-18]
 #+BEGIN_SRC emacs-lisp :tangle yes
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; @win
@@ -554,19 +575,20 @@
   (and (progn (add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin"))
   (setq-default ispell-program-name "aspell")
   (progn (setq ispell-personal-dictionary "C:/Program Files (x86)/Aspell/dict"))))
-  
+
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; @mac, [2015-12-28]
   (if (string-equal system-type "darwin")
   (and (setq ispell-program-name "/usr/local/bin/ispell")
   (setq-default ispell-program-name "/usr/local/bin/aspell")))
-  
+
   ; @seamless, for both 
   (require 'ispell)
   (setq text-mode-hook '(lambda()  (flyspell-mode t)  ) )
   (add-hook 'LaTeX-mode-hook 'flyspell-mode)
   (ispell-minor-mode) 
-  
+  ; @flyspell, [2016-01-18]
+  (flyspell-mode 1)
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 *** @ac, first ispell, then ac-ispell [2015-12-28]
@@ -678,22 +700,32 @@
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 
-** @predictive, [2014-11-04]
-#+BEGIN_SRC emacs-lisp
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; predictive install location
-(add-to-list 'load-path (concat path-to "predictive"))
-     ;; dictionary locations
-(add-to-list 'load-path (concat path-to "predictive/latex/"))
-(add-to-list 'load-path (concat path-to "predictive/texinfo/"))
- (add-to-list 'load-path (concat path-to "predictive/html/"))
- (autoload 'predictive-mode (concat path-to "predictive/") "Turn on Predictive Completion Mode." t)
-;    (autoload 'predictive-mode (concat path-to "predictive/" "Turn on Predictive Completion Mode." t))
-     ;; load predictive package
-;     (require 'predictive)
-;(autoload 'predictive-mode "D:/Emacs14/predictive/predictive" "Turn on Predictive Completion Mode." t)
-; delete predictive, /141110
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+** COMMENT @predictive, REDO [2016-01-18]; memory consuming [2014-11-04]
+#+BEGIN_SRC emacs-lisp :tangle no
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; predictive install location
+    (add-to-list 'load-path (concat path-to "predictive"))
+         ;; dictionary locations
+    (add-to-list 'load-path (concat path-to "predictive/latex/"))
+    (add-to-list 'load-path (concat path-to "predictive/texinfo/"))
+     (add-to-list 'load-path (concat path-to "predictive/html/"))
+     (autoload 'predictive-mode (concat path-to "predictive/") "Turn on Predictive Completion Mode." t)
+    ;    (autoload 'predictive-mode (concat path-to "predictive/" "Turn on Predictive Completion Mode." t))
+         ;; load predictive package
+     (require 'predictive)
+    ;(autoload 'predictive-mode "D:/Emacs14/predictive/predictive" "Turn on Predictive Completion Mode." t)
+                                            ; delete predictive,  [2014-11-10]
+    ; REDO http://www.emacswiki.org/emacs/PredictiveMode
+    (autoload 'predictive-mode "predictive" "predictive" t)
+    (set-default 'predictive-auto-add-to-dict t)
+    (setq predictive-main-dict 'dict-english
+  ; Original value was dict-english, [2016-01-18]
+  ; predictive-main-dict 'rpg-dictionary
+          predictive-auto-learn t
+          predictive-add-to-dict-ask nil
+          predictive-use-auto-learn-cache nil
+          predictive-which-dict t)
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 
 ** @session, REDO [2016-01-07], DONE [2015-12-28]
@@ -798,74 +830,75 @@
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; ** DONE @bib
-  ; http://blog.waterlin.org/articles/bind-emacs-org-mode-with-bibtex.html
-  ; (concat path-to "bib1307.bib")
-  (setq reftex-default-bibliography
-        (list
-         (concat path-to "bib1307.bib")  (concat path-to "bib1410.bib")   (concat path-to"bib1506.bib")  (concat path-to"bib1505.bib")  )) ; @success, list [2015-12-30]
-  
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   
-  ;; *** @bib: @auto: @org-mode-reftex-setup, "C-c (",  RefTeX, [2015-12-30]
-  ; @key, @redo, first setq org-link-abbrev-alist [2015-12-30]
-  ; @key: missing ), @org-mode-reftex-setup, [2015-12-30]
-  
-  ; (concat git-to "notes.org")
-  ; D:/gitlib/orglib/emacslib
-  ;;  org-mode reftex, [2015-01-27]
-  ;; @ln: https://wiki.freebsdchina.org/doc/r/reference
-  ;; define org-mode-reftex-search
-  
-  (defun org-mode-reftex-search ()
-   ;; jump to the notes for the paper pointed to at from reftex search
-   (interactive)
-   (org-open-link-from-string (format "[[notes:%s]]" (reftex-citation t))))
-  
-  ; @org-link, [2015-12-30]
-  ; replace D: to /Volumes/xiaoanh
-  (cond 
-  ((string-equal system-type "darwin")
-  (setq org-link-abbrev-alist
-   '(("bib" . "/Volumes/xiaoanh/gitlib/orglib/emacslib/bib1410.bib::%s, /Volumes/xiaoanh/gitlib/orglib/emacslib/bib1505.bib::%s, /Volumes/xiaoanh/gitlib/orglib/emacslib/bib1506.bib::%s")
-     ("notes" .  "/Volumes/xiaoanh/gitlib/orglib/emacslib/bib_notes.org::%s")
-     ("figs" . "/Volumes/xiaoanh/figure1411/%s.png")
-  ;   ("papers" . "D:/bib1410/paper1410/%s.pdf")
-     ("papers" . "/Volumes/xiaoanh/bitlib/orglib/paper1512/%s.pdf"))))
-  ((string-equal system-type "windows-nt")
-  (setq org-link-abbrev-alist
-   '(("bib" . "D:/gitlib/orglib/emacslib/bib1410.bib::%s, D:/gitlib/orglib/emacslib/bib1505.bib::%s, D:/gitlib/orglib/emacslib/bib1506.bib::%s")
-     ("notes" .  "D:/gitlib/orglib/emacslib/bib_notes.org::%s")
-  ;   ("notes" . "(concat git-to "notes.org") ::%s")
-  ;  (invalid-read-syntax ". in wrong context")
-  ;    ("notes" . (concat git-to "notes.org::%s")
-     ("figs" . "D:/figure1411/%s.png")
-  ;   ("papers" . "D:/bib1410/paper1410/%s.pdf")
-     ("papers" . "D:/bitlib/orglib/paper1512/%s.pdf")))))
-  
-  (defun org-mode-reftex-setup ()
-    (load-library "reftex")
-    (and (buffer-file-name) (file-exists-p (buffer-file-name))
-         (progn
-      ;; enable auto-revert-mode to update reftex when bibtex file changes on disk
-      (global-auto-revert-mode t)
-      (reftex-parse-all)
-      ;; add a custom reftex cite format to insert links
-      (reftex-set-cite-format
-        '((?b . "[[bib:%l][%l-bib]]")
-          (?c . "\\cite{%l}")
-          (?n . "[[notes:%l][%l-notes]]")
-          (?p . "[[papers:%l][%l-paper]]")
-	  (?f . "[[figs:%l][%l-fig]]")
-          (?t . "%t")
-          (?h . "** %t\n:PROPERTIES:\n:Custom_ID: %l\n:END:\n[[papers:%l][%l-paper]]"))))))
-  (define-key global-map (kbd "C-c )") 'reftex-citation)
-  (define-key global-map (kbd "C-c (") 'org-mode-reftex-search)
-;  (define-key org-mode-map (kbd "C-c )") 'reftex-citation) ; @success, list [2015-12-30]
-    ;; binding of  ”C-c (” to org-mode-reftex-search
-;  (define-key org-mode-map (kbd "C-c (") 'org-mode-reftex-search)
-  (add-hook 'org-mode-hook 'org-mode-reftex-setup)
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; ** DONE @bib
+    ; http://blog.waterlin.org/articles/bind-emacs-org-mode-with-bibtex.html
+    ; (concat path-to "bib1307.bib")
+    (setq reftex-default-bibliography
+          (list
+           (concat path-to "bib1307.bib")  (concat path-to "bib1410.bib")   (concat path-to"bib1506.bib")  (concat path-to"bib1505.bib")  )) ; @success, list [2015-12-30]
+    
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   
+    ;; *** @bib: @auto: @org-mode-reftex-setup, "C-c (",  RefTeX, [2015-12-30]
+    ; @key, @redo, first setq org-link-abbrev-alist [2015-12-30]
+    ; @key: missing ), @org-mode-reftex-setup, [2015-12-30]
+    
+    ; (concat git-to "notes.org")
+    ; D:/gitlib/orglib/emacslib
+    ;;  org-mode reftex, [2015-01-27]
+    ;; @ln: https://wiki.freebsdchina.org/doc/r/reference
+    ;; define org-mode-reftex-search
+    
+    (defun org-mode-reftex-search ()
+     ;; jump to the notes for the paper pointed to at from reftex search
+     (interactive)
+     (org-open-link-from-string (format "[[notes:%s]]" (reftex-citation t))))
+    
+    ; @org-link, [2015-12-30]
+    ; replace D: to /Volumes/xiaoanh
+    (cond 
+    ((string-equal system-type "darwin")
+    (setq org-link-abbrev-alist
+     '(("bib" . "/Volumes/xiaoanh/gitlib/emacslib/bib1410.bib::%s, /Volumes/xiaoanh/gitlib/emacslib/bib1505.bib::%s, /Volumes/xiaoanh/gitlib/emacslib/bib1506.bib::%s")
+       ("notes" .  "/Volumes/xiaoanh/gitlib/emacslib/bib_notes.org::%s")
+       ("figs" . "/Volumes/xiaoanh/figure1411/%s.png")
+    ;   ("papers" . "D:/bib1410/paper1410/%s.pdf")
+       ("papers" . "/Volumes/xiaoanh/bitlib/orglib/paper1512/%s.pdf"))))
+    
+    ((string-equal system-type "windows-nt")
+    (setq org-link-abbrev-alist
+     '(("bib" . "D:/gitlib/emacslib/bib1410.bib::%s, D:/gitlib/emacslib/bib1505.bib::%s, D:/gitlib/emacslib/bib1506.bib::%s")
+       ("notes" .  "D:/gitlib/emacslib/bib_notes.org::%s")
+    ;   ("notes" . "(concat git-to "notes.org") ::%s")
+    ;  (invalid-read-syntax ". in wrong context")
+    ;    ("notes" . (concat git-to "notes.org::%s")
+       ("figs" . "D:/figure1411/%s.png")
+    ;   ("papers" . "D:/bib1410/paper1410/%s.pdf")
+       ("papers" . "D:/bitlib/orglib/paper1512/%s.pdf")))))
+    
+    (defun org-mode-reftex-setup ()
+      (load-library "reftex")
+      (and (buffer-file-name) (file-exists-p (buffer-file-name))
+           (progn
+        ;; enable auto-revert-mode to update reftex when bibtex file changes on disk
+        (global-auto-revert-mode t)
+        (reftex-parse-all)
+        ;; add a custom reftex cite format to insert links
+        (reftex-set-cite-format
+          '((?b . "[[bib:%l][%l-bib]]")
+            (?c . "\\cite{%l}")
+            (?n . "[[notes:%l][%l-notes]]")
+            (?p . "[[papers:%l][%l-paper]]")
+            (?f . "[[figs:%l][%l-fig]]")
+            (?t . "%t")
+            (?h . "** %t\n:PROPERTIES:\n:Custom_ID: %l\n:END:\n[[papers:%l][%l-paper]]"))))))
+    (define-key global-map (kbd "C-c )") 'reftex-citation)
+    (define-key global-map (kbd "C-c (") 'org-mode-reftex-search)
+  ;  (define-key org-mode-map (kbd "C-c )") 'reftex-citation) ; @success, list [2015-12-30]
+      ;; binding of  ”C-c (” to org-mode-reftex-search
+  ;  (define-key org-mode-map (kbd "C-c (") 'org-mode-reftex-search)
+    (add-hook 'org-mode-hook 'org-mode-reftex-setup)
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp :tangle no
@@ -1077,9 +1110,9 @@ git push -u origin master
 *** @lisp:  (expand-file-name ".." path-to)
   ; (expand-file-name ".." path-to)
   (setq initial-user-file (concat (expand-file-name ".." path-to) "dotemacsw.el"))
-*** @win
-c:/Users/xiaoanh/AppData/Roaming/.emacs
-(load-file "D:/gitlib/orglib/dotemacsw.el")
+*** @win =c:/Users/xiaoanh/AppData/Roaming/.emacs=
+    1. @key: -> (load-file "D:/gitlib/dotemacsw.el"), [2016-01-18]
+    2. (load-file "D:/gitlib/orglib/dotemacsw.el")
 ** @org, org_manual.pdf
 *** 14 Working with source code, pp192
     1. #+BEGIN_SRC <language> <switches> <header arguments>
@@ -1216,8 +1249,8 @@ Then to load emacs now:
     ;;   (error "Init org file '%s' missing." init-source-org-file))
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
 #+END_SRC
-* @study: @lisp, from eintr.pdf 
-  1. An Introduction to Programming in Emacs Lisp
+* @study: @lisp, from eintr.pdf , 
+  1. An Introduction to Programming in Emacs Lisp 
      1. http://www.gnu.org/software/emacs/manual/eintr.html
   2. @ln: http://www.gnu.org/software/emacs/manual/
 ** @basic
@@ -1471,7 +1504,23 @@ value))
 #+END_SRC
 
 * @study: @eng, @html @python
+** TODO @quant, <2016-01-18 Mon>
+   1. 数据挖掘（Data Mining，DM）
+*** [#C] [全职]【股票量化部】高级研究员(投资经理岗)
+    1. 简历发送至 hf_zhaopin@126.com
+    2. 杭州鋆石
+*** [全职] 夏普中国实验室 招聘无线通信技术研究员
+    1. 联系方式：liurenmao@cn.sharp-world.com
+*** [全职] 量化交易系统开发首席架构师/首席技术
+    1. 简历发送至 hf_zhaopin@126.com
 ** @python [2016-01-15]
+*** 10 种机器学习算法的要点（附 Python 和 R 代码）
+    1. http://blog.jobbole.com/92021/
+*** 机器学习算法与Python实践之（一）k近邻（KNN） , scikit-learn
+    1. http://blog.csdn.net/zouxy09/article/details/16955347
+    2. 数据探索: pandas, statsmodels, matplotlib, numpy, unix
+    3. 建立模型: scikit-learn, numpy, pandas, scipy
+    4. 测试模型: scikit-learn, matplotlib
 *** Python 面试问题
     1. http://xiaocong.github.io/blog/2013/06/16/python-interview-question-and-answer/
 ** @html, [2016-01-15]
@@ -1495,4 +1544,5 @@ value))
 ** @eng, [2016-01-15]
    1. chrono
    2. postamble
+   3. Shanghai Theatre Academy
 
