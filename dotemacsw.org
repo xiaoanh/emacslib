@@ -3,7 +3,7 @@
 ** [#C] @basic: @gitlib: path-to, @bitlib: git-to, is for org files,  [2015-12-24]
    1. init.el must be separate [2015-12-25]
 #+BEGIN_SRC emacs-lisp :tangle yes :reports no 
-  ; Time-stamp: "xiaoanh 2016/01/18 16:22:51"
+  ; Time-stamp: "xiaoanh 2016/01/19 16:52:51"
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;       
   ; @dir,  "D:/gitlib/orglib/emacslib/" ->  "D:/gitlib/emacslib/" ;  be careful of org-link-abbrev-alist, [2016-01-18]
                                           ; @gitlib: path-to
@@ -206,7 +206,7 @@
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
-** [#C] @company, =(company-mode 1)=. 
+** [#C] @company, =(company-mode 1)=, @completion, fuzzy mode
 #+BEGIN_SRC emacs-lisp :tangle yes
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ; DONE http://company-mode.github.io/, [2016-01-18]
@@ -234,6 +234,89 @@
        (define-key company-active-map (kbd "C-:") 'helm-company)))
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
+
+** [#C] @ac, @completion
+#+BEGIN_SRC emacs-lisp :tangle yes
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; auto-complete, [2014-11-06]
+  (add-to-list 'load-path (concat path-to "auto-complete-master/"))
+  ; (add-to-list 'load-path (concat path-to "auto-complete-master"))
+  ; (add-to-list 'ac-dictionary-directories "D:/dotemacsw/auto-complete-master/ac-dict")
+  (require 'auto-complete)
+  (require 'auto-complete-config)
+  ; (require 'log4e)
+  ; (require 'yaxception)
+  ; (require 'auto-complete-pcmp)
+  ; (require 'org-ac)
+  ;; missing auto-complete-pcmp, https://github.com/aki2o/auto-complete-pcmp
+  ;; Make config suit for you. About the config item, eval the following sexp.
+  ;; (customize-group "org-ac")
+  (org-ac/config-default)
+
+  (ac-config-default)
+  (add-to-list 'ac-dictionary-directories (concat path-to "auto-complete-master/ac-dict"))
+  (auto-complete-mode 1) 
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
+*** @ac, ac-ispell, =(flyspell-mode 1)= [2016-01-18]
+#+BEGIN_SRC emacs-lisp :tangle yes
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; @win
+  (if (string-equal system-type "windows-nt")
+  (and (progn (add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin"))
+  (setq-default ispell-program-name "aspell")
+  (progn (setq ispell-personal-dictionary "C:/Program Files (x86)/Aspell/dict"))))
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; @mac, [2015-12-28]
+  (if (string-equal system-type "darwin")
+  (and (setq ispell-program-name "/usr/local/bin/ispell")
+  (setq-default ispell-program-name "/usr/local/bin/aspell")))
+
+  ; @seamless, for both 
+  (require 'ispell)
+  (setq text-mode-hook '(lambda()  (flyspell-mode t)  ) )
+  (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+  (ispell-minor-mode) 
+  ; @flyspell, [2016-01-18]
+  (flyspell-mode 1)
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
+*** @ac, first ispell, then ac-ispell [2015-12-28]
+#+BEGIN_SRC emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'load-path (concat path-to "auto-complete-master/"))
+; (add-to-list 'load-path "D:/dotemacsw/auto-complete-master/")
+(require 'ac-ispell)
+(eval-after-load "auto-complete" '(progn (ac-ispell-setup)))
+(add-hook 'git-commit-mode-hook 'ac-ispell-ac-setup)
+(add-hook 'mail-mode-hook 'ac-ispell-ac-setup)
+
+; error enabling flyspell mode, ispell-set-spellcheker, /141106
+(setq flyspell-issue-welcome-flag nil)
+;; fix flyspell problem
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
+** @org-ac, [2016-01-19], Dependency:  yaxception.el, popup.el, fuzzy. el and log4e.el, @aki2o
+  #+BEGIN_SRC emacs-lisp :tangle no
+     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                                            ;  https://github.com/aki2o/org-ac
+                                            ;  Hiroaki Otsu aki2o
+                                            ; @err: Cannot open load file: no such file or directory, auto-complete-pcmp
+                                            ; https://github.com/aki2o/auto-complete-pcmp
+                                            ; provide the functions of auto-complete for handling Programmable Completion.
+
+    ; Tested On  auto-complete-pcmp.el … 0.0.1 and log4e.el … 0.2.0
+    (add-to-list 'load-path (concat path-to "org-ac-master/"))
+    (require 'org-ac)
+    ;; Make config suit for you. About the config item, eval the following sexp.
+    ;; (customize-group "org-ac")
+    ; (org-ac/config-default)
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  #+END_SRC
+
 ** @org-publish, [2016-01-08]
 #+BEGIN_SRC emacs-lisp :tangle yes
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -549,61 +632,6 @@
 ;; highlight：hi-line.el,emacs inside, /[2014-11-06]
 ; (require 'hl-line)  
 ; (global-hl-line-mode t) 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-#+END_SRC
-
-** [#C] @ac
-#+BEGIN_SRC emacs-lisp :tangle yes
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; auto-complete, [2014-11-06]
-  (add-to-list 'load-path (concat path-to "auto-complete-master/"))
-  ; (add-to-list 'load-path (concat path-to "auto-complete-master"))
-  ; (add-to-list 'ac-dictionary-directories "D:/dotemacsw/auto-complete-master/ac-dict")
-  (require 'auto-complete)
-  (require 'auto-complete-config)
-  (ac-config-default)
-  (add-to-list 'ac-dictionary-directories (concat path-to "auto-complete-master/ac-dict"))
-  (auto-complete-mode 1) 
-
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-#+END_SRC
-*** @ac, ac-ispell, =(flyspell-mode 1)= [2016-01-18]
-#+BEGIN_SRC emacs-lisp :tangle yes
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; @win
-  (if (string-equal system-type "windows-nt")
-  (and (progn (add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin"))
-  (setq-default ispell-program-name "aspell")
-  (progn (setq ispell-personal-dictionary "C:/Program Files (x86)/Aspell/dict"))))
-
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; @mac, [2015-12-28]
-  (if (string-equal system-type "darwin")
-  (and (setq ispell-program-name "/usr/local/bin/ispell")
-  (setq-default ispell-program-name "/usr/local/bin/aspell")))
-
-  ; @seamless, for both 
-  (require 'ispell)
-  (setq text-mode-hook '(lambda()  (flyspell-mode t)  ) )
-  (add-hook 'LaTeX-mode-hook 'flyspell-mode)
-  (ispell-minor-mode) 
-  ; @flyspell, [2016-01-18]
-  (flyspell-mode 1)
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-#+END_SRC
-*** @ac, first ispell, then ac-ispell [2015-12-28]
-#+BEGIN_SRC emacs-lisp
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path (concat path-to "auto-complete-master/"))
-; (add-to-list 'load-path "D:/dotemacsw/auto-complete-master/")
-(require 'ac-ispell)
-(eval-after-load "auto-complete" '(progn (ac-ispell-setup)))
-(add-hook 'git-commit-mode-hook 'ac-ispell-ac-setup)
-(add-hook 'mail-mode-hook 'ac-ispell-ac-setup)
-
-; error enabling flyspell mode, ispell-set-spellcheker, /141106
-(setq flyspell-issue-welcome-flag nil)
-;; fix flyspell problem
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 ** @auctex, REDO [2016-01-07], no use [2015-12-24]
@@ -1100,6 +1128,11 @@ git push -u origin master
     1. org-agenda-files
 
 * @study: @dotemacs
+** Emacspeak --The Complete Audio Desktop
+   1. http://www.cs.cornell.edu/home/raman/emacspeak/
+** @spacemacs
+*** redguardtoo/mastering-emacs-in-one-year-guide [2016-01-19]
+   2. Sylvain Benner’s spacemacs (Spacemacs是针对Vim用户优化的，所以非Vim用户不用试了)
 ** @ln [2016-01-15]
 *** internal links, [[target]], =FIRST TARGET, THEN CITE []=
     1. #<<target>>
@@ -1523,6 +1556,8 @@ value))
     4. 测试模型: scikit-learn, matplotlib
 *** Python 面试问题
     1. http://xiaocong.github.io/blog/2013/06/16/python-interview-question-and-answer/
+** @other
+*** 我的博士老公有声小说, 播音:小茹
 ** @html, [2016-01-15]
 *** @basic , HTML Basic Tags
     1. http://www.tutorialspoint.com/html/html_overview.htm
@@ -1543,6 +1578,9 @@ value))
 
 ** @eng, [2016-01-15]
    1. chrono
-   2. postamble
-   3. Shanghai Theatre Academy
+   2. =facilitation=
+   3. Mnemonic
+   4. postamble
+   5. Shanghai Theatre Academy
+   6. =tomb-sweeping, spring-festival, mid-autumn, dragon-boat=
 
