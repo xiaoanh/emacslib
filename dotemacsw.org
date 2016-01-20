@@ -1,9 +1,10 @@
+  # Time-stamp: "xiaoanh 2016/01/20 16:08:02"
 
 * @basic
 ** [#C] @basic: @gitlib: path-to, @bitlib: git-to, is for org files,  [2015-12-24]
    1. init.el must be separate [2015-12-25]
 #+BEGIN_SRC emacs-lisp :tangle yes :reports no 
-  ; Time-stamp: "xiaoanh 2016/01/19 16:52:51"
+  ; Time-stamp: "xiaoanh 2016/01/20 15:26:52"
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;       
   ; @dir,  "D:/gitlib/orglib/emacslib/" ->  "D:/gitlib/emacslib/" ;  be careful of org-link-abbrev-alist, [2016-01-18]
                                           ; @gitlib: path-to
@@ -180,6 +181,8 @@
 #+END_SRC
 
 * @other
+** @python, @win: C:\Program Files\Python35\, [2016-01-20]
+   1. @cmd, not included 
 ** @helm, (helm-mode 1), should make @mac, fail, delete @anything [2015-12-25]
 #+BEGIN_SRC emacs-lisp :tangle yes
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -238,16 +241,17 @@
 ** [#C] @ac, @completion
 #+BEGIN_SRC emacs-lisp :tangle yes
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; must add yaxception, log4e, auto-complete-pcmp and org-ac in auto-complete-master dir, [2016-01-20]
   ;; auto-complete, [2014-11-06]
   (add-to-list 'load-path (concat path-to "auto-complete-master/"))
   ; (add-to-list 'load-path (concat path-to "auto-complete-master"))
   ; (add-to-list 'ac-dictionary-directories "D:/dotemacsw/auto-complete-master/ac-dict")
   (require 'auto-complete)
   (require 'auto-complete-config)
-  ; (require 'log4e)
-  ; (require 'yaxception)
-  ; (require 'auto-complete-pcmp)
-  ; (require 'org-ac)
+  (require 'log4e)
+  (require 'yaxception)
+  (require 'auto-complete-pcmp)
+  (require 'org-ac)
   ;; missing auto-complete-pcmp, https://github.com/aki2o/auto-complete-pcmp
   ;; Make config suit for you. About the config item, eval the following sexp.
   ;; (customize-group "org-ac")
@@ -1536,16 +1540,53 @@ value))
 ; => (2 1 0)
 #+END_SRC
 
-* @study: @eng, @html @python
+* @study: @eng, @quant, @html @python
 ** TODO @quant, <2016-01-18 Mon>
    1. 数据挖掘（Data Mining，DM）
-*** [#C] [全职]【股票量化部】高级研究员(投资经理岗)
+   2. 个人看法是买方 >>卖方，好团队>好平台
+   3. 基本的matlab操作和fix income toolbox的内容吧
+   4. 止盈止损 + 心态
+*** [#C] @note
+**** @book： Quant_2012李航统计学习方法
+     1. 感知机： 线性分类，是一个判别模型，w*x+y=b
+**** @cv, @patent: 818074, EIF155097
+**** @uqer
+     1. https://uqer.io/help/faq/
+**** 量化策略研究过程 how to write
+     1. 在贝尔实验室担任研究科学家期间，为满足未来5G高密度和高容量的需
+       	求，首次提出了新颖的交织信道聚合算法 (_11倍容量提升且成本降低
+       	30%_)：基于现存的方案不能满足未来5G高密度和高容量的需求且成本较高，本人通过阅读大量文献并与同事积极地讨论和交流，提
+       	出了一种新颖的架构。此架构设计了一种新的算法，解决了容量受限的
+       	关键问题并降低了相关的硬件成本。与国际同行相比，此方案不仅容量
+       	大为提升11倍，而且成本降了30%。该方案得到了贝尔实验室知名专家的
+       	充分肯定，并发表在国际专利上。
+     2. 基于上述的工作经历与量化策略研究很相似，本人具备了模型设计、算
+       	法实现和性能优化等方面的技能及能力，并且充分具备很强的编程和学习能力，坚信在之后的量化研究中定能发挥自己的专业才能。
+**** 职业规划
+     1. 半年内充分锻炼自己的量化研究技能并熟悉相关的金融业务，努力为公
+       	司获利
+     2. 3年内希望担任量化研究的manager，领导团队不断前进
+     3. 5年后成为业界的知名量化专家，成为公司的中坚力量
+*** datayes
+    1. http://www.datayes.com/#/about
+*** 中国量化投资研究院
+    1. http://www.cqiri.com/
+*** [招聘]量化研究员/投资经理, quack2006@163.com
+    1. http://www.yingjiesheng.com/job-002-199-088.html
+*** 上海明溪资产管理有限公司,  hr@clearstreamasset.com
+    1. 上海明溪资产管理有限公司成立于2015年，注册资本1000万
+    2. 上海市浦东新区杨高南路729号陆家嘴世纪金融广场1号楼1503室
+
+*** [全职] 量化交易系统开发首席架构师/首席技术, hf_zhaopin@126.com
+    1. 简历发送至 hf_zhaopin@126.com
+*** TODO [#C] [全职]【股票量化部】高级研究员(投资经理岗), 鋆石, hf_zhaopin@126.com
     1. 简历发送至 hf_zhaopin@126.com
     2. 杭州鋆石
+    3. 杭州鋆石互联网金融服务有限公司
+       1. http://www.precise-investing.com/
+    4. 上海磐石： http://www.stonecapital.com.cn/index.jsp
 *** [全职] 夏普中国实验室 招聘无线通信技术研究员
     1. 联系方式：liurenmao@cn.sharp-world.com
-*** [全职] 量化交易系统开发首席架构师/首席技术
-    1. 简历发送至 hf_zhaopin@126.com
 ** @python [2016-01-15]
 *** 10 种机器学习算法的要点（附 Python 和 R 代码）
     1. http://blog.jobbole.com/92021/
@@ -1556,7 +1597,20 @@ value))
     4. 测试模型: scikit-learn, matplotlib
 *** Python 面试问题
     1. http://xiaocong.github.io/blog/2013/06/16/python-interview-question-and-answer/
+** @PCIe
+*** Virtex-6 FPGA Integrated Block for PCI Express  UG517
+*** PCI Express System Architecture.pdf
+    1. https://www.mindshare.com/files/ebooks/PCI%20Express%20System%20Architecture.pdf
+*** @note
+    1. 3 layer protocol
+       1. PHY->DATA->TRANSACTION
+    2. root complex (MEMORY) -> switch -> endpoint
+*** @book: PCI Experss体系结构导读
+    1. http://blog.sina.com.cn/s/articlelist_1685243084_3_1.html
 ** @other
+*** Tomomi Kasai (河西 智美, Kasai Tomomi, born November 16, 1991 in Tokyo) 
+    1. 河西智美 (@tomoomichan)
+    2. naked with a child cupping her breasts
 *** 我的博士老公有声小说, 播音:小茹
 ** @html, [2016-01-15]
 *** @basic , HTML Basic Tags
@@ -1578,9 +1632,11 @@ value))
 
 ** @eng, [2016-01-15]
    1. chrono
-   2. =facilitation=
-   3. Mnemonic
-   4. postamble
-   5. Shanghai Theatre Academy
-   6. =tomb-sweeping, spring-festival, mid-autumn, dragon-boat=
+   2. ample
+   3. buffalo
+   4. =facilitation=
+   5. Mnemonic
+   6. postamble
+   7. Shanghai Theatre Academy
+   8. =tomb-sweeping, spring-festival, mid-autumn, dragon-boat=
 
