@@ -1,4 +1,4 @@
-  # Time-stamp: "xiaoanh 2016/01/20 16:08:02"
+  # Time-stamp: "xiaoanh 2016/01/22 16:16:14"
 
 * @basic
 ** [#C] @basic: @gitlib: path-to, @bitlib: git-to, is for org files,  [2015-12-24]
@@ -183,6 +183,9 @@
 * @other
 ** @python, @win: C:\Program Files\Python35\, [2016-01-20]
    1. @cmd, not included 
+#+BEGIN_SRC emacs-lisp :tangle no
+  (add-to-list 'exec-path "C:/Program Files/Python35/")
+#+END_SRC
 ** @helm, (helm-mode 1), should make @mac, fail, delete @anything [2015-12-25]
 #+BEGIN_SRC emacs-lisp :tangle yes
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -439,20 +442,39 @@
 #+RESULTS:
 ** @markdown [2016-01-08]
    1. markdown最主要的用途可能就是blog了
+   2. markdown-preview-eww,
+      1. https://github.com/niku/markdown-preview-eww
 #+BEGIN_SRC emacs-lisp :tangle yes
-  ; MD, [2015-02-13]
-  (add-to-list 'load-path (concat path-to "markdown-mode/"))  
-;  (add-to-list 'load-path  path-to)  
-  (autoload 'markdown-mode "markdown-mode"   "Major mode for editing Markdown files" t)
-  (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
-  (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+                                          ; MD, [2015-02-13]
+                                          ; https://github.com/niku/markdown-preview-eww
+
+    (add-to-list 'load-path (concat path-to "markdown-mode/"))  
+  ;  (add-to-list 'load-path  path-to)  
+    (autoload 'markdown-mode "markdown-mode"   "Major mode for editing Markdown files" t)
+    (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+    (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+    (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+  (require 'markdown-preview-eww)
+  ; How to use, install redcarpet from gem % gem install redcarpet
+
+#+END_SRC
+** @weather, [2016-01-22]
+   1. https://github.com/lujun9972/yahoo-weather-mode
+#+BEGIN_SRC emacs-lisp :tangle yes
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (add-to-list 'load-path (concat path-to "yahoo-weather-mode-master/") )
+                                          ; https://github.com/lujun9972/yahoo-weather-mode
+  (require 'yahoo-weather)
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 #+END_SRC
 ** @pandoc
 *** 黑魔法利器pandoc, [2016-01-12]
     1. 如果你需要把文件从一种标记语言格式转换到另一种格式，pandoc会是你的瑞士军刀
 ** @pomodoro, @org-timer
 #+BEGIN_SRC emacs-lisp :tangle yes
+      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                           ; @ln : http://orgmode.org/worg/org-gtd-etc.html, [2016-01-12]
                                           ; Activate the org-timer module :
   (add-to-list 'org-modules 'org-timer)
@@ -463,7 +485,7 @@
   (add-hook 'org-clock-in-hook (lambda ()
         (if (not org-timer-current-timer) 
         (org-timer-set-timer '(16)))))
-
+      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 ** @helm-bibtex-master, dash first
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1546,10 +1568,60 @@ value))
    2. 个人看法是买方 >>卖方，好团队>好平台
    3. 基本的matlab操作和fix income toolbox的内容吧
    4. 止盈止损 + 心态
+   5. 脸皮够厚。这个就是soft skill，我觉得每个行业想做得好，纯研究类、教育类除外，这个能力都很重要。
 *** [#C] @note
+**** @interview
+     1. A、B两证券的权重、波动率、相关系数、贝塔值
+     2. 一价定律(The Law Of One Price)
+     3. 贝塔系数反映了个股对市场（或大盘）变化的敏感性，也就是个股与大盘的相关性或通俗说的“股性”。
+     4. 两正整数M,N之间的最大公因数, 辗转相除法
+	1. gcd：求最大公因数, lcm：求最小公倍数
+	2. rN−2 = qN rN−1
+ function gcd(a, b)
+    while b ≠ 0
+       t ← b
+       b ← a mod b
+       a ← t
+    return a
+
+**** 模式识别算法
+     1. K-Nearest Neighbor
+**** 预测算法
+     1. 最小二乘法
+     2. 线性回归(linear regression)
+     3. 逻辑回归(logistic regression)
+	1. 逻辑回归是线性回归的一种，线性回归是回归的一种
+**** @key: =Dr. ZHANG=, Soros, 慈溪， =一定要抱着挣大钱的心理=, [2016-01-21 Thu]
+     1. 花木路陆家嘴那
+     2. 一次性找出重复数字，1-1001， 另一矩阵设为1000
+     3. 方法三：标志数组法
+     4. 申请一个长度为n-1且均为'0'组成的字符串。然后从头遍历a[n]数组，
+        取每个数组元素a[i]的值，将其对应的字符串中的相应位置置1，如果
+        已经置过1的话，那么该数就是重复的数。就是用位图来实现的。
+     5. 输入数字填到对应下标的元素中去，那么只要发现已经填过的元素，必
+        然就是重复的元素了
+
+**** @key: =Dr. Ding=, 丁晓蔚，Standford,  precise 巴菲特，Peter Linch, =Soros and for long=, [2016-01-20 Wed]
+      1. focus on =中信证券, 海通证券, 国泰君安=
+      2. 对冲基金（Hedge Fund）对冲基金, =做空, hedge=fence=
+	 1. Large Personal Stake
+	 2. 这第五个特征，叫Infrequent Redemption
+	    1. 一年只有指定的几个日子可以撤资（也可能一年一度）
+	 3. 这第八个特征，叫Leverage
+	 4. 大部分情况主要是第五和第八特征共同作用导致的
+	 5. 对冲”，就是在交易和投资中，用一定的成本去“冲掉”风险，来获取风险较低或无风险利润，即所谓“套利”
+      3. 高频交易（英语：High Frequency Trading，HFT）
+	 1. 简单的模型可以只依靠基本的一元线性回归，而更复杂的也可应用
+            到博弈论、模式识别、预测算法。神经网络和遗传算法也已被用来
+            实现这些模型。
+      4. =乔治·索罗斯= （George Soros）, *soros fund*
+	 1. 乔治·索罗斯，著名的货币投机家，股票投资者，慈善家和政治行动主义
+	    分子，曾经打败英国央行和“制造”亚洲金融危机的金融大鳄
+	 2. 你正确或错误并不是最重要的，最重要的是你正确的时候能赚多少钱、错误的时候会亏多少钱。”
+	    1. 对于一个投资者最重要的事是“正确性的量级”，而不是“正确的频率”有多高。
 **** @book： Quant_2012李航统计学习方法
      1. 感知机： 线性分类，是一个判别模型，w*x+y=b
-**** @cv, @patent: 818074, EIF155097
+**** @cv, @patent: 818074, EIF155097, 学士学位->硕士学位
 **** @uqer
      1. https://uqer.io/help/faq/
 **** 量化策略研究过程 how to write
@@ -1573,13 +1645,13 @@ value))
     1. http://www.cqiri.com/
 *** [招聘]量化研究员/投资经理, quack2006@163.com
     1. http://www.yingjiesheng.com/job-002-199-088.html
-*** 上海明溪资产管理有限公司,  hr@clearstreamasset.com
+*** DONE [#C] 上海明溪资产管理有限公司,  hr@clearstreamasset.com
     1. 上海明溪资产管理有限公司成立于2015年，注册资本1000万
     2. 上海市浦东新区杨高南路729号陆家嘴世纪金融广场1号楼1503室
 
 *** [全职] 量化交易系统开发首席架构师/首席技术, hf_zhaopin@126.com
     1. 简历发送至 hf_zhaopin@126.com
-*** TODO [#C] [全职]【股票量化部】高级研究员(投资经理岗), 鋆石, hf_zhaopin@126.com
+*** DONE [#E] [全职]【股票量化部】高级研究员(投资经理岗), 鋆石, hf_zhaopin@126.com
     1. 简历发送至 hf_zhaopin@126.com
     2. 杭州鋆石
     3. 杭州鋆石互联网金融服务有限公司
