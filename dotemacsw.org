@@ -1,10 +1,9 @@
-  # Time-stamp: "xiaoanh 2016/01/22 16:16:14"
 
 * @basic
 ** [#C] @basic: @gitlib: path-to, @bitlib: git-to, is for org files,  [2015-12-24]
    1. init.el must be separate [2015-12-25]
 #+BEGIN_SRC emacs-lisp :tangle yes :reports no 
-  ; Time-stamp: "xiaoanh 2016/01/20 15:26:52"
+  ; Time-stamp: "xiaoanh 2016/01/27 16:44:06"
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;       
   ; @dir,  "D:/gitlib/orglib/emacslib/" ->  "D:/gitlib/emacslib/" ;  be careful of org-link-abbrev-alist, [2016-01-18]
                                           ; @gitlib: path-to
@@ -185,6 +184,14 @@
    1. @cmd, not included 
 #+BEGIN_SRC emacs-lisp :tangle no
   (add-to-list 'exec-path "C:/Program Files/Python35/")
+#+END_SRC
+** graphviz-dot-mode-master
+   1. https://github.com/ppareit/graphviz-dot-mode
+   2. Graphviz （英文：Graph Visualization Software的缩写）, @Bell-Labs
+#+BEGIN_SRC emacs-lisp :tangle yes
+(load-file  (concat path-to "graphviz-dot-mode-master/graphviz-dot-mode.el") )
+#+END_SRC
+#+BEGIN_SRC dot :file D: figure1411/test-dot.png :cmdline -Kdot -Tpng
 #+END_SRC
 ** @helm, (helm-mode 1), should make @mac, fail, delete @anything [2015-12-25]
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -476,6 +483,7 @@
 #+BEGIN_SRC emacs-lisp :tangle yes
       ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                                           ; @ln : http://orgmode.org/worg/org-gtd-etc.html, [2016-01-12]
+                                          ; pomodoro, which means tomato.
                                           ; Activate the org-timer module :
   (add-to-list 'org-modules 'org-timer)
   ; Set a default value for the timer, for example :
@@ -955,13 +963,39 @@
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp :tangle no
-  ; *** Epresent [2014-12-10]
+** @org-present
+
+*** org-html5presentation.el-master
+    1. @err: no such file org-exp.el
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (add-to-list 'load-path (concat org-dir "/org-html5presentation.el-master"))
+  (require 'org-html5presentation)
+#+END_SRC
+*** Org-Reveal, [2016-01-27]
+    1. 目前感觉org-reveal还是最好的方案
+    2. require Reveal.js
+    3. http://jr0cket.co.uk/slides/revealjs.html
+       1. Copy ox-reveal.el to the Org-mode installation directory.
+       2. @err: Wrong number of arguments: #[(checkbox)
+       3. https://github.com/yjwen/org-reveal/issues/162
+#+BEGIN_SRC emacs-lisp :tangle yes
+                                          ; org-mode-master\lisp, [2016-01-27]
+  (add-to-list 'load-path (concat org-dir "/org-reveal-master"))
+  (require 'ox-reveal)
+  (setq org-reveal-root (concat "file:///" org-dir "/reveal.js"))
+                                          ; To load Org-reveal, type “M-x load-library”, then type “ox-reveal”.
+                                          ; Now you can export this manual into Reveal.js presentation by typing “C-c C-e R R”.
+
+
+#+END_SRC
+*** Epresent REDO [2016-01-27], [2014-12-10]
+#+BEGIN_SRC emacs-lisp :tangle yes
+  ; *** Epresent REDO [2016-01-27], [2014-12-10]
   ; Debugger entered--Lisp error: (file-error "Cannot open load file" "ox")  require(ox)
-  ; (add-to-list 'load-path (concat path-to "epresent-master"))
-  ; (require 'epresent)
+  (add-to-list 'load-path (concat path-to "epresent-master"))
+  (require 'epresent)
   ; epresent and reveal fail, due to ox missing and latest org-mode 8.0, [2015-07-07]
-  
+
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ; *** @ditaa, [2015-07-02]
   ; (setq org-ditaa-jar-path “~/.emacs.d/plugins/ditaa/ditaa0_9.jar”) 
@@ -1154,6 +1188,11 @@ git push -u origin master
     1. org-agenda-files
 
 * @study: @dotemacs
+** C-c a L, (org-timeline), timeline
+   1. milestone or roadmap
+   2. Helm Projectile
+   3. TaskJuggler
+      1. http://orgmode.org/worg/org-tutorials/org-taskjuggler.html
 ** Emacspeak --The Complete Audio Desktop
    1. http://www.cs.cornell.edu/home/raman/emacspeak/
 ** @spacemacs
@@ -1621,7 +1660,10 @@ value))
 	    1. 对于一个投资者最重要的事是“正确性的量级”，而不是“正确的频率”有多高。
 **** @book： Quant_2012李航统计学习方法
      1. 感知机： 线性分类，是一个判别模型，w*x+y=b
-**** @cv, @patent: 818074, EIF155097, 学士学位->硕士学位
+**** @cv, @patent: 818074, EIF155097, 学士学位->硕士学位, =国家重大专项浦江人才计划=
+     1. 浦江人才计划
+	1. http://www.stcsm.gov.cn/wsbs/kyjgkt/pjrc/xgtz/343281.htm
+ 
 **** @uqer
      1. https://uqer.io/help/faq/
 **** 量化策略研究过程 how to write
@@ -1641,6 +1683,10 @@ value))
      3. 5年后成为业界的知名量化专家，成为公司的中坚力量
 *** datayes
     1. http://www.datayes.com/#/about
+*** 大数据
+*** 上海金融期货信息技术有限公司
+    1. 上海金融期货信息技术有限公司（简称：中金所技术公司）
+    2. http://www.cffexit.com.cn/static/4000.html
 *** 中国量化投资研究院
     1. http://www.cqiri.com/
 *** [招聘]量化研究员/投资经理, quack2006@163.com
@@ -1659,7 +1705,23 @@ value))
     4. 上海磐石： http://www.stonecapital.com.cn/index.jsp
 *** [全职] 夏普中国实验室 招聘无线通信技术研究员
     1. 联系方式：liurenmao@cn.sharp-world.com
+** [#B] 浦江人才计划, =浦江计划留学人员资格认定=
+*** 关于发布《上海市浦江人才计划管理办法》的通知, B创新, [2016-01-26]
+    1. http://www.stcsm.gov.cn/wsbs/kyjgkt/pjrc/zcfg/343280.htm
+    2. A（科研开发类）、B（企业创新创业类）、C（社会科学类）、D（特殊急需类）
+    3. A类项目资助以高等院校、科研院所等单位为依托的自然科学和技术研究；
+       B类项目主要资助以企业为依托的科技创新创业，包括创新和创业两类，
+       其中创新类针对企业引进的留学人员，创业类针对自主创办科技企业的
+       留学人员
+*** 上海物联网有限公司
+    1. 公司信息：   国企 / 100-499人
+    2. 图像算法
+
 ** @python [2016-01-15]
+*** Examples
+#+BEGIN_SRC python :tangle no
+#+END_SRC
+*** 网络爬虫，即Web Spider，是一个很形象的名字
 *** 10 种机器学习算法的要点（附 Python 和 R 代码）
     1. http://blog.jobbole.com/92021/
 *** 机器学习算法与Python实践之（一）k近邻（KNN） , scikit-learn
@@ -1685,6 +1747,12 @@ value))
     2. naked with a child cupping her breasts
 *** 我的博士老公有声小说, 播音:小茹
 ** @html, [2016-01-15]
+*** @css
+    1. @import url
+    2. @import was handy to support both
+    3. use <link /> instead of @import
+    4. CSS 文件的媒体查询：@media 和@import
+    5. be tailored to
 *** @basic , HTML Basic Tags
     1. http://www.tutorialspoint.com/html/html_overview.htm
     2. @css
@@ -1707,8 +1775,9 @@ value))
    2. ample
    3. buffalo
    4. =facilitation=
-   5. Mnemonic
-   6. postamble
-   7. Shanghai Theatre Academy
-   8. =tomb-sweeping, spring-festival, mid-autumn, dragon-boat=
+   5. =unanimous, be handy, ProAndCon=
+   6. Mnemonic
+   7. postamble
+   8. Shanghai Theatre Academy
+   9. =tomb-sweeping, spring-festival, mid-autumn, dragon-boat=
 
