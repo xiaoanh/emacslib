@@ -3,7 +3,7 @@
 ** [#C] @basic: @gitlib: path-to, @bitlib: git-to, is for org files,  [2015-12-24]
    1. init.el must be separate [2015-12-25]
 #+BEGIN_SRC emacs-lisp :tangle yes :reports no 
-  ; Time-stamp: "xiaoanh 2016/01/27 16:44:06"
+  ; Time-stamp: "xiaoanh 2016/01/28 16:47:05"
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;       
   ; @dir,  "D:/gitlib/orglib/emacslib/" ->  "D:/gitlib/emacslib/" ;  be careful of org-link-abbrev-alist, [2016-01-18]
                                           ; @gitlib: path-to
@@ -344,6 +344,7 @@
   ;(setq path-orgblog  (concat (expand-file-name "../" path-to) "orgblog"))
   ;(setq path-orgpublish  (concat (expand-file-name "../" path-to) "xiaoanh.github.io"))
   (require 'org)
+  (require 'ox)
   (require 'ox-publish)
                                           ; (require 'org-publish)
                                           ; (list path-orgblog)
@@ -377,7 +378,7 @@
            :sitemap-title "Sitemap"         ; ... with title 'Sitemap'.
            :author "xiaoanh"
   ;         :email "dayigu at gmail dot com"
-                                          ;          :style    "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/worg.css\"/>"
+            :style    "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/solarized-light.css\"/>"
            :sitemap-sort-files anti-chronologically
            :sitemap-file-entry-format "%d %t"
            )
@@ -421,7 +422,7 @@
            :sitemap-title "Sitemap"         ; ... with title 'Sitemap'.
            :author "xiaoanh"
   ;         :email "dayigu at gmail dot com"
-           :style    "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/worg.css\"/>"
+           :style    "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/solarized-light.css\"/>"
            )
           ("blog-static"
   ;         :base-directory "~/org/blog/"
@@ -440,9 +441,22 @@
           ;;
           ))))
                                           ; M-x org-publish-project RET blog RET
-
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ; setting, [2016-01-28]
                                           ; @key: postamble, [2016-01-18]
   (setq org-export-html-postamble nil)
+
+                                          ; http://stackoverflow.com/questions/12052013/beautiful-websites-using-emacss-org-mode
+                                          ; [2016-01-28]
+
+   (setq org-export-html-style-include-scripts nil
+         org-export-html-style-include-default nil)
+   (setq org-export-html-style
+         "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/solarized-light.css\" />")
+
+  (setq org-export-html-postamble-format 
+        '(("en" "<p class=\"postamble\">Last Updated %d. Created by %c</p>")))
+
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 
@@ -964,10 +978,9 @@
 #+END_SRC
 
 ** @org-present
-
 *** org-html5presentation.el-master
     1. @err: no such file org-exp.el
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp :tangle no
   (add-to-list 'load-path (concat org-dir "/org-html5presentation.el-master"))
   (require 'org-html5presentation)
 #+END_SRC
@@ -976,8 +989,10 @@
     2. require Reveal.js
     3. http://jr0cket.co.uk/slides/revealjs.html
        1. Copy ox-reveal.el to the Org-mode installation directory.
-       2. @err: Wrong number of arguments: #[(checkbox)
-       3. https://github.com/yjwen/org-reveal/issues/162
+       2. @err: Wrong number of arguments: #[(checkbox),
+          org-html-checkbox func in ox-html.el
+	  1. d:/emacs24.5/share/emacs/24.5/lisp/org/ox-html.elc" 
+	  2. https://github.com/yjwen/org-reveal/issues/162
 #+BEGIN_SRC emacs-lisp :tangle yes
                                           ; org-mode-master\lisp, [2016-01-27]
   (add-to-list 'load-path (concat org-dir "/org-reveal-master"))
@@ -989,6 +1004,7 @@
 
 #+END_SRC
 *** Epresent REDO [2016-01-27], [2014-12-10]
+    1. https://github.com/eschulte/epresent
 #+BEGIN_SRC emacs-lisp :tangle yes
   ; *** Epresent REDO [2016-01-27], [2014-12-10]
   ; Debugger entered--Lisp error: (file-error "Cannot open load file" "ox")  require(ox)
@@ -1019,12 +1035,23 @@
 
 ** TODO xiaoanh.github.io [2016-01-12] 
 *** @key:  =(org-publish "blog" t) or C-u M-x org-publish= , postamble [2016-01-15]
-    1. @err: _Skipping unmodified file d:/gitlib/orglib/orgblog/css/worg.css_
+    1. #+OPTIONS: html-postamble:nil
+       1. (setq org-export-html-postamble nil)
+    2. =org-info-js=, [2016-01-28]
+       1. #+INFOJS_OPT
+       2. org-info-js is a great javascript tool to navigate through a HTML page
+       3. http://orgmode.org/worg/code/org-info-js/
+    3. org-html-themes
+       1. https://github.com/fniessen/org-html-themes
+    4. @css: =href=, @err: D:/, DONE-WELL, ->css/solarized-light.css, [2016-01-28]
+       1. https://github.com/fniessen/org-html-themes
+       2. local for css
+    5. @err: _Skipping unmodified file d:/gitlib/orglib/orgblog/css/worg.css_
        1. As you discovered yourself, a prefix argument will also force Org to publish all files:
        2. force =(org-publish "blog" t)=
-    2. @err: clear version and validate
+    6. @err: clear version and validate
        1. http://stackoverflow.com/questions/9742836/how-do-i-format-the-postamble-in-html-export-with-org-mode
-       2.  (setq org-export-html-postamble nil)
+
 **** [#C] 使用Emacs org-mode + GitHub Pages来写博客 [2016-01-15]
        1. http://www.kuqin.com/shuoit/20150804/347399.html
        2. :publishing-function org-html-publish-to-html
@@ -1067,7 +1094,20 @@ git push -u origin master
        1. echo "Hello World" > index.html
 ** hs, =M-x hs-minor-mode=, [2016-01-08]
    1. C-c @ C-c
-** @org-publish
+** @org-publish, @org
+*** @org, @update, 8.3.2->8.3.3, both in origin and emacslib, [2016-01-28], =not download from orgmode.org=
+    1. void-function org-export-file-uri when Updated to 8.3.3
+       1. @err: even html no output
+    2. origin: D:\emacs24.5\share\emacs\24.5\lisp\org
+    3. DONE-WELL http://orgmode.org/elpa/ and origin emacs-24.5-bin-i686-mingw32
+    4. @err: http://orgmode.org/, =not download from orgmode.org=
+    5. org-20160125, working
+    6. but org-contrib-dir, not working, org-plus-contrib-20160125
+*** DONE-WELL  @css, =href, HTML_HEAD=, (#+STYLE: changed to #+HTML_HEAD: in org-mode 8.0), [2016-01-28]
+    1. http://thomasf.github.io/solarized-css/
+#+INFOJS_OPT: view:t toc:t ltoc:t mouse:underline buttons:0 path:http://thomasf.github.io/solarized-css/org-info.min.js
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://thomasf.github.io/solarized-css/solarized-light.min.css" />
+
 *** ssh: https://github.com/xiaoanh/xiaoanh.github.io.git [2016-01-12]
     1. from https://github.com/xiaoanh/xiaoanh.github.io
     2. git clone https://github.com/xiaoanh/xiaoanh.github.io
