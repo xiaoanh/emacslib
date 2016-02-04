@@ -3,7 +3,7 @@
 ** [#C] @basic: @gitlib: path-to, @bitlib: git-to, is for org files,  [2015-12-24]
    1. init.el must be separate [2015-12-25]
 #+BEGIN_SRC emacs-lisp :tangle yes :reports no 
-  ; Time-stamp: "xiaoanh 2016/01/28 16:47:05"
+  ; Time-stamp: "xiaoanh 2016/02/03 15:13:39"
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;       
   ; @dir,  "D:/gitlib/orglib/emacslib/" ->  "D:/gitlib/emacslib/" ;  be careful of org-link-abbrev-alist, [2016-01-18]
                                           ; @gitlib: path-to
@@ -180,6 +180,53 @@
 #+END_SRC
 
 * @other
+** @ditaa, @plantuml and @graphviz [2016-02-03]
+    1. PlantUML的用法还是比较简单的，首先安装好 Graphviz
+       1. http://www.graphviz.org/Download_windows.php
+    2. @ditaa
+       1. http://sourceforge.net/projects/ditaa/
+    3. @gnuwin, windows版本的Emacs 无法显示图片的解决方法
+       1. http://gnuwin32.sourceforge.net/packages.html
+       2. Win 的不能显示图片是因为编译后默认没有带几个DLL文件
+       3. 另外一个比较快的方法了在
+	  1. https://code.google.com/archive/p/emacs-for-windows/downloads
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                                          ; *** @ditaa, REDO [2016-02-03], [2015-07-02]
+  ; Ditaa is distributed with Org mode. The file ditaa.jar can be found in contrib/scripts. 
+  (setq org-ditaa-jar-path (concat path-to  "org-mode-master/contrib/scripts/ditaa.jar") )
+  ; (setq org-ditaa-jar-path (concat path-to "plugins/ditaa0_9.jar") )
+  ; (setq org-plantuml-jar-path "~/java/plantuml.jar")
+  (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
+  (org-babel-do-load-languages 'org-babel-load-languages '((ditaa . t) (dot . t))) 
+  ; this line activates ditaa
+  ; can not find ditaa.jar can be found in contrib/scripts
+  ; C:\Users\xiaoanh\Downloads\Emacs24.3\lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   
+#+END_SRC
+# #+BEGIN_SRC ditaa :file orgblog/img/hello-world.png
+#+BEGIN_SRC ditaa :file hello-world.png
+ Hello World!
+#+END_SRC
+
+#+BEGIN_SRC lisp
+  (image-type-available-p 'png)
+  (image-type-available-p 'jpeg)
+  (image-type-available-p 'tiff)
+#+END_SRC
+
+** Taskjuggler [2016-02-01 Mon]
+   1. http://orgmode.org/worg/org-tutorials/org-taskjuggler.html
+   2. C-c C-c taskjuggler_project RET
+   3. M-x org-export-as-taskjuggler-and-open
+*** install ruby, ruby-v2.2.3, C:/ruby22
+      1. https://lujianmei.gitbooks.io/taskjuggler-manage-projects/content/Install_taskjuggler.html
+#+BEGIN_SRC emacs-lisp :tangle yes
+  ; org-contrib-dir
+  (require 'ox-taskjuggler)
+#+END_SRC
+
 ** @python, @win: C:\Program Files\Python35\, [2016-01-20]
    1. @cmd, not included 
 #+BEGIN_SRC emacs-lisp :tangle no
@@ -249,6 +296,7 @@
 #+END_SRC
 
 ** [#C] @ac, @completion
+   1. add log4e, yaxception, auto-complete-pcmp and org-ac in github [2016-01-28 Thu]
 #+BEGIN_SRC emacs-lisp :tangle yes
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ; must add yaxception, log4e, auto-complete-pcmp and org-ac in auto-complete-master dir, [2016-01-20]
@@ -1011,19 +1059,8 @@
   (add-to-list 'load-path (concat path-to "epresent-master"))
   (require 'epresent)
   ; epresent and reveal fail, due to ox missing and latest org-mode 8.0, [2015-07-07]
-
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ; *** @ditaa, [2015-07-02]
-  ; (setq org-ditaa-jar-path “~/.emacs.d/plugins/ditaa/ditaa0_9.jar”) 
-  ;(setq org-plantuml-jar-path “~/java/plantuml.jar”)
-  ; (add-hook ‘org-babel-after-execute-hook ‘org-display-inline-images ‘append)
-  ; (org-babel-do-load-languages 'org-babel-load-languages '((ditaa . t))) 
-  ; this line activates ditaa
-  ; can not find ditaa.jar can be found in contrib/scripts
-  ; C:\Users\xiaoanh\Downloads\Emacs24.3\lisp
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   
 #+END_SRC
-   
 * @debug [2015-12-28]
 ** @markdown, 
 *** DONE @win: markdownpad, =@PATH=, [2016-01-15]
@@ -1094,15 +1131,26 @@ git push -u origin master
        1. echo "Hello World" > index.html
 ** hs, =M-x hs-minor-mode=, [2016-01-08]
    1. C-c @ C-c
-** @org-publish, @org
+** @org-publish, @org, @org-protocol
+*** @org-protocol, [2016-02-03]
+    1. http://orgmode.org/worg/org-contrib/org-protocol.html#orgheadline5
+    2. [emacs] 为什么说org-mode是个神器
+       1. http://bamanzi3.blogspot.fr/2012/05/emacs-org-mode.html
+
+*** [#C] @key: @org, current is v8.3.2, =keepaspectratio and height=, [2016-02-02]
+    1. @err: =D:-> //D:=, Full path figure export to LaTeX error in org-mode in Windows 7
+       1. http://emacs.stackexchange.com/questions/7779/full-path-figure-export-to-latex-error-in-org-mode-in-windows-7
+    2. #+ATTR_LaTeX: :align "centering" :width 0.9\textwidth :height 0.9\textheight :options keepaspectratio
+    3. no commented line before figure
+    4. #+OPTIONS: H:2, not +BEAMER_FRAME_LEVEL: 2,  otherwise, no frame
 *** @org, @update, 8.3.2->8.3.3, both in origin and emacslib, [2016-01-28], =not download from orgmode.org=
     1. void-function org-export-file-uri when Updated to 8.3.3
        1. @err: even html no output
     2. origin: D:\emacs24.5\share\emacs\24.5\lisp\org
-    3. DONE-WELL http://orgmode.org/elpa/ and origin emacs-24.5-bin-i686-mingw32
-    4. @err: http://orgmode.org/, =not download from orgmode.org=
-    5. org-20160125, working
-    6. but org-contrib-dir, not working, org-plus-contrib-20160125
+    3. @err: http://orgmode.org/, =not download from orgmode.org=
+    4. DONE-WELL http://orgmode.org/elpa/ and origin emacs-24.5-bin-i686-mingw32
+       1. org-20160125, working
+       2. but org-contrib-dir not working, org-plus-contrib-20160125
 *** DONE-WELL  @css, =href, HTML_HEAD=, (#+STYLE: changed to #+HTML_HEAD: in org-mode 8.0), [2016-01-28]
     1. http://thomasf.github.io/solarized-css/
 #+INFOJS_OPT: view:t toc:t ltoc:t mouse:underline buttons:0 path:http://thomasf.github.io/solarized-css/org-info.min.js
@@ -1228,6 +1276,13 @@ git push -u origin master
     1. org-agenda-files
 
 * @study: @dotemacs
+** Microsoft Project, org-taskJuggler, [2016-02-01 Mon]
+*** emacs gantt chart
+    1. A Gantt chart created using Microsoft Project (MSP)
+*** TaskJuggler
+    1. Project Management beyond Gantt Chart Drawing
+*** Etask
+    1. Emacs Major Mode for (Project) Task Management and Gantt Charts
 ** C-c a L, (org-timeline), timeline
    1. milestone or roadmap
    2. Helm Projectile
@@ -1239,11 +1294,10 @@ git push -u origin master
 *** redguardtoo/mastering-emacs-in-one-year-guide [2016-01-19]
    2. Sylvain Benner’s spacemacs (Spacemacs是针对Vim用户优化的，所以非Vim用户不用试了)
 ** @ln [2016-01-15]
-*** internal links, [[target]], =FIRST TARGET, THEN CITE []=
+*** internal links, [[target]], =FIRST <<TARGET>>, THEN CITE [[TARGET][]]=
     1. #<<target>>
        1. C-c C-o, C-c &
     2. @key: first <<PUBS>>, then _[[PUBS][PUBLICATIONS]]_
-
 ** @orglib @update =../=
 *** @lisp:  (expand-file-name ".." path-to)
   ; (expand-file-name ".." path-to)
@@ -1724,6 +1778,9 @@ value))
 *** datayes
     1. http://www.datayes.com/#/about
 *** 大数据
+**** 陆金所，算法工程师
+     1. https://promo.lu.com/activity-pages/job-20150213/detail_05.html
+     
 *** 上海金融期货信息技术有限公司
     1. 上海金融期货信息技术有限公司（简称：中金所技术公司）
     2. http://www.cffexit.com.cn/static/4000.html
@@ -1745,6 +1802,9 @@ value))
     4. 上海磐石： http://www.stonecapital.com.cn/index.jsp
 *** [全职] 夏普中国实验室 招聘无线通信技术研究员
     1. 联系方式：liurenmao@cn.sharp-world.com
+*** 上海物联网有限公司
+    1. 公司信息：   国企 / 100-499人
+    2. 图像算法
 ** [#B] 浦江人才计划, =浦江计划留学人员资格认定=
 *** 关于发布《上海市浦江人才计划管理办法》的通知, B创新, [2016-01-26]
     1. http://www.stcsm.gov.cn/wsbs/kyjgkt/pjrc/zcfg/343280.htm
@@ -1753,11 +1813,10 @@ value))
        B类项目主要资助以企业为依托的科技创新创业，包括创新和创业两类，
        其中创新类针对企业引进的留学人员，创业类针对自主创办科技企业的
        留学人员
-*** 上海物联网有限公司
-    1. 公司信息：   国企 / 100-499人
-    2. 图像算法
 
 ** @python [2016-01-15]
+*** install numpy
+    1. NumPy的话，在IDLE里面执行import numpy
 *** Examples
 #+BEGIN_SRC python :tangle no
 #+END_SRC
@@ -1821,3 +1880,4 @@ value))
    8. Shanghai Theatre Academy
    9. =tomb-sweeping, spring-festival, mid-autumn, dragon-boat=
 
+      
