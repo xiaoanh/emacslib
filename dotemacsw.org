@@ -3,7 +3,7 @@
 ** [#C] @basic: @gitlib: path-to, @bitlib: git-to, is for org files,  [2015-12-24]
    1. init.el must be separate [2015-12-25]
 #+BEGIN_SRC emacs-lisp :tangle yes :reports no 
-  ; Time-stamp: "xiaoanh 2016/02/03 15:13:39"
+  ; Time-stamp: "xiaoanh 2016/02/15 11:04:48"
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;       
   ; @dir,  "D:/gitlib/orglib/emacslib/" ->  "D:/gitlib/emacslib/" ;  be careful of org-link-abbrev-alist, [2016-01-18]
                                           ; @gitlib: path-to
@@ -1704,10 +1704,11 @@ value))
    5. 脸皮够厚。这个就是soft skill，我觉得每个行业想做得好，纯研究类、教育类除外，这个能力都很重要。
 *** [#C] @note
 **** @interview
-     1. A、B两证券的权重、波动率、相关系数、贝塔值
-     2. 一价定律(The Law Of One Price)
-     3. 贝塔系数反映了个股对市场（或大盘）变化的敏感性，也就是个股与大盘的相关性或通俗说的“股性”。
-     4. 两正整数M,N之间的最大公因数, 辗转相除法
+     1. This work was supported by the National Science and Technology Major Project of the Ministry of Science and Technology of China (No. 2015ZX03001021).
+     2. A、B两证券的权重、波动率、相关系数、贝塔值
+     3. 一价定律(The Law Of One Price)
+     4. 贝塔系数反映了个股对市场（或大盘）变化的敏感性，也就是个股与大盘的相关性或通俗说的“股性”。
+     5. 两正整数M,N之间的最大公因数, 辗转相除法
 	1. gcd：求最大公因数, lcm：求最小公倍数
 	2. rN−2 = qN rN−1
  function gcd(a, b)
@@ -1781,6 +1782,25 @@ value))
 **** 陆金所，算法工程师
      1. https://promo.lu.com/activity-pages/job-20150213/detail_05.html
      
+*** 莫泰山
+    1. 莫泰山，中国人民大学学士、中国人民银行研究生部经济学硕士。历任中国证券监督管理委员会基金监管部副处长、基金监管部处长、交银施罗德基金管理有限公司副总经理
+    2. bdfund, http://www.bdfund.com.cn/joinus.aspx
+*** @51job, [2016-02-15]
+**** 总行资金运营中心衍生品部量化分析师, 上海-浦东新区, 100000-600000/年, 平安银行股份有限公司
+    1. http://jobs.51job.com/shanghai-pdxq/73140663.html
+**** 花旗银行（中国）有限公司上海分行（个人银行
+     1. IT Project Manager
+     2. 上海-浦东新区
+     3. 20-30万/年
+     4. http://jobs.51job.com/shanghai-pdxq/74686505.html?s=2
+**** 上海拍拍贷金融信息服务有限公司
+     1. http://jobs.51job.com/all/co2718210.html
+**** 三菱东京日联银行（中国）有限公司
+     1. IT基础架构, 上海-浦东新区
+     2. http://jobs.51job.com/shanghai-pdxq/62306735.html
+*** 私募基金管理人公示信息, [2016-02-15]
+    1. https://pf.amac.org.cn/open/comNotice/view
+    2. efn: http://jobs.cenet.org.cn/list-117-1.html
 *** 上海金融期货信息技术有限公司
     1. 上海金融期货信息技术有限公司（简称：中金所技术公司）
     2. http://www.cffexit.com.cn/static/4000.html
