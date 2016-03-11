@@ -3,7 +3,7 @@
 ** [#C] @basic: @gitlib: path-to, @bitlib: git-to, is for org files,  [2015-12-24]
    1. init.el must be separate [2015-12-25]
 #+BEGIN_SRC emacs-lisp :tangle yes :reports no 
-  ; Time-stamp: "xiaoanh 2016/02/15 11:04:48"
+  ; Time-stamp: "xiaoanh 2016/03/11 14:40:53"
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;       
   ; @dir,  "D:/gitlib/orglib/emacslib/" ->  "D:/gitlib/emacslib/" ;  be careful of org-link-abbrev-alist, [2016-01-18]
                                           ; @gitlib: path-to
@@ -180,6 +180,26 @@
 #+END_SRC
 
 * @other
+** @cs, [2016-02-29]
+#+BEGIN_SRC emacs-lisp :tangle yes 
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (add-to-list 'load-path (concat path-to "csharp-mode-master/"))
+  (require 'csharp-mode)
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC 
+
+** @yas, [2016-02-23]
+   1. https://github.com/capitaomorte/yasnippet
+   2. yas/choose-value
+   3. YASnippet (Yet Another Snippet)
+   4. is inspired from [TextMate's][textmate-snippets] syntax
+#+BEGIN_SRC emacs-lisp :tangle yes 
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (add-to-list 'load-path (concat path-to "yasnippet-master/"))
+  (require 'yasnippet)
+  (yas-global-mode 1)
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC 
 ** @ditaa, @plantuml and @graphviz [2016-02-03]
     1. PlantUML的用法还是比较简单的，首先安装好 Graphviz
        1. http://www.graphviz.org/Download_windows.php
@@ -222,7 +242,7 @@
    3. M-x org-export-as-taskjuggler-and-open
 *** install ruby, ruby-v2.2.3, C:/ruby22
       1. https://lujianmei.gitbooks.io/taskjuggler-manage-projects/content/Install_taskjuggler.html
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp :tangle no
   ; org-contrib-dir
   (require 'ox-taskjuggler)
 #+END_SRC
@@ -1083,6 +1103,7 @@
     4. @css: =href=, @err: D:/, DONE-WELL, ->css/solarized-light.css, [2016-01-28]
        1. https://github.com/fniessen/org-html-themes
        2. local for css
+       3. href="http://thomasf.github.io/solarized-css/solarized-light.min.css"
     5. @err: _Skipping unmodified file d:/gitlib/orglib/orgblog/css/worg.css_
        1. As you discovered yourself, a prefix argument will also force Org to publish all files:
        2. force =(org-publish "blog" t)=
@@ -1276,6 +1297,12 @@ git push -u origin master
     1. org-agenda-files
 
 * @study: @dotemacs
+** @latex: includepdf, merge, angle [2016-02-19]
+   1. \includepdf[landscape=true, angle=90, pages=-]{2016021702.pdf}
+** @yas, Shulei Zhu把emacs org-mode用的太神了！
+   1. yas/choose-value 可以搞定
+   2. 不知道开头 #+BEAMER_FRAME_LEVEL: 里通过下拉菜单选择是怎么搞的，yasnippet能实现
+
 ** Microsoft Project, org-taskJuggler, [2016-02-01 Mon]
 *** emacs gantt chart
     1. A Gantt chart created using Microsoft Project (MSP)
@@ -1703,6 +1730,16 @@ value))
    4. 止盈止损 + 心态
    5. 脸皮够厚。这个就是soft skill，我觉得每个行业想做得好，纯研究类、教育类除外，这个能力都很重要。
 *** [#C] @note
+**** @quant
+     1. 业内的朋友刘震有个比喻：阿尔法是肉，贝塔是面
+	1. http://www.swjrzk.com/14269.html
+     2. 证券(securities)+套利（一价定理）
+     3. 证券投资分析
+     4. 漕河泾开发区
+**** @sci, 灵芯集成, 基带算法
+     1. www.sci-inc.com.cn/
+     2. 公司调整，没有岗位了
+**** Business Intelligence，简写为BI
 **** @interview
      1. This work was supported by the National Science and Technology Major Project of the Ministry of Science and Technology of China (No. 2015ZX03001021).
      2. A、B两证券的权重、波动率、相关系数、贝塔值
@@ -1759,8 +1796,17 @@ value))
      1. 浦江人才计划
 	1. http://www.stcsm.gov.cn/wsbs/kyjgkt/pjrc/xgtz/343281.htm
  
-**** @uqer
+**** @uqer, @pass Ansel1986 | @pass: usual, 
      1. https://uqer.io/help/faq/
+     2. 优矿—通联量化实验室, http://q.datayes.com/
+
+***** 量化分析师的Python日记, @python
+      1. http://bbs.pinggu.org/thread-3753704-1-1.html
+      2. pandas: series and dataframe (index)
+	 1. Series 是1-D的，DataFrame是2-D的
+      3. D9: 二叉树算法
+	 1. 二叉树（英语：Binary tree）是每个节点最多有两个子树的树结构
+
 **** 量化策略研究过程 how to write
      1. 在贝尔实验室担任研究科学家期间，为满足未来5G高密度和高容量的需
        	求，首次提出了新颖的交织信道聚合算法 (_11倍容量提升且成本降低
@@ -1776,16 +1822,45 @@ value))
        	司获利
      2. 3年内希望担任量化研究的manager，领导团队不断前进
      3. 5年后成为业界的知名量化专家，成为公司的中坚力量
-*** datayes
-    1. http://www.datayes.com/#/about
-*** 大数据
-**** 陆金所，算法工程师
+*** 投行大数据研究员
+**** bigdata-research @chengdu
+     1. http://www.bigdata-research.org/
+**** NEC中国研究院【大数据研究员】, 工作地点：北京 
+     1. NEC中国研究院 【大数据研究员-HDM2015】
+     2. 北京市・中関村に「NEC中国研究院」を設立し
+     3. @shanghai
+     4. http://www4.newsmth.net/nForum/#!article/Career_PHD/224395?p=1
+**** 【全职】SAP Labs CHINA招聘（博士优先）, 大数据科学家/研究员, [2016-02-16]
+     1. http://www.yingjiesheng.com/job-002-163-940.html
+     2. SAP(这是一家德国公司，从事数据处理系统应用和产品开发)
+     3. SAP中国研究院:晨晖路1001号(近金科路
+**** 投行大数据研究员, [2016-02-16]
+     1. 想成为投行大数据研究员？资深人士告诉你哪些技能是必备的
+	1. http://news.efinancialcareers.cn/%E8%81%8C%E5%9C%BA%E5%AE%9D%E5%85%B8/307/
+	2. 在IT方面， Hadoop显然是你必须要了解的一个重要工具 
+       	   1. Hadoop的发音是 [hædu:p]。
+	   2. to replace SQL
+	   3. 認識大數據的黃色小象幫手–– Hadoop
+	3. 在硬件方面，很重要的一点是要记住投行业基本属于*nix世界（比如Linux，等等）
+	4. 虽然同样高效的Python和R
+**** TODO 陆金所，算法工程师, again [2016-02-16]
      1. https://promo.lu.com/activity-pages/job-20150213/detail_05.html
-     
+     2. 陆金所—中国平安集团成员
+     3. 银行系（陆金所）上市系（宜人贷）国资系（开鑫贷，芒果金融）民营系（人人贷）等吧，都是不错的！
+**** datayes
+     1. http://www.datayes.com/#/about
+      
 *** 莫泰山
     1. 莫泰山，中国人民大学学士、中国人民银行研究生部经济学硕士。历任中国证券监督管理委员会基金监管部副处长、基金监管部处长、交银施罗德基金管理有限公司副总经理
     2. bdfund, http://www.bdfund.com.cn/joinus.aspx
+*** bankhr
+**** http://www.bankhr.com/so/224107.html
 *** @51job, [2016-02-15]
+**** 中信证券
+     1. 量化/期权研究员
+     2. 上海-浦东新区
+     3. 6000-15000/月中信期货有限公司
+     4. http://jobs.51job.com/shanghai-pdxq/69658141.html?s=0
 **** 总行资金运营中心衍生品部量化分析师, 上海-浦东新区, 100000-600000/年, 平安银行股份有限公司
     1. http://jobs.51job.com/shanghai-pdxq/73140663.html
 **** 花旗银行（中国）有限公司上海分行（个人银行
@@ -1798,9 +1873,17 @@ value))
 **** 三菱东京日联银行（中国）有限公司
      1. IT基础架构, 上海-浦东新区
      2. http://jobs.51job.com/shanghai-pdxq/62306735.html
-*** 私募基金管理人公示信息, [2016-02-15]
-    1. https://pf.amac.org.cn/open/comNotice/view
-    2. efn: http://jobs.cenet.org.cn/list-117-1.html
+*** 【全职】McKinsey_TMT-Research Analyst
+    1.  投递简历请先加微信：fengzh27（备注：姓名 学校 专业 投递职位）
+*** Index Capital指数资本 分析师/IR， [2016-02-16]
+    1. 招聘职位：分析师【全职】
+    2. 公司总部位于上海
+    3. https://bbs.sjtu.edu.cn/bbscon,board,JobInfo,file,M.1455604705.A.html
+    4. 工作地点：上海虹口区四川北路
+    5. 请将简历发至 hr@indexvc.com
+*** 【prefer Junior】世界顶尖投行Strategy quant @sjtu
+   1. My tel. number is 021-51081455
+   2. My email is brandyyang@allegisbn.com
 *** 上海金融期货信息技术有限公司
     1. 上海金融期货信息技术有限公司（简称：中金所技术公司）
     2. http://www.cffexit.com.cn/static/4000.html
@@ -1808,23 +1891,27 @@ value))
     1. http://www.cqiri.com/
 *** [招聘]量化研究员/投资经理, quack2006@163.com
     1. http://www.yingjiesheng.com/job-002-199-088.html
-*** DONE [#C] 上海明溪资产管理有限公司,  hr@clearstreamasset.com
-    1. 上海明溪资产管理有限公司成立于2015年，注册资本1000万
-    2. 上海市浦东新区杨高南路729号陆家嘴世纪金融广场1号楼1503室
+*** PE私募
+**** 私募基金管理人公示信息, [2016-02-15]
+     1. https://pf.amac.org.cn/open/comNotice/view
+     2. efn: http://jobs.cenet.org.cn/list-117-1.html
+**** DONE [#C] 上海明溪资产管理有限公司,  hr@clearstreamasset.com
+     1. 上海明溪资产管理有限公司成立于2015年，注册资本1000万
+     2. 上海市浦东新区杨高南路729号陆家嘴世纪金融广场1号楼1503室
 
-*** [全职] 量化交易系统开发首席架构师/首席技术, hf_zhaopin@126.com
-    1. 简历发送至 hf_zhaopin@126.com
-*** DONE [#E] [全职]【股票量化部】高级研究员(投资经理岗), 鋆石, hf_zhaopin@126.com
-    1. 简历发送至 hf_zhaopin@126.com
-    2. 杭州鋆石
-    3. 杭州鋆石互联网金融服务有限公司
-       1. http://www.precise-investing.com/
-    4. 上海磐石： http://www.stonecapital.com.cn/index.jsp
-*** [全职] 夏普中国实验室 招聘无线通信技术研究员
-    1. 联系方式：liurenmao@cn.sharp-world.com
+**** [全职] 量化交易系统开发首席架构师/首席技术, hf_zhaopin@126.com
+     1. 简历发送至 hf_zhaopin@126.com
+**** DONE [#E] [全职]【股票量化部】高级研究员(投资经理岗), 鋆石, hf_zhaopin@126.com
+     1. 简历发送至 hf_zhaopin@126.com
+     2. 杭州鋆石
+     3. 杭州鋆石互联网金融服务有限公司
+       	1. http://www.precise-investing.com/
+     4. 上海磐石： http://www.stonecapital.com.cn/index.jsp
 *** 上海物联网有限公司
     1. 公司信息：   国企 / 100-499人
     2. 图像算法
+*** [全职] 夏普中国实验室 招聘无线通信技术研究员
+    1. 联系方式：liurenmao@cn.sharp-world.com
 ** [#B] 浦江人才计划, =浦江计划留学人员资格认定=
 *** 关于发布《上海市浦江人才计划管理办法》的通知, B创新, [2016-01-26]
     1. http://www.stcsm.gov.cn/wsbs/kyjgkt/pjrc/zcfg/343280.htm
@@ -1834,12 +1921,57 @@ value))
        其中创新类针对企业引进的留学人员，创业类针对自主创办科技企业的
        留学人员
 
+** Hadoop, @bigdata
+   1. international science olympians (IMO, IPhO, IChO, IOI, IBO)
+   2. International Mathematical Olympiad (IMO)
+   3. 关联规则挖掘技术已经被广泛应用于金融行业企业中用以预测客户的需求，各银行在自己的ATM 机上通过捆绑客户可能感兴趣的信息供用户了解并获取相应信息来改善自身的营销。
+   4. 数据挖掘十大经典算法
+*** hadoop
+    1. http://www.ppvke.com/Blog/archives/3263
+
+** @vs, c#, [2016-02-26 Fri]
+   1. Visual Studio包含Visual C++。功能比Visual C++强大很多。楼上说得很恰当，就是类似于word和office的区别
+   2. @matlab:  A simple UDP communications application
+      1. using Matlab's Java interface.
+   3. import java.net.DatagramSocket
+   4. socket通讯(UDP)User Datagram Protocol
+      1. Copy Rx samples from Rx buffer to File buffer
+      2. 2304 * kOfdmSymbols
+      3. each OFDM symbol is divided into 8 packets
+      4. kPacketSize = kPktHeadBytes + kPktBodyBytes;
+   5. using System.Net
+      1. IPAddress是ip，如“127.0.0.1”, IPEndPoint是ip和端口对的组合，如“127.0.0.1:80”  
+
 ** @python [2016-01-15]
-*** install numpy
-    1. NumPy的话，在IDLE里面执行import numpy
-*** Examples
+*** @opencv, [2016-03-11 Fri]
+    1. OpenCV (Open Source Computer Vision)
+    2. 图像的就业，感觉压力挺大的，感觉就业不是太好
+    3. 最近版上有不少人在讨论图像处理的就业方向，似乎大部分都持悲观的态度
+*** @book: MATLAB数据分析与挖掘实战, [2016-02-24]
+    1. Python for Data Analysis
+    2. 机器学习实战
+*** PANDAS (Python Data Analysis) library, big data
+    1. http://social-metrics.org/analyzing-big-data-with-python-pandas/
+*** Installing pandas with Anaconda, [2016-03-10], pycharm
+    1. https://docs.continuum.io/anaconda/install
+       1. Anaconda, a cross-platform (Linux, Mac OS X, Windows) Python
+          distribution for data analytics and scientific computing.
+    2. Installing pandas with Miniconda¶
+       1. http://pandas.pydata.org/pandas-docs/stable/install.html
+    3. Installing from PyPI¶
+       1. https://pypi.python.org/pypi/pandas
+    4.  Microsoft Visual C++ Compiler for Python 2.7 
+       1. 安裝pandas前先安 numpy、six、pytz、dateutil 這四個套件，six系統已安裝
+    5. Pycharm创建、运行Python程序
+*** install numpy, elpy, pip
+**** NumPy的话，在IDLE里面执行import numpy
+**** @elpy, Elpy is the Emacs Python Development Environment.
+      1. https://github.com/jorgenschaefer/elpy
+*** Examples, application
 #+BEGIN_SRC python :tangle no
 #+END_SRC
+    1. 25行Python代码完成人脸识别, opencv, pattern match
+    2. 图像处理PIL - Python Image Library
 *** 网络爬虫，即Web Spider，是一个很形象的名字
 *** 10 种机器学习算法的要点（附 Python 和 R 代码）
     1. http://blog.jobbole.com/92021/
@@ -1890,14 +2022,17 @@ value))
 #+END_SRC
 
 ** @eng, [2016-01-15]
-   1. chrono
-   2. ample
-   3. buffalo
-   4. =facilitation=
-   5. =unanimous, be handy, ProAndCon=
-   6. Mnemonic
-   7. postamble
-   8. Shanghai Theatre Academy
-   9. =tomb-sweeping, spring-festival, mid-autumn, dragon-boat=
+   1. =go beyond, tackle challanges=
+   2. wrangle, mung
+   3. aspect, dunno man, undeniable
+   4. chrono
+   5. ample
+   6. buffalo
+   7. =facilitation=
+   8. =unanimous, be handy, ProAndCon=
+   9. Mnemonic
+   10. postamble
+   11. Shanghai Theatre Academy
+   12. =tomb-sweeping, spring-festival, mid-autumn, dragon-boat=
 
       
