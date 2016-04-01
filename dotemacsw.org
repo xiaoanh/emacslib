@@ -3,7 +3,7 @@
 ** [#C] @basic: @gitlib: path-to, @bitlib: git-to, is for org files,  [2015-12-24]
    1. init.el must be separate [2015-12-25]
 #+BEGIN_SRC emacs-lisp :tangle yes :reports no 
-  ; Time-stamp: "xiaoanh 2016/03/11 14:40:53"
+  ; Time-stamp: "xiaoanh 2016/03/31 15:42:24"
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;       
   ; @dir,  "D:/gitlib/orglib/emacslib/" ->  "D:/gitlib/emacslib/" ;  be careful of org-link-abbrev-alist, [2016-01-18]
                                           ; @gitlib: path-to
@@ -1822,6 +1822,35 @@ value))
        	司获利
      2. 3年内希望担任量化研究的manager，领导团队不断前进
      3. 5年后成为业界的知名量化专家，成为公司的中坚力量
+*** 工科博士可以去做行业研究员嘛
+发信人: xinzaitiao (sylvan), 信区: WorkLife
+标  题: Re: 工科博士可以去做行业研究员嘛
+发信站: 水木社区 (Thu Feb  4 09:00:01 2016), 站内
+  
+行业需要的人不多，靠谱的机构不多，中国整个资产管理行业都还没发展起来。
+  
+即使入职了以后，大部分a股私募、公募都还是炒作概念的阶段和玩法，需要的能力都是搞关系搞消息和发掘题材， 和博士关系不大，销售或者中介只要愿意思考，比博士更有优势。
+  
+极少部分外资，做港股和美股的是基于纯基本面你研究，可能需要博士这样的人，深入分析行业，对行业的跟踪分析持续数年。
+  
+一般top2的phd，如果没啥财务基础或者实习经历，投个100个简历能有个个位数的面试机会，面上10个，能有1个offer吧。
+  
+这行门槛高的原因就是，靠谱和不靠谱的机构，研究员一般都在5个左右，机构不随发展扩大而添人，而且很多牛逼的机构人非常少，2-3个人做投资决策。做到亚洲第一规模的私募，研究员人数也不会20个。所以机会太少了，比起其他行业。
+  
+好处是中国资产管理行业根本就没发展起来，而这个行业是美国最大的行业，控制着数万亿美元的资金和投资，中国这行的规模连人家估计几十分之一都没到。可以看看，苹果一只股票一天的成交量就有100亿美元，超过港股全部成交额。所以只要中国经济发展，这个行业是有可能成长出来新的阿里、腾讯级别的企业。
+  
+靠谱机构人均工资应该在20万美金以上，不靠谱的机构就是小几十万rmb。
+  
+【 在 yhy8623 (yhy) 的大作中提到: 】
+: 工学的，没有经济学经验，入行需要什么条件，未来有发展嘛
+发信人: nowherefly (LittlePan), 信区: WorkLife
+标  题: Re: 工科博士可以去做行业研究员嘛
+发信站: 水木社区 (Thu Feb  4 19:38:14 2016), 站内
+  
+楼上的，你漏了券商啊，券商招的人多。计算机、电子的博士机会肯定是有的，但是首先必须去实习
+-- 
+  
+
 *** 投行大数据研究员
 **** bigdata-research @chengdu
      1. http://www.bigdata-research.org/
@@ -1921,6 +1950,86 @@ value))
        其中创新类针对企业引进的留学人员，创业类针对自主创办科技企业的
        留学人员
 
+** @ANN, [2016-03-17 Thu]
+*** @cnn, 卷积神经网络, CCM
+    1. CCM: CHANNEL CAPACITY MAXIMIZATION
+    2. 卷积神经网络（Convolutional Neural Network）总结
+       1. http://blog.sina.com.cn/s/blog_870a639201019pee.html
+       2. genpath('D:\matlab1411\DeepLearnToolbox')
+**** 有关深度学习领域的几点想法 
+     1. http://blog.csdn.net/u013088062/article/details/50893901
+
+**** 漫谈ANN(2)：BP神经网络
+     1. 双隐层感知器就足以解决任何复杂的分类问题
+     2. 多层感知器确实是非常理想的分类器，但问题也随之而来：隐层的权值怎么训练？
+     3. 前面我们说到，多层感知器在如何获取隐层的权值的问题上遇到了瓶颈。
+        既然我们无法直接得到隐层的权值，能否先通过输出层得到输出结果和
+        期望输出的误差来间接调整隐层的权值呢？
+*** @classifier, 分类器, boost, RF, AdaBoost (adaptive boosting) , [2016-03-29 Tue]
+    1. 随机化（比如random forest），Boosting（比如GBDT）都是其中典型的方法
+    2. 一般这种模型比较简单，称为弱分类器(weak learner)每次分类都将上一次分错的数据权重提高一点再进行分类
+    3. Rainforest 数据挖掘中的雨林算法
+       1. SPRINT算法
+    4. AdaBoost，是英文"Adaptive Boosting"（自适应增强）的缩写，是一种机器学习方法
+       1. AdaBoost方法的自适应在于：前一个分类器分错的样本会被用来训练下一个分类器
+*** UFLDL_Tutorial
+    1. http://ufldl.stanford.edu/wiki/index.php/UFLDL_Tutorial
+*** @dnn, 深度神经网络, [2016-03-22 Tue], @DarkScop
+    1. DarkScope从这里开始 a learner, like Machine Learning
+    2. 【面向代码】学习 Deep Learning（一）Neural Network 
+       1. http://blog.csdn.net/dark_scope/article/details/9421061
+       2. 理解机器学习算法的一点心得: http://blog.csdn.net/Dark_Scope/article/details/25485893
+       3. DeepLearnToolbox-master: https://github.com/rasmusbergpalm/DeepLearnToolbox
+    3. @py, deeplearning.net/tutorial/deeplearning.pdf
+    4. 深度神经网络（deep neuron networks, DNN）是一种判别模型，可以使
+       用反向传播算法进行训练
+       1. https://github.com/rasmusbergpalm/DeepLearnToolbox
+       2. Convolutional Neural Nets
+       3. 图灵测试（Turing Testing
+    5. 非监督：无需用户标注, clustering from Statistics Toolbox
+       1. whereas in unsupervised learning no datasets are provided,
+          instead the data is clustered into different classes 
+       2. Why does unsupervised pre-training help deep learning?
+       3. Unsupervised learning, clustering
+	  1. The most common unsupervised learning method is cluster analysis
+	  2. k-means clustering,  K-平均算法
+*** @key: @matlab NN-examples.pdf
+    1. 人工神经网络Artificial Neural Networks 
+    2. http://lab.fs.uni-lj.si/lasin/wp/IMIT_files/neural/NN-examples.pdf
+    3. Libsvm, 支持向量机（SVM）, SVM(Support Vector)
+    4. 小波分析把原始的信号分解为两个部分：近似（Approximation）和细节（Detail），近似就是我们通常所说的信号的低频部分，而细节就是高频部分
+    5. @matlab: R2009B-v7.9.0 weak, need R2013B
+**** @matlab: NN toolbox, R2009B
+***** [#C] annbp.m, @matlab, @WELLDONE, 漫谈ANN(2)：BP神经网络, newff, sim
+      1. 漫谈ANN(2)：BP神经网络
+      2. http://hahack.com/reading/ann2/
+      3. %% 2.生成BP网络。用newff函数生成前向型BP网络，设定隐层中神经元数目为10
+****** BP（Back Propagation）, annbp.m
+       1. 信号是前向传播的，
+       2. 它的学习规则是使用最速下降法，通过反向传播来不断 调整网络的权值和阈值，使网络的误差平方和最小
+
+***** [#C] doc_train.m, from matlab doc =network=, newff
+	1. % @WELLDONE, net.trainParam, from train Purpose, Train neural network
+	2. net = newff(P,T,5);
+	   1. % Here a network is created with one hidden layer of five neurons.
+	3. % add by @me, net.trainParam.goal = 1e-5;
+***** demop4.m, Demos->perceptron->Outlier Input Vectors, @WELLDONE
+	1. newp
+	2. [net,Y,E] = adapt(net,P,T);
+***** demogrn1.m, newgrnn and sim, @WELLDONE, GRNN Function Approximation
+       1. % @note: toolbox/nnet/nndemos/, NEWGRNN to create a generalized regression
+       2. spread = 0.7; net = newgrnn(P,T,spread); A = sim(net,P);
+**** nn02_neuron_output.m @WELLDONE, FEVAL from net NN-examples.pdf
+     1. % @note: feval, @WELLDONE
+     2. PLOTPV (Plot perceptron input/target vectors)
+     3. PLOTPC, plot classification line on perceptron vector plo
+*** @book: MATLAB 神经网络30个案例分析
+**** 人工神经网络入门讲稿.pdf
+     1. http://www.chinaai.org/paper/ai/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%85%A5%E9%97%A8%E8%AE%B2%E7%A8%BF.pdf
+**** @book: 神经网络从入门到精通.pdf
+**** @book: Neural Network Toolbox
+     1. Entering help percept at the MATLAB command
+
 ** Hadoop, @bigdata
    1. international science olympians (IMO, IPhO, IChO, IOI, IBO)
    2. International Mathematical Olympiad (IMO)
@@ -1992,7 +2101,38 @@ value))
     2. root complex (MEMORY) -> switch -> endpoint
 *** @book: PCI Experss体系结构导读
     1. http://blog.sina.com.cn/s/articlelist_1685243084_3_1.html
-** @other
+** @other 
+*** @home, [2016-03-17 Thu]
+**** 购房贷款计算器, fang.com
+     1. http://fang.com/house/tools.htm
+     2. 单价：15300，面积：53， 按揭成数： 7成
+     3. 2009年1月份与2008年12月份相比较称其为环比。
+     4. 同比即本年某月与上年同期相比，如2009年5月份与2008年5月份的工业产值的比较，简称同比。
+     5. 上海 二手房2月均价35091元/㎡，环比：4.68%↑，同比：15.01%↑
+     6. http://fangjia.fang.com/zoushi/sh.htm
+
+**** 最近公积金贷款新政 首套二套房界定有标准
+     1. 购买改善型第二套住房人均建筑面积标准为低于35.1平方米（含35.1平方米）
+     2. 公积金的贷款额为公积金余额的40倍
+     3. 但是个人公积金贷款要贷到最高额度的话，余额必须要在12500元以上
+     4. 公积金政策调整后, 个人最高贷款额提高至60万元，家庭最高贷款额提至120万元
+     5. 现行公积金贷款利率是2015年10月24日调整并实施的，五年以上公积金贷款利率3.25%,月利率为3.25%/12
+     6. 唯一住房”（商住两用的房子和商铺不在其内）
+	1. 唯一的话没有个税，不唯一要缴纳20%差额个税。
+	2. 满五年唯一:营业税免征;个税免征;契税=全额*1%
+	3. 满五年不唯一:营业税免征;个税=全额*1%;契税=全额*1%
+	4. 不满五年:营业税=全额*5.55%;个税=全额*1%;契税=全额*1%
+     7. 营业税=（现在出售总价-当初房东买进价）*5.45%
+*** @x1, [2016-03-17 Thu]
+**** 熄灭表示允许右转
+     1. 禁右通常与同向直行同时出现 from 上海轨道交通俱乐部
+     2. 许多“右转红灯”只是一个正方形的小方块，附加在红绿灯的右侧，一般都很不起眼，也没有黄灯和绿灯的项目，只有一个红灯（箭头灯），熄灭表示允许右转（只是悄悄熄灭而不是亮绿灯）
+     3. 禁右通常与同向直行同时出现，当直行黄灯亮起，如果信号灯旁有单独单灯存在，应当可以预判接下来这个灯会亮起禁右信号, 事实上这个灯的亮起会比直行红灯稍有延迟
+     4. 右转时需非常谨慎，一旦与行人或“飞机”发生冲突，那LZ基本完败，要了结不容易的，好自为之吧
+     5. 右转是过路口操作中风险最大的一种操作，因为此时司机视线有死角
+	1. 快速扭头看一在右边，不靠反光镜，而是通过车窗；因为反光镜有死角
+     6. 横向道路的左转信号灯放行时，右转是最安全的
+
 *** Tomomi Kasai (河西 智美, Kasai Tomomi, born November 16, 1991 in Tokyo) 
     1. 河西智美 (@tomoomichan)
     2. naked with a child cupping her breasts
