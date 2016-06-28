@@ -1,31 +1,9 @@
-Content-Type: text/enriched
-Text-Width: 70
 
+* @mac, [2016-06-28]
+** @git, install again @mbp, @note in github, install brew 
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-
-<x-color><param>chocolate1</param>#  Time-stamp: "xiaoanh 2015/12/23 10:01:03"</x-color>
-
-<x-color><param>chocolate1</param># <<2015-01-15 Thu> add study to agenda</x-color>
-
-<x-color><param>chocolate1</param># #+TODO: Study(s@) TODO(t@) | DONE(d)</x-color>
-
-<x-color><param>chocolate1</param># #+TYP_TODO: Fred Sara Lucy Mike | DONE</x-color>
-
-<x-color><param>chocolate1</param># #+FILETAGS: :@study:</x-color>
-
-<x-color><param>chocolate1</param># #+TAGS: @Emacs @Lang</x-color>
-
-<x-bg-color><param>#EAEAFF</param><x-color><param>#008ED1</param>#+BEGIN_SRC emacs-lisp
-</x-color></x-bg-color>  (setq org-agenda-use-tag-inheritance nil)
-<x-bg-color><param>#EAEAFF</param><x-color><param>#008ED1</param>#+END_SRC
-
-</x-color></x-bg-color>
-
-<x-color><param>chocolate1</param># @problem: auto inherited @MFH, why, [2015-07-23 Thu]</x-color>
-
-<x-color><param>chocolate1</param># @solution: delete study todo type in dotemacs</x-color>
-
-* <x-bg-color><param>DarkOrange</param>TODO</x-bg-color> GPP_Intel, ICC
+* TODO GPP_Intel, ICC
   - State "TODO"       from ""           <x-color><param>Cyan</param>[2015-01-08 Thu 11:06]</x-color>
 ** GPP_code list
     1. D:\GPP_code\GPP_Intel\Intel 201112\LTE_L1_UL_DL\LTE_PDSCH_4x2\LTE_RAN_Emulator_Design\CodeDev\src\UE\phy
