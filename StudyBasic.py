@@ -728,7 +728,7 @@ person.name("EarlGrey").age(21).introduce()
 
 ####################################
 #### @re, 2016-06-30, compile and split, [], * and +, .+(\w+)?@, (.+)? | (.+)
-## @key: ? | *, ab* means a, ab, abb; ab+ means ab , abb; ab? means a or ab, a.*b, a.*?b
+## @key: ? | *, ab* means a, ab, abb; ab.* means abdc; ab+ means ab , abb; ab? means a or ab; a.*b, a.*?b (greedy and minimum)
 #### @key: 分组, (); 后向引用, \1; 分枝条件, 具体方法是用|把不同的规则分隔开
 ## RE.I RE.M, ( ?) | \.| [.\w]+ | pattern='\w+@[\w.]+'
 ##r'\bwww\..*\.(com|net|edu)' | 'w{3}[.\w]+.com', pattern='w{3}[.\w]+.com'
@@ -748,7 +748,7 @@ w | word, b | boundary, s | string
 (?= … )	表达式’…’之前的字符串 	在字符串’ pythonretest ’中 (?=test) 会匹配’ pythonre ’
 (?!...)	后面不跟表达式’…’的字符串 	如果’ pythonre ’后面不是字符串’ test ’，那么 (?!test) 会匹配’ pythonre ’
 (?<= … )	跟在表达式’…’后面的字符串符合括号之后的正则表达式 	正则表达式’ (?<=abc)def ’会在’ abcdef ’中匹配’ def ’
-'industr(?:y|ies) 就是一个比 'industry|industries' 更简略的表达式。那么(?:13\d|15\d)也就是要在这里面选择匹配13+0~9的数字一个或15+0~9的数字
+(?:) 'industr(?:y|ies) 就是一个比 'industry|industries' 更简略的表达式。那么(?:13\d|15\d)也就是要在这里面选择匹配13+0~9的数字一个或15+0~9的数字
 \*{3}就是要匹配“***”
 '''
 ####################################
@@ -840,6 +840,9 @@ pattern='\w+@[\w.]+'
 
 
 ##15.25.只从电子邮件地址中提取出登录名和域名。（二者分别提取）
+##Fanxiang.Bin@alcatel-sbell.com.cn
+##Qingjiang.a.Chang@alcatel-sbell.com.cn
+##BIN Fanxiang <Fanxiang.Bin@alcatel-sbell.com.cn>
 import re
 
 ##f = open('/home/dzhwen/456.txt','r')
@@ -848,23 +851,45 @@ f = open('foo.txt','r')
 
 ##pattern = '.+::(\w+)?@(.+)?::.+'
 ##pattern = '.+(\w+)?@(.+)?.+'
-pattern = '.+(\w+)@(.+)?.+'
+##pattern = '.+(\w+)@(.+)?.+'
+##pattern = '.+(\w+)@(.+?)\.'
+##pattern = '(.+?)@(.+?)\.' #DONE
+##pattern = '(\w+\.)@.+(\w+\.)+\w+' ## 2016-06-30
+pattern = '\b(\w+\.)+\w+@.+\w+'
+##DONE-WELL, 2016-07-01, Fanxiang.Bin@alcatel-sbell.com.cn
+##from BIN Fanxiang <Fanxiang.Bin@alcatel-sbell.com.cn>
 for eachLine in f:
     m = re.match(pattern,eachLine)
     print (m.group(1),m.group(2))
 ##AttributeError: 'NoneType' object has no attribute 'group'
+##Fanxiang.Bin alcatel-sbell
+##Qingjiang.a.Chang alcatel-sbell
+##BIN Fanxiang <Fanxiang.Bin alcatel-sbell
+    
 ##15.26.将每行中的电子邮件地址替换为你自己的电子邮件地址
 import re
 
 f = open('foo.txt','r')
 
 ##pattern = '.+::(.+)?::.+'
-pattern = '.+(.+)?.+'
-
+##pattern = '.+(.+)?.+'
+##pattern = '.+(.+)?.+'
+##pattern = '(\w+\.)+@?.+'
+##pattern = '.+<?(\w+\.)+@?.+'
+# @DONE, Fanxiang.Bin@alcatel-sbell.com.cn>
+##pattern = '(\w+\.)+@?\w+'
+# @DONE, Fanxiang.Bin
+##pattern = '(\w+\.)+@?(\w+\.)+\w+'
+##sbell.com.cn
+pattern = '(\w+\.)+@?.+(\w+\.)+\w+'
+## replace to search, @DONE, Fanxiang.Bin@alcatel-sbell.com.cn
 for eachLine in f:
-    m = re.match(pattern,eachLine)
+##    m = re.match(pattern,eachLine)
+    m = re.search(pattern,eachLine)
+    print (m.group())
 ##    address = raw_input('请输入你自己的电子邮件:')
-    address = input('请输入你自己的电子邮件: ')
+##    address = input('请输入你自己的电子邮件: ')
+    address = "xxx@gmail.com"
 ##    print (re.subn(m.group(1),address,eachLine))
 ##AttributeError: 'NoneType' object has no attribute 'group'
 
@@ -907,3 +932,15 @@ url="http://www.jb51.net"
 ##else:
 ##    print ('this is over')
 ##AttributeError: module 'urllib' has no attribute 'urlopen'
+
+####################################
+####@re, @app
+####################################
+
+import re
+url="http://www.jb51.net"
+
+print (re.search('\.(\w+)\.', url).group(0))
+print (re.search('\.(\w+)\.', url).group(1))
+##.jb51.
+##jb51
