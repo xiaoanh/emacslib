@@ -1,0 +1,376 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Aug  8 11:51:18 2016
+
+@author: Zhang Dongxu (dongxu.c.zhang@alcatel-sbell.com.cn)
+"""
+
+from math import *
+import sys
+import random as random
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from scipy.interpolate import interp1d
+import matplotlib.animation as animation
+
+n_of_RRH = 216 #468
+n_BBU = 3
+
+#for n_of_BBUpool in range(1,11):
+portion_of_office = 0.5
+clustering = 0.95 # valid range is [0,1], 0 means the there are many small offices
+                 # each occupying only one RRH; 1 means there is only one big
+                 # consecutive office area occupying a lot of RRHs 
+tslice = 15 # precision of traffic statistics, in number of minitus
+
+
+miu = 4.5 # setting the cluster size distribution
+sigma = 1
+
+miu_traffic_mean = 1
+sigma_traffic_mean = 0.2 #0.2
+shrinkfactor_res = 0.4
+shrinkfactor_office = 0.4
+
+miu_traffic_inst = 1
+sigma_traffic_inst = 0.3 #0.3
+
+
+random.seed(a=5, version=2)
+
+#==============================================================================
+# Generate topology
+#==============================================================================
+b=0.25
+a=b/sqrt(3)
+l=a*2
+
+if (sqrt(9+12*n_of_RRH) - 3)/6 > int((sqrt(9+12*n_of_RRH) - 3)/6):
+    K = int((sqrt(9+12*n_of_RRH) - 3)/6) + 1
+    n_of_RRH = 3*K*(K+1)
+    print("WARNING: number of RRHs is set to", n_of_RRH, "\n")
+else:
+    K = int((sqrt(9+12*n_of_RRH) - 3)/6)+1
+
+RRH = []    # RRH[i] = [id, type, (x,y)], type = 0 res, 1 offices
+nbr = {}    # nbr[i] = [a,b,c,d,e,f]. key: node ID, value: list of neighbours
+scrambled_i = list(range(n_of_RRH+1))
+random.shuffle(scrambled_i)
+
+for k in range(K):
+    #print("k=",k,"---------------------------------")
+    cnt = 0
+    if k==0:
+        m = 0
+        #print("m=",m)
+        RRH.append([scrambled_i[m],0,(0,0)])
+        if n_of_RRH < 6:
+            nbr[scrambled_i[m]] = [scrambled_i[x] for x in list(range(1,n_of_RRH+1))]
+        else:
+            nbr[scrambled_i[m]] = [scrambled_i[x] for x in list(range(1,7))]
+    elif k==1:
+        for m in range(1,7):
+            #print("m=",m)
+            RRH.append([scrambled_i[m],0,(2*b*cos((pi/3)*(m-1)),2*b*sin((pi/3)*(m-1)))])
+        nbr[scrambled_i[1]] = [scrambled_i[x] for x in [0,2,6,7,8,18] if x<=n_of_RRH]
+        nbr[scrambled_i[2]] = [scrambled_i[x] for x in [0,1,3,8,9,10] if x<=n_of_RRH]
+        nbr[scrambled_i[3]] = [scrambled_i[x] for x in [0,2,4,10,11,12] if x<=n_of_RRH]
+        nbr[scrambled_i[4]] = [scrambled_i[x] for x in [0,3,5,12,13,14] if x<=n_of_RRH]
+        nbr[scrambled_i[5]] = [scrambled_i[x] for x in [0,4,6,14,15,16] if x<=n_of_RRH]
+        nbr[scrambled_i[6]] = [scrambled_i[x] for x in [0,1,5,16,17,18] if x<=n_of_RRH]
+    else:
+        for m in range(3*k*(k-1)+1, 3*k*(k-1)+6*k+1):
+            #print("m=",m)
+            if cnt < k:
+                delta = cnt
+                RRH.append([scrambled_i[m],0,(2*b*k-delta*b,delta*(l+a))])
+                if cnt == 0:
+                    nbr[scrambled_i[m]] = [scrambled_i[x] for x in [m+1,m+6*k-1,m-6*(k-1),m+6*k,m+6*k+1,m+12*k+5] if x<=n_of_RRH]
+                else:
+                    nbr[scrambled_i[m]] = [scrambled_i[x] for x in [m+1,m-1,m-6*(k-1),m-6*(k-1)-1,m+6*k,m+6*k+1] if x<=n_of_RRH]
+            elif (cnt>=k and cnt<2*k):
+                delta = cnt-k
+                RRH.append([scrambled_i[m],0,(k*b-delta*2*b, k*(l+a))])
+                if cnt == k:
+                    nbr[scrambled_i[m]] = [scrambled_i[x] for x in [m+1,m-1,m-6*(k-1)-1,m+6*k,m+6*k+1,m+6*k+2] if x<=n_of_RRH]
+                else:
+                    nbr[scrambled_i[m]] = [scrambled_i[x] for x in [m+1,m-1,m-6*(k-1)-1,m-6*(k-1)-2,m+6*k+1,m+6*k+2] if x<=n_of_RRH]
+
+            elif (cnt>=2*k and cnt<3*k):
+                delta = cnt-2*k
+                RRH.append([scrambled_i[m],0,(-k*b-delta*b, (k-delta)*(l+a))])
+                if cnt == 2*k:
+                    nbr[scrambled_i[m]] = [scrambled_i[x] for x in [m+1,m-1,m-6*(k-1)-2,m+6*k+1,m+6*k+2,m+6*k+3] if x<=n_of_RRH]
+                else:
+                    nbr[scrambled_i[m]] = [scrambled_i[x] for x in [m+1,m-1,m-6*(k-1)-2,m-6*(k-1)-3,m+6*k+2,m+6*k+3] if x<=n_of_RRH]
+                
+            elif (cnt>=3*k and cnt<4*k):
+                delta = cnt-3*k
+                RRH.append([scrambled_i[m],0,(-2*b*k+delta*b, -delta*(l+a))])
+                if cnt == 3*k:
+                    nbr[scrambled_i[m]] = [scrambled_i[x] for x in [m+1,m-1,m-6*(k-1)-3,m+6*k+2,m+6*k+3,m+6*k+4] if x<=n_of_RRH]
+                else:
+                    nbr[scrambled_i[m]] = [scrambled_i[x] for x in [m+1,m-1,m-6*(k-1)-3,m-6*(k-1)-4,m+6*k+3,m+6*k+4] if x<=n_of_RRH]
+
+            elif (cnt>=4*k and cnt<5*k):
+                delta = cnt-4*k
+                RRH.append([scrambled_i[m],0,(-k*b+delta*2*b, -k*(l+a))])
+                if cnt == 4*k:
+                    nbr[scrambled_i[m]] = [scrambled_i[x] for x in [m+1,m-1,m-6*(k-1)-4,m+6*k+3,m+6*k+4,m+6*k+5] if x<=n_of_RRH]
+                else:
+                    nbr[scrambled_i[m]] = [scrambled_i[x] for x in [m+1,m-1,m-6*(k-1)-4,m-6*(k-1)-5,m+6*k+4,m+6*k+5] if x<=n_of_RRH]
+
+            elif (cnt>=5*k and cnt<6*k):
+                delta = cnt-5*k
+                RRH.append([scrambled_i[m],0,(k*b+delta*b, -(k-delta)*(l+a))])
+                if (cnt == 5*k):
+                    nbr[scrambled_i[m]] = [scrambled_i[x] for x in [m+1,m-1,m-6*(k-1)-5,m+6*k+4,m+6*k+5,m+6*k+6] if x<=n_of_RRH]
+                elif cnt == 6*k-1:
+                    nbr[scrambled_i[m]] = [scrambled_i[x] for x in [m-1,m-6*k+1,m-6*(k-1)-6,m-12*k+7,m+6*k+5,m+6*k+6] if x<=n_of_RRH]
+                else:
+                    nbr[scrambled_i[m]] = [scrambled_i[x] for x in [m+1,m-1,m-6*(k-1)-5,m-6*(k-1)-6,m+6*k+5,m+6*k+6] if x<=n_of_RRH]
+
+            else:
+                pass
+            
+            cnt = cnt + 1
+
+
+n_office = int(n_of_RRH*portion_of_office)
+n_res = n_of_RRH-n_office
+
+n_office_cluster = int(n_office*(1-clustering))
+if n_office_cluster == 0:
+    n_office_cluster = 1
+
+office_clusters = [] # office_clusters[i] = [a,b,c,...] which is a list of nodes
+cluster_size = []
+while len(cluster_size)<n_office_cluster:
+    temprand = random.normalvariate(miu, sigma)
+    if temprand>(miu-3*sigma) and temprand<(miu+3*sigma):
+        cluster_size.append(temprand)
+tempsum = sum(cluster_size)
+cluster_size = [round(n_office*(item/tempsum)) for item in cluster_size]
+
+for i in range(n_office_cluster):
+    tempcluster = []
+    clusterOK = 0
+    n_node_left = cluster_size[i]
+    need_anchor = 1
+    reanchortimes = 0
+    while (clusterOK == 0):
+        if need_anchor == 1:
+            reanchortimes = reanchortimes+1
+            if reanchortimes > 100:
+                print("too many reanchor times (fail office site allcoation)")
+                sys.exit(0)
+            for item in tempcluster:  # clean the allocated office type flags
+                RRH[scrambled_i.index(item)][1] = 0
+            candinodes = [n for [n,t,(x,y)] in RRH if t==0]        
+            anchornode = random.choice(candinodes)
+            RRH[scrambled_i.index(anchornode)][1] = 1
+            tempcluster = []
+            tempcluster.append(anchornode)
+            need_anchor = 0
+        n_node_left = cluster_size[i] - len(tempcluster)
+        if n_node_left == 0:
+            clusterOK == 1
+            office_clusters.append(tempcluster)
+            break
+        elif n_node_left < 0:
+            print("what the FUCK!!!! too many nodes are added into cluster")
+        candinodes = []
+        for node in tempcluster:
+            candinodes.extend(nbr[node])
+        rawcandiset = list(set(candinodes))
+        realcandiset = [x for x in rawcandiset if RRH[scrambled_i.index(x)][1]==0]
+        if len(realcandiset) == 0:
+            need_anchor = 1
+        else:
+            if len(realcandiset)<=n_node_left:
+                tempcluster.extend(realcandiset)
+                for item in realcandiset:
+                    RRH[scrambled_i.index(item)][1] = 1
+            else:
+                addednodes = random.sample(realcandiset,n_node_left)
+                tempcluster.extend(addednodes)
+                for item in addednodes:
+                    RRH[scrambled_i.index(item)][1] = 1
+
+dataforplot=[]
+for n_of_BBUpool in range(n_BBU,n_BBU+1):
+    rings = np.linspace(0,2*b*k, num = 20)
+    BBU_angle = np.linspace(0,360,n_of_BBUpool,endpoint=False)
+    
+    total_fiberlen = []
+    for r in rings:
+        BBU_loc = [(r*cos(radians(fi)), r*sin(radians(fi))) for fi in BBU_angle]
+        tlen = 0
+        for rrh in RRH:
+            candidate_len = [ sqrt((rrh[2][0]-x)**2+(rrh[2][1]-y)**2) for (x,y) in BBU_loc]
+            tlen = tlen + min(candidate_len)
+        total_fiberlen.append(tlen)
+    
+    BBU_bestloc = [(rings[total_fiberlen.index(min(total_fiberlen))]*cos(radians(fi)), rings[total_fiberlen.index(min(total_fiberlen))]*sin(radians(fi))) for fi in BBU_angle]
+    #print(min(total_fiberlen))
+    dataforplot.append(min(total_fiberlen))
+#    plt.plot(rings, total_fiberlen, 'ro-')
+#    plt.xlabel('FOX-haul Ring\'s Radius (km)')
+#    plt.ylabel('Total Length of Fronthaul (km)')
+#    plt.show()
+
+
+
+#fig5=plt.figure(5)
+#ax=fig5.add_subplot(111)
+#ax.plot(list(range(1,11)), dataforplot,'ro-')
+#ax.grid(True)
+#ax.set_xlim(0.5,10.5)
+#ax.set_ylim(150,600)
+#ax.set_xlabel('Number of BBU Pools')
+#ax.set_ylabel('Total Length of Fronthaul (km)')
+#plt.show()
+
+
+#================ draw the overall simulation topology ========================
+#==============================================================================
+#fig = plt.figure(1)
+#ax = fig.add_subplot(111)
+#ax.scatter( [x for [i,t,(x,y)] in RRH], [y for [i,t,(x,y)] in RRH],  marker='h', s=700, c=[t for [i,t,(x,y)] in RRH],cmap='coolwarm', alpha=0.5)
+#
+#for i in range(n_of_RRH+1):
+#    ax.annotate(str(scrambled_i[i]), xy=RRH[i][2],horizontalalignment='center', verticalalignment='center',fontsize=7) 
+#plt.show()
+#==============================================================================
+#==============================================================================
+# Generate traffic 
+#==============================================================================
+# using the tidal traffic statistics from CMCC white paper. (last point = first point)
+meantraffic_office_origin = [0,0,0,0,0,0,0.2,1,5,34,21,38,22,27.5,34,37,37.5,21,33,11.5,5,4.7,2.5,1,0]
+meantraffic_res_origin = [2.5,1,0,0,0,1,1.5,3.5,7.8,11,12,10,10.3,8,7.5,8,8,14,16.2,21.5,20.2,24,20.8,7,2.5]
+
+meantraffic_office = [tvalue*shrinkfactor_office for tvalue in meantraffic_office_origin]
+meantraffic_res = [tvalue*shrinkfactor_res for tvalue in meantraffic_res_origin]
+
+t=list(range(int(1440/tslice))) # traffic sample points
+n_tsample = len(t)
+
+traffic={} # traffic[rrhid] = [bw@t1,bw@t2...]
+
+ts = np.linspace(1, 25, num=n_tsample, endpoint=False)
+cnt=0
+for [rrh,rrhtype,(x,y)] in RRH:
+    tvcoef1 = random.normalvariate(miu_traffic_mean, sigma_traffic_mean)
+    while(tvcoef1<=0):
+        tvcoef1 = random.normalvariate(miu_traffic_mean, sigma_traffic_mean)
+    if rrhtype==0:
+        f_tv_rrh = interp1d(np.linspace(1,25,num=25,endpoint=True), [tv*tvcoef1 for tv in meantraffic_res])
+    else:
+        f_tv_rrh = interp1d(np.linspace(1,25,num=25,endpoint=True), [tv*tvcoef1 for tv in meantraffic_office])
+    tv_rrh = f_tv_rrh(ts)
+
+    for j in range(len(tv_rrh)):
+        tvcoef = random.normalvariate(miu_traffic_inst, sigma_traffic_inst)
+        while(tvcoef<0):
+            tvcoef = 0
+        tv_rrh[j] = tv_rrh[j]*tvcoef
+    traffic[rrh] = tv_rrh
+        
+
+
+num_bins = 50
+# the histogram of the data
+tvtotalres=np.zeros(len(ts))
+tvtotaloffice=np.zeros(len(ts))
+tvtotal=np.zeros(len(ts))
+xres=[]
+xoffice=[]
+cntres=0
+cntoffice=0
+for item in traffic:
+    if RRH[scrambled_i.index(item)][1] == 0:
+        if cntres >= 5000:
+            pass
+        else:
+            cntres=cntres+1
+            xres.append(traffic[item][60])
+            for tpoint in range(n_tsample):
+                tvtotalres[tpoint]= tvtotalres[tpoint]+traffic[item][tpoint]
+                tvtotal[tpoint] = tvtotal[tpoint] + traffic[item][tpoint]
+    else:
+        if cntoffice >= 5000:
+            pass
+        else:
+            cntoffice=cntoffice+1
+            xoffice.append(traffic[item][60])
+            for tpoint in range(n_tsample):
+                tvtotaloffice[tpoint]= tvtotaloffice[tpoint]+traffic[item][tpoint]
+                tvtotal[tpoint] = tvtotal[tpoint] + traffic[item][tpoint]
+
+#=================these plots are for test====================================
+# n, bins, patches = plt.hist(xres, num_bins, normed=1, facecolor='green', alpha=0.5)
+# n, bins, patches = plt.hist(xoffice, num_bins, normed=1, facecolor='green', alpha=0.5)
+#plt.semilogy(ts,traffic[77])
+#plt.semilogy(ts,traffic[131])
+plt.semilogy(ts,tvtotal)
+plt.ylim(100, 3000)
+plt.semilogy(ts,tvtotalres)
+plt.semilogy(ts,tvtotaloffice)
+#==============================================================================
+
+
+
+
+
+
+alltrafficdata=[]
+for timepoint in range(n_tsample):
+    alltrafficdata.extend([traffic[rrhid][timepoint] for rrhid in scrambled_i])
+RRHcap = max(alltrafficdata)/0.7
+BBUcap = RRHcap*0.7+0.0001
+n_BBU_res = [int(tv/BBUcap)+1 for tv in tvtotalres]
+n_BBU_office = [int(tv/BBUcap)+1 for tv in tvtotaloffice]
+n_BBU_total = [int(tv/BBUcap)+1 for tv in tvtotal]
+
+
+#=================plot the BBU saving effect, like that in Checko's paper======
+#fig4=plt.figure(4)
+#ax=fig4.add_subplot(111)
+#ax.plot(ts,np.ones(len(ts))*n_of_RRH, 'y-',linewidth=2,label='Traditional RAN')
+#ax.plot(ts,n_BBU_office,'g--',linewidth=1,label='BBU Pool - Office')
+#ax.plot(ts,n_BBU_res,'b--',linewidth=1,label='BBU Pool - Residential')
+#ax.plot(ts,n_BBU_total,'r-',linewidth=2,label='CRAN (100 office cells + 100 Residential cells)')
+#legend = ax.legend(loc=(0.05,0.4),fontsize =11,framealpha=0)
+#ax.set_xlabel('Time (h)')
+#ax.set_ylabel('Number of allocated BBUs')
+#plt.show()
+#==============================================================================
+
+
+#=================plot the pdf distribution of all traffic load================
+#num_bins = 50
+#n, bins, patches = plt.hist(alltrafficdata, num_bins, normed=1, facecolor='green', alpha=0.5)
+
+#=============== watch the animation of traffic vriation accross one day=======
+#fig3 = plt.figure(3)
+#ax = fig3.add_subplot(111)
+#ims = []
+#vmax=20
+#for timepoint in range(n_tsample):
+#    colordata=[traffic[rrhid][timepoint] for rrhid in scrambled_i]
+#    for i in range(len(colordata)):
+#        if colordata[i]>vmax:
+#            colordata[i]=vmax
+#    ims.append((ax.scatter( [x for [i,t,(x,y)] in RRH], [y for [i,t,(x,y)] in RRH],  marker='h', s=700, c=colordata, cmap='coolwarm',vmin=0, vmax=vmax, alpha=0.5),))
+#
+#im_ani = animation.ArtistAnimation(fig3, ims, interval=30, repeat_delay=0,
+#                                   blit=True)
+##im_ani.save('im.mp4', metadata={'artist':'Guido'})
+#plt.show()
+#
+
+
+
+
+
