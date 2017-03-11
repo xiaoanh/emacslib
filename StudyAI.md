@@ -1,4 +1,4 @@
 # @AI
-## d2017_03
+## d201703
 ### thinkbayes.py
-- http://www.greenteapress.com/thinkbayes/dice.py
+- [@link:@Bayes](http://www.greenteapress.com/thinkbayes/dice.py)
